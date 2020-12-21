@@ -11,7 +11,7 @@ import {
     logoutError,
     getCurrentUserRequest,
     getCurrentUserSuccess,
-    getCurrentUserError
+    getCurrentUserError,
 } from '../auth/authActions'
 
 const error = createReducer(null, {
