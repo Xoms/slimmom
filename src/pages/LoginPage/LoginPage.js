@@ -1,7 +1,8 @@
 import React, {Component} from "react"
 import {connect} from "react-redux"
 import {authOperations, authSelectors} from "../../redux/auth"
-import authActions from "../../redux/auth"
+import getError from "../../redux/global/globalSelectors"
+import css from "./LoginPage.module.scss"
 
 class LoginPage extends Component {
   state = {
@@ -22,21 +23,38 @@ class LoginPage extends Component {
   render() {
     const {login, password} = this.state
     return (
-      <div>
-        <h1>Вход</h1>
+      <div className={css.loginPage}>
+        <h2 className={css.loginTitle}>Вход</h2>
 
-        <form onSubmit={this.handleSubmit} className="loginForm">
-          <label className="loginLabel">
-          Логин *
-            <input type="text" name="login" value={login} onChange={this.handleChange} />
+        <form onSubmit={this.handleSubmit} className={css.loginForm}>
+          <label className={css.formLabel}>
+            <input
+              className={css.login}
+              type="text"
+              name="login"
+              value={login}
+              onChange={this.handleChange}
+              placeholder="Логин *"
+            />
           </label>
 
-          <label className="loginForm">
-          Пароль *
-            <input type="password" name="password" value={password} onChange={this.handleChange} />
+          <label className={css.formLabel}>
+            <input
+              className={css.password}
+              type="password"
+              name="password"
+              value={password}
+              onChange={this.handleChange}
+              placeholder="Пароль *"
+            />
           </label>
 
-          <button type="submit">Login</button>
+          <button type="submit" className={css.loginBtn}>
+            Вход
+          </button>
+          <button type="submit" className={css.loginBtn}>
+            Регистрация
+          </button>
         </form>
       </div>
     )
@@ -44,8 +62,8 @@ class LoginPage extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  error: authSelectors.getErrorMessage(state),
+  // error: authSelectors.getError(state),
 })
-const mapDispatchToProps = {logIn: authOperations.logIn } 
+const mapDispatchToProps = {logIn: authOperations.logIn}
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage)

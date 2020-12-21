@@ -20,7 +20,7 @@ const routes = [
         label: "Вход",
         path: "/login",
         exact: true,
-        component: lazy(() => import("./pages/LoginPage")),
+        component: lazy(() => import("./pages/LoginPage/LoginPage")),
         privated: false,
         restricted: true
     },
