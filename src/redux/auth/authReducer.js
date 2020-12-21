@@ -8,19 +8,33 @@ const initialState = { name: null, email: null};
 const user = createReducer(initialState, {
     [authActions.registerSuccess]: (state, { payload }) => payload.user,
     [authActions.loginSuccess]: (state, { payload }) => payload.user,
-    [authActions.getCurrentUserSuccess]: (state, { payload }) => payload,
+    //[authActions.getCurrentUserSuccess]: (state, { payload }) => payload, 
     [authActions.logoutSuccess]: () => initialState
 })
 
-const token = createReducer(null, {
-    [authActions.registerSuccess]: (state, {payload}) => payload.token,
-    [authActions.loginSuccess]: (state, { payload }) => payload.token,
+const accessToken = createReducer(null, {
+    //[authActions.registerSuccess]: (state, {payload}) => payload.accessToken, 
+    [authActions.loginSuccess]: (state, { payload }) => payload.accessToken,
+    [authActions.logoutSuccess]: () => null
+})
+
+const refreshToken = createReducer(null, {
+    //[authActions.registerSuccess]: (state, {payload}) => payload.accessToken,
+    [authActions.refreshSuccess]: (state, { payload }) => { const newTokens = {payload.newRefreshToken, payload.newAccessToken})}
+    [authActions.logoutSuccess]: () => null
+})
+
+const sid = createReducer(null, {
+    //[authActions.registerSuccess]: (state, {payload}) => payload.accessToken,
+    [authActions.loginSuccess]: (state, { payload }) => payload.sid,
     [authActions.logoutSuccess]: () => null
 })
 
 const authReducer = combineReducers({
     user,
-    token,
+    accessToken,
+    refreshToken,
+    sid
 })
 
 export default authReducer
