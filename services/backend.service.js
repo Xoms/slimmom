@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = "https://goit-phonebook-api.herokuapp.com"; //"https://lpj-tasker.herokuapp.com"
+const url = "https://slimmom-backend.herokuapp.com/"; //"https://lpj-tasker.herokuapp.com"
 
 axios.defaults.baseURL = url;
 
@@ -9,19 +9,19 @@ class PhonebookService {
     //===================  auth ===================
 
     register(newUser){
-        return axios.post('/users/signup', newUser)
+        return axios.post('/auth/register', newUser)
     }
 
     login(userCredentials){
-        return axios.post('/users/login', userCredentials)
+        return axios.post('/auth/login', userCredentials)
     }
 
     logout(token){
-        return axios.post('/users/logout', token)
+        return axios.post('/auth/logout', token)
     }    
 
     getCurrentUser(){
-        return axios.get('/users/current')
+        return axios.get('/user')
     }
 
     setToken(token){
