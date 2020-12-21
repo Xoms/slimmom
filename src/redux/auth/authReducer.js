@@ -20,7 +20,7 @@ const accessToken = createReducer(null, {
 
 const refreshToken = createReducer(null, {
     //[authActions.registerSuccess]: (state, {payload}) => payload.accessToken,
-    [authActions.refreshSuccess]: (state, { payload }) => { const newTokens = {payload.newRefreshToken, payload.newAccessToken})}
+    [authActions.refreshSuccess]: (state, { payload }) => { const {newRefreshToken, newAccessToken} = {...payload}},
     [authActions.logoutSuccess]: () => null
 })
 
