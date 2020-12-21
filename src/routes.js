@@ -1,7 +1,7 @@
 import { lazy } from "react";
 
 const routes = [
-    {   label: "Home",
+    {   label: "",
         path: "/",
         exact: true,
         component: lazy(() => import("./pages/Home")),
@@ -9,7 +9,7 @@ const routes = [
         restricted: false
     },
     {   
-        label: "Register",
+        label: "Регистация",
         path: "/register",
         exact: true,
         component: lazy(() => import("./pages/RegistrationPage")),
@@ -17,7 +17,7 @@ const routes = [
         restricted: true
     },
     {   
-        label: "Login",
+        label: "Вход",
         path: "/login",
         exact: true,
         component: lazy(() => import("./pages/LoginPage")),
@@ -25,10 +25,18 @@ const routes = [
         restricted: true
     },
     {   
-        label: "Contacts",
-        path: "/contacts",
+        label: "Дневник",
+        path: "/diary",
         exact: true,
-        component: lazy(() => import("./pages/Contacts")),
+        component: lazy(() => import("./pages/DiaryPage")),
+        privated: true,
+        restricted: false
+    },
+    {   
+        label: "Калькулятор",
+        path: "/calculator",
+        exact: true,
+        component: lazy(() => import("./pages/CalculatorPage")),
         privated: true,
         restricted: false
     },
