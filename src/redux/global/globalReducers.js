@@ -1,18 +1,19 @@
 import { createReducer } from '@reduxjs/toolkit';
-import {
-    registerRequest,
-    registerSuccess,
-    registerError,
-    loginRequest,
-    loginSuccess,
-    loginError,
-    logoutRequest,
-    logoutSuccess,
-    logoutError,
-    getCurrentUserRequest,
-    getCurrentUserSuccess,
-    getCurrentUserError,
-} from '../auth/authActions'
+import authActions from '../auth/authActions'
+const {
+  registerRequest,
+  registerSuccess,
+  registerError,
+  loginRequest,
+  loginSuccess,
+  loginError,
+  logoutRequest,
+  logoutSuccess,
+  logoutError,
+  getCurrentUserRequest,
+  getCurrentUserSuccess,
+  getCurrentUserError
+} = {...authActions};
 
 const error = createReducer(null, {
   [loginError]: (state, {payload}) => payload.error,
