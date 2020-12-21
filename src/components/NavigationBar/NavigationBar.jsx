@@ -1,18 +1,25 @@
-import React from "react";
+import React from "react";                      
 import style from "./navigationbar.module.css";
-
+import {NavLink} from "react-router-dom"; 
 
 const NavigationBar = () => {
   return (
     <>
-      <nav>
-        <div className={style}>
-              <span>Вход</span>
-            </NavLink>
-            <NavLink activeClassName>
-              <span>Регистрация</span>
-            </NavLink>
-        </div>
+      <nav className={style.container}>
+      <ul className={style.navContainer}>
+          <li>
+          <NavLink 
+            activeClassName={style.active} exact to="/login" className={style.login}><span>Вход</span>
+          </NavLink>
+          </li>
+
+          <li>
+          <NavLink activeClassName={style.active} exact to="/register">
+          <span>Регистрация</span>
+          </NavLink>
+          </li>
+
+          </ul>
       </nav>
     </>
   );
