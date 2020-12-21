@@ -1,10 +1,11 @@
 import React from 'react';
+import UserInfo from '../UserInfo';
 
 import './App.scss';
 
 const App = (props) => (
   <div className="AppWrapper">
-    Test content
+    <UserInfo userName='Nic' />
   </div>
 );
 
