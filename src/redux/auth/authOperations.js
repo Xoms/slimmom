@@ -1,5 +1,5 @@
 import authActions from './authActions';
-import api from '../../../services/backend.service';
+import api from '../../services/backend.service';
 
 const register = credentials => dispatch => {
     
@@ -7,7 +7,8 @@ const register = credentials => dispatch => {
 
     api.register(credentials)
         .then(({data}) => {
-            //api.setToken(data.token);
+            //api.setToken(data.token); //токена нету О_о
+
             dispatch(authActions.registerSuccess(data));
         })
         .catch( err => dispatch(authActions.registerError(err)));
@@ -36,15 +37,15 @@ const logout = token => dispatch => {
         .catch( err => dispatch(authActions.logoutError(err)));
 }
 
-const refresh = sid => dispatch => {
-    dispatch(authActions.refreshRequest());
+// const refresh = sid => dispatch => {
+//     dispatch(authActions.refreshRequest());
 
-    api.logout(sid)
-        .then(({data}) => {
-            api.setToken(data.newAccessToken);
-            dispatch(authActions.logoutSuccess(data));
-        })
-}
+//     api.logout(sid)
+//         .then(({data}) => {
+//             api.setToken(data.newAccessToken);
+//             dispatch(authActions.logoutSuccess(data));
+//         })
+// }
 
 const getCurrentUser = () => (dispatch, getState) => {
 

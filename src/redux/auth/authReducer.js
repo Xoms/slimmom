@@ -8,7 +8,7 @@ const initialState = { name: null, email: null};
 const user = createReducer(initialState, {
     [authActions.registerSuccess]: (state, { payload }) => payload.user,
     [authActions.loginSuccess]: (state, { payload }) => payload.user,
-    //[authActions.getCurrentUserSuccess]: (state, { payload }) => payload, 
+    [authActions.getCurrentUserSuccess]: (state, { payload }) => payload, 
     [authActions.logoutSuccess]: () => initialState
 })
 
@@ -20,7 +20,11 @@ const accessToken = createReducer(null, {
 
 const refreshToken = createReducer(null, {
     //[authActions.registerSuccess]: (state, {payload}) => payload.accessToken,
-    [authActions.refreshSuccess]: (state, { payload }) => { const {newRefreshToken, newAccessToken} = {...payload}},
+    [authActions.refreshSuccess]: (state, { payload }) => { 
+        const {newRefreshToken: refreshToken, newAccessToken: accessToken} = {...payload};
+        const newTokens = {refreshToken, accessToken};
+        return {...newTokens}        
+    },
     [authActions.logoutSuccess]: () => null
 })
 
