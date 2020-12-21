@@ -13,7 +13,7 @@ class App extends Component {
   render(){
     return (
       <>
-        Yo
+       <h1>SlimMom </h1>
       </>      
     );  
   }

@@ -1,3 +1,8 @@
+@import './shared-styles/colors';
+@import './shared-styles/reset';
+@import './shared-styles/mixins';
+
+
 html {
     box-sizing: border-box;
     width: 100vw;
@@ -24,5 +29,11 @@ html {
     display: block;
     max-width: 100%;
     height: auto;
+  }
+
+  h1 {
+    font-family: "GothamPro-Bold";
+    font-size: 50px;
+    text-align: center;
   }
   
