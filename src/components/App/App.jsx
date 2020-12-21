@@ -9,6 +9,8 @@ import Loader from '../shared/Loader';
 
 import './App.scss';
 
+import NavigationBar from '../NavigationBar';
+
 class App extends Component{
   render() {
     const routesMap = routes.map(route => {
@@ -16,13 +18,15 @@ class App extends Component{
       })
 
   return (
+    <><NavigationBar/>
     <Suspense fallback={<Loader/>}>
       <Switch>
         {routesMap}
         <Route component={lazy( () => import("../../pages/NotFound") )} />
       </Switch>
   </Suspense>
-  )}
+  </>
+    )}
 };
 
 App.propTypes = {
