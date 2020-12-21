@@ -6,7 +6,7 @@ const NavigationBar = () => {
   return (
     <>
       <nav>
-        <div className>
+        <div className={style}>
               <span>Вход</span>
             </NavLink>
             <NavLink activeClassName>
