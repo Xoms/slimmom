@@ -7,7 +7,7 @@ const register = credentials => dispatch => {
 
     api.register(credentials)
         .then(({data}) => {
-            api.setToken(data.token);
+            //api.setToken(data.token);
             dispatch(authActions.registerSuccess(data));
         })
         .catch( err => dispatch(authActions.registerError(err)));
@@ -19,7 +19,7 @@ const login = credentials => (dispatch) => {
 
     api.login(credentials)
         .then(({data}) => {
-            api.setToken(data.token);
+            api.setToken(data.accessToken);
             dispatch(authActions.loginSuccess(data));
         })
         .catch( err => dispatch(authActions.loginError(err)));
@@ -34,6 +34,16 @@ const logout = token => dispatch => {
             dispatch(authActions.logoutSuccess(data));
         })
         .catch( err => dispatch(authActions.logoutError(err)));
+}
+
+const refresh = sid => dispatch => {
+    dispatch(authActions.refreshRequest());
+
+    api.logout(sid)
+        .then(({data}) => {
+            api.setToken(data.newAccessToken);
+            dispatch(authActions.logoutSuccess(data));
+        })
 }
 
 const getCurrentUser = () => (dispatch, getState) => {
