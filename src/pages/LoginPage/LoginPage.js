@@ -1,7 +1,7 @@
 import React, {Component} from "react"
 import {connect} from "react-redux"
-import {authOperations, authSelectors} from "../../redux/auth"
-import getError from "../../redux/global/globalSelectors"
+import {authOperations, authActions} from "../../redux/auth"
+import globalSelectors from "../../redux/global/globalSelectors"
 import css from "./LoginPage.module.scss"
 
 class LoginPage extends Component {
@@ -22,48 +22,58 @@ class LoginPage extends Component {
 
   render() {
     const {login, password} = this.state
+    if (this.props.error) {
+      setTimeout(() => {
+        this.props.loginError()
+      }, 3000)
+    }
     return (
-      <div className={css.loginPage}>
-        <h2 className={css.loginTitle}>Вход</h2>
+      <>
+        {/* <Notification error={Boolean(this.props.error)} message="There is no such account!"></Notification> */}
+        <div className={css.loginPage}>
+          <h2 className={css.loginTitle}>Вход</h2>
 
-        <form onSubmit={this.handleSubmit} className={css.loginForm}>
-          <label className={css.formLabel}>
-            <input
-              className={css.login}
-              type="text"
-              name="login"
-              value={login}
-              onChange={this.handleChange}
-              placeholder="Логин *"
-            />
-          </label>
+          <form onSubmit={this.handleSubmit} className={css.loginForm}>
+            <label className={css.formLabel}>
+              <input
+                className={css.login}
+                type="text"
+                name="login"
+                value={login}
+                onChange={this.handleChange}
+                placeholder="Логин *"
+              />
+            </label>
 
-          <label className={css.formLabel}>
-            <input
-              className={css.password}
-              type="password"
-              name="password"
-              value={password}
-              onChange={this.handleChange}
-              placeholder="Пароль *"
-            />
-          </label>
+            <label className={css.formLabel}>
+              <input
+                className={css.password}
+                type="password"
+                name="password"
+                value={password}
+                onChange={this.handleChange}
+                placeholder="Пароль *"
+              />
+            </label>
 
-          <button type="submit" className={css.loginBtn}>
-            Вход
-          </button>
-          <button type="submit" className={css.loginBtn}>
-            Регистрация
-          </button>
-        </form>
-      </div>
+            <div className={css.buttons}>
+              <button type="submit" className={css.loginBtn}>
+                Вход
+              </button>
+              <button type="submit" className={css.loginBtn}>
+                Регистрация
+              </button>
+            </div>
+          </form>
+        </div>
+      </>
     )
   }
 }
 
 const mapStateToProps = (state) => ({
-  // error: authSelectors.getError(state),
+  error: globalSelectors.getError(state),
 })
-const mapDispatchToProps = {logIn: authOperations.logIn}
+const mapDispatchToProps = {loginError: authActions.loginError, logIn: authOperations.logIn}
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage)
