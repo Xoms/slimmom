@@ -1,5 +1,5 @@
 import React from "react"
-import {connect} from "react-redux"
+import {connect, useSelector} from "react-redux"
 import {authOperations, authActions} from "../../redux/auth"
 import globalSelectors from "../../redux/global/globalSelectors"
 import Notification from "../shared/Notification/Notification"
@@ -10,21 +10,18 @@ import css from "./LoginForm.module.scss"
 
 const SignupSchema = Yup.object().shape({
   email: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required("Required"),
-  password: Yup.string().required("Required").min(9, "Too Short!"),
+  password: Yup.string().required("Required").min(8, "Too Short!"),
 })
 
 const LoginForm = (props) => {
-
   const handleSubmit = (values) => {
-    props.logIn(values)
-    // console.log(values);
+    props.login(values)
+    }
     if (props.error) {
       setTimeout(() => {
-        props.loginError()
+        props.clearError()
       }, 3000)
-    }
   }
-
   return (
     <>
       <Notification error={Boolean(props.error)} message="There is no such account!"></Notification>
@@ -55,8 +52,11 @@ const LoginForm = (props) => {
             </label>
 
             <div className={css.buttons}>
-            <Button marker="secondary" text="Вход"> </ Button>
-              <Button marker="primary" text="Регистрация"> </ Button>
+            <Button marker="primary" text="Вход"> </ Button>
+            <Button marker="secondary" text="Регистрация" >
+              
+              </ Button>
+            
             </div>
           </Form>
         </Formik>
@@ -67,7 +67,11 @@ const LoginForm = (props) => {
 
 const mapStateToProps = (state) => ({
   error: globalSelectors.getError(state),
+
 })
-const mapDispatchToProps = {loginError: authActions.loginError, logIn: authOperations.logIn}
+const mapDispatchToProps = {
+  loginError: authActions.loginError, 
+  clearError: authActions.clearError, 
+  login: authOperations.login}
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm)
