@@ -2,22 +2,37 @@ import userActions from './userActions';
 
 import api from '../../services/backend.service';
 
-
 const getCurrentUser = () => (dispatch, getState) => {
+  const {
+    user: { token },
+  } = getState();
 
-const { user: { token } } = getState()
+  if (!token) return;
 
-    if (!token) return
+  api.setToken(token);
 
-    api.setToken(token)
+  dispatch(userActions.getCurrentUserRequest());
 
-    dispatch(userActions.getCurrentUserRequest());
+  api
+    .getCurrentUser()
+    .then(({ data }) => {
+      dispatch(userActions.getCurrentUserSuccess(data));
+    })
+    .catch(err => dispatch(userActions.getCurrentUserError(err)));
+};
 
-    api.getCurrentUser()
-        .then(({data}) => {
-            dispatch(userActions.getCurrentUserSuccess(data))
-        })
-        .catch( err => dispatch(userActions.getCurrentUserError(err)));
-}
+const getDailyRate = userCharacteristics => dispatch => {
+  //   const token =
+  //     'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI1ZmUxZGNiODVjMmJhNzAwMDQ0NDA5NjUiLCJzaWQiOiI1ZmUxZjdmNTVjMmJhNzAwMDQ0NDA5NmUiLCJpYXQiOjE2MDg2NDQ1OTcsImV4cCI6MTYwODY0ODE5N30.mynRviNExi5wDgG9Mhxc-mNUEw-0FNycFKYL1LoNiJs'; // надо поменять логику, пока захардкодили
 
-export { getCurrentUser }
+  //   const id = '5fcffaa7f7ae5300043515a6'; // надо поменять логику, пока захардкодили
+  //   api.setToken(token);
+  dispatch(userActions.getCurrentUserRequest());
+
+  api.getDailyRate(userCharacteristics).then(({ data }) => {
+    console.log(data);
+    return dispatch(userActions.getDailyRateSuccess(data));
+  });
+};
+
+export { getCurrentUser, getDailyRate };

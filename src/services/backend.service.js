@@ -1,43 +1,56 @@
 import axios from 'axios';
 
-const url = "https://slimmom-backend.herokuapp.com/"; 
+const url = 'https://slimmom-backend.herokuapp.com/';
 
 axios.defaults.baseURL = url;
 
 class PhonebookService {
+  //===================  auth ===================
 
-    //===================  auth ===================
+  register(newUser) {
+    return axios.post('/auth/register', newUser);
+  }
 
-    register(newUser){
-        return axios.post('/auth/register', newUser)
-    }
+  login(userCredentials) {
+    return axios.post('/auth/login', userCredentials);
+  }
 
-    login(userCredentials){
-        return axios.post('/auth/login', userCredentials)
-    }
+  logout() {
+    return axios.post('/auth/logout');
+  }
 
-    logout(){
-        return axios.post('/auth/logout');
-    }
+  getCurrentUser() {
+    return axios.get('/user');
+  }
 
-    refresh(sid){
-        return axios.post('/auth/refresh', sid);
-    }
+  setToken(token) {
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  }
 
-    getCurrentUser(){
-        return axios.get('/user')
-    }
+  unsetToken() {
+    axios.defaults.headers.common.Authorization = ``;
+  }
 
-    setToken(token){
-        axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-    }
+  getDailyRate(userCharacteristics) {
+    return axios.post(`/daily-rate/`, userCharacteristics);
+  }
 
-    unsetToken(){
-        axios.defaults.headers.common.Authorization = ``;
-    }
+  //================== contacts ==================
+  getContacts() {
+    return axios.get('/contacts');
+  }
 
-    
+  addContact(newContact) {
+    return axios.post('/contacts', newContact);
+  }
 
+  delContact(id) {
+    return axios.delete(`/contacts/${id}`);
+  }
+
+  updateContact(id) {
+    return axios.patch(`/contacts/${id}`);
+  }
 }
 
 export default new PhonebookService();
