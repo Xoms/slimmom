@@ -1,5 +1,5 @@
 const getLoading = state => state.loading;
-const getError = state => state.auth.error;
+const getError = state => state.error;
 export default {
   getLoading,
   getError
