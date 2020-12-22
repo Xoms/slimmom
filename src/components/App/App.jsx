@@ -22,12 +22,8 @@ class App extends Component {
     });
 
     return (
-<<<<<<< HEAD
-      <Fragment>
-        <Decoration isLoginPage={false}/>
-=======
+
       <Layout>
->>>>>>> 7bc1d4aa87d6b2e391c458c0ba32e7d0cbc891b5
         <Suspense fallback={<Loader />}>
           <Switch>
             {routesMap}
