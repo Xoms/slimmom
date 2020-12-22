@@ -24,6 +24,7 @@
     "react-transition-group": "^4.4.1",
     "redux": "^4.0.5",
     "redux-persist": "^6.0.0",
+    "semantic-ui-react": "^2.0.1",
     "styled-components": "^5.2.1",
     "web-vitals": "^0.2.4"
   },
