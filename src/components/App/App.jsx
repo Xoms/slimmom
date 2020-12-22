@@ -4,6 +4,7 @@ import { Route, Switch /*Redirect*/ } from "react-router-dom";
 import routes from '../../routes';
 import PublicRoute from '../PublicRoute/PublicRoute';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
+import DiaryProductListItem from '../DiaryProductListItem/DiaryProductListItem';
 
 
 //jsx components
@@ -16,6 +17,8 @@ import "./App.scss";
 class App extends Component {
   render() {
 
+
+
     const routesMap = routes.map((route) => {
       return route.privated ? (
         <PrivateRoute key={route.path} {...route} />
@@ -25,7 +28,9 @@ class App extends Component {
     });
 
     return (
+      
       <Fragment>
+        <DiaryProductListItem/>
         <Decoration isLoginPage={true}/>
         <Suspense fallback={<Loader />}>
           <Switch>
