@@ -1,4 +1,4 @@
-@import '../../shared-styles/colors.scss';
+@import '../../../shared-styles/colors';
 
 .primary-button {
     font-weight: bold;
@@ -11,6 +11,7 @@
     margin-bottom: 20px;
 
     color: $accent;
+    background-color: #fff;
     transition: all 250ms linear;
     box-shadow: 0px 4px 10px rgba(252, 132, 45, 0.5);
     outline: none;
@@ -30,6 +31,7 @@
     margin-bottom: 20px;
 
     background-color: $accent;
+    color: #fff;
     transition: all 250ms linear;
     outline: none;
 
@@ -37,12 +39,12 @@
     border-radius: 30px;
 }
 
-.primary-button {
+.primary-button:hover {
     color: #fff;
     background-color: $accent;
     box-shadow: 0px 4px 10px rgba(252, 132, 45, 0.5);
 }
 
-.secondary-button {
+.secondary-button:hover {
     box-shadow: 0px 4px 10px rgba(252, 132, 45, 0.5);
 }
