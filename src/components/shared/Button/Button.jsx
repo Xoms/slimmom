@@ -10,7 +10,7 @@ const Button = (props) => {
         ) 
     } else if (marker === "secondary") {
         return (
-            <button type="submit" className="secondary-button">{text}</button>
+            <button type="button" className="secondary-button">{text}</button>
         ) 
     }
 };
