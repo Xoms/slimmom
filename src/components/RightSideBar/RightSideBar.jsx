@@ -1,7 +1,6 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 import classes from './rightSideBar.module.scss';
-// import imgLeaves from '../../img/rightSideBarBottom@1x.png'
 
 function RightSideBar({ props }) {
   return (
