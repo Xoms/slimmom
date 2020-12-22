@@ -34,7 +34,10 @@ class PhonebookService {
   getDailyRate(userCharacteristics) {
     return axios.post(`/daily-rate/`, userCharacteristics);
   }
-
+  //================== daily norm ==================
+  // getDailyNorm(userCharacteristics) {
+  //   return axios.post(`/daily-rate/`, userCharacteristics);
+  // }
   //================== contacts ==================
   getContacts() {
     return axios.get('/contacts');

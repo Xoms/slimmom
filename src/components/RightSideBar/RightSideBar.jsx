@@ -1,8 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import userReducer from '../../redux/user/userReducer.js';
 // import PropTypes from 'prop-types';
 import classes from './rightSideBar.module.scss';
 
-function RightSideBar({ props }) {
+function RightSideBar({ notAllowedProducts }) {
   return (
     <section className={classes.section__rightSideBar}>
       <div className={classes.conteiner__rightSideBar}>
@@ -36,4 +38,8 @@ function RightSideBar({ props }) {
   );
 }
 
-export default RightSideBar;
+const mapStateToProps = state => ({
+  notAllowedProducts: userReducer.initialState.notAllowedProducts(state),
+});
+
+export default connect(mapStateToProps)(RightSideBar);
