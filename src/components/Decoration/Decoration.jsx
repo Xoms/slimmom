@@ -6,12 +6,12 @@ class Decoration extends Component {
     const addStyle = this.props.isLoginPage ? "-login" : '';
     return ( 
       <section className={`decoration${addStyle}`} >
-        <div className="dec-container">
+        {/* <div className="dec-container"> */}
           <div className='dec-spot'></div>
-          <div className="dec-banana"></div>
           <div className="dec-strawberry"></div>
           <div className="dec-leaves"></div>
-        </div>
+          <div className="dec-banana"></div>
+        {/* </div> */}
       </section>
      );
   }

@@ -24,7 +24,7 @@ class App extends Component {
 
     return (
       <Fragment>
-        <Decoration isLoginPage={true}/>
+        <Decoration isLoginPage={false}/>
         <Suspense fallback={<Loader />}>
           <Switch>
             {routesMap}
