@@ -40,8 +40,8 @@ class RegistrationForm extends Component {
                     <input onChange={this.handleChange} value={this.state.password} placeholder="Пароль *" name="password" type="password"/>
                 </div>
                 <div className="registration-buttons">
-                    <Button clickHandler={this.handleClick} marker="secondary" text="Вход"/>
-                    <Button marker="primary" text="Регистрация"/>
+                    <Button clickHandler={this.handleClick} className="primary-button"> Вход </Button>
+                    <Button type="submit" className='secondary-button'> Регистрация </Button>
                 </div>
             </form>
         )
