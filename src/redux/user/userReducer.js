@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
 import authActions from '../auth/authActions';
 import userActions from './userActions';
@@ -8,9 +7,7 @@ const initialState = {
   email: null,
   id: null,
   dailyRate: null,
-  userData: {
-    notAllowedProducts: [],
-  },
+  notAllowedProducts: [],
 };
 
 const user = createReducer(initialState, {
@@ -22,9 +19,10 @@ const user = createReducer(initialState, {
   },
   [userActions.getCurrentUserSuccess]: (state, { payload }) => payload,
   [authActions.logoutSuccess]: () => initialState,
-  [userActions.getDailyRateSuccess]: () => (state, { payload }) => {
-    console.log(payload);
-  },
+  [userActions.getDailyRateSuccess]: (state, { payload }) => ({
+    ...state,
+    ...payload,
+  }),
 });
 
 export default user;

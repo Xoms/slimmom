@@ -11,7 +11,7 @@ import {
  } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-import { loading } from '../redux/global/globalReducers';
+import { loading, error } from '../redux/global/globalReducers';
 import authReducer from './auth/authReducer';
 import user from './user/userReducer';
 
@@ -29,8 +29,9 @@ const authPersistConfig = {
 
 export const store = configureStore({
   reducer: {
-    loading,
     auth: persistReducer(authPersistConfig, authReducer),
+    loading,
+    error,
     user 
   },
   middleware: [...defaultMiddleware, ],
