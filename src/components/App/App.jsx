@@ -1,10 +1,11 @@
 import React from 'react';
+import RightSideBar from '../RightSideBar/RightSideBar';
 
 import './App.scss';
 
-const App = (props) => (
+const App = props => (
   <div className="AppWrapper">
-    Test content
+    <RightSideBar></RightSideBar>
   </div>
 );
 
