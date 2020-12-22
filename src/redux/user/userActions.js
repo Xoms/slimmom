@@ -4,8 +4,9 @@ const getCurrentUserRequest = createAction('auth/getUserRequest');
 const getCurrentUserSuccess = createAction('auth/getUserSuccess');
 const getCurrentUserError = createAction('auth/getUserError');
 
-export { 
+const actions = { 
     getCurrentUserRequest,
     getCurrentUserSuccess,
     getCurrentUserError
 }
+export default actions
