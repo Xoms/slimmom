@@ -1,4 +1,5 @@
 import React from 'react';
+import './Button.scss';
 
 const Button = (props) => {
     const {marker, text} = props;
@@ -9,7 +10,7 @@ const Button = (props) => {
         ) 
     } else if (marker === "secondary") {
         return (
-            <button type="submit" className="secondary-button">{text}</button>
+            <button type="button" className="secondary-button">{text}</button>
         ) 
     }
 };
