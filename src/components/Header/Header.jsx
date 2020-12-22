@@ -4,6 +4,8 @@ import Media from "react-media"
 import { NavLink } from "react-router-dom"
 import { BurgerMenu, Burger } from "../BurgerMenu"
 import { Logo, LogoText } from "../Logo"
+import NavigationBar from '../NavigationBar';
+import UserInfo from '../UserInfo';
 import AuthNavigations from '../AuthNavigations';
 import styles from "./Header.module.scss"
 import withAuth from "../hocs/withAuth"
@@ -17,7 +19,7 @@ class Header extends Component {
   }
 
   render() {
-    const { isAuth = true } = this.props
+    const { isAuth=true } = this.props
     const { isOpen } = this.state
 
     return (
@@ -29,7 +31,7 @@ class Header extends Component {
               
                 <Media
                   queries={{
-                    small: "(max-width: 320px)",
+                    small: "(min-width: 320px) and (max-width: 767px)",
                     medium: "(min-width: 768px) and (max-width: 1099px)",
                     large: "(min-width: 1100px)",
                   }}
@@ -53,7 +55,7 @@ class Header extends Component {
             <div>
             <Media
                   queries={{
-                    small: "(max-width: 320px)",
+                    small: "(min-width: 320px) and (max-width: 767px)",
                     medium: "(min-width: 768px) and (max-width: 1099px)",
                     large: "(min-width: 1100px)",
                   }}
@@ -62,48 +64,46 @@ class Header extends Component {
                     <Fragment>
                       {matches.small && (
                         <>{isAuth ? (
-                          <div className={styles.navigationAuth} onClick={() => this.handleToggle()}>
+                          <div className={styles.navigationAuth}>
                             {!isOpen ? (
-                              <Burger />
+                              <Burger onClick={this.handleToggle}/>
                             ) : (
-                              <button type="button" className={styles.closeBtn}>
+                              <button type="button" className={styles.closeBtn} onClick={() => this.handleToggle()}>
                                 X
                               </button>
                             )}
                           </div>
                         ) : (
-                          <div className={styles.navigation}> ВХОД | РЕГИСТРАЦИЯ </div> //тут будет комп NAV
+                          <div className={styles.navigation}> <NavigationBar /></div> //тут будет комп NAV
                         )}
-                        {isAuth && <div>User Profile</div>} 
+                        {isAuth && <div><UserInfo /></div>} 
                         </>
                       )}
                       {matches.medium && (
                         <>{isAuth ? (
-                          <div className={styles.navigationAuth} onClick={() => this.handleToggle()}>
+                          <div className={styles.navigationAuth}>
                             {/* сюда вставить UserMenu */}
-                            {isAuth && <div>User Profile</div>} 
+                            {isAuth && <div><UserInfo /></div>} 
                             
                             {!isOpen ? (
-                              <Burger />
+                              <Burger onClick={this.handleToggle}/>
                             ) : (
-                              <button type="button" className={styles.closeBtn}>
+                              <button type="button" className={styles.closeBtn} onClick={() => this.handleToggle()}>
                                 X
                               </button>
                             )}
                           </div>
                         ) : (
-                          <div className={styles.navigation}> ВХОД | РЕГИСТРАЦИЯ </div> //тут будет комп NAV
+                          <div className={styles.navigation}> <NavigationBar /> </div> //тут будет комп NAV
                         )}</>
                       )}
                       {matches.large && (
                         <>{isAuth ? (
-                          <div className={styles.navigationAuth} onClick={() => this.handleToggle()}>
-                            <AuthNavigations />
-                            {/* сюда вставить UserMenu */}
-                            {isAuth && <div>User Profile</div>} 
+                          <div className={styles.navigationAuth}>
+                            {isAuth && <div><UserInfo /></div>} 
                           </div>
                         ) : (
-                          <div className={styles.navigation}> ВХОД | РЕГИСТРАЦИЯ </div> //тут будет комп NAV
+                          <div className={styles.navigation}> <NavigationBar /> </div>
                         )}</>
                       )}
                     </Fragment>

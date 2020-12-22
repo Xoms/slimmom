@@ -7,7 +7,8 @@ const register = credentials => dispatch => {
 
     api.register(credentials)
         .then(({data}) => {
-            api.setToken(data.token);
+            //api.setToken(data.token); //токена нету О_о
+
             dispatch(authActions.registerSuccess(data));
         })
         .catch( err => dispatch(authActions.registerError(err)));
@@ -19,7 +20,7 @@ const login = credentials => (dispatch) => {
 
     api.login(credentials)
         .then(({data}) => {
-            api.setToken(data.token);
+            api.setToken(data.accessToken);
             dispatch(authActions.loginSuccess(data));
         })
         .catch( err => dispatch(authActions.loginError(err)));
@@ -36,22 +37,32 @@ const logout = token => dispatch => {
         .catch( err => dispatch(authActions.logoutError(err)));
 }
 
-const getCurrentUser = () => (dispatch, getState) => {
+const refresh = sid => dispatch => {
+    dispatch(authActions.refreshRequest());
 
-    const { auth: { token } } = getState()
-
-    if (!token) return
-
-    api.setToken(token)
-
-    dispatch(authActions.getCurrentUserRequest());
-
-    api.getCurrentUser()
+    api.refresh(sid)
         .then(({data}) => {
-            dispatch(authActions.getCurrentUserSuccess(data))
+            api.setToken(data.newAccessToken);
+            dispatch(authActions.refreshSuccess(data));
         })
-        .catch( err => dispatch(authActions.getCurrentUserError(err)));
 }
 
-const ops = { register, login, logout, getCurrentUser }
+// const getCurrentUser = () => (dispatch, getState) => {
+
+//     const { auth: { token } } = getState()
+
+//     if (!token) return
+
+//     api.setToken(token)
+
+//     dispatch(authActions.getCurrentUserRequest());
+
+//     api.getCurrentUser()
+//         .then(({data}) => {
+//             dispatch(authActions.getCurrentUserSuccess(data))
+//         })
+//         .catch( err => dispatch(authActions.getCurrentUserError(err)));
+// }
+
+const ops = { register, login, logout, refresh }
 export default ops

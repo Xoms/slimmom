@@ -74,6 +74,7 @@ header > .container {
   }
   @include for-size(desktop) {
     margin-left: 45px;
+    padding-top: 40px;
   }
 }
 .logoLink {
@@ -86,6 +87,11 @@ header > .container {
   background-color: $main-background;
   color: $main-text;
   font-size: 20px;
+ 
+  @include for-size(tablet){
+    margin-left: 50px;  
+    padding-right: 30px;
+  }
 
   &:hover,
   &:focus {
