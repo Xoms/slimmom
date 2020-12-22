@@ -1,8 +1,9 @@
-import React, {Component} from "react"
-import {connect} from "react-redux"
-import {authOperations, authActions} from "../../redux/auth"
-import globalSelectors from "../../redux/global/globalSelectors"
-import css from "./LoginForm.module.scss"
+import React, {Component} from "react";
+import {connect} from "react-redux";
+import {authOperations, authActions} from "../../redux/auth";
+import globalSelectors from "../../redux/global/globalSelectors";
+import Notification from '../shared/Notification/Notification';
+import css from "./LoginForm.module.scss";
 
 class LoginForm extends Component {
   state = {
@@ -22,14 +23,14 @@ class LoginForm extends Component {
 
   render() {
     const {login, password} = this.state
-    // if (this.props.error) {
-    //   setTimeout(() => {
-    //     this.props.loginError()
-    //   }, 3000)
-    // }
+    if (this.props.error) {
+      setTimeout(() => {
+        this.props.loginError()
+      }, 3000)
+    }
     return (
       <>
-        {/* <Notification error={Boolean(this.props.error)} message="There is no such account!"></Notification> */}
+        <Notification error={Boolean(this.props.error)} message="There is no such account!"></Notification>
         <div className={css.loginPage}>
           <h2 className={css.loginTitle}>Вход</h2>
 
