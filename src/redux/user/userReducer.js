@@ -1,8 +1,7 @@
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
-import { authActions } from '../auth/authActions';
-import { useReducer } from 'react';
-
+import  authActions  from '../auth/authActions';
+import userActions from './userActions';
 
 const initialState = { 
     username: null, 
@@ -12,7 +11,6 @@ const initialState = {
         notAllowedProducts: []
     }
 };
-
 
 const user = createReducer(initialState, {
     [authActions.registerSuccess]: (state, { payload }) => payload,
