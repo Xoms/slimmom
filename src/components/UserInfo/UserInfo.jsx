@@ -6,7 +6,7 @@ import './UserInfo.scss';
 class UserInfo extends Component {
 
     handleClick = () => {
-        this.props.logout();
+        this.props.logout(this.props.token);
     };
 
     render () {
@@ -23,6 +23,7 @@ class UserInfo extends Component {
 
 const mapStateToProps = state => ({
     userName: state.user.username,
+    token: state.auth.accessToken,
 });
 
 const mapDispatchToProps = {
