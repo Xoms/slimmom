@@ -1,0 +1,23 @@
+@import "../../shared-styles/reset";
+@import "../../shared-styles/mixins";
+@import "../../shared-styles/colors";
+
+
+.authNavigationsDairy {
+  @include for-size(desktop) {
+    text-decoration: none;
+    color: $secondary-text;
+    font-family: "VerdanaBold";
+    font-size: 14px;
+    margin-right: 22px;
+  }
+}
+.authNavigationsCalc {
+  @include for-size(desktop) {
+    text-decoration: none;
+    color: $main-text;
+    font-family: "VerdanaBold";
+    font-size: 14px;
+    margin-right: 500px;
+  }
+}
