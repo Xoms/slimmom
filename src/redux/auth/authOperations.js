@@ -1,5 +1,4 @@
 import authActions from './authActions';
-
 import api from '../../services/backend.service';
 
 const register = credentials => dispatch => {
