@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
-import { authActions } from '../auth/authActions';
+import  authActions  from '../auth/authActions';
 import userActions from './userActions';
 
 
