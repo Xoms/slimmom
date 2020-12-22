@@ -43,11 +43,11 @@ nav {
   color: $main-text;
 }
 
-@media (min-width: 650px) {
-  .container {
-    padding: 0px 75px;
-  }
-}
+// @media (min-width: 650px) {
+//   .container {
+//     padding: 0px 75px;
+//   }
+// }
 
 @media (min-width: 1100px) {
   nav {
@@ -56,7 +56,7 @@ nav {
     border-bottom: none;
   }
 
-  .navContainer {
-    display: none;
-  }
+  // .navContainer {
+  //   display: none;
+  // }
 }

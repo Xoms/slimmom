@@ -5,10 +5,11 @@ import routes from '../../routes';
 import PublicRoute from '../PublicRoute/PublicRoute';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
 
-import Loader from '../shared/Loader';
-import Layout from '../Layout';
 
-import RightSideBar from '../RightSideBar/RightSideBar.jsx';
+import Loader from '../shared/Loader';
+
+import Layout from '../Layout';
+import Decoration from '../Decoration';
 
 //style
 import './App.scss';
@@ -24,15 +25,17 @@ class App extends Component {
     });
 
     return (
-      <Layout>
-        <RightSideBar></RightSideBar>
-        <Suspense fallback={<Loader />}>
-          <Switch>
-            {routesMap}
-            <Route component={lazy(() => import('../../pages/NotFound'))} />
-          </Switch>
-        </Suspense>
-      </Layout>
+      <>
+        <Decoration />
+        <Layout>
+          <Suspense fallback={<Loader />}>
+            <Switch>
+              {routesMap}
+              <Route component={lazy(() => import('../../pages/NotFound'))} />
+            </Switch>
+          </Suspense>
+        </Layout>
+      </>
     );
   }
 }

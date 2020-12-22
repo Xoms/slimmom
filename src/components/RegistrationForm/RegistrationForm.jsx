@@ -1,21 +1,47 @@
 import React, {Component} from 'react';
 import Button from '../shared/Button/Button';
+import ops from '../../redux/auth/authOperations';
+import {connect} from 'react-redux';
 import './RegistrationForm.scss';
 
 class RegistrationForm extends Component {
+    state = {
+        email: '',
+        password: '',
+        username: '',
+    };
+
+    handleChange = ({target: {name, value}}) => {
+        this.setState({[name]: value})
+    };
+
+    handleClick = () => {
+        this.props.history.push('/login')
+    };
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+        this.props.register(({...this.state}));
+        this.setState({
+            email: '',
+            password: '',
+            username: '',
+        });
+        this.props.history.push('/login');
+    };
 
     render () {
         return (
-            <form className="registration-form">
+            <form onSubmit={this.handleSubmit} className="registration-form">
                 <h1>РЕГИСТРАЦИЯ</h1>
                 <div className="registration-inputs">
-                    <input placeholder="Имя *" name="name" type="text"/>
-                    <input placeholder="Логин *" name="login" type="text"/>
-                    <input placeholder="Пароль *" name="password" type="password"/>
+                    <input onChange={this.handleChange} value={this.state.username} placeholder="Имя *" name="username" type="text"/>
+                    <input onChange={this.handleChange} value={this.state.email} placeholder="E-mail *" name="email" type="text"/>
+                    <input onChange={this.handleChange} value={this.state.password} placeholder="Пароль *" name="password" type="password"/>
                 </div>
                 <div className="registration-buttons">
-                    <Button marker="secondary" text="Вход"/>
-                    <Button marker="primary" text="Регистрация"/>
+                    <Button clickHandler={this.handleClick} className="primary-button"> Вход </Button>
+                    <Button type="submit" className='secondary-button'> Регистрация </Button>
                 </div>
             </form>
         )
@@ -23,4 +49,8 @@ class RegistrationForm extends Component {
 
 };
 
-export default RegistrationForm;
+const mapDispatchToProps = {
+    register: ops.register,
+};
+
+export default connect(null, mapDispatchToProps)(RegistrationForm);

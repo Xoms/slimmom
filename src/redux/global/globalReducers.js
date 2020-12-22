@@ -1,5 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
-import authActions from '../auth/authActions'
+import authActions from '../auth/authActions';
+import userActions from '../user/userActions';
 const {
   registerRequest,
   registerSuccess,
@@ -10,16 +11,21 @@ const {
   logoutRequest,
   logoutSuccess,
   logoutError,
+  clearError,
+} = {...authActions};
+
+const {
   getCurrentUserRequest,
   getCurrentUserSuccess,
   getCurrentUserError
-} = {...authActions};
+} = userActions;
 
 const error = createReducer(null, {
-  [loginError]: (state, {payload}) => payload.error,
+  [loginError]: (state, {payload}) => payload.message,
   [getCurrentUserError]: (state, {payload}) => payload.error,
   [registerError]: (state, {payload}) => payload.error,
-  [logoutError]: (state, {payload}) => payload.error
+  [logoutError]: (state, {payload}) => payload.error,
+  [clearError]: () => null,
 } );
 
 const loading = createReducer(false, {

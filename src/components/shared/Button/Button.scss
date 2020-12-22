@@ -1,6 +1,7 @@
-@import '../../shared-styles/colors.scss';
+@import '../../../shared-styles/colors';
 
-.primary-button {
+.secondary-button {
+    cursor: pointer;
     font-weight: bold;
     font-size: 14px;
     line-height: 17px;
@@ -11,6 +12,7 @@
     margin-bottom: 20px;
 
     color: $accent;
+    background-color: #fff;
     transition: all 250ms linear;
     box-shadow: 0px 4px 10px rgba(252, 132, 45, 0.5);
     outline: none;
@@ -19,7 +21,8 @@
     border-radius: 30px;
 }
 
-.secondary-button {
+.primary-button {
+    cursor: pointer;
     font-weight: bold;
     font-size: 14px;
     line-height: 17px;
@@ -30,6 +33,7 @@
     margin-bottom: 20px;
 
     background-color: $accent;
+    color: #fff;
     transition: all 250ms linear;
     outline: none;
 
@@ -37,12 +41,14 @@
     border-radius: 30px;
 }
 
-.primary-button {
+.secondary-button:hover {
     color: #fff;
     background-color: $accent;
     box-shadow: 0px 4px 10px rgba(252, 132, 45, 0.5);
 }
 
-.secondary-button {
+.primary-button:hover {
+    color: $accent;
+    background-color:  #fff;
     box-shadow: 0px 4px 10px rgba(252, 132, 45, 0.5);
 }
