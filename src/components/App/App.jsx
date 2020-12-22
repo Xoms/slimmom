@@ -22,7 +22,6 @@ class App extends Component {
     });
 
     return (
-
       <Layout>
         <Suspense fallback={<Loader />}>
           <Switch>

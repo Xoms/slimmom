@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
-import { authActions } from '../auth/authActions';
-import { useReducer } from 'react';
+import  authActions  from '../auth/authActions';
+import userActions from './userActions';
+
 
 
 const initialState = { 
@@ -21,7 +22,7 @@ const user = createReducer(initialState, {
         const user = {email, username, id};
         return user;
     },
-    [authActions.getCurrentUserSuccess]: (state, { payload }) => payload, 
+    [userActions.getCurrentUserSuccess]: (state, { payload }) => payload, 
     [authActions.logoutSuccess]: () => initialState
 })
 
