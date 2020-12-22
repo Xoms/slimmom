@@ -1,6 +1,8 @@
 import React, {Component, Suspense, lazy} from 'react';
 import { Route, Switch, /*Redirect*/ } from 'react-router-dom';
 
+import RegistrationForm from '../RegistrationForm/RegistrationForm';
+
 import routes from '../../routes';
 import PublicRoute from '../PublicRoute/PublicRoute';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
@@ -18,7 +20,12 @@ class App extends Component{
       })
 
   return (
-    <><NavigationBar/>
+
+    <>
+    <RegistrationForm />
+    <NavigationBar/>
+
+
     <Suspense fallback={<Loader/>}>
       <Switch>
         {routesMap}
@@ -26,7 +33,9 @@ class App extends Component{
       </Switch>
   </Suspense>
   </>
-    )}
+
+  )}
+
 };
 
 App.propTypes = {

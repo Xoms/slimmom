@@ -1,3 +1,6 @@
+@import "../../shared-styles/_colors.scss";
+
+
 nav {
   height: 80px;
   border-bottom: 2px solid #e0e0e0;
@@ -18,14 +21,14 @@ nav {
 }
 
 .navContainer a {
-  font-family: GothamProBold;
+  font-family: GothamPro-Bold;
   font-style: normal;
   font-weight: bold;
   font-size: 14px;
   text-align: right;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: #9b9faa;
+  color: $secondary-text;
   text-decoration: none;
 }
 .login {
@@ -33,11 +36,11 @@ nav {
 }
 
 .navContainer a :hover {
-  color: #212121;
+    color: $main-text;
 }
 
 .active {
-  color: #212121;
+  color: $main-text;
 }
 
 @media (min-width: 650px) {
