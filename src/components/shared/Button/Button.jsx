@@ -10,7 +10,7 @@ const Button = (props) => {
         ) 
     } else if (marker === "secondary") {
         return (
-            <button type="button" className="secondary-button">{text}</button>
+            <button onClick={props.clickHandler} type="button" className="secondary-button">{text}</button>
         ) 
     }
 };
