@@ -1,5 +1,5 @@
 import React, { Component, Suspense, lazy } from 'react';
-import { Route, Switch /*Redirect*/ } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import routes from '../../routes';
 import PublicRoute from '../PublicRoute/PublicRoute';
@@ -8,6 +8,7 @@ import PrivateRoute from '../PrivateRoute/PrivateRoute';
 import Loader from '../shared/Loader';
 import Layout from '../Layout';
 
+//style
 import './App.scss';
 
 class App extends Component {

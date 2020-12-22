@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = "https://slimmom-backend.herokuapp.com/"; //"https://lpj-tasker.herokuapp.com"
+const url = "https://slimmom-backend.herokuapp.com/"; 
 
 axios.defaults.baseURL = url;
 
@@ -16,8 +16,8 @@ class PhonebookService {
         return axios.post('/auth/login', userCredentials)
     }
 
-    logout(token){
-        return axios.post('/auth/logout', token)
+    logout(){
+        return axios.post('/auth/logout')
     }    
 
     getCurrentUser(){
