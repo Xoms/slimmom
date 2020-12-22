@@ -95,7 +95,7 @@
   width: 290px;
   @include for-size(tablet) {
     width: 594px;
-    background-color: tomato;
+    // background-color: tomato;
     display: flex;
     justify-content: space-between;
   }
@@ -104,7 +104,7 @@
     display: block;
     margin-left: 500px;
 
-    background-color: rgb(0, 255, 85);
+    // background-color: rgb(0, 255, 85);
   }
 }
 

@@ -1,0 +1,86 @@
+@import "../../shared-styles/colors";
+@import "../../shared-styles/mixins";
+
+.loginPage {
+  text-align: center;
+  @include for-size(tablet) {
+    text-align: left;
+  }
+}
+.loginTitle {
+  margin-bottom: 60px;
+
+  color: $accent;
+
+  font-family: "GothamPro-Bold";
+  text-transform: uppercase;
+  line-height: 1.1;
+  letter-spacing: 0.04em;
+}
+.loginForm {
+  display: flex;
+  flex-direction: column;
+}
+input {
+  // display: inline-block;
+  font-family: "VerdanaBold";
+  font-size: 14px;
+  line-height: 1.215px;
+  letter-spacing: 0.04em;
+  color: $secondary-text;
+
+  height: 36px;
+  width: 289px;
+  padding-bottom: 20px;
+  border: none;
+  border-bottom: 1px solid $secondary-text;
+  background: transparent;
+
+  @include for-size(tablet) {
+    display: flex;
+    width: 240px;
+  }
+}
+.login {
+  margin-bottom: 40px;
+}
+.password {
+  margin-bottom: 60px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @include for-size(tablet) {
+    flex-direction: row;
+  }
+}
+.loginBtn {
+  font-family: "VerdanaBold";
+  font-size: 14px;
+  line-height: 1.215px;
+  letter-spacing: 0.04em;
+
+  height: 44px;
+  width: 175px;
+  border-radius: 30px;
+
+  color: $main-background;
+  background: $accent;
+  box-shadow: 0px 4px 10px rgba(252, 132, 45, 0.5);
+  border: none;
+  cursor: pointer;
+}
+.loginBtn:last-child {
+  margin-top: 20px;
+  color: $accent;
+  background: $main-background;
+  border: 2px solid $accent;
+  box-shadow: none;
+
+  @include for-size(tablet) {
+    margin-top: 0;
+    margin-left: 30px;
+  }
+}

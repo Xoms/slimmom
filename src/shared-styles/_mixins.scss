@@ -1,7 +1,7 @@
 @mixin for-size($range) {
   $mobile: 320px;
   $tablet: 768px;
-  $desktop: 1100px;
+  $desktop: 1110px;
   @if $range == phone-only {
     //max-width: 480 - 1 = 479
   } @else if $range == tablet {
