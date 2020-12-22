@@ -17,8 +17,12 @@ class PhonebookService {
     }
 
     logout(){
-        return axios.post('/auth/logout')
-    }    
+        return axios.post('/auth/logout');
+    }
+
+    refresh(sid){
+        return axios.post('/auth/refresh', sid);
+    }
 
     getCurrentUser(){
         return axios.get('/user')
@@ -32,22 +36,7 @@ class PhonebookService {
         axios.defaults.headers.common.Authorization = ``;
     }
 
-    //================== contacts ==================
-    getContacts(){
-        return axios.get('/contacts'); 
-    }
-
-    addContact(newContact) {
-        return axios.post('/contacts', newContact);
-    }
-
-    delContact(id) {
-        return axios.delete(`/contacts/${id}`)
-    }
     
-    updateContact(id) {
-        return axios.patch(`/contacts/${id}`)
-    }
 
 }
 

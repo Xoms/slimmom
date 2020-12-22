@@ -16,9 +16,7 @@ const refreshRequest = createAction('auth/refreshRequest');
 const refreshSuccess = createAction('auth/refreshSuccess');
 const refreshError = createAction('auth/refreshError');
 
-const getCurrentUserRequest = createAction('auth/getUserRequest');
-const getCurrentUserSuccess = createAction('auth/getUserSuccess');
-const getCurrentUserError = createAction('auth/getUserError');
+
 
 const actions = {
     registerRequest,
@@ -30,9 +28,6 @@ const actions = {
     logoutRequest,
     logoutSuccess,
     logoutError,
-    getCurrentUserRequest,
-    getCurrentUserSuccess,
-    getCurrentUserError,
     refreshRequest,
     refreshSuccess,
     refreshError
