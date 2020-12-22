@@ -16,7 +16,7 @@ const refreshRequest = createAction('auth/refreshRequest');
 const refreshSuccess = createAction('auth/refreshSuccess');
 const refreshError = createAction('auth/refreshError');
 
-
+const clearError = createAction('clearError');
 
 const actions = {
     registerRequest,
@@ -30,7 +30,8 @@ const actions = {
     logoutError,
     refreshRequest,
     refreshSuccess,
-    refreshError
+    refreshError,
+    clearError,
 }
 
 export default actions
