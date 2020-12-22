@@ -7,6 +7,10 @@
     text-align: left;
   }
 }
+.errorLogin {
+  display: flex;
+  color: rgb(238, 20, 20);
+}
 .loginTitle {
   margin-bottom: 60px;
 
@@ -22,7 +26,7 @@
   flex-direction: column;
 }
 input {
-  // display: inline-block;
+  // position: relative;
   font-family: "VerdanaBold";
   font-size: 14px;
   line-height: 1.215px;

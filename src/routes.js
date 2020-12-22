@@ -9,14 +9,14 @@ const routes = [
     privated: false,
     restricted: false,
   },
-  {
-    label: 'Регистация',
-    path: '/register',
-    exact: true,
-    component: lazy(() => import('./pages/RegistrationPage')),
-    privated: false,
-    restricted: true,
-  },
+//   {
+//     label: 'Регистация',
+//     path: '/register',
+//     exact: true,
+//     component: lazy(() => import('./pages/RegistrationPage')),
+//     privated: false,
+//     restricted: true,
+//   },
   {
     label: 'Вход',
     path: '/login',
