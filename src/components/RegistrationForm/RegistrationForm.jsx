@@ -25,6 +25,7 @@ class RegistrationForm extends Component {
 
     render () {
         return (
+<<<<<<< HEAD
 
             <>
                 <Formik initialValues={{email: "", password: "", username: ""}} onSubmit={this.handleSubmit} validationSchema={RegisterSchema}>
@@ -51,46 +52,6 @@ class RegistrationForm extends Component {
                 </Form>
                 </Formik>
             </>
-
-    //   <Notification error={Boolean(props.error)} message="Заполните форму в соответствии с требованиями"></Notification>
-    //   <div className={css.loginPage}>
-    //     <h2 className={css.loginTitle}>Вход</h2>
-
-    //     <Formik initialValues={{email: "", password: ""}} onSubmit={handleSubmit} validationSchema={SignupSchema}>
-    //       <Form className={css.loginForm}>
-
-    //       <label className={css.formLabel}>
-    //           <Field
-    //             className={css.login}
-    //             type="email"
-    //             name="email"
-    //             placeholder="Логин *"
-    //           />
-    //           <ErrorMessage className={css.validField} name="email" component="span" />
-    //         </label>
-
-    //         <label className={css.formLabel}>
-    //           <Field
-    //             className={css.password}
-    //             type="password"
-    //             name="password"
-    //             placeholder="Пароль *"
-    //           />
-    //           <ErrorMessage className={css.validField} name="password" component="span" />
-    //         </label>
-
-    //         <div className={css.buttons}>
-    //         <Button marker="primary" text="Вход"> </ Button>
-    //         <Button marker="secondary" text="Регистрация" >
-              
-    //           </ Button>
-            
-    //         </div>
-    //       </Form>
-    //     </Formik>
-    //   </div>
-
-           
         )
     }
 
