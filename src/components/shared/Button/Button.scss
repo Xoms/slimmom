@@ -1,6 +1,7 @@
 @import '../../../shared-styles/colors';
 
-.primary-button {
+.secondary-button {
+    cursor: pointer;
     font-weight: bold;
     font-size: 14px;
     line-height: 17px;
@@ -20,7 +21,8 @@
     border-radius: 30px;
 }
 
-.secondary-button {
+.primary-button {
+    cursor: pointer;
     font-weight: bold;
     font-size: 14px;
     line-height: 17px;
@@ -39,12 +41,14 @@
     border-radius: 30px;
 }
 
-.primary-button:hover {
+.secondary-button:hover {
     color: #fff;
     background-color: $accent;
     box-shadow: 0px 4px 10px rgba(252, 132, 45, 0.5);
 }
 
-.secondary-button:hover {
+.primary-button:hover {
+    color: $accent;
+    background-color:  #fff;
     box-shadow: 0px 4px 10px rgba(252, 132, 45, 0.5);
 }
