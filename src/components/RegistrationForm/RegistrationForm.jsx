@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Button from '../shared/Button/Button';
 import './RegistrationForm.scss';
 
 class RegistrationForm extends Component {
@@ -13,8 +14,8 @@ class RegistrationForm extends Component {
                     <input placeholder="Пароль *" name="password" type="password"/>
                 </div>
                 <div className="registration-buttons">
-                    <button>Вход</button>
-                    <button type="submit">Регистрация</button>
+                    <Button marker="secondary" text="Вход"/>
+                    <Button marker="primary" text="Регистрация"/>
                 </div>
             </form>
         )

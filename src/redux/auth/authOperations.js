@@ -1,5 +1,5 @@
 import authActions from './authActions';
-import api from '../../../services/backend.service';
+import api from '../../services/backend.service';
 
 const register = credentials => dispatch => {
     
@@ -7,7 +7,8 @@ const register = credentials => dispatch => {
 
     api.register(credentials)
         .then(({data}) => {
-            //api.setToken(data.token);
+            //api.setToken(data.token); //токена нету О_о
+
             dispatch(authActions.registerSuccess(data));
         })
         .catch( err => dispatch(authActions.registerError(err)));
@@ -39,29 +40,29 @@ const logout = token => dispatch => {
 const refresh = sid => dispatch => {
     dispatch(authActions.refreshRequest());
 
-    api.logout(sid)
+    api.refresh(sid)
         .then(({data}) => {
             api.setToken(data.newAccessToken);
-            dispatch(authActions.logoutSuccess(data));
+            dispatch(authActions.refreshSuccess(data));
         })
 }
 
-const getCurrentUser = () => (dispatch, getState) => {
+// const getCurrentUser = () => (dispatch, getState) => {
 
-    const { auth: { token } } = getState()
+//     const { auth: { token } } = getState()
 
-    if (!token) return
+//     if (!token) return
 
-    api.setToken(token)
+//     api.setToken(token)
 
-    dispatch(authActions.getCurrentUserRequest());
+//     dispatch(authActions.getCurrentUserRequest());
 
-    api.getCurrentUser()
-        .then(({data}) => {
-            dispatch(authActions.getCurrentUserSuccess(data))
-        })
-        .catch( err => dispatch(authActions.getCurrentUserError(err)));
-}
+//     api.getCurrentUser()
+//         .then(({data}) => {
+//             dispatch(authActions.getCurrentUserSuccess(data))
+//         })
+//         .catch( err => dispatch(authActions.getCurrentUserError(err)));
+// }
 
-const ops = { register, login, logout, getCurrentUser }
+const ops = { register, login, logout, refresh }
 export default ops

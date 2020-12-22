@@ -2,20 +2,20 @@ import React from "react";
 import styles from "./DiaryProductListItem.module.scss";
 
 
-const DiaryProductListItem = ({ title = 'баклажан', kcal = '100', weight ='100'}) => {
+const DiaryProductListItem = ({ title = '', ccal = '', weight =''}) => {
     
 return (
-    <ul className={styles.list}>
-      <li className={styles.listName}>{title}</li>
-      <li className={styles.listWeight}>{weight} г</li>
-      <li className={styles.listCalories}>{kcal} 
-      <li className={styles.ccal}> ккал</li>
-      </li>
-      <button className={styles.listButton}>
-X
+  <li className={styles.list}>
+  <span className={styles.listName}>{title}</span>
+  <span className={styles.listWeight}>{weight} г</span>
+  <span className={styles.listCalories}>{ccal} ккал</span>
+
+  <button className={styles.listButton}>
+x
       </button>
-    </ul>
+    </li>
   );
 };
+
 
 export default DiaryProductListItem;
