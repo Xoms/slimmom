@@ -13,6 +13,7 @@ import storage from 'redux-persist/lib/storage';
 
 import { loading } from '../redux/global/globalReducers';
 import authReducer from './auth/authReducer';
+import user from './user/userReducer';
 
 const defaultMiddleware = getDefaultMiddleware({
   serializableCheck: {
@@ -29,7 +30,8 @@ const authPersistConfig = {
 export const store = configureStore({
   reducer: {
     loading,
-    auth: persistReducer(authPersistConfig, authReducer)
+    auth: persistReducer(authPersistConfig, authReducer),
+    user 
   },
   middleware: [...defaultMiddleware, ],
 })

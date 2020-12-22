@@ -1,5 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
-import authActions from '../auth/authActions'
+import authActions from '../auth/authActions';
+import userActions from '../user/userActions';
 const {
   registerRequest,
   registerSuccess,
@@ -10,10 +11,13 @@ const {
   logoutRequest,
   logoutSuccess,
   logoutError,
+} = {...authActions};
+
+const {
   getCurrentUserRequest,
   getCurrentUserSuccess,
   getCurrentUserError
-} = {...authActions};
+} = userActions;
 
 const error = createReducer(null, {
   [loginError]: (state, {payload}) => payload.error,

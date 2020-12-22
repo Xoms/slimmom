@@ -1,4 +1,5 @@
 import authActions from './authActions';
+
 import api from '../../services/backend.service';
 
 const register = credentials => dispatch => {
@@ -37,32 +38,32 @@ const logout = token => dispatch => {
         .catch( err => dispatch(authActions.logoutError(err)));
 }
 
-// const refresh = sid => dispatch => {
-//     dispatch(authActions.refreshRequest());
+const refresh = sid => dispatch => {
+    dispatch(authActions.refreshRequest());
 
-//     api.logout(sid)
-//         .then(({data}) => {
-//             api.setToken(data.newAccessToken);
-//             dispatch(authActions.logoutSuccess(data));
-//         })
-// }
-
-const getCurrentUser = () => (dispatch, getState) => {
-
-    const { auth: { token } } = getState()
-
-    if (!token) return
-
-    api.setToken(token)
-
-    dispatch(authActions.getCurrentUserRequest());
-
-    api.getCurrentUser()
+    api.refresh(sid)
         .then(({data}) => {
-            dispatch(authActions.getCurrentUserSuccess(data))
+            api.setToken(data.newAccessToken);
+            dispatch(authActions.refreshSuccess(data));
         })
-        .catch( err => dispatch(authActions.getCurrentUserError(err)));
 }
 
-const ops = { register, login, logout, getCurrentUser }
+// const getCurrentUser = () => (dispatch, getState) => {
+
+//     const { auth: { token } } = getState()
+
+//     if (!token) return
+
+//     api.setToken(token)
+
+//     dispatch(authActions.getCurrentUserRequest());
+
+//     api.getCurrentUser()
+//         .then(({data}) => {
+//             dispatch(authActions.getCurrentUserSuccess(data))
+//         })
+//         .catch( err => dispatch(authActions.getCurrentUserError(err)));
+// }
+
+const ops = { register, login, logout, refresh }
 export default ops
