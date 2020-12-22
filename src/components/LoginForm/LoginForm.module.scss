@@ -1,0 +1,80 @@
+@import "../../shared-styles/colors";
+@import "../../shared-styles/mixins";
+
+.loginPage {
+  text-align: center;
+  @include for-size(tablet) {
+    text-align: left;
+  }
+}
+.formLabel {
+  position: relative;
+}
+.validField {
+  font-family: "GothamPro-Bold";
+  position: absolute;
+  color: rgb(238, 20, 20);
+  top: 8px;
+  left: 110px;
+
+  @include for-size(tablet) {
+    left: 250px;
+  }
+}
+.loginTitle {
+  margin-bottom: 60px;
+
+  color: $accent;
+
+  font-family: "GothamPro-Bold";
+  text-transform: uppercase;
+  line-height: 1.1;
+  letter-spacing: 0.04em;
+}
+.loginForm {
+  display: flex;
+  flex-direction: column;
+}
+input {
+  font-family: "VerdanaBold";
+  font-size: 14px;
+  line-height: 1.215px;
+  letter-spacing: 0.04em;
+  color: $secondary-text;
+
+  height: 36px;
+  width: 289px;
+  padding-bottom: 20px;
+  border: none;
+  border-bottom: 1px solid $secondary-text;
+  background: transparent;
+
+  @include for-size(tablet) {
+    display: flex;
+    width: 240px;
+  }
+}
+.login {
+  margin-bottom: 40px;
+}
+.password {
+  margin-bottom: 60px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @include for-size(tablet) {
+    flex-direction: row;
+     & button {
+       margin-bottom: 0;
+     }
+  }
+}
+.buttons > button:last-child {
+  margin-bottom: 0;
+  @include for-size(tablet) {
+   margin-left: 30px;
+  }
+}

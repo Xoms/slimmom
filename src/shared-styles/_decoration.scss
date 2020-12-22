@@ -1,0 +1,178 @@
+section.decoration {
+  position: absolute;
+  z-index: -1000;
+  width: 100vw;
+  height: 100%;
+  overflow: hidden;
+  // background-color: ghostwhite;
+  //!dec-container ----------------------------------
+  // .dec-container{
+  //   position: relative;
+  //   margin: 0 auto;
+  //   @media screen and (min-width: 1100px){
+  //     width: 1050px;
+  //   }
+  //   height: 100vh;
+  // }
+  //!dec-spot ----------------------------------
+  .dec-spot {
+    position: absolute;
+    background-repeat: no-repeat;
+    bottom: -187px;
+    right: -32px;
+    width: 553px;
+    height: 750px;
+    background-image: url("../img/spot-tablet.png");
+    @media screen and (min-width: 1100px) {
+      bottom: 0;
+      right: 0;
+      width: 603px;
+      height: 816px;
+      background-image: url("../img/spot.png");
+    }
+  }
+  //!dec-strawberry ----------------------------------
+  .dec-strawberry {
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: contain;
+    bottom: 204px;
+    right: 68px;
+    width: 265px;
+    height: 273px;
+    background-image: url("../img/strawberry@1x.png");
+    @media screen and (min-width: 1100px) {
+      bottom: 30px;
+      right: 2px;
+      width: 362px;
+      height: 374px;
+      background-image: url("../img/strawberry@1x.png");
+    }
+  }
+  //!dec-leaves ----------------------------------
+  .dec-leaves {
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: contain;
+    left: 0px;
+    bottom: -35px;
+    width: 531px;
+    height: 602px;
+    transform: rotate(90deg);
+    background-image: url("../img/leaves@1x.png");
+    @media screen and (min-width: 1100px) {
+      top: -26px;
+      right: 195px;
+      width: 746px;
+      height: 846px;
+      transform: rotate(0);
+      background-image: url("../img/leaves@1x.png");
+    }
+  }
+  //!dec-banana ----------------------------------
+  .dec-banana {
+    position: absolute;
+    background-repeat: no-repeat;
+    bottom: -96px;
+    right: -249px;
+    width: 740px;
+    height: 527px;
+    background-image: url("../img/banana@1x.png");
+    @media screen and (min-width: 1100px) {
+      top: -102px;
+      right: -287px;
+      width: 773px;
+      height: 552px;
+      background-image: url("../img/banana@1x.png");
+    }
+  }
+}
+//? ======================LOGN PAGE =================================
+section.decoration-login {
+  position: absolute;
+  z-index: -1000;
+  width: 100vw;
+  height: 100%;
+  overflow: hidden;
+
+  // background-color: ghostwhite;
+
+  //?dec-container ----------------------------------
+  // .dec-container{
+  //   position: relative;
+  //   margin: 0 auto;
+  //   @media screen and (min-width: 1100px){
+  //     width: 1050px;
+  //   }
+  //   height: 100vh;
+  // }
+  //?dec-spot ----------------------------------
+  .dec-spot {
+    position: absolute;
+    background-repeat: no-repeat;
+    bottom: -187px;
+    right: -32px;
+    width: 553px;
+    height: 750px;
+    background-image: url("../img/spot-tablet.png");
+    @media screen and (min-width: 1100px) {
+      bottom: 0px;
+      right: 0px;
+      width: 715px;
+      height: 849px;
+      background-image: url("../img/spot-login.png");
+    }
+  }
+  //?dec-strawberry ----------------------------------
+  .dec-strawberry {
+    position: absolute;
+    background-repeat: no-repeat;
+    bottom: 230px;
+    right: -66px;
+    width: 370px;
+    height: 382px;
+    background-image: url("../img/strawberry@1x.png");
+    @media screen and (min-width: 1100px) {
+      top: 165px;
+      right: 27px;
+      width: 362px;
+      height: 374px;
+      background-image: url("../img/strawberry@1x.png");
+    }
+  }
+  //?dec-leaves ----------------------------------
+  .dec-leaves {
+    position: absolute;
+    background-repeat: no-repeat;
+    top: -97px;
+    left: 16px;
+    width: 740px;
+    height: 842px;
+    background-image: url("../img/leaves-login-tablet@1x.png");
+    @media screen and (min-width: 1100px){
+      top: -26px;
+      right: 250px;
+      width: 746px;
+      height: 846px;
+      background-image: url("../img/leaves-login@1x.png");
+    }
+  }
+  //?dec-banana ----------------------------------
+  .dec-banana {
+    position: absolute;
+    background-repeat: no-repeat;
+    bottom: -96px;
+    right: -249px;
+    width: 740px;
+    height: 527px;
+    background-image: url("../img/banana@1x.png");
+    @media screen and (min-width: 1100px){
+      bottom: -42px;
+      right: -204px;
+      width: 773px;
+      height: 552px;
+      background-image: url("../img/banana@1x.png");
+    }
+  }
+}
+

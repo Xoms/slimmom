@@ -1,31 +1,43 @@
-import React, { useState } from 'react';
-import Modal from '../Modal'
+import React, { Component, Suspense, lazy } from 'react';
+import { Route, Switch } from 'react-router-dom';
 
+import routes from '../../routes';
+import PublicRoute from '../PublicRoute/PublicRoute';
+import PrivateRoute from '../PrivateRoute/PrivateRoute';
+
+
+import Loader from '../shared/Loader';
+
+import Layout from '../Layout';
+import Decoration from '../Decoration';
+
+//style
 import './App.scss';
 
+class App extends Component {
+  render() {
+    const routesMap = routes.map(route => {
+      return route.privated ? (
+        <PrivateRoute key={route.path} {...route} />
+      ) : (
+        <PublicRoute key={route.path} {...route} />
+      );
+    });
 
-const App = () => {
-  const [modalActive, setModalActive] = useState(false)
-
-  return (
-    < div className="AppWrapper" >
-      Test content
-      <main>
-        <button className="open-btn" onClick={() => setModalActive(true)}>Open Modal</button>
-      </main>
-      <Modal active={modalActive} setActive={setModalActive}>
-        <p >Ваша рекомендуемая суточная норма калорий составляет</p>
-        <p >2800 ккал</p>
-        <ul >Продукты, которые вам не рекомендуется употреблять
-          <li >1. Мучные продукты</li>
-          <li >2. Молоко</li>
-          <li >3. Красное мясо</li>
-          <li >4. Копчености</li>
-        </ul>
-        <button>Начать худеть</button>
-      </Modal>
-    </div >
-  )
+    return (
+      <>
+        <Decoration />
+        <Layout>
+          <Suspense fallback={<Loader />}>
+            <Switch>
+              {routesMap}
+              <Route component={lazy(() => import('../../pages/NotFound'))} />
+            </Switch>
+          </Suspense>
+        </Layout>
+      </>
+    );
+  }
 }
 
 App.propTypes = {
