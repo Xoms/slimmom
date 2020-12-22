@@ -1,19 +1,18 @@
 @import "../../shared-styles/reset";
 @import "../../shared-styles/mixins";
 @import "../../shared-styles/colors";
-// @import "../../fonts/GothamPro-Bold.woff";
 
 .container {
   margin: 0 auto;
   padding-left: 15px;
   padding-right: 15px;
   @include for-size(tablet) {
-    padding-left: 28px;
-    padding-right: 28px;
+    padding-left: 78px;
+    padding-right: 78px;
   }
   @include for-size(desktop) {
-    padding-left: 25px;
-    padding-right: 25px;
+    padding-left: 29px;
+    padding-right: 29px;
   }
   //@include for-size(tablet) {
   // min-width: 768
@@ -22,55 +21,74 @@
 }
 header > .container {
   display: flex;
+  justify-content: space-between;
+  // flex-wrap: wrap;
   padding-top: 18px;
   padding-bottom: 18px;
 
   @include for-size(desktop) {
     padding-top: 82px;
-    // padding-bottom: 18px;
+    justify-content: start;
   }
 }
 
 .logoContainer {
-  width: 50px;
-  margin-right: 65px;
   display: flex;
+  position: relative;
 
   @include for-size(tablet) {
     width: 165px;
-    margin-right: 270px;
   }
   @include for-size(desktop) {
-    margin-right: 45px;
+  }
+  &::after {
+    position: absolute;
+    @include for-size(desktop) {
+      background-color: silver;
+      content: "";
+      display: inline-block;
+      width: 2px;
+      height: 32px;
+      top: 35px;
+      left: 190px;
+    }
   }
 }
-.navContainer {
+
+.navigationAuth {
+  margin-left: 106px;
+  padding: 13px 0px;
+  display: flex;
+  @include for-size(desktop) {
+    margin-left: 40px;
+    padding: 0;
+    padding-top: 40px;
+  }
+}
+
+.navigation {
+  margin-left: 65px;
+  padding: 12px 0px;
+  @include for-size(tablet) {
+    margin-left: 270px;
+  }
+  @include for-size(desktop) {
+    margin-left: 45px;
+  }
 }
 .logoLink {
   text-decoration: none;
 }
-.logoSvg {
-  width: 47px;
-  height: 44px;
-  display: block;
-}
-.logoText {
-  width: 105px;
-  padding: 15px 10px;
-  display: none;
-  font-family: "GothamPro-Light";
 
-  @include for-size(tablet) {
-    display: block;
-  }
-  @include for-size(desktop) {
-    // margin-right: 45px;
-  }
-}
-.logoTextSlim {
+.closeBtn {
+  border: none;
+  outline: none;
+  background-color: $main-background;
   color: $main-text;
-  margin-right: 6px;
-}
-.logoTextMom {
-  color: $accent;
+  font-size: 20px;
+
+  &:hover,
+  &:focus {
+    color: $accent;
+  }
 }
