@@ -8,6 +8,8 @@ import PrivateRoute from '../PrivateRoute/PrivateRoute';
 import Loader from '../shared/Loader';
 import Layout from '../Layout';
 
+import RightSideBar from '../RightSideBar/RightSideBar.jsx';
+
 //style
 import './App.scss';
 
@@ -23,6 +25,7 @@ class App extends Component {
 
     return (
       <Layout>
+        <RightSideBar></RightSideBar>
         <Suspense fallback={<Loader />}>
           <Switch>
             {routesMap}
