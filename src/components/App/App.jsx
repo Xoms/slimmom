@@ -1,10 +1,10 @@
 import React, { Component, Suspense, lazy, Fragment } from "react";
 import { Route, Switch /*Redirect*/ } from "react-router-dom";
+import RightSideBar from '../RightSideBar/RightSideBar';
 
 import routes from '../../routes';
 import PublicRoute from '../PublicRoute/PublicRoute';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
-
 
 //jsx components
 import Loader from "../shared/Loader";
@@ -27,6 +27,7 @@ class App extends Component {
     return (
       <Fragment>
         <Decoration isLoginPage={true}/>
+        <RightSideBar></RightSideBar>
         <Suspense fallback={<Loader />}>
           <Switch>
             {routesMap}
