@@ -2,9 +2,9 @@ import React, {Component} from "react"
 import {connect} from "react-redux"
 import {authOperations, authActions} from "../../redux/auth"
 import globalSelectors from "../../redux/global/globalSelectors"
-import css from "./LoginPage.module.scss"
+import css from "./LoginForm.module.scss"
 
-class LoginPage extends Component {
+class LoginForm extends Component {
   state = {
     login: "",
     password: "",
@@ -16,17 +16,17 @@ class LoginPage extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    this.props.onLogin({...this.state})
+    this.props.login({...this.state})
     this.setState({name: "", login: "", password: ""})
   }
 
   render() {
     const {login, password} = this.state
-    if (this.props.error) {
-      setTimeout(() => {
-        this.props.loginError()
-      }, 3000)
-    }
+    // if (this.props.error) {
+    //   setTimeout(() => {
+    //     this.props.loginError()
+    //   }, 3000)
+    // }
     return (
       <>
         {/* <Notification error={Boolean(this.props.error)} message="There is no such account!"></Notification> */}
@@ -76,4 +76,4 @@ const mapStateToProps = (state) => ({
 })
 const mapDispatchToProps = {loginError: authActions.loginError, logIn: authOperations.logIn}
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginPage)
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm)

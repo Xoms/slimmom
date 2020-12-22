@@ -8,7 +8,6 @@ import PrivateRoute from '../PrivateRoute/PrivateRoute';
 import Loader from '../shared/Loader';
 
 import './App.scss';
-import LoginPage from '../../pages/LoginPage/LoginPage';
 
 class App extends Component{
   render() {
@@ -17,15 +16,12 @@ class App extends Component{
       })
 
   return (
-    <>
-    <LoginPage />
     <Suspense fallback={<Loader/>}>
       <Switch>
         {routesMap}
         <Route component={lazy( () => import("../../pages/NotFound") )} />
       </Switch>
   </Suspense>
-  </>
   )}
 };
 
