@@ -12,9 +12,11 @@ const logoutRequest = createAction('auth/logoutRequest');
 const logoutSuccess = createAction('auth/logoutSuccess');
 const logoutError = createAction('auth/logoutError');
 
-const getCurrentUserRequest = createAction('auth/getUserRequest');
-const getCurrentUserSuccess = createAction('auth/getUserSuccess');
-const getCurrentUserError = createAction('auth/getUserError');
+const refreshRequest = createAction('auth/refreshRequest');
+const refreshSuccess = createAction('auth/refreshSuccess');
+const refreshError = createAction('auth/refreshError');
+
+
 
 const actions = {
     registerRequest,
@@ -26,9 +28,9 @@ const actions = {
     logoutRequest,
     logoutSuccess,
     logoutError,
-    getCurrentUserRequest,
-    getCurrentUserSuccess,
-    getCurrentUserError
+    refreshRequest,
+    refreshSuccess,
+    refreshError
 }
 
 export default actions

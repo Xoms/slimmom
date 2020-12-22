@@ -1,0 +1,84 @@
+@import '../../shared-styles/mixins.scss';
+@import '../../shared-styles/colors.scss';
+
+.registration-form > h1 {
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 13px;
+    letter-spacing: 0.04em;
+
+    color: $accent;
+
+    margin-bottom: 60px;
+    @include for-size(tablet) {
+        margin-bottom: 40px;
+    }
+    @include for-size(desktop) {
+        margin-bottom: 60px;
+    }
+}
+
+.registration-form {
+    width: 290px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @include for-size(tablet) {
+        align-items: flex-start;
+    }
+    @include for-size(desktop) {
+        align-items: flex-start;
+    }
+    
+    background-color: transparent;
+}
+
+.registration-inputs {
+    display: flex;
+    flex-direction: column;
+
+    margin-bottom: 60px;
+    @include for-size(tablet) {
+        margin-bottom: 40px;
+    }
+    @include for-size(desktop) {
+        margin-bottom: 60px;
+    }
+
+    & > input {
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 17px;
+        letter-spacing: 0.04em;
+
+        color: $secondary-text;
+        outline: none;
+        border: none;
+        border-bottom: 1px solid $secondary-text;
+
+        &:not(:last-child) {
+            margin-bottom: 40px;
+        }
+    }
+}
+
+.registration-buttons {
+    display: flex;
+    flex-direction: column;
+    @include for-size(tablet) {
+        flex-direction: row;
+    }
+    @include for-size(desktop) {
+        flex-direction: row;
+    }
+
+    & > button:first-child {
+        @include for-size(tablet) {
+            margin-right: 30px;
+        }
+        @include for-size(desktop) {
+            margin-right: 30px;
+        }
+    }
+}
+

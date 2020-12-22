@@ -2,33 +2,26 @@ import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
 import authActions from './authActions';
 
-const initialState = { name: null, email: null};
-
-//user reducer
-const user = createReducer(initialState, {
-    [authActions.registerSuccess]: (state, { payload }) => payload.user,
-    [authActions.loginSuccess]: (state, { payload }) => payload.user,
-    [authActions.getCurrentUserSuccess]: (state, { payload }) => payload,
-    [authActions.logoutSuccess]: () => initialState
-})
-
-const token = createReducer(null, {
-    [authActions.registerSuccess]: (state, {payload}) => payload.token,
-    [authActions.loginSuccess]: (state, { payload }) => payload.token,
+const accessToken = createReducer(null, { 
+    [authActions.loginSuccess]: (state, { payload }) => payload.accessToken,
     [authActions.logoutSuccess]: () => null
 })
 
-const error = createReducer(null, {
-    [authActions.registerError]: (state, {payload}) => payload.error,
-    [authActions.loginError]: (state, {payload}) => payload.error,
-    [authActions.getCurrentUserError]: (state, {payload}) => payload.error,
-    [authActions.logoutError]: (state, {payload}) => payload.error
-} );
+const refreshToken = createReducer(null, {
+    [authActions.refreshSuccess]: (state, { payload }) => payload.refreshToken,
+    [authActions.logoutSuccess]: () => null
+})
+
+const sid = createReducer(null, {
+    [authActions.refreshSuccess]: (state, { payload }) => payload.sid,
+    [authActions.loginSuccess]: (state, { payload }) => payload.sid,
+    [authActions.logoutSuccess]: () => null
+})
 
 const authReducer = combineReducers({
-    user,
-    token,
-    error
+    accessToken,
+    refreshToken,
+    sid
 })
 
 export default authReducer

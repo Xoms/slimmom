@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = "https://slimmom-backend.herokuapp.com/"; //"https://lpj-tasker.herokuapp.com"
+const url = "https://slimmom-backend.herokuapp.com/"; 
 
 axios.defaults.baseURL = url;
 
@@ -16,9 +16,13 @@ class PhonebookService {
         return axios.post('/auth/login', userCredentials)
     }
 
-    logout(token){
-        return axios.post('/auth/logout', token)
-    }    
+    logout(){
+        return axios.post('/auth/logout');
+    }
+
+    refresh(sid){
+        return axios.post('/auth/refresh', sid);
+    }
 
     getCurrentUser(){
         return axios.get('/user')
@@ -32,22 +36,7 @@ class PhonebookService {
         axios.defaults.headers.common.Authorization = ``;
     }
 
-    //================== contacts ==================
-    getContacts(){
-        return axios.get('/contacts'); 
-    }
-
-    addContact(newContact) {
-        return axios.post('/contacts', newContact);
-    }
-
-    delContact(id) {
-        return axios.delete(`/contacts/${id}`)
-    }
     
-    updateContact(id) {
-        return axios.patch(`/contacts/${id}`)
-    }
 
 }
 
