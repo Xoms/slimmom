@@ -1,0 +1,50 @@
+@import '../../shared-styles/colors';
+
+.user-info-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.user-info-wrapper > span {
+    width: 3px;
+    height: 32px;
+    background-color: #E0E0E0;
+}
+
+.user-info-wrapper-item:not(:last-child) {
+    margin-right: 15px;
+}
+
+.user-info-wrapper > p {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 13px;
+    letter-spacing: 4%;
+
+    color: $main-text;
+}
+
+.user-info-wrapper > button {
+    outline: none;
+    border: none;
+    background-color: transparent;
+
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 13px;
+    letter-spacing: 0.04em;
+
+    color: #9B9FAA;
+
+    transition: all 250ms linear;
+}
+
+.user-info-wrapper > button:hover {
+    color: $main-text;
+}
+
+@media screen and (min-width: 1280px) {
+    .user-info-wrapper-item:not(:last-child) {
+        margin-right: 22px;
+    }
+}
