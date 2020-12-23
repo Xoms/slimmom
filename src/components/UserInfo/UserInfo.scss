@@ -1,6 +1,7 @@
 @import '../../shared-styles/colors';
 
 .user-info-wrapper {
+    font-family: Verdana;
     display: flex;
     align-items: center;
 }
@@ -16,6 +17,7 @@
 }
 
 .user-info-wrapper > p {
+    font-family: Verdana;
     font-weight: 700;
     font-size: 14px;
     line-height: 13px;
@@ -29,6 +31,7 @@
     border: none;
     background-color: transparent;
 
+    font-family: Verdana;
     font-weight: bold;
     font-size: 14px;
     line-height: 13px;
