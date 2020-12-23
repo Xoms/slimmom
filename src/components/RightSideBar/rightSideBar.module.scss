@@ -4,12 +4,11 @@
 .section__rightSideBar {
   padding-top: 40px;
   padding-bottom: 24px;
+  position: relative;
 
   @include for-size(tablet) {
     padding-top: 91px;
     padding-bottom: 91px;
-    padding-left: 87px;
-    padding-right: 87px;
   }
   @include for-size(desktop) {
     padding-top: 100px;
@@ -48,12 +47,32 @@
 }
 .sideBar__BlocList {
   margin-bottom: 40px;
-  width: 290px;
+  width: 265px;
   @include for-size(tablet) {
     width: 237px;
   }
   @include for-size(desktop) {
     width: 330px;
+  }
+}
+.backgroundSideBar {
+  @include for-size(tablet) {
+    width: 270px;
+    position: absolute;
+    top: 13px;
+    right: 38px;
+    height: 400px;
+    background-image: url('../../img/rightSideBarBottom@1x.png');
+    background-repeat: no-repeat;
+  }
+  @include for-size(desktop) {
+    width: 600px;
+    position: absolute;
+    top: -172px;
+    right: -94px;
+    height: 952px;
+    background-image: url('../../img/rightSideBar@1x.png');
+    background-repeat: no-repeat;
   }
 }
 
@@ -87,7 +106,6 @@
   background-color: $secondary-beckground;
 }
 
-// -----------tablet--------
 .rightSideBar {
   display: block;
   margin-left: auto;
@@ -95,7 +113,7 @@
   width: 290px;
   @include for-size(tablet) {
     width: 594px;
-    // background-color: tomato;
+
     display: flex;
     justify-content: space-between;
   }
@@ -103,8 +121,6 @@
     width: 330px;
     display: block;
     margin-left: 500px;
-
-    // background-color: rgb(0, 255, 85);
   }
 }
 

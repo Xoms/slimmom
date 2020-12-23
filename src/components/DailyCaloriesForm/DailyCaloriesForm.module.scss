@@ -1,0 +1,138 @@
+@import "../../shared-styles/colors";
+@import "../../shared-styles/mixins";
+
+.DailyCaloriesFormWrapper {
+  width: 100%;
+  font-family: "Verdana";
+}
+.DailyCaloriesFormTitle {
+  color: $main-text;
+  font-size: 20px;
+  line-height: 1.529;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+.DailyCaloriesFormBloodTitle {
+  color: $secondary-text;
+  font-size: 14px;
+  line-height: 1.215;
+  font-weight: 700;
+  margin-bottom: 5px;
+  letter-spacing: 0.04em;
+}
+.DailyCaloriesForm {
+  width: 240px;
+  height: 354px;
+  margin-bottom: 40px;
+}
+.DailyCaloriesFormBloodWrapper {
+  margin-bottom: 42px;
+}
+.DailyCaloriesFormFieldsWrapper {
+  position: relative;
+}
+.DailyCaloriesFormInput {
+  font-family: "VerdanaBold";
+  font-size: 14px;
+  line-height: 1.215;
+  letter-spacing: 0.04em;
+  color: $secondary-text;
+  height: 36px;
+  width: 239px;
+  padding-bottom: 20px;
+  border: none;
+  border-bottom: 1px solid $secondary-text;
+  background: transparent;
+  margin-bottom: 30px;
+
+  @include for-size(tablet) {
+    display: flex;
+    width: 240px;
+  }
+}
+.errorInput {
+  border: 1px solid red;
+  box-shadow: 0px 2px 4px -1px rgba(226, 13, 13, 0.4),
+    0px 4px 5px 0px rgba(226, 13, 13, 0.24),
+    0px 1px 10px 0px rgba(226, 13, 13, 0.22);
+}
+.errorMessage {
+  color: red;
+  font-size: 12px;
+  line-height: 1.415;
+  letter-spacing: 0.04em;
+  position: absolute;
+  left: 0;
+  top: 45px;
+}
+.DailyCaloriesFormLabel {
+  color: $main-text;
+  margin-right: 20px;
+}
+.DailyCaloriesLabelField {
+  display: inline-block;
+  padding: 6px;
+  margin-right: 6px;
+  position: relative;
+  top: 1px;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border: 1px solid $secondary-text;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.2s;
+}
+input[type="radio"]:checked {
+  background-color: $accent;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.5);
+}
+.DailyCaloriesFormButton {
+  display: block;
+  margin: 0 auto;
+}
+@media screen and (min-width: 650px) {
+  .DailyCaloriesFormTitle {
+    font-size: 30px;
+    line-height: 1.529;
+    margin-bottom: 60px;
+  }
+  .DailyCaloriesFormInput {
+    margin-bottom: 40px;
+  }
+  .DailyCaloriesFormButton {
+    display: block;
+    margin: 0;
+  }
+  .DailyCaloriesForm {
+    display: flex;
+    width: 510px;
+    height: 186px;
+    margin-bottom: 60px;
+  }
+  .DailyCaloriesFormFieldsWrappers {
+    margin-right: 31px;
+  }
+}
+@media screen and (min-width: 1100px) {
+  .DailyCaloriesFormWrapper {
+    width: 580px;
+    height: 447px;
+    // margin-top: 146px;
+    // margin-left: 115px;
+    position: absolute;
+    top: 292px;
+    left: 115px;
+  }
+  .DailyCaloriesFormTitle {
+    font-size: 34px;
+    line-height: 1.205;
+    margin-bottom: 68px;
+  }
+  .DailyCaloriesForm {
+    margin-bottom: 64px;
+  }
+  .DailyCaloriesFormButton {
+    margin-left: 300px;
+  }
+}

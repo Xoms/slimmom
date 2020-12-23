@@ -1,0 +1,113 @@
+@import '../../shared-styles/colors';
+
+.trigger-button {
+    width: 50px;
+    height: 50px;
+    border: none;
+    outline: none;
+    border-radius: 50%;
+
+    color: #fff;
+    background-color: $accent;
+    font-size: 40px;
+}
+
+.button-wrapper {
+    width: 100%;
+
+    position: relative;
+
+    & button {
+        position: absolute;
+        top: -20px;
+        left: 0;
+
+        background-color: transparent;
+        border: none;
+    }
+}
+
+.modal {
+    width: 100%;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: #fff;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.modal-form {
+    min-width: 300px;
+    margin-top: 80px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & input {
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 17px;
+        letter-spacing: 0.04em;
+    
+        color: $secondary-text;
+        outline: none;
+        border: none;
+        border-bottom: 1px solid $secondary-text;
+        width: 290px;
+
+        &:first-child {
+            margin-bottom: 30px;
+        }
+    }
+
+    & button {
+        margin-top: 60px;
+
+        background-color: $accent;
+        color: #fff;
+    }
+}
+
+.add-button {
+    width: 50px;
+    height: 50px;
+    border: none;
+    outline: none;
+    border-radius: 50%;
+
+    color: #fff;
+    background-color: $accent;
+    font-size: 40px;
+}
+
+.add-form {
+
+    display: flex;
+    align-items: center;
+
+    & input {
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 17px;
+        letter-spacing: 0.04em;
+    
+        color: $secondary-text;
+        outline: none;
+        border: none;
+        border-bottom: 1px solid $secondary-text;
+        min-width: 105px;
+
+        margin-right: 48px;
+
+        &:first-child {
+            margin-right: 30px;
+            min-width: 240px;
+        }
+    }
+}
