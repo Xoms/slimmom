@@ -17,6 +17,12 @@
     height: 600px;
   }
 }
+.notAllowedProductsList {
+  max-height: 300px;
+  margin-top: 25px;
+  color: $secondary-text;
+  overflow-y: scroll;
+}
 
 .title {
   font-family: Verdana;
