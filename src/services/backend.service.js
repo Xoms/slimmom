@@ -35,10 +35,23 @@ class PhonebookService {
     return axios.post(`/daily-rate/`, userCharacteristics);
   }
 
-  deleteEatenProduct (product) { // product = (dayId, productId)
+  deleteEatenProduct(product) {
+    // product = (dayId, productId)
     return axios.delete(`/day`, product);
   }
 
+  searchProduct() {
+    return axios.get(`/product`);
+  }
+
+  addProduct(product) {
+    //  product = {
+    //     "date": "2020-12-31",
+    //     "productId": "5d51694802b2373622ff552c",
+    //     "weight": 100
+    //   }
+    return axios.post('/day', product);
+  }
 }
 
 export default new PhonebookService();

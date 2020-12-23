@@ -36,12 +36,22 @@ const getDailyRate = userCharacteristics => dispatch => {
 };
 
 const deleteEatenProduct = () => dispatch => {
-
   dispatch(userActions.deleteEatenProductRequest());
-  api.deleteEatenProduct().then(({data}) => {
-       return dispatch(userActions.deleteEatenProductSuccess(data));
-  })
+  api
+    .deleteEatenProduct()
+    .then(({ data }) => {
+      return dispatch(userActions.deleteEatenProductSuccess(data));
+    })
     .catch(err => dispatch(userActions.deleteEatenProductError(err)));
-  };
+};
+
+const addProduct = product => dispatch => {
+  dispatch(userActions.addProductRequest());
+
+  api
+    .addProduct(product)
+    .then(({ data }) => console.log(data))
+    .catch(err => dispatch(userActions.addProductError(err)));
+};
 
 export { getCurrentUser, getDailyRate, deleteEatenProduct };

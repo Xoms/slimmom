@@ -3,12 +3,22 @@ import { createAction } from '@reduxjs/toolkit';
 const getCurrentUserRequest = createAction('auth/getUserRequest');
 const getCurrentUserSuccess = createAction('auth/getUserSuccess');
 const getCurrentUserError = createAction('auth/getUserError');
+
 const getDailyRateRequest = createAction('auth/getDailyRateRequest');
 const getDailyRateSuccess = createAction('auth/getDailyRateSuccess');
 const getDailyRateError = createAction('auth/getDailyRateError');
-const deleteEatenProductRequest = createAction('user/deleteEatenProductRequest');
-const deleteEatenProductSuccess = createAction('user/deleteEatenProductSuccess');
+
+const deleteEatenProductRequest = createAction(
+  'user/deleteEatenProductRequest',
+);
+const deleteEatenProductSuccess = createAction(
+  'user/deleteEatenProductSuccess',
+);
 const deleteEatenProductError = createAction('user/deleteEatenProductError');
+
+const addProductRequest = createAction('user/addProduct');
+const addProductSuccess = createAction('user/addProduct');
+const addProductError = createAction('user/addProduct');
 
 const actions = {
   getCurrentUserRequest,
@@ -20,6 +30,9 @@ const actions = {
   deleteEatenProductRequest,
   deleteEatenProductSuccess,
   deleteEatenProductError,
+  addProductRequest,
+  addProductSuccess,
+  addProductError,
 };
 
 export default actions;
