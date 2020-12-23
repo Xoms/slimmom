@@ -22,7 +22,8 @@ class RegistrationForm extends Component {
     };
 
     handleSubmit = (values) => {
-        this.props.register(values);
+        this.props.register(values)
+        this.props.history.push('/login')
     };
 
     render () {
