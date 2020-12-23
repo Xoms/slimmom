@@ -36,27 +36,9 @@ class PhonebookService {
   }
 
   deleteEatenProduct (product) { // product = (dayId, productId)
-    return axios.delete(`/day`);
+    return axios.delete(`/day`, product);
   }
 
-  
-
-  //================== contacts ==================
-  getContacts() {
-    return axios.get('/contacts');
-  }
-
-  addContact(newContact) {
-    return axios.post('/contacts', newContact);
-  }
-
-  delContact(id) {
-    return axios.delete(`/contacts/${id}`);
-  }
-
-  updateContact(id) {
-    return axios.patch(`/contacts/${id}`);
-  }
 }
 
 export default new PhonebookService();

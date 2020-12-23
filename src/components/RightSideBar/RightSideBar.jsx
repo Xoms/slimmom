@@ -1,13 +1,13 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 import classes from './rightSideBar.module.scss';
-// import imgLeaves from '../../img/rightSideBarBottom@1x.png'
 
 function RightSideBar({ props }) {
   return (
     <section className={classes.section__rightSideBar}>
       <div className={classes.conteiner__rightSideBar}>
         <div className={classes.rightSideBar}>
+          <div className={classes.backgroundSideBar}></div>
           <div className={classes.sideBar__BlocList}>
             <h2 className={classes.title}>Сводка за 20.06.2020</h2>
             <div className={classes.rightSideBar__lists}>

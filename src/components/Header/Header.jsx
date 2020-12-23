@@ -100,7 +100,10 @@ class Header extends Component {
                       {matches.large && (
                         <>{isAuth ? (
                           <div className={styles.navigationAuth}>
-                            {isAuth && <div><UserInfo /></div>} 
+                            {isAuth && <>
+                            <div className={styles.navigation}> <AuthNavigations /> </div>
+                            <div><UserInfo /></div> 
+                            </>} 
                           </div>
                         ) : (
                           <div className={styles.navigation}> <NavigationBar /> </div>
