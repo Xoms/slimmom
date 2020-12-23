@@ -40,8 +40,8 @@ class PhonebookService {
     return axios.delete(`/day`, product);
   }
 
-  searchProduct() {
-    return axios.get(`/product`);
+  searchProduct(query) {
+    return axios.get(`/product/?search=${query}`);
   }
 
   addProduct(product) {
