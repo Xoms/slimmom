@@ -1,26 +1,30 @@
 import React from "react"
-import {connect, useSelector} from "react-redux"
+import {connect} from "react-redux"
 import {authOperations, authActions} from "../../redux/auth"
 import globalSelectors from "../../redux/global/globalSelectors"
 import Notification from "../shared/Notification/Notification"
 import {Formik, Form, Field, ErrorMessage} from "formik"
 import * as Yup from "yup"
-import Button from '../shared/Button';
+import Button from "../shared/Button"
 import css from "./LoginForm.module.scss"
 
 const SignupSchema = Yup.object().shape({
-  email: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required("Required"),
-  password: Yup.string().required("Required").min(8, "Too Short!"),
+  email: Yup.string().min(2, "Минимум два символа!").max(50, "Превышен лимит символов").required("Обязательное поле *"),
+  password: Yup.string().required("Обязательное поле *").min(8, "Минимум два символа!"),
 })
 
 const LoginForm = (props) => {
+  const handleClick = () => {
+    props.history.push("/register")
+  }
   const handleSubmit = (values) => {
     props.login(values)
-    }
-    if (props.error) {
-      setTimeout(() => {
-        props.clearError()
-      }, 3000)
+  }
+  console.log(props.test);
+  if (props.error) {
+    setTimeout(() => {
+      props.clearError()
+    }, 3000)
   }
   return (
     <>
@@ -30,33 +34,21 @@ const LoginForm = (props) => {
 
         <Formik initialValues={{email: "", password: ""}} onSubmit={handleSubmit} validationSchema={SignupSchema}>
           <Form className={css.loginForm}>
-
-          <label className={css.formLabel}>
-              <Field
-                className={css.login}
-                type="email"
-                name="email"
-                placeholder="Логин *"
-              />
+            <label className={css.formLabel}>
+              <Field className={css.login} type="email" name="email" placeholder="Логин *" />
               <ErrorMessage className={css.validField} name="email" component="span" />
             </label>
 
             <label className={css.formLabel}>
-              <Field
-                className={css.password}
-                type="password"
-                name="password"
-                placeholder="Пароль *"
-              />
+              <Field className={css.password} type="password" name="password" placeholder="Пароль *" />
               <ErrorMessage className={css.validField} name="password" component="span" />
             </label>
 
             <div className={css.buttons}>
-            <Button type="submit"> Вход </ Button>
-            <Button className="secondary-button">
-              Регистрация
-            </ Button>
-            
+              <Button type="submit"> Вход </Button>
+              <Button className="secondary-button" clickHandler={handleClick}>
+                Регистрация
+              </Button>
             </div>
           </Form>
         </Formik>
@@ -67,11 +59,12 @@ const LoginForm = (props) => {
 
 const mapStateToProps = (state) => ({
   error: globalSelectors.getError(state),
-
+  test: state
 })
 const mapDispatchToProps = {
-  loginError: authActions.loginError, 
-  clearError: authActions.clearError, 
-  login: authOperations.login}
+  loginError: authActions.loginError,
+  clearError: authActions.clearError,
+  login: authOperations.login,
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm)

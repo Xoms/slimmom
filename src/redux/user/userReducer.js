@@ -13,7 +13,6 @@ const initialState = {
 };
 
 const user = createReducer(initialState, {
-  [authActions.registerSuccess]: (state, { payload }) => payload,
   [authActions.loginSuccess]: (state, { payload }) => {
     const { email, username, id, userData: {dailyRate, notAllowedProducts, eatenProducts} } = { ...payload.user };
     const user = { email, username, id, dailyRate, notAllowedProducts, eatenProducts};
