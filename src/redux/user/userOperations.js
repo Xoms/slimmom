@@ -3,8 +3,9 @@ import userActions from './userActions';
 import api from '../../services/backend.service';
 
 const getCurrentUser = () => (dispatch, getState) => {
-   const {auth: accessToken} = getState();
-  console.log(getState().auth.accessToken)
+   const {auth: {accessToken}} = getState();
+  console.log(accessToken)
+
   if (!accessToken) return;
 
   api.setToken(accessToken);

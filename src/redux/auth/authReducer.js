@@ -3,7 +3,7 @@ import { createReducer } from '@reduxjs/toolkit';
 import authActions from './authActions';
 
 const accessToken = createReducer(null, { 
-    [authActions.loginSuccess]: (state, { payload }) => ({...state, ...payload}),
+    [authActions.loginSuccess]: (state, { payload }) => payload.accessToken,
     [authActions.logoutSuccess]: () => null
 })
 
@@ -20,8 +20,8 @@ const sid = createReducer(null, {
 
 const authReducer = combineReducers({
     accessToken,
-    refreshToken,
-    sid
+    // refreshToken,
+    // sid
 })
 
 export default authReducer
