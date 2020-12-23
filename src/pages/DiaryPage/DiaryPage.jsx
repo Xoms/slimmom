@@ -1,16 +1,25 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-//import { Test } from './DiaryPage.styles';
+import React, {Component} from 'react';
 import DiaryProductsList from '../../components/DiaryProductsList';
+import DiaryAddProductForm from '../../components/DiaryAddProductForm/DiaryAddProductForm';
 
-const DiaryPage = () => <DiaryProductsList />;
+class DiaryPage extends Component {
 
-DiaryPage.propTypes = {
-  // bla: PropTypes.string,
-};
+  state = {
+    screenWidth: window.visualViewport.width
+  }
 
-DiaryPage.defaultProps = {
-  // bla: 'test',
+componentDidMount () {
+  console.log(window)
+}
+
+  render () {
+    return (
+      this.state.screenWidth < 650 
+      ? <><DiaryProductsList /><DiaryAddProductForm mobile={true} /></> 
+      : <><DiaryAddProductForm mobile={false} /><DiaryProductsList /></>
+      
+    )
+  }
 };
 
 export default DiaryPage;
