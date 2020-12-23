@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import DiaryProductsList from '../../components/DiaryProductsList';
 import RightSideBar from '../../components/RightSideBar';
 import DiaryAddProductForm from '../../components/DiaryAddProductForm/DiaryAddProductForm';
-
+import { connect } from 'react-redux';
+import { getProducts} from '../../redux/user/userOperations'
 
 class DiaryPage extends Component {
 
@@ -10,9 +11,11 @@ class DiaryPage extends Component {
     screenWidth: window.visualViewport.width
   }
 
-componentDidMount () {
-  console.log(window)
-}
+  componentDidMount() {
+    this.props.getProducts({
+      date: "2020-12-23"
+    });
+  }
 
   render () {
     return (
@@ -24,4 +27,4 @@ componentDidMount () {
   }
 };
 
-export default DiaryPage;
+export default connect(null, {getProducts})(DiaryPage);

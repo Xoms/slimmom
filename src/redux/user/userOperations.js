@@ -4,7 +4,6 @@ import api from '../../services/backend.service';
 
 const getCurrentUser = () => (dispatch, getState) => {
    const {auth: {accessToken}} = getState();
-  console.log(accessToken)
 
   if (!accessToken) return;
 
@@ -15,7 +14,9 @@ const getCurrentUser = () => (dispatch, getState) => {
   api
     .getCurrentUser()
     .then(({ data }) => {
-      dispatch(userActions.getCurrentUserSuccess(data));
+      const  { username, id, userData } = data;
+      const userInfo = { username, id, userData,  };
+      dispatch(userActions.getCurrentUserSuccess(userInfo));
     })
     .catch(err => dispatch(userActions.getCurrentUserError(err)));
 };
@@ -29,7 +30,6 @@ const getDailyRate = userCharacteristics => dispatch => {
   dispatch(userActions.getCurrentUserRequest());
 
   api.getDailyRate(userCharacteristics).then(({ data }) => {
-    console.log(data);
     return dispatch(userActions.getDailyRateSuccess(data));
   });
 };
@@ -58,10 +58,14 @@ const getProducts = (date) => (dispatch, getState) => {
   api
     .getProducts(date)
     .then(({ data }) => {
-      console.log(data);
       dispatch(userActions.getProductsSuccess(data));
     })
     .catch(err => dispatch(userActions.getProductsError(err)));
 }
 
 export { getCurrentUser, getDailyRate, deleteEatenProduct, getProducts };
+
+// dailyRate: 1351.5
+// kcalConsumed: 0
+// kcalLeft: 1351.5
+// percentsOfDailyRate: 0

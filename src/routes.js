@@ -7,7 +7,7 @@ const routes = [
     exact: true,
     component: lazy(() => import("./pages/HomePage")),
     privated: false,
-    restricted: false,
+    restricted: true,
   },
   {
     label: "Регистация",
