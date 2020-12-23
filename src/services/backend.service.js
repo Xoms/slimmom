@@ -35,6 +35,12 @@ class PhonebookService {
     return axios.post(`/daily-rate/`, userCharacteristics);
   }
 
+  deleteEatenProduct (product) { // product = (dayId, productId)
+    return axios.delete(`/day`);
+  }
+
+  
+
   //================== contacts ==================
   getContacts() {
     return axios.get('/contacts');

@@ -35,4 +35,13 @@ const getDailyRate = userCharacteristics => dispatch => {
   });
 };
 
-export { getCurrentUser, getDailyRate };
+const deleteEatenProduct = () => dispatch => {
+
+  dispatch(userActions.deleteEatenProductRequest());
+  api.deleteEatenProduct().then(({data}) => {
+       return dispatch(userActions.deleteEatenProductSuccess(data));
+  })
+    .catch(err => dispatch(userActions.deleteEatenProductError(err)));
+  };
+
+export { getCurrentUser, getDailyRate, deleteEatenProduct };
