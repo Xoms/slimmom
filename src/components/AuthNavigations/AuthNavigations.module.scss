@@ -1,23 +1,31 @@
-@import "../../shared-styles/reset";
 @import "../../shared-styles/mixins";
 @import "../../shared-styles/colors";
 
+.authnav {
+  @include for-size(desktop) {
+    margin-right: 500px;
+  }
+}
 
-.authNavigationsDairy {
+.link { 
   @include for-size(desktop) {
     text-decoration: none;
     color: $secondary-text;
     font-family: "VerdanaBold";
     font-size: 14px;
-    margin-right: 22px;
+
+    &:not(:last-child){
+      margin-right: 22px;
+    }
   }
 }
-.authNavigationsCalc {
+.active {
   @include for-size(desktop) {
     text-decoration: none;
     color: $main-text;
     font-family: "VerdanaBold";
     font-size: 14px;
-    margin-right: 500px;
   }
 }
+
+

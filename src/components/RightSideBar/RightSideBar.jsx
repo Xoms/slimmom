@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import React from 'react';
-import selectors from '../../redux/auth/authSelectors';
+import selectors from '../../redux/user/userSelectors';
 // import PropTypes from 'prop-types';
 import classes from './rightSideBar.module.scss';
 
@@ -34,7 +34,7 @@ function RightSideBar(props) {
           <div className={classes.sideBar__BlocDescription}>
             <h2 className={classes.title}>Нерекомендуемые продукты</h2>
             <div className={classes.notAllowedProductsList}>
-              {notAllowedProducts.map(product => <span>{product}, </span>)}
+              {notAllowedProducts.map(product => <span key={product}>{product}, </span>)}
             </div>
           </div>
         </div>
@@ -44,7 +44,7 @@ function RightSideBar(props) {
 }
 
 const mapStateToProps =(state)=> ({
-  daySummary:  selectors.getDaySummary(state),
+  daySummary: selectors.getDaySummary(state),
   notAllowedProducts: selectors.getnotAllowedProducts(state),
 })
 
