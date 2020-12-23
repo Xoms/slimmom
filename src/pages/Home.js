@@ -93,19 +93,19 @@ class Home extends Component {
               />
               <h3>Группа крови *</h3>
               <div>
-                <label for="bloodType_1">
+                <label htmlFor="bloodType_1">
                   I
                   <Field type="radio" name="bloodType" value="1" />
                 </label>
-                <label for="bloodType_2">
+                <label htmlFor="bloodType_2">
                   II
                   <Field type="radio" name="bloodType" value="2" />
                 </label>
-                <label for="bloodType_3">
+                <label htmlFor="bloodType_3">
                   III
                   <Field type="radio" name="bloodType" value="3" />
                 </label>
-                <label for="bloodType_4">
+                <label htmlFor="bloodType_4">
                   IV
                   <Field type="radio" name="bloodType" value="4" />
                 </label>
