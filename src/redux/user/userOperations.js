@@ -41,6 +41,27 @@ const deleteEatenProduct = () => dispatch => {
        return dispatch(userActions.deleteEatenProductSuccess(data));
   })
     .catch(err => dispatch(userActions.deleteEatenProductError(err)));
-  };
+};
 
-export { getCurrentUser, getDailyRate, deleteEatenProduct };
+const getProducts = (date) => (dispatch, getState) => {
+
+  const {
+    auth: { accessToken },
+  } = getState();
+
+  if (!accessToken) return;
+
+  api.setToken(accessToken);
+
+  dispatch(userActions.getProductsRequest());
+
+  api
+    .getProducts(date)
+    .then(({ data }) => {
+      console.log(data);
+      dispatch(userActions.getProductsSuccess(data));
+    })
+    .catch(err => dispatch(userActions.getProductsError(err)));
+}
+
+export { getCurrentUser, getDailyRate, deleteEatenProduct, getProducts };

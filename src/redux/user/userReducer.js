@@ -8,13 +8,16 @@ const initialState = {
   id: null,
   dailyRate: null,
   notAllowedProducts: [],
+  eatenProducts: [],
+  daySummary: {}
 };
 
 const user = createReducer(initialState, {
   [authActions.loginSuccess]: (state, { payload }) => {
-    const { email, username, id } = { ...payload.user };
-    const user = { email, username, id };
-    return {...state, ...user};
+    const { email, username, id, userData: {dailyRate, notAllowedProducts, eatenProducts} } = { ...payload.user };
+    const user = { email, username, id, dailyRate, notAllowedProducts, eatenProducts};
+    console.log(payload);
+    return user;
   },
   [userActions.getCurrentUserSuccess]: (state, { payload }) => payload,
   [authActions.logoutSuccess]: () => initialState,
@@ -22,6 +25,11 @@ const user = createReducer(initialState, {
     ...state,
     ...payload,
   }),
+  [userActions.getProductsSuccess]: (state, {payload: {eatenProducts, daySummary}}) => ({
+    ...state,
+    eatenProducts,
+    daySummary,
+  })
 });
 
 export default user;

@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import  {store, persistor}  from './redux/store';
 import { PersistGate } from 'redux-persist/integration/react'
-
+import axios from 'axios';
 import App from './components/App';
 
 import './fonts/VerdanaBold.woff2';
@@ -13,6 +13,7 @@ import './fonts/GothamPro-Light.woff';
 import './fonts/GothamPro-Bold.woff';
 
 import './index.css';
+
 
 ReactDOM.render(
   <BrowserRouter>
@@ -23,5 +24,5 @@ ReactDOM.render(
     </Provider>
   </BrowserRouter>
     ,
-  document.getElementById('root')
-);
+    document.getElementById('root')
+    );
