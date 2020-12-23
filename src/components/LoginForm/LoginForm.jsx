@@ -1,5 +1,5 @@
 import React from "react"
-import {connect, useSelector} from "react-redux"
+import {connect} from "react-redux"
 import {authOperations, authActions} from "../../redux/auth"
 import globalSelectors from "../../redux/global/globalSelectors"
 import Notification from "../shared/Notification/Notification"
