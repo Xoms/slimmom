@@ -3,13 +3,12 @@ import userActions from './userActions';
 import api from '../../services/backend.service';
 
 const getCurrentUser = () => (dispatch, getState) => {
-  const {
-    user: { token },
-  } = getState();
+   const {auth: {accessToken}} = getState();
+  console.log(accessToken)
 
-  if (!token) return;
+  if (!accessToken) return;
 
-  api.setToken(token);
+  api.setToken(accessToken);
 
   dispatch(userActions.getCurrentUserRequest());
 
@@ -42,6 +41,27 @@ const deleteEatenProduct = () => dispatch => {
        return dispatch(userActions.deleteEatenProductSuccess(data));
   })
     .catch(err => dispatch(userActions.deleteEatenProductError(err)));
-  };
+};
 
-export { getCurrentUser, getDailyRate, deleteEatenProduct };
+const getProducts = (date) => (dispatch, getState) => {
+
+  const {
+    auth: { accessToken },
+  } = getState();
+
+  if (!accessToken) return;
+
+  api.setToken(accessToken);
+
+  dispatch(userActions.getProductsRequest());
+
+  api
+    .getProducts(date)
+    .then(({ data }) => {
+      console.log(data);
+      dispatch(userActions.getProductsSuccess(data));
+    })
+    .catch(err => dispatch(userActions.getProductsError(err)));
+}
+
+export { getCurrentUser, getDailyRate, deleteEatenProduct, getProducts };

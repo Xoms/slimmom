@@ -4,8 +4,8 @@ import { Redirect, Route } from 'react-router-dom';
 import withAuth from '../hocs/withAuth'
 
 
-const PrivateRoute = ({component: Component,  isAuthorized, ...rest}) => (
-  <Route {...rest} render={(props =>  isAuthorized ? <Component {...props}/> : <Redirect to='/login' />  )} />
+const PrivateRoute = ({component: Component,  isAuth, ...rest}) => (
+  <Route {...rest} render={(props =>  isAuth ? <Component {...props}/> : <Redirect to='/login' />  )} />
 );
 
 

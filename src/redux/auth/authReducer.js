@@ -20,8 +20,8 @@ const sid = createReducer(null, {
 
 const authReducer = combineReducers({
     accessToken,
-    refreshToken,
-    sid
+    // refreshToken,
+    // sid
 })
 
 export default authReducer

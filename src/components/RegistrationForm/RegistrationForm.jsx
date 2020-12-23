@@ -6,6 +6,8 @@ import './RegistrationForm.scss';
 import Notification from "../shared/Notification/Notification";
 import {Formik, Form, Field, ErrorMessage} from "formik";
 import * as Yup from "yup";
+import {authActions} from "../../redux/auth"
+import globalSelectors from "../../redux/global/globalSelectors"
 
 const RegisterSchema = Yup.object().shape({
     username: Yup.string().min(2, "Too short!").max(50, "Too long!").required("Required!"),
@@ -21,11 +23,20 @@ class RegistrationForm extends Component {
 
     handleSubmit = (values) => {
         this.props.register(values)
+        this.props.history.push('/login')
     };
 
     render () {
+
+        if (this.props.error) {
+            setTimeout(() => {
+              this.props.clearError()
+            }, 3000)
+        };
+
         return (
             <>
+                <Notification error={Boolean(this.props.error)} message="Пользователь с такими данными уже существует"></Notification>
                 <Formik initialValues={{email: "", password: "", username: ""}} onSubmit={this.handleSubmit} validationSchema={RegisterSchema}>
                 <Form className="registration-form">
                     <h1>РЕГИСТРАЦИЯ</h1>
@@ -56,7 +67,12 @@ class RegistrationForm extends Component {
 };
 
 const mapDispatchToProps = {
+    clearError: authActions.clearError,
     register: ops.register,
 };
 
-export default connect(null, mapDispatchToProps)(RegistrationForm);
+const mapStateToProps = state => ({
+    error: globalSelectors.getError(state),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegistrationForm);
