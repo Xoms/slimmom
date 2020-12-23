@@ -7,6 +7,9 @@
   padding-right: 15px;
   width: 320px;
   color: $main-background;
+
+  position: relative;
+
   @include for-size(tablet) {
     width: 650px;
     padding-left: 28px;
