@@ -52,10 +52,10 @@ const LoginForm = (props) => {
             </label>
 
             <div className={css.buttons}>
-            <Button marker="primary" text="Вход"> </ Button>
-            <Button marker="secondary" text="Регистрация" >
-              
-              </ Button>
+            <Button type="submit"> Вход </ Button>
+            <Button className="secondary-button">
+              Регистрация
+            </ Button>
             
             </div>
           </Form>

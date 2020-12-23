@@ -1,4 +1,5 @@
 @import "../../shared-styles/_colors.scss";
+@import "../../shared-styles/mixins";
 
 
 nav {
@@ -12,6 +13,9 @@ nav {
   flex-direction: row;
   justify-content: space-between;
   padding: 0px 15px;
+  @include for-size(desktop){
+    padding-top: 40px;
+  }
 }
 
 .navContainer {
@@ -43,11 +47,11 @@ nav {
   color: $main-text;
 }
 
-@media (min-width: 650px) {
-  .container {
-    padding: 0px 75px;
-  }
-}
+// @media (min-width: 650px) {
+//   .container {
+//     padding: 0px 75px;
+//   }
+// }
 
 @media (min-width: 1100px) {
   nav {
@@ -56,7 +60,7 @@ nav {
     border-bottom: none;
   }
 
-  .navContainer {
-    display: none;
-  }
+  // .navContainer {
+  //   display: none;
+  // }
 }

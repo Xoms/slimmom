@@ -30,7 +30,7 @@ const routes = [
     path: '/diary',
     exact: true,
     component: lazy(() => import('./pages/DiaryPage')),
-    privated: true,
+    privated: false, //поменять на true
     restricted: false,
   },
   {
