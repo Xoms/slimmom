@@ -26,10 +26,10 @@ const login = credentials => (dispatch) => {
         .catch( err => dispatch(authActions.loginError(err)));
 }
 
-const logout = token => dispatch => {
+const logout = () => dispatch => {
     dispatch(authActions.logoutRequest());
 
-    api.logout(token)
+    api.logout()
         .then(({data}) => {
             api.unsetToken();
             dispatch(authActions.logoutSuccess(data));

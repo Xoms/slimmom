@@ -31,7 +31,7 @@ const routes = [
     exact: true,
     component: lazy(() => import('./pages/DiaryPage')),
     privated: true, //поменять на true
-    restricted: true,
+    restricted: false,
   },
   {
     label: 'Калькулятор',
@@ -39,7 +39,7 @@ const routes = [
     exact: true,
     component: lazy(() => import('./pages/CalculatorPage')),
     privated: true,
-    restricted: true,
+    restricted: false,
   },
 ];
 
