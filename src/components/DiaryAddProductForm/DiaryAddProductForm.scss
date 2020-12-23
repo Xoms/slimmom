@@ -1,11 +1,14 @@
 @import '../../shared-styles/colors';
 
 .trigger-button {
+    font-family: Verdana;
     width: 50px;
     height: 50px;
     border: none;
     outline: none;
     border-radius: 50%;
+    margin-top: 60px;
+    margin-bottom: 60px;
 
     color: #fff;
     background-color: $accent;
@@ -50,6 +53,7 @@
     align-items: center;
 
     & input {
+        font-family: Verdana;
         font-weight: bold;
         font-size: 14px;
         line-height: 17px;
@@ -87,11 +91,15 @@
 }
 
 .add-form {
+    margin-top: 60px;
+    margin-bottom: 60px;
 
     display: flex;
     align-items: center;
 
     & input {
+        font-family: Verdana;
+        font-style: normal;
         font-weight: bold;
         font-size: 14px;
         line-height: 17px;
@@ -102,12 +110,17 @@
         border: none;
         border-bottom: 1px solid $secondary-text;
         min-width: 105px;
+        min-height: 35px;
 
         margin-right: 48px;
 
         &:first-child {
             margin-right: 30px;
-            min-width: 240px;
+            min-width: 220px;
         }
     }
+}
+
+.gramms::placeholder {
+    text-align: right;
 }

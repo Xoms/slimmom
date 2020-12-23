@@ -11,7 +11,7 @@ const register = credentials => dispatch => {
 
             dispatch(authActions.registerSuccess(data));
         })
-        .catch( err => dispatch(authActions.registerError(err)));
+        .catch( err => dispatch(authActions.loginError(err)));
 }
 
 const login = credentials => (dispatch) => {
