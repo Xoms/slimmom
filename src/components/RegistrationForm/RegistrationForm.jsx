@@ -25,8 +25,6 @@ class RegistrationForm extends Component {
 
     render () {
         return (
-<<<<<<< HEAD
-
             <>
                 <Formik initialValues={{email: "", password: "", username: ""}} onSubmit={this.handleSubmit} validationSchema={RegisterSchema}>
                 <Form className="registration-form">
@@ -46,8 +44,8 @@ class RegistrationForm extends Component {
                         </label>
                     </div>
                     <div className="registration-buttons">
-                        <Button clickHandler={this.handleClick} marker="secondary" text="Вход"/>
-                        <Button marker="primary" text="Регистрация"/>
+                        <Button clickHandler={this.handleClick} >Вход</Button>
+                        <Button type="submit" className="secondary-button">Регистрация</Button>
                     </div>
                 </Form>
                 </Formik>
