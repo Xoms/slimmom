@@ -4,9 +4,9 @@ import styles from './AuthNavigations.module.scss';
 import { NavLink } from 'react-router-dom';
 
 const AuthNavigations = (props) => (
-  <div>
-    <NavLink exact to="/diary" className={styles.authNavigationsDairy}>ДНЕВНИК</NavLink>
-    <NavLink exact to="/calculator" className={styles.authNavigationsCalc}>КАЛЬКУЛЯТОР</NavLink>
+  <div className={styles.authnav}>
+    <NavLink exact to="/diary" className={styles.link} activeClassName={styles.active}>ДНЕВНИК</NavLink>
+    <NavLink exact to="/calculator" className={styles.link} activeClassName={styles.active}>КАЛЬКУЛЯТОР</NavLink>
   </div>
 );
 

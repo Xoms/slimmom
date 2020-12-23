@@ -20,7 +20,7 @@ const LoginForm = (props) => {
   const handleSubmit = (values) => {
     props.login(values)
   }
-  console.log(props.test);
+
   if (props.error) {
     setTimeout(() => {
       props.clearError()

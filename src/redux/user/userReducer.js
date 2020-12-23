@@ -4,31 +4,29 @@ import userActions from './userActions';
 
 const initialState = {
   username: null,
-  email: null,
   id: null,
   dailyRate: null,
-  notAllowedProducts: [],
+  userData: {
+    notAllowedProducts: [],
+  },
   eatenProducts: [],
   daySummary: {}
 };
 
+
+
 const user = createReducer(initialState, {
-  [authActions.loginSuccess]: (state, { payload }) => {
-    const { email, username, id, userData: {dailyRate, notAllowedProducts, eatenProducts} } = { ...payload.user };
-    const user = { email, username, id, dailyRate, notAllowedProducts, eatenProducts};
-    console.log(payload);
-    return user;
-  },
-  [userActions.getCurrentUserSuccess]: (state, { payload }) => payload,
+  [authActions.loginSuccess]: (state, { payload }) => payload.user,
+  [userActions.getCurrentUserSuccess]: (state, { payload }) => ({...state, ...payload}),
+
   [authActions.logoutSuccess]: () => initialState,
   [userActions.getDailyRateSuccess]: (state, { payload }) => ({
     ...state,
     ...payload,
   }),
-  [userActions.getProductsSuccess]: (state, {payload: {eatenProducts, daySummary}}) => ({
+  [userActions.getProductsSuccess]: (state, {payload}) => ({
     ...state,
-    eatenProducts,
-    daySummary,
+    daySummary: payload
   })
 });
 
