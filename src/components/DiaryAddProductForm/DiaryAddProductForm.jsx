@@ -40,7 +40,7 @@ class DiaryAddProductForm extends Component {
             return (
                 <form className='add-form'>
                     <input placeholder="Введите название продукта" type="text"/>
-                    <input placeholder="Граммы" type="number"/>
+                    <input className="gramms" placeholder="Граммы" type="text"/>
                     <button type="submit" className="add-button">+</button>
                 </form>
             )
