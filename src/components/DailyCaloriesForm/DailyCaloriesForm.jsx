@@ -23,6 +23,12 @@ const formSchema = Yup.object().shape({
 });
 
 class DailyCaloriesForm extends Component {
+  state = {
+    showModal: false,
+  };
+
+  toggleModal = () => {};
+
   render() {
     return (
       <div className={styles.DailyCaloriesFormWrapper}>
