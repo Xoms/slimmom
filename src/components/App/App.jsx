@@ -6,9 +6,7 @@ import PublicRoute from '../PublicRoute/PublicRoute';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
 
 import Loader from '../shared/Loader';
-
 import Layout from '../Layout';
-import Decoration from '../Decoration';
 
 //style
 import './App.scss';

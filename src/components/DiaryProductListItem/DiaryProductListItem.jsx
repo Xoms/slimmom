@@ -1,7 +1,16 @@
+import { connect } from 'formik';
 import React from 'react';
 import styles from './DiaryProductListItem.module.scss';
+import { deleteEatenProduct } from '../../redux/user/userOperations';
 
-const DiaryProductListItem = ({ name, cal, weight }) => {
+const DiaryProductListItem = ({
+  name,
+  cal,
+  weight,
+  dayId,
+  productId,
+  deleteProduct,
+}) => {
   return (
     <li className={styles.list}>
       <span className={styles.listName}>{name}</span>
@@ -10,9 +19,18 @@ const DiaryProductListItem = ({ name, cal, weight }) => {
         {cal} <span className={styles.ccal}>ккал</span>
       </span>
 
-      <button className={styles.listButton}>x</button>
+      <button
+        className={styles.listButton}
+        onClick={() => deleteProduct({ dayId, productId })}
+      >
+        x
+      </button>
     </li>
   );
 };
 
-export default DiaryProductListItem;
+const mapDispatchToProps = {
+  deleteProduct: deleteEatenProduct,
+};
+
+export default connect(null, mapDispatchToProps)(DiaryProductListItem);
