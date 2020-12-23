@@ -10,7 +10,8 @@
   width: 47px;
   height: 44px;
   @include for-size(tablet) {
-    margin-left: 50px;
+    margin-left: 53px;
+    padding-top: 7px;
   }
   &:hover,
   &:focus {
