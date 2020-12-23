@@ -6,16 +6,20 @@
 }
 
 .productList {
-  width: 287px;
+  padding-right: 3px;
+  width: 290px;
   height: 210px;
   margin: 0 auto;
   overscroll-behavior: contain;
   overflow-y: auto;
+  overflow-x: hidden;
   @include for-size(tablet) {
-    width: 589px;
+    padding-right: 30px;
+    width: 594px;
     height: 240px;
   }
   @include for-size(desktop) {
+    padding-right: 40px;
     width: 600px;
     height: 269px;
   }

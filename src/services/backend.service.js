@@ -35,23 +35,10 @@ class PhonebookService {
     return axios.post(`/daily-rate/`, userCharacteristics);
   }
 
-  
-  //================== contacts ==================
-  getContacts() {
-    return axios.get('/contacts');
+  deleteEatenProduct (product) { // product = (dayId, productId)
+    return axios.delete(`/day`, product);
   }
 
-  addContact(newContact) {
-    return axios.post('/contacts', newContact);
-  }
-
-  delContact(id) {
-    return axios.delete(`/contacts/${id}`);
-  }
-
-  updateContact(id) {
-    return axios.patch(`/contacts/${id}`);
-  }
 }
 
 export default new PhonebookService();

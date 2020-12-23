@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './DiaryProductsList.module.scss';
-// import DiaryProductsListItem from '../../components/DiaryProductsListItem';
+import DiaryProductsListItem from '../DiaryProductListItem';
 
 const products = [
   {
@@ -440,16 +440,12 @@ const products = [
 const DiaryProductsList = () => {
   const mappedList = products.map(product => {
     return (
-      /* <DiaryProductsListItem key={product._id}
-          name={product.title.ru}
-          weight={product.weight}
-          cal={product.calories}
-        /> */
-      <li key={product._id} className={styles.listItem}>
-        <span>{product.title.ru}</span>
-        <span>{product.weight}</span>
-        <span>{product.calories}</span>
-      </li>
+      <DiaryProductsListItem
+        key={product._id}
+        name={product.title.ru}
+        weight={product.weight}
+        cal={product.calories}
+      />
     );
   });
 
