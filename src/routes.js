@@ -30,8 +30,8 @@ const routes = [
     path: '/diary',
     exact: true,
     component: lazy(() => import('./pages/DiaryPage')),
-    privated: false, //поменять на true
-    restricted: false,
+    privated: true, //поменять на true
+    restricted: true,
   },
   {
     label: 'Калькулятор',
@@ -39,7 +39,7 @@ const routes = [
     exact: true,
     component: lazy(() => import('./pages/CalculatorPage')),
     privated: true,
-    restricted: false,
+    restricted: true,
   },
 ];
 
