@@ -14,11 +14,11 @@
   font-family: "GothamPro-Bold";
   position: absolute;
   color: rgb(238, 20, 20);
-  top: 8px;
-  left: 110px;
+  top: 40px;
+  left: 55px;
 
   @include for-size(tablet) {
-    left: 250px;
+    left: 40px;
   }
 }
 .loginTitle {
