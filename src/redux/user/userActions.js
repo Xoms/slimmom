@@ -9,6 +9,9 @@ const getDailyRateError = createAction('auth/getDailyRateError');
 const deleteEatenProductRequest = createAction('user/deleteEatenProductRequest');
 const deleteEatenProductSuccess = createAction('user/deleteEatenProductSuccess');
 const deleteEatenProductError = createAction('user/deleteEatenProductError');
+const getProductsRequest = createAction('user/getProductsRequest');
+const getProductsSuccess = createAction('user/getProductsSuccess');
+const getProductsError = createAction('user/getProductsError');
 
 const actions = {
   getCurrentUserRequest,
@@ -20,6 +23,9 @@ const actions = {
   deleteEatenProductRequest,
   deleteEatenProductSuccess,
   deleteEatenProductError,
+  getProductsRequest,
+  getProductsSuccess,
+  getProductsError
 };
 
 export default actions;

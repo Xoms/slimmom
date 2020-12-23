@@ -17,7 +17,11 @@ const {
 const {
   getCurrentUserRequest,
   getCurrentUserSuccess,
-  getCurrentUserError
+  getCurrentUserError,
+  getProductsRequest,
+  getProductsSuccess,
+  getProductsError,
+
 } = userActions;
 
 const error = createReducer(null, {
@@ -25,7 +29,9 @@ const error = createReducer(null, {
   [getCurrentUserError]: (state, {payload}) => payload.error,
   [registerError]: (state, {payload}) => payload.error,
   [logoutError]: (state, {payload}) => payload.error,
+  [getProductsError]: (state, {payload}) => payload.message,
   [clearError]: () => null,
+
 } );
 
 const loading = createReducer(false, {
@@ -41,6 +47,9 @@ const loading = createReducer(false, {
     [getCurrentUserRequest]: () => true,
     [getCurrentUserSuccess]: () => false,
     [getCurrentUserError]: () => false,
+    [getProductsRequest]: () => true,
+    [getProductsSuccess]: () => false,
+    [getProductsError]: () => false,
   });
   
   export { loading, error };

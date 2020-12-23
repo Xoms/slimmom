@@ -28,7 +28,7 @@ class App extends Component {
           <Suspense fallback={<Loader />}>
             <Switch>
               {routesMap}
-              <Route component={lazy(() => import('../../pages/NotFound'))} />
+              {/* <Route component={lazy(() => import('../../pages/NotFound'))} /> */}
             </Switch>
           </Suspense>
         </Layout>

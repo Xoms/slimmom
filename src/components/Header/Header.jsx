@@ -19,7 +19,7 @@ class Header extends Component {
   }
 
   render() {
-    const { isAuth=true } = this.props
+    const { isAuth } = this.props
     const { isOpen } = this.state
 
     return (
