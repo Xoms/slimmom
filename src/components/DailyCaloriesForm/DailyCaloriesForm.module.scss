@@ -1,6 +1,5 @@
 @import "../../shared-styles/colors";
 @import "../../shared-styles/mixins";
-
 .DailyCaloriesFormWrapper {
   width: 100%;
   font-family: "Verdana";
@@ -89,7 +88,6 @@ input[type="radio"]:checked {
 .DailyCaloriesFormButton {
   display: block;
   margin: 0 auto;
-  margin-bottom: 60px;
 }
 @media screen and (min-width: 650px) {
   .DailyCaloriesFormTitle {
@@ -100,13 +98,7 @@ input[type="radio"]:checked {
   .DailyCaloriesFormInput {
     margin-bottom: 40px;
   }
-  .DailyCaloriesFormButton {
-    display: block;
-    margin: 0;
-    margin-bottom: 74px;
-  }
   .DailyCaloriesForm {
-    display: flex;
     width: 510px;
     height: 186px;
     margin-bottom: 60px;
@@ -116,12 +108,17 @@ input[type="radio"]:checked {
   }
 }
 @media screen and (min-width: 1100px) {
+  .DailyCaloriesFormFirstWrapper {
+    display: flex;
+  }
   .DailyCaloriesFormWrapper {
-    width: 580px;
+    width: 607px;
     height: 447px;
+
     margin-top: 137px;
     // margin-left: 115px;
     // margin-right: 15px;
+
   }
   .DailyCaloriesFormTitle {
     font-size: 34px;
@@ -129,10 +126,10 @@ input[type="radio"]:checked {
     margin-bottom: 68px;
   }
   .DailyCaloriesForm {
-    margin-bottom: 25px;
+    width: 552px;
+    height: 294px;
   }
   .DailyCaloriesFormButton {
     margin-left: 300px;
-    margin-bottom: 111px;
   }
 }

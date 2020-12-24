@@ -1,1 +1,11 @@
-/* your css code */
+.wrapper {
+  display: flex;
+}
+.container {
+  width: 630px;
+  justify-self: start;
+}
+.sidebarContainer {
+  width: 420px;
+  justify-self: end;
+}
