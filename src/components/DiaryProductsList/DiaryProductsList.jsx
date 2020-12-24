@@ -7,40 +7,12 @@ import selectors from '../../redux/user/userSelectors';
 // import withAuth from "../hocs/withAuth"
 import { connect } from "react-redux"
 
-// const productsList = [
-//   {
-//     _id: "507f1f77bcf86cd799439011",
-//     categories: ["яйца"],
-//     weight: 100,
-//     title: {
-//       ru: "Меланж яичный",
-//       ua: "Меланж яєчний",
-//     },
-//     calories: 157,
-//     groupBloodNotAllowed: [null, true, false, false, false],
-//     __v: 0,
-//   },
-//   {
-//     _id: "507f1f77bcf86cd799439011",
-//     categories: ["яйца"],
-//     weight: 100,
-//     title: {
-//       ru: "Меланж яичный",
-//       ua: "Меланж яєчний",
-//     },
-//     calories: 157,
-//     groupBloodNotAllowed: [null, true, false, false, false],
-//     __v: 0,
-//   },
-// ]
 class DiaryProductsList extends Component {
 
   static props = {
     getProducts: PropTypes.func.isRequired,
     date: PropTypes.string,
   }
-
-  
 
   render() {
     let { products } = this.props;

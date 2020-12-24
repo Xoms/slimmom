@@ -16,7 +16,7 @@ function RightSideBar(props) {
 
   return (
     <>
-      <div className={classes.section__background}></div>
+      {/* <div className={classes.section__background}></div> */}
       <section className={classes.section__rightSideBar}>
         <div className={classes.conteiner__rightSideBar}>
           <div className={classes.rightSideBar}>
