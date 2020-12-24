@@ -1,8 +1,9 @@
-import { connect } from "react-redux";
-import React from "react";
-import styles from "./DiaryProductListItem.module.scss";
-import { deleteEatenProduct } from "../../redux/user/userOperations";
-import IconClose from "../shared/IconClose/IconClose";
+import { connect } from 'react-redux';
+import React from 'react';
+import styles from './DiaryProductListItem.module.scss';
+import { deleteEatenProduct } from '../../redux/user/userOperations';
+import IconClose from '../shared/IconClose/IconClose';
+import selectors from '../../redux/user/userSelectors';
 
 // ПОПРАВИТЬ ВЫРАВНИВАНИЕ КНОПКИ
 
@@ -14,6 +15,7 @@ const DiaryProductListItem = ({
   productId,
   deleteProduct,
 }) => {
+  console.log(productId);
   return (
     <li className={styles.list}>
       <span className={styles.listName}>{name}</span>
@@ -24,7 +26,12 @@ const DiaryProductListItem = ({
 
       <button
         className={styles.listButton}
-        onClick={() => deleteProduct({ dayId, productId })}
+        onClick={() =>
+          deleteProduct({
+            dayId,
+            eatenProductId: productId,
+          })
+        }
       >
         <IconClose />
       </button>
@@ -36,4 +43,11 @@ const mapDispatchToProps = {
   deleteProduct: deleteEatenProduct,
 };
 
-export default connect(null, mapDispatchToProps)(DiaryProductListItem);
+const mapStateToProps = state => ({
+  dayId: selectors.getCurrentDayId(state),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(DiaryProductListItem);
