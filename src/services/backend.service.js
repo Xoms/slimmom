@@ -52,6 +52,9 @@ class PhonebookService {
     //   }
     return axios.post('/day', product);
   }
+  getProducts(date) {
+    return axios.post(`/day/info`, date); // дата из календаря для запроса
+  }
 }
 
 export default new PhonebookService();

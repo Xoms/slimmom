@@ -3,8 +3,9 @@ import userActions from './userActions';
 import api from '../../services/backend.service';
 
 const getCurrentUser = () => (dispatch, getState) => {
-   const {auth: {accessToken}} = getState();
-  console.log(accessToken)
+  const {
+    auth: { accessToken },
+  } = getState();
 
   if (!accessToken) return;
 
@@ -15,7 +16,9 @@ const getCurrentUser = () => (dispatch, getState) => {
   api
     .getCurrentUser()
     .then(({ data }) => {
-      dispatch(userActions.getCurrentUserSuccess(data));
+      const { username, id, userData } = data;
+      const userInfo = { username, id, userData };
+      dispatch(userActions.getCurrentUserSuccess(userInfo));
     })
     .catch(err => dispatch(userActions.getCurrentUserError(err)));
 };
@@ -29,7 +32,6 @@ const getDailyRate = userCharacteristics => dispatch => {
   dispatch(userActions.getCurrentUserRequest());
 
   api.getDailyRate(userCharacteristics).then(({ data }) => {
-    console.log(data);
     return dispatch(userActions.getDailyRateSuccess(data));
   });
 };
@@ -52,5 +54,28 @@ const addProduct = product => dispatch => {
     .then(({ data }) => console.log(data))
     .catch(err => dispatch(userActions.addProductError(err)));
 };
+const getProducts = date => (dispatch, getState) => {
+  const {
+    auth: { accessToken },
+  } = getState();
 
-export { getCurrentUser, getDailyRate, deleteEatenProduct };
+  if (!accessToken) return;
+
+  api.setToken(accessToken);
+
+  dispatch(userActions.getProductsRequest());
+
+  api
+    .getProducts(date)
+    .then(({ data }) => {
+      dispatch(userActions.getProductsSuccess(data));
+    })
+    .catch(err => dispatch(userActions.getProductsError(err)));
+};
+
+export { getCurrentUser, getDailyRate, deleteEatenProduct, getProducts };
+
+// dailyRate: 1351.5
+// kcalConsumed: 0
+// kcalLeft: 1351.5
+// percentsOfDailyRate: 0

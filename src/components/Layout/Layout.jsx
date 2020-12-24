@@ -5,8 +5,7 @@ import styles from './Layout.module.scss';
 
 const Layout = ({ children }) => (
   <>
-    <Header/>
-    <div className={styles.container}>{children}</div>
+    <div className={styles.container}><Header />{children}</div>
   </>
 );
 

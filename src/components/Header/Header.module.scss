@@ -2,27 +2,9 @@
 @import "../../shared-styles/mixins";
 @import "../../shared-styles/colors";
 
-.container {
-  margin: 0 auto;
-  padding-left: 15px;
-  padding-right: 15px;
-  @include for-size(tablet) {
-    padding-left: 78px;
-    padding-right: 78px;
-  }
-  @include for-size(desktop) {
-    padding-left: 29px;
-    padding-right: 29px;
-  }
-  //@include for-size(tablet) {
-  // min-width: 768
-  //  padding: 20px;
-  //}
-}
 header > .container {
   display: flex;
   justify-content: space-between;
-  // flex-wrap: wrap;
   padding-top: 18px;
   padding-bottom: 18px;
 

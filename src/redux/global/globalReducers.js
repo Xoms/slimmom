@@ -21,6 +21,9 @@ const {
   getDailyRateRequest,
   getDailyRateSuccess,
   getDailyRateError,
+  getProductsRequest,
+  getProductsSuccess,
+  getProductsError,
 } = userActions;
 
 const error = createReducer(null, {
@@ -29,6 +32,7 @@ const error = createReducer(null, {
   [registerError]: (state, { payload }) => payload.error,
   [logoutError]: (state, { payload }) => payload.error,
   [getDailyRateError]: (state, { payload }) => payload.error,
+  [getProductsError]: (state, { payload }) => payload.message,
   [clearError]: () => null,
 });
 
@@ -45,6 +49,9 @@ const loading = createReducer(false, {
   [getCurrentUserRequest]: () => true,
   [getCurrentUserSuccess]: () => false,
   [getCurrentUserError]: () => false,
+  [getProductsRequest]: () => true,
+  [getProductsSuccess]: () => false,
+  [getProductsError]: () => false,
   [getDailyRateRequest]: () => true,
   [getDailyRateSuccess]: () => false,
   [getDailyRateError]: () => false,

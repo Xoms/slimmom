@@ -10,7 +10,6 @@ class DiaryAddProductForm extends Component {
   state = {
     renderMarker: false,
     products: [],
-    product: '',
   };
 
   handleClick = () => {
@@ -19,20 +18,20 @@ class DiaryAddProductForm extends Component {
     });
   };
 
-  searchProduct = product => {
-    console.log(product);
-    api
-      .searchProduct(product)
-      .then(({ data }) => this.setState({ products: data }))
-      .catch(err => this.setState({ products: [] }));
-  };
+  debouncedSearch = debounce(
+    query =>
+      api
+        .searchProduct(query)
+        .then(({ data }) => {
+          console.log(data);
+          this.setState({ products: data });
+        })
+        .catch(err => this.setState({ products: [] })),
+    2000,
+  );
 
   hanleChange = ({ target }) => {
-    // this.setState({ [target.name]: target.value });
-    // прикрутить лодаш дебоунс
-    // console.log(debounce);
-    const debouncedSearch = debounce(value => this.searchProduct(value), 400);
-    debouncedSearch(target.value);
+    this.debouncedSearch(target.value);
   };
 
   handleSubmit = event => {
@@ -52,10 +51,10 @@ class DiaryAddProductForm extends Component {
         {({ setFieldValue, handleChange, handleBlur }) => (
           <Form className="modal-form">
             <Field
-              onBlur={e => {
-                handleBlur(e);
-                this.setState({ products: [] });
-              }}
+              // onBlur={e => {
+              //   handleBlur(e);
+              //   this.setState({ products: [] });
+              // }} поставить задержку
               onChange={e => {
                 handleChange(e);
                 this.hanleChange(e);
