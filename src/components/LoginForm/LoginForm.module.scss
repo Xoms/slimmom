@@ -7,11 +7,8 @@
   @include for-size(tablet) {
     text-align: left;
     padding-top: 191px;
-    padding-left: 92px;
     @include for-size(desktop) {
-      text-align: left;
-      padding-top: 213px;
-      padding-left: 115px;
+      padding-top: 217px;
     }
   }
 }

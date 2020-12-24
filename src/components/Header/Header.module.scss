@@ -10,7 +10,7 @@
   justify-content: space-between;
   padding-top: 17px;
   padding-bottom: 18px;
-  border-bottom: 2px silver;
+  border-bottom: 2px solid $header-border;
 
   @include for-size(desktop) {
     border: 0;
