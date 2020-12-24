@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { CSSTransition } from "react-transition-group";
-import Calendar from "react-calendar";
+import { CSSTransition } from 'react-transition-group';
+import Calendar from 'react-calendar';
 
-import "react-calendar/dist/Calendar.css";
+import 'react-calendar/dist/Calendar.css';
 
 class SetDate extends Component {
   state = {
@@ -13,46 +13,43 @@ class SetDate extends Component {
     outputValue: '',
   };
 
-  showCalendar = (event) => {
-    console.log(event);
-    this.setState((state) => {
+  showCalendar = event => {
+    this.setState(state => {
       return {
         isShowCalendar: !state.isShowCalendar,
       };
     });
   };
 
-  setDate = (value) => {
+  setDate = value => {
     const year = value.getFullYear();
-    const month = value.getMonth() || '01' ;
-    const day = value.getDate() || '01';
-    this.setState((state) => {
+    const month = value.getMonth() || '01';
+    let day = value.getDate() || '01';
+    this.setState(state => {
       return {
         isShowCalendar: !state.isShowCalendar,
         currentValue: value,
         outputValue: `${day}.${month}.${year}`,
       };
     });
-    // console.log(`${year}-${month}-${day}`);
+    day = String(day);
+    day.length === 1 ? (day = `0${day}`) : (day = day);
     this.props.value(`${year}-${month}-${day}`);
   };
 
-  componentDidMount(){
+  componentDidMount() {
     const currentDate = new Date();
     const year = currentDate.getFullYear();
-    const month = currentDate.getMonth() || '01' ;
+    const month = currentDate.getMonth() || '01';
     const day = currentDate.getDate() || '01';
-    this.setState((state) => {
+    this.setState(state => {
       return {
         outputValue: `${day}.${month}.${year}`,
       };
     });
   }
 
-
   render() {
-    console.log(this.state);
-
     return (
       <div className="setdate">
         <p className="setdate-title">{`${this.state.outputValue}`}</p>
@@ -77,11 +74,10 @@ class SetDate extends Component {
 
 export default SetDate;
 
-
 SetDate.propTypes = {
-  value: PropTypes.func
+  value: PropTypes.func,
 };
 
 SetDate.defaultProps = {
-  value(){}
+  value() {},
 };

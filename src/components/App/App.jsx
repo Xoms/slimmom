@@ -34,8 +34,6 @@ class App extends Component {
     });
 
     return (
-      <>
-        {/* <Decoration /> */}
         <Layout>
           <Suspense fallback={<Loader />}>
             <Switch>
@@ -44,7 +42,6 @@ class App extends Component {
             </Switch>
           </Suspense>
         </Layout>
-      </>
     );
   }
 }
