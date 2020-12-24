@@ -46,14 +46,14 @@ const deleteEatenProduct = () => dispatch => {
     .catch(err => dispatch(userActions.deleteEatenProductError(err)));
 };
 
-const addProduct = product => dispatch => {
-  dispatch(userActions.addProductRequest());
+// const addProduct = product => dispatch => {
+//   dispatch(userActions.addProductRequest());
 
-  api
-    .addProduct(product)
-    .then(({ data }) => console.log(data))
-    .catch(err => dispatch(userActions.addProductError(err)));
-};
+//   api
+//     .addProduct(product)
+//     .then(({ data }) => console.log(data))
+//     .catch(err => dispatch(userActions.addProductError(err)));
+// };
 
 // {
 //   "date": "2020-12-31",
@@ -75,7 +75,15 @@ const getProducts = date => (dispatch, getState) => {
   api
     .getProducts(date)
     .then(({ data }) => {
-      dispatch(userActions.getProductsSuccess(data));
+      console.log(data);
+      let payload = {};
+      if(data.daySummary) {
+        const {daySummary, eatenProducts} = data;
+        payload = {daySummary, eatenProducts}
+      } else {
+        payload.daySummary = {...data}
+      }
+      dispatch(userActions.getProductsSuccess(payload));
     })
     .catch(err => dispatch(userActions.getProductsError(err)));
 };

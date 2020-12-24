@@ -19,7 +19,7 @@ const DiaryProductListItem = ({
       <span className={styles.listName}>{name}</span>
       <span className={styles.listWeight}>{weight} г</span>
       <span className={styles.listCalories}>
-        {cal} <span className={styles.ccal}>ккал</span>
+        {cal} <span className={Math.round(styles.ccal)}>ккал</span>
       </span>
 
       <button

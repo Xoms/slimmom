@@ -27,7 +27,7 @@ const user = createReducer(initialState, {
   }),
   [userActions.getProductsSuccess]: (state, {payload}) => ({
     ...state,
-    daySummary: payload
+    ...payload
   })
 });
 
