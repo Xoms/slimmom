@@ -5,18 +5,20 @@
   padding-top: 40px;
   padding-bottom: 24px;
   position: relative;
+  background-color: $secondary-beckground;
 
   @include for-size(tablet) {
     padding-top: 91px;
     padding-bottom: 91px;
   }
   @include for-size(desktop) {
-    padding-top: 150px;
-    padding-bottom: 218px;
-    width: 535px;
-    height: 600px;
+    padding-top: 300px;
+    /* padding-bottom: 218px; */
+    min-width: 535px;
+    min-height: 600px;
   }
 }
+
 .notAllowedProductsList {
   max-height: 300px;
   margin-top: 25px;
@@ -110,9 +112,7 @@
     padding: 0 25px;
   }
 }
-.section__rightSideBar {
-  background-color: $secondary-beckground;
-}
+
 
 .rightSideBar {
   display: block;

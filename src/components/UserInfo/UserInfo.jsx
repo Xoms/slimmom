@@ -13,7 +13,7 @@ class UserInfo extends Component {
         return (
             <div className="user-info-wrapper">
                 <p className="user-info-wrapper-item">{this.props.userName}</p>
-                <span className="user-info-wrapper-item"></span>
+                {/* <span className="user-info-wrapper-item"></span> */}
                 <button onClick={this.handleClick} className="user-info-wrapper-item" type="button">Выйти</button>
             </div>
         )
