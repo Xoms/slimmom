@@ -4,6 +4,14 @@
 
 .burgerMenu {
   background-color: $burger-background;
+  position: absolute;
+  display: block;
+  z-index: 2;
+  min-width: 320px;
+  @include for-size(tablet){
+    left: 0;
+    right: 0;
+  }
 }
 .burgerSvg {
   display: block;
@@ -11,7 +19,7 @@
   height: 44px;
   @include for-size(tablet) {
     margin-left: 53px;
-    padding-top: 7px;
+    padding-top: 2px;
   }
   &:hover,
   &:focus {
@@ -25,6 +33,7 @@
   display: block;
   margin: 0 auto;
   text-align: center;
+  min-width: 320px;
 
   & :not(:last-child) {
     margin-bottom: 15px;

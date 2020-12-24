@@ -1,7 +1,7 @@
 import React, { Component, Suspense, lazy } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import {connect} from "react-redux";
-import {getCurrentUser} from "../../redux/user/userOperations";
+import { connect } from 'react-redux';
+import { getCurrentUser } from '../../redux/user/userOperations';
 import routes from '../../routes';
 import PublicRoute from '../PublicRoute/PublicRoute';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
@@ -14,8 +14,7 @@ import Layout from '../Layout';
 import './App.scss';
 
 class App extends Component {
-
-  componentDidMount(){
+  componentDidMount() {
     this.props.getCurrentUser();
   }
   render() {
@@ -48,7 +47,7 @@ App.propTypes = {
 };
 
 const mapDispatch = {
-  getCurrentUser
-}
+  getCurrentUser,
+};
 
 export default connect(null, mapDispatch)(App);
