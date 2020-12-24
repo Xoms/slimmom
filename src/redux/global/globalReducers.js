@@ -1,6 +1,6 @@
-import { createReducer } from '@reduxjs/toolkit';
-import authActions from '../auth/authActions';
-import userActions from '../user/userActions';
+import { createReducer } from "@reduxjs/toolkit";
+import authActions from "../auth/authActions";
+import userActions from "../user/userActions";
 const {
   registerRequest,
   registerSuccess,
@@ -31,8 +31,9 @@ const error = createReducer(null, {
   [getCurrentUserError]: (state, { payload }) => payload.error,
   [registerError]: (state, { payload }) => payload.error,
   [logoutError]: (state, { payload }) => payload.error,
-  [getDailyRateError]: (state, { payload }) => payload.error,
   [getProductsError]: (state, { payload }) => payload.message,
+  [clearError]: () => null,
+  [getDailyRateError]: (state, { payload }) => payload.message,
   [clearError]: () => null,
 });
 
