@@ -4,19 +4,21 @@ import api from '../../services/backend.service';
 
 const getCurrentUser = () => (dispatch, getState) => {
   const {
-    user: { token },
+    auth: { accessToken },
   } = getState();
 
-  if (!token) return;
+  if (!accessToken) return;
 
-  api.setToken(token);
+  api.setToken(accessToken);
 
   dispatch(userActions.getCurrentUserRequest());
 
   api
     .getCurrentUser()
     .then(({ data }) => {
-      dispatch(userActions.getCurrentUserSuccess(data));
+      const { username, id, userData } = data;
+      const userInfo = { username, id, userData };
+      dispatch(userActions.getCurrentUserSuccess(userInfo));
     })
     .catch(err => dispatch(userActions.getCurrentUserError(err)));
 };
@@ -30,18 +32,50 @@ const getDailyRate = userCharacteristics => dispatch => {
   dispatch(userActions.getCurrentUserRequest());
 
   api.getDailyRate(userCharacteristics).then(({ data }) => {
-    console.log(data);
     return dispatch(userActions.getDailyRateSuccess(data));
   });
 };
 
 const deleteEatenProduct = () => dispatch => {
-
   dispatch(userActions.deleteEatenProductRequest());
-  api.deleteEatenProduct().then(({data}) => {
-       return dispatch(userActions.deleteEatenProductSuccess(data));
-  })
+  api
+    .deleteEatenProduct()
+    .then(({ data }) => {
+      return dispatch(userActions.deleteEatenProductSuccess(data));
+    })
     .catch(err => dispatch(userActions.deleteEatenProductError(err)));
-  };
+};
 
-export { getCurrentUser, getDailyRate, deleteEatenProduct };
+const addProduct = product => dispatch => {
+  dispatch(userActions.addProductRequest());
+
+  api
+    .addProduct(product)
+    .then(({ data }) => console.log(data))
+    .catch(err => dispatch(userActions.addProductError(err)));
+};
+const getProducts = date => (dispatch, getState) => {
+  const {
+    auth: { accessToken },
+  } = getState();
+
+  if (!accessToken) return;
+
+  api.setToken(accessToken);
+
+  dispatch(userActions.getProductsRequest());
+
+  api
+    .getProducts(date)
+    .then(({ data }) => {
+      dispatch(userActions.getProductsSuccess(data));
+    })
+    .catch(err => dispatch(userActions.getProductsError(err)));
+};
+
+export { getCurrentUser, getDailyRate, deleteEatenProduct, getProducts };
+
+// dailyRate: 1351.5
+// kcalConsumed: 0
+// kcalLeft: 1351.5
+// percentsOfDailyRate: 0

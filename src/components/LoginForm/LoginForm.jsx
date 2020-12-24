@@ -9,8 +9,8 @@ import Button from "../shared/Button"
 import css from "./LoginForm.module.scss"
 
 const SignupSchema = Yup.object().shape({
-  email: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required("Required"),
-  password: Yup.string().required("Required").min(8, "Too Short!"),
+  email: Yup.string().min(2, "Минимум два символа!").max(50, "Превышен лимит символов").required("Обязательное поле *"),
+  password: Yup.string().required("Обязательное поле *").min(8, "Минимум два символа!"),
 })
 
 const LoginForm = (props) => {
@@ -20,7 +20,7 @@ const LoginForm = (props) => {
   const handleSubmit = (values) => {
     props.login(values)
   }
-  console.log(props.test);
+
   if (props.error) {
     setTimeout(() => {
       props.clearError()
