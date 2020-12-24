@@ -24,8 +24,8 @@ class Header extends Component {
 
     return (
       <>
-        <header>
-          <div className={styles.container}>
+        <header className='container'>
+          <div className={styles.mainHeader}>
             <NavLink exact to="/" className={styles.logoLink}>
               <div className={styles.logoContainer}>
               

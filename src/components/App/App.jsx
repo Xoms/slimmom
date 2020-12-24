@@ -6,7 +6,6 @@ import routes from '../../routes';
 import PublicRoute from '../PublicRoute/PublicRoute';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
 
-import Decoration from '../Decoration';
 import Loader from '../shared/Loader';
 import Layout from '../Layout';
 
@@ -27,8 +26,6 @@ class App extends Component {
     });
 
     return (
-      <>
-        <Decoration />
         <Layout>
           <Suspense fallback={<Loader />}>
             <Switch>
@@ -37,7 +34,6 @@ class App extends Component {
             </Switch>
           </Suspense>
         </Layout>
-      </>
     );
   }
 }

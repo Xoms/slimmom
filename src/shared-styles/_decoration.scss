@@ -1,5 +1,6 @@
 section.decoration {
   position: absolute;
+  top: 0;
   z-index: -1000;
   // width: 100vw;
   min-height: 850px;
@@ -75,7 +76,7 @@ section.decoration {
       background-image: url("../img/leaves@1x.png");
     }
     @media screen and (min-width: 1100px) {
-      top: -26px;
+      top: 0;
       right: 195px;
       width: 746px;
       height: 846px;

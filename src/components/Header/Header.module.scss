@@ -4,26 +4,19 @@
 // @import "../../shared-styles/container";
 
 
-header {
-  background-color: transparent;
-  position: static;
-  @include for-size(desktop) {
-    position: fixed;
-    z-index: 2;
-    
-  }
-}
-header > .container {
+.mainHeader {
+  position: relative;
   display: flex;
   justify-content: space-between;
-  padding-top: 18px;
+  padding-top: 17px;
   padding-bottom: 18px;
   border-bottom: 2px silver;
-
+  
   @include for-size(desktop) {
     border: 0;
-    // padding-top: 82px;
-    // justify-content: start;
+    padding-top: 82px;
+    padding-bottom: 0;
+    justify-content: start;
   }
 }
 
