@@ -5,11 +5,13 @@ import back from '../../img/back-arrow.svg';
 import api from '../../services/backend.service';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import debounce from 'lodash.debounce';
+import {CSSTransition} from 'react-transition-group';
 
 class DiaryAddProductForm extends Component {
   state = {
     renderMarker: false,
     products: [],
+    showUl: false,
   };
 
   handleClick = () => {
@@ -32,6 +34,11 @@ class DiaryAddProductForm extends Component {
 
   hanleChange = ({ target }) => {
     this.debouncedSearch(target.value);
+    this.setState({showUl: true});
+  };
+
+  handleBlur = ({target}) => {
+    this.setState({showUl: false});
   };
 
   handleSubmit = event => {
@@ -59,13 +66,16 @@ class DiaryAddProductForm extends Component {
                 handleChange(e);
                 this.hanleChange(e);
               }}
+              onBlur={this.handleBlur}
               //   value={product}
               name="product"
               placeholder="Введите название продукта"
               type="text"
               autoComplete="off"
             />
-            <div className="autocomplete">
+            <div className="product-list-wrapper">
+            <CSSTransition in={this.state.showUl} unmountOnExit classNames="search-list" timeout={500}>
+            <ul className="autocomplete">
               {!!products.length &&
                 products.map(product => (
                   <li
@@ -78,8 +88,10 @@ class DiaryAddProductForm extends Component {
                     {product.title.ru}
                   </li>
                 ))}
+            </ul>
+            </CSSTransition>
             </div>
-            <Field name="weight" placeholder="Граммы" type="number" />
+            <Field className="gramms" name="weight" placeholder="Граммы" type="number" />
             <Button type="submit" className="secondary-button">
               Добавить
             </Button>
