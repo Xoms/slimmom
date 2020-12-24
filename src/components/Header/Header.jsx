@@ -28,7 +28,7 @@ class Header extends Component {
           <div className={styles.mainHeader}>
             <NavLink exact to="/" className={styles.logoLink}>
               <div className={styles.logoContainer}>
-              
+
                 <Media
                   queries={{
                     small: "(min-width: 320px) and (max-width: 767px)",
@@ -83,8 +83,8 @@ class Header extends Component {
                         <>{isAuth ? (
                           <div className={styles.navigationAuth}>
                             {/* сюда вставить UserMenu */}
-                            {isAuth && <div><UserInfo /></div>} 
-                            
+                            {isAuth && <div><UserInfo /></div>}
+
                             {!isOpen ? (
                               <Burger onClick={this.handleToggle}/>
                             ) : (
@@ -102,8 +102,8 @@ class Header extends Component {
                           <div className={styles.navigationAuth}>
                             {isAuth && <>
                             <div className={styles.navigation}> <AuthNavigations /> </div>
-                            <div><UserInfo /></div> 
-                            </>} 
+                            <div><UserInfo /></div>
+                            </>}
                           </div>
                         ) : (
                           <div className={styles.navigation}> <NavigationBar /> </div>
@@ -112,10 +112,10 @@ class Header extends Component {
                     </Fragment>
                   )}
                 </Media>
-              
+
             </div>
           </div>
-          
+
         </header>
         {<Media
                   queries={{
@@ -123,7 +123,7 @@ class Header extends Component {
                     medium: "(min-width: 768px) and (max-width: 1099px)",
                     large: "(min-width: 1100px)",
                   }}
-                > 
+                >
                 {(matches) => (
                   <Fragment>
                   {matches.small && isAuth && <div className={styles.mobUserInfoWrap}><UserInfo /></div>}

@@ -11,7 +11,7 @@
   padding-top: 17px;
   padding-bottom: 18px;
   border-bottom: 2px silver;
-  
+
   @include for-size(desktop) {
     border: 0;
     padding-top: 82px;
@@ -82,9 +82,9 @@
   color: $main-text;
   font-size: 20px;
   padding-right: 30px;
- 
+
   @include for-size(tablet){
-    margin-left: 50px;  
+    margin-left: 50px;
     padding-right: 30px;
   }
 
