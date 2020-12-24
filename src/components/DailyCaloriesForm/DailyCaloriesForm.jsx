@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { getDailyRate } from "../../redux/user/userOperations";
+import userSelectors from '../../redux/user/userSelectors';
 import { connect } from "react-redux";
 import Button from "../shared/Button";
 import styles from "./DailyCaloriesForm.module.scss";
@@ -43,7 +44,8 @@ class DailyCaloriesForm extends Component {
       desiredWeight: +values.desiredWeight,
       bloodType: +values.bloodType,
     };
-    this.props.getDailyRate(userCharacteristics);
+    
+    this.props.getDailyRate(userCharacteristics, this.props.userId);
     this.toggleModal();
   };
 
@@ -209,6 +211,7 @@ class DailyCaloriesForm extends Component {
 
 const mapStateToProps = (state) => ({
   isLoading: globalSelectors.getLoading(state),
+  userId: userSelectors.getUserId(state),
 });
 
 const mapDispatchToProps = {

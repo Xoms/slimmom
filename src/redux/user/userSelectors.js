@@ -3,6 +3,7 @@ const getDaySummary = (state) => state.user.daySummary;
 const getnotAllowedProducts = (state) => state.user.userData.notAllowedProducts;
 const getCalories = (state) => state.user.dailyRate;
 const getProducts = (state) => state.user.notAllowedProducts;
+const getUserId = (state) => state.user.id;
 
 const selectors = {
   getProductsSelectors,
@@ -10,5 +11,6 @@ const selectors = {
   getnotAllowedProducts,
   getProducts,
   getCalories,
+  getUserId
 };
 export default selectors;

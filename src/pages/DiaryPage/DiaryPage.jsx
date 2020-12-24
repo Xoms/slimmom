@@ -15,9 +15,9 @@ class DiaryPage extends Component {
   componentDidMount() {
     const today = this.getCurrentDate();
     this.setState({ date: today });
-    this.props.getProducts({
-      date: today,
-    });
+    // this.props.getProducts({
+    //   date: today,
+    // });
   }
 
   componentDidUpdate(prevProps, prevState) {

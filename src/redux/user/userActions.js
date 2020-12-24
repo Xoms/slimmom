@@ -23,6 +23,9 @@ const addProductRequest = createAction('user/addProduct');
 const addProductSuccess = createAction('user/addProduct');
 const addProductError = createAction('user/addProduct');
 
+const setCurrentDay = createAction('user/setCurrentDay');
+
+
 const actions = {
   getCurrentUserRequest,
   getCurrentUserSuccess,
@@ -39,6 +42,7 @@ const actions = {
   getProductsRequest,
   getProductsSuccess,
   getProductsError,
+  setCurrentDay,
 };
 
 export default actions;

@@ -21,9 +21,9 @@ const login = credentials => (dispatch) => {
         .then(({data}) => {
             api.setToken(data.accessToken);
     
-            const  { user: {username, id, userData}, accessToken } = data;
+            const  { user: {username, id, userData}, accessToken, sid } = data;
             
-            const userInfo = { auth: {accessToken}, user: {username, id, userData, eatenProducts : [], daySummary: {} } }
+            const userInfo = { auth: {accessToken, sid}, user: {username, id, userData, eatenProducts : [], daySummary: {} } }
             dispatch(authActions.loginSuccess(userInfo));
         })
         .catch( err => dispatch(authActions.loginError(err)));

@@ -10,7 +10,8 @@ const initialState = {
     notAllowedProducts: [],
   },
   eatenProducts: [],
-  daySummary: {}
+  daySummary: {},
+  
 };
 
 
@@ -28,7 +29,11 @@ const user = createReducer(initialState, {
   [userActions.getProductsSuccess]: (state, {payload}) => ({
     ...state,
     ...payload
+  }),
+  [userActions.setCurrentDay]: (state, {payload}) => ({
+    ...state, ...payload
   })
+
 });
 
 export default user;

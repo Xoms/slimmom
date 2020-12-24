@@ -23,7 +23,7 @@ const getCurrentUser = () => (dispatch, getState) => {
     .catch(err => dispatch(userActions.getCurrentUserError(err)));
 };
 
-const getDailyRate = userCharacteristics => dispatch => {
+const getDailyRate = (userCharacteristics, userId) => dispatch => {
   //   const token =
   //     'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI1ZmUxZGNiODVjMmJhNzAwMDQ0NDA5NjUiLCJzaWQiOiI1ZmUxZjdmNTVjMmJhNzAwMDQ0NDA5NmUiLCJpYXQiOjE2MDg2NDQ1OTcsImV4cCI6MTYwODY0ODE5N30.mynRviNExi5wDgG9Mhxc-mNUEw-0FNycFKYL1LoNiJs'; // надо поменять логику, пока захардкодили
 
@@ -31,7 +31,16 @@ const getDailyRate = userCharacteristics => dispatch => {
   //   api.setToken(token);
   dispatch(userActions.getCurrentUserRequest());
 
-  api.getDailyRate(userCharacteristics).then(({ data }) => {
+  api.getDailyRate(userCharacteristics, userId).then(({ data }) => {
+    
+    if (userId) {
+      console.log('with userId ===>', data);
+      const { summaries } = data;
+      const daySummary = {} 
+      return dispatch(userActions.getDailyRateSuccess(data));
+    }
+
+    console.log('without userId ===>', data);
     return dispatch(userActions.getDailyRateSuccess(data));
   });
 };

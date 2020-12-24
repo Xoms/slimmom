@@ -31,7 +31,10 @@ class PhonebookService {
     axios.defaults.headers.common.Authorization = ``;
   }
 
-  getDailyRate(userCharacteristics) {
+  getDailyRate(userCharacteristics, userId) {
+    if(userId) {
+      return axios.post(`/daily-rate/${userId}`, userCharacteristics);
+    } 
     return axios.post(`/daily-rate/`, userCharacteristics);
   }
 
