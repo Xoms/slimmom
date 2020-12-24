@@ -45,7 +45,7 @@ const refresh = sid => dispatch => {
     api.refresh(sid)
         .then(({data}) => {
             api.setToken(data.newAccessToken);
-            dispatch(authActions.refreshSuccess(data));
+            dispatch(authActions.refreshSuccess(data.newAccessToken));
         })
 }
 
