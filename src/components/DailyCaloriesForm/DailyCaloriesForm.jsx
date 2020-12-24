@@ -68,119 +68,121 @@ class DailyCaloriesForm extends Component {
         >
           {({ errors, touched }) => (
             <Form className={styles.DailyCaloriesForm}>
-              <div className={styles.DailyCaloriesFormFieldsWrappers}>
-                <div className={styles.DailyCaloriesFormFieldsWrapper}>
-                  <Field
-                    name="height"
-                    placeholder="Рост *"
-                    className={`${styles.DailyCaloriesFormInput} ${
-                      errors.height && touched.height ? styles.errorInput : ""
-                    }`}
-                  />
-                  <ErrorMessage
-                    name="height"
-                    component="p"
-                    className={styles.errorMessage}
-                  />
-                </div>
-                <div className={styles.DailyCaloriesFormFieldsWrapper}>
-                  <Field
-                    name="age"
-                    placeholder="Возраст *"
-                    className={`${styles.DailyCaloriesFormInput} ${
-                      errors.age && touched.age ? styles.errorInput : ""
-                    }`}
-                  />
-                  <ErrorMessage
-                    name="age"
-                    component="p"
-                    className={styles.errorMessage}
-                  />
-                </div>
-                <div className={styles.DailyCaloriesFormFieldsWrapper}>
-                  <Field
-                    name="weight"
-                    placeholder="Текущий вес *"
-                    className={`${styles.DailyCaloriesFormInput} ${
-                      errors.weight && touched.weight ? styles.errorInput : ""
-                    }`}
-                  />
-                  <ErrorMessage
-                    name="weight"
-                    component="p"
-                    className={styles.errorMessage}
-                  />
-                </div>
-              </div>
-              <div>
-                <div className={styles.DailyCaloriesFormFieldsWrapper}>
-                  <Field
-                    name="desiredWeight"
-                    placeholder="Желаемый вес *"
-                    className={`${styles.DailyCaloriesFormInput} ${
-                      errors.desiredWeight && touched.desiredWeight
-                        ? styles.errorInput
-                        : ""
-                    }`}
-                  />
-                  <ErrorMessage
-                    name="desiredWeight"
-                    component="p"
-                    className={styles.errorMessage}
-                  />
-                </div>
-                <div className={styles.DailyCaloriesFormBloodWrapper}>
-                  <h3 className={styles.DailyCaloriesFormBloodTitle}>
-                    Группа крови *
-                  </h3>
-                  <label
-                    htmlFor="bloodType_1"
-                    className={styles.DailyCaloriesFormLabel}
-                  >
+              <div className={styles.DailyCaloriesFormFirstWrapper}>
+                <div className={styles.DailyCaloriesFormFieldsWrappers}>
+                  <div className={styles.DailyCaloriesFormFieldsWrapper}>
                     <Field
-                      type="radio"
-                      name="bloodType"
-                      value="1"
-                      className={styles.DailyCaloriesLabelField}
+                      name="height"
+                      placeholder="Рост *"
+                      className={`${styles.DailyCaloriesFormInput} ${
+                        errors.height && touched.height ? styles.errorInput : ""
+                      }`}
                     />
-                    1
-                  </label>
-                  <label
-                    htmlFor="bloodType_2"
-                    className={styles.DailyCaloriesFormLabel}
-                  >
+                    <ErrorMessage
+                      name="height"
+                      component="p"
+                      className={styles.errorMessage}
+                    />
+                  </div>
+                  <div className={styles.DailyCaloriesFormFieldsWrapper}>
                     <Field
-                      type="radio"
-                      name="bloodType"
-                      value="2"
-                      className={styles.DailyCaloriesLabelField}
+                      name="age"
+                      placeholder="Возраст *"
+                      className={`${styles.DailyCaloriesFormInput} ${
+                        errors.age && touched.age ? styles.errorInput : ""
+                      }`}
                     />
-                    2
-                  </label>
-                  <label
-                    htmlFor="bloodType_3"
-                    className={styles.DailyCaloriesFormLabel}
-                  >
+                    <ErrorMessage
+                      name="age"
+                      component="p"
+                      className={styles.errorMessage}
+                    />
+                  </div>
+                  <div className={styles.DailyCaloriesFormFieldsWrapper}>
                     <Field
-                      type="radio"
-                      name="bloodType"
-                      value="3"
-                      className={styles.DailyCaloriesLabelField}
+                      name="weight"
+                      placeholder="Текущий вес *"
+                      className={`${styles.DailyCaloriesFormInput} ${
+                        errors.weight && touched.weight ? styles.errorInput : ""
+                      }`}
                     />
-                    3
-                  </label>
-                  <label
-                    htmlFor="bloodType_4"
-                    className={styles.DailyCaloriesFormLabel}
-                  >
+                    <ErrorMessage
+                      name="weight"
+                      component="p"
+                      className={styles.errorMessage}
+                    />
+                  </div>
+                </div>
+                <div>
+                  <div className={styles.DailyCaloriesFormFieldsWrapper}>
                     <Field
-                      type="radio"
-                      name="bloodType"
-                      value="4"
-                      className={styles.DailyCaloriesLabelField}
+                      name="desiredWeight"
+                      placeholder="Желаемый вес *"
+                      className={`${styles.DailyCaloriesFormInput} ${
+                        errors.desiredWeight && touched.desiredWeight
+                          ? styles.errorInput
+                          : ""
+                      }`}
                     />
-                    4
-                  </label>
+                    <ErrorMessage
+                      name="desiredWeight"
+                      component="p"
+                      className={styles.errorMessage}
+                    />
+                  </div>
+                  <div className={styles.DailyCaloriesFormBloodWrapper}>
+                    <h3 className={styles.DailyCaloriesFormBloodTitle}>
+                      Группа крови *
+                    </h3>
+                    <label
+                      htmlFor="bloodType_1"
+                      className={styles.DailyCaloriesFormLabel}
+                    >
+                      <Field
+                        type="radio"
+                        name="bloodType"
+                        value="1"
+                        className={styles.DailyCaloriesLabelField}
+                      />
+                      1
+                    </label>
+                    <label
+                      htmlFor="bloodType_2"
+                      className={styles.DailyCaloriesFormLabel}
+                    >
+                      <Field
+                        type="radio"
+                        name="bloodType"
+                        value="2"
+                        className={styles.DailyCaloriesLabelField}
+                      />
+                      2
+                    </label>
+                    <label
+                      htmlFor="bloodType_3"
+                      className={styles.DailyCaloriesFormLabel}
+                    >
+                      <Field
+                        type="radio"
+                        name="bloodType"
+                        value="3"
+                        className={styles.DailyCaloriesLabelField}
+                      />
+                      3
+                    </label>
+                    <label
+                      htmlFor="bloodType_4"
+                      className={styles.DailyCaloriesFormLabel}
+                    >
+                      <Field
+                        type="radio"
+                        name="bloodType"
+                        value="4"
+                        className={styles.DailyCaloriesLabelField}
+                      />
+                      4
+                    </label>
+                  </div>
                 </div>
               </div>
               <Button

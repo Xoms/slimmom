@@ -18,12 +18,12 @@ const {
   getCurrentUserRequest,
   getCurrentUserSuccess,
   getCurrentUserError,
-  getProductsRequest,
-  getProductsSuccess,
-  getProductsError,
   getDailyRateRequest,
   getDailyRateSuccess,
   getDailyRateError,
+  getProductsRequest,
+  getProductsSuccess,
+  getProductsError,
 } = userActions;
 
 const error = createReducer(null, {
@@ -34,6 +34,7 @@ const error = createReducer(null, {
   [getProductsError]: (state, { payload }) => payload.message,
   [clearError]: () => null,
   [getDailyRateError]: (state, { payload }) => payload.message,
+  [clearError]: () => null,
 });
 
 const loading = createReducer(false, {

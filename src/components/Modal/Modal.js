@@ -5,7 +5,7 @@ import Button from "../shared/Button";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import dailyRateSelector from "../../redux/user/userSelectors";
-import { getDailyRate } from "../../redux/user/userOperations";
+import IconClose from "../shared/IconClose/IconClose";
 
 class Modal extends Component {
   static propTypes = {
@@ -38,7 +38,7 @@ class Modal extends Component {
             type="button"
             onClick={this.props.toggleModal}
           >
-            X
+            <IconClose />
           </button>
           <div className={styles.wrapper}>
             <p className={styles.title}>
@@ -54,7 +54,7 @@ class Modal extends Component {
               <p className={styles.productsTitle}>
                 Продукты, которые вам не рекомендуется употреблять
               </p>
-              <ol className={styles.productsList}>
+              <ol className={`${styles.productsList} ${styles.scrollbar}`}>
                 {this.props.products &&
                   this.props.products.map((product, id) => (
                     <li key={id} className={styles.productsItem}>
@@ -62,7 +62,7 @@ class Modal extends Component {
                     </li>
                   ))}
               </ol>
-              <Button>
+              <Button className={`primary-button ${styles.modalButton}`}>
                 <NavLink to="/register" className={styles.buttonLink}>
                   Начать худеть
                 </NavLink>

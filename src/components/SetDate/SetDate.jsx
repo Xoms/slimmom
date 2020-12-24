@@ -33,8 +33,8 @@ class SetDate extends Component {
         outputValue: `${day}.${month}.${year}`,
       };
     });
-    console.log(`${day}-${month}-${year}`);
-    this.props.value(`${day}-${month}-${year}`);
+    // console.log(`${year}-${month}-${day}`);
+    this.props.value(`${year}-${month}-${day}`);
   };
 
   componentDidMount(){

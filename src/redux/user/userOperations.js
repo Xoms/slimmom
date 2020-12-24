@@ -3,7 +3,9 @@ import userActions from './userActions';
 import api from '../../services/backend.service';
 
 const getCurrentUser = () => (dispatch, getState) => {
-   const {auth: {accessToken}} = getState();
+  const {
+    auth: { accessToken },
+  } = getState();
 
   if (!accessToken) return;
 
@@ -14,8 +16,8 @@ const getCurrentUser = () => (dispatch, getState) => {
   api
     .getCurrentUser()
     .then(({ data }) => {
-      const  { username, id, userData } = data;
-      const userInfo = { username, id, userData,  };
+      const { username, id, userData } = data;
+      const userInfo = { username, id, userData };
       dispatch(userActions.getCurrentUserSuccess(userInfo));
     })
     .catch(err => dispatch(userActions.getCurrentUserError(err)));
@@ -35,16 +37,24 @@ const getDailyRate = userCharacteristics => dispatch => {
 };
 
 const deleteEatenProduct = () => dispatch => {
-
   dispatch(userActions.deleteEatenProductRequest());
-  api.deleteEatenProduct().then(({data}) => {
-       return dispatch(userActions.deleteEatenProductSuccess(data));
-  })
+  api
+    .deleteEatenProduct()
+    .then(({ data }) => {
+      return dispatch(userActions.deleteEatenProductSuccess(data));
+    })
     .catch(err => dispatch(userActions.deleteEatenProductError(err)));
 };
 
-const getProducts = (date) => (dispatch, getState) => {
+const addProduct = product => dispatch => {
+  dispatch(userActions.addProductRequest());
 
+  api
+    .addProduct(product)
+    .then(({ data }) => console.log(data))
+    .catch(err => dispatch(userActions.addProductError(err)));
+};
+const getProducts = date => (dispatch, getState) => {
   const {
     auth: { accessToken },
   } = getState();
@@ -61,7 +71,7 @@ const getProducts = (date) => (dispatch, getState) => {
       dispatch(userActions.getProductsSuccess(data));
     })
     .catch(err => dispatch(userActions.getProductsError(err)));
-}
+};
 
 export { getCurrentUser, getDailyRate, deleteEatenProduct, getProducts };
 

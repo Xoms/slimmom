@@ -13,6 +13,10 @@
 .container {
   padding: 0;
 }
+.modalButton {
+  display: block;
+  margin: 0 auto;
+}
 .button {
   padding: 13px 0;
   margin: 0 auto;
@@ -63,7 +67,9 @@
   color: $main-text;
 }
 .productsList {
-  overflow-y: scroll;
+  overscroll-behavior: contain;
+  overflow-y: auto;
+  overflow-x: hidden;
   height: 100px;
   font-size: 14px;
   line-height: 17px;
@@ -154,7 +160,35 @@
   height: 30px;
   background-color: $main-background;
   border: 1px solid rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 .closeModalBtn:hover {
   background-color: rgba(37, 37, 37, 0.12);
+}
+
+// Scroll-bar customisation
+
+.scrollbar {
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  scrollbar-width: thin;
+  scrollbar-color: $burger-background $secondary-beckground;
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.scrollbar::-webkit-scrollbar-track {
+  background-color: $secondary-beckground;
+}
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: $burger-background;
+  border-radius: 0px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb:vertical {
+  min-height: 1.5rem;
+}
+.scrollbar::-webkit-scrollbar-thumb:horizontal {
+  min-width: 1.5rem;
 }
