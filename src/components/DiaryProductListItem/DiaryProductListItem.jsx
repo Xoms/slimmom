@@ -1,7 +1,10 @@
-import { connect } from 'react-redux';
-import React from 'react';
-import styles from './DiaryProductListItem.module.scss';
-import { deleteEatenProduct } from '../../redux/user/userOperations';
+import { connect } from "react-redux";
+import React from "react";
+import styles from "./DiaryProductListItem.module.scss";
+import { deleteEatenProduct } from "../../redux/user/userOperations";
+import IconClose from "../shared/IconClose/IconClose";
+
+// ПОПРАВИТЬ ВЫРАВНИВАНИЕ КНОПКИ
 
 const DiaryProductListItem = ({
   name,
@@ -23,7 +26,7 @@ const DiaryProductListItem = ({
         className={styles.listButton}
         onClick={() => deleteProduct({ dayId, productId })}
       >
-        x
+        <IconClose />
       </button>
     </li>
   );
