@@ -12,16 +12,16 @@ const accessToken = createReducer(null, {
 //     [authActions.logoutSuccess]: () => null
 // })
 
-// const sid = createReducer(null, {
-//     [authActions.refreshSuccess]: (state, { payload }) => payload.sid,
-//     [authActions.loginSuccess]: (state, { payload }) => payload.sid,
-//     [authActions.logoutSuccess]: () => null
-// })
+const sid = createReducer(null, {
+    [authActions.refreshSuccess]: (state, { payload }) => payload.sid,
+    [authActions.loginSuccess]: (state, { payload }) => payload.sid,
+    [authActions.logoutSuccess]: () => null
+})
 
 const authReducer = combineReducers({
     accessToken,
     // refreshToken,
-    // sid
+    sid
 })
 
 export default authReducer

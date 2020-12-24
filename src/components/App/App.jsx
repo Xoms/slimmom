@@ -1,7 +1,11 @@
 import React, { Component, Suspense, lazy } from 'react';
 import { Route, Switch } from 'react-router-dom';
+
 import { connect } from 'react-redux';
 import { getCurrentUser } from '../../redux/user/userOperations';
+import {authOperations, authSelectors} from '../../redux/auth';
+import globalSelectors from '../../redux/global/globalSelectors';
+
 import routes from '../../routes';
 import PublicRoute from '../PublicRoute/PublicRoute';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
@@ -13,10 +17,14 @@ import Layout from '../Layout';
 import './App.scss';
 
 class App extends Component {
+
   componentDidMount() {
     this.props.getCurrentUser();
   }
+
   render() {
+    
+    
     const routesMap = routes.map(route => {
       return route.privated ? (
         <PrivateRoute key={route.path} {...route} />
@@ -42,8 +50,13 @@ App.propTypes = {
   // bla: PropTypes.string,
 };
 
+const mapStateToProps = (state) => ({
+  authError : globalSelectors.getError(state),
+  sid : authSelectors.sid(state) 
+})
 const mapDispatch = {
   getCurrentUser,
+  refreshToken: authOperations.refresh
 };
 
-export default connect(null, mapDispatch)(App);
+export default connect(mapStateToProps, mapDispatch)(App);

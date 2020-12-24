@@ -16,6 +16,7 @@ const initialState = {
 
 
 const user = createReducer(initialState, {
+  [authActions.loginSuccess]: (state, { payload }) => ({...state, ...payload}),
   [authActions.loginSuccess]: (state, { payload }) => payload.user,
   [userActions.getCurrentUserSuccess]: (state, { payload }) => ({...state, ...payload}),
 
@@ -26,7 +27,7 @@ const user = createReducer(initialState, {
   }),
   [userActions.getProductsSuccess]: (state, {payload}) => ({
     ...state,
-    daySummary: payload
+    ...payload
   })
 });
 
