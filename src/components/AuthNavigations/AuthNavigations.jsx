@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 import styles from './AuthNavigations.module.scss';
 import { NavLink } from 'react-router-dom';
 
