@@ -1,32 +1,34 @@
-import { connect } from "formik";
+import { connect } from "react-redux";
 import React from "react";
 import styles from "./DiaryProductListItem.module.scss";
 import {deleteEatenProduct} from "../../redux/user/userOperations";
-import close from "./image/close.svg";
+import IconClose from "../shared/IconClose/IconClose";
 
-
-const DiaryProductListItem = ({ title, ccal, weight, dayId, productId, deleteProduct }) => {
-
-    
-return (
-  <li className={styles.list}>
-  <span className={styles.listName}>{title}</span>
-  <span className={styles.listWeight}>{weight} г</span>
-  <span className={styles.listCalories}>{ccal} ккал</span>
+const DiaryProductListItem = ({
+  name,
+  cal,
+  weight,
+  dayId,
+  productId,
+  deleteProduct,
+}) => {
+  return (
+    <li className={styles.list}>
+      <span className={styles.listName}>{name}</span>
+      <span className={styles.listWeight}>{weight} г</span>
+      <span className={styles.listCalories}>
+        {cal} <span className={styles.ccal}>ккал</span>
+      </span>
 
   <button className={styles.listButton} onClick={() => deleteProduct({dayId, productId})}>
-  src={close}
-          alt="close menu"
-          aria-label="close menu"
-          className={styles.img}
-        />
-      </button>
+<IconClose/>
+  </button>
     </li>
   );
 };
 
 const mapDispatchToProps = {
-deleteProduct: deleteEatenProduct,
-}
+  deleteProduct: deleteEatenProduct,
+};
 
 export default connect(null, mapDispatchToProps)(DiaryProductListItem);
