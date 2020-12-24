@@ -29,15 +29,9 @@ const routes = [
     label: "Дневник",
     path: "/diary",
     exact: true,
-<<<<<<< HEAD
-    component: lazy(() => import('./pages/DiaryPage')),
-    privated: false, //поменять на true
-    restricted: true,
-=======
     component: lazy(() => import("./pages/DiaryPage")),
     privated: true, //поменять на true
     restricted: false,
->>>>>>> e46805865f26c87b35aee75a0aaf4f5f40b0e776
   },
   {
     label: "Калькулятор",
