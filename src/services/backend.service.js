@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'https://slimmom-backend.herokuapp.com/';
+const url = 'https://slimmom-backend.goit.global/' //'https://slimmom-backend.herokuapp.com/';
 
 axios.defaults.baseURL = url;
 
