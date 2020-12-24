@@ -7,16 +7,6 @@ section.decoration {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  // background-color: ghostwhite;
-  //!dec-container ----------------------------------
-  // .dec-container{
-  //   position: relative;
-  //   margin: 0 auto;
-  //   @media screen and (min-width: 1100px){
-  //     width: 1050px;
-  //   }
-  //   height: 100vh;
-  // }
   //!dec-spot ----------------------------------
   .dec-spot {
     display: none;
@@ -109,22 +99,11 @@ section.decoration {
 //? ======================LOGN PAGE =================================
 section.decoration-login {
   position: absolute;
+  top: 0;
   z-index: -1000;
   width: 100vw;
   height: 100%;
   overflow: hidden;
-
-  // background-color: ghostwhite;
-
-  //?dec-container ----------------------------------
-  // .dec-container{
-  //   position: relative;
-  //   margin: 0 auto;
-  //   @media screen and (min-width: 1100px){
-  //     width: 1050px;
-  //   }
-  //   height: 100vh;
-  // }
   //?dec-spot ----------------------------------
   .dec-spot {
     display: none;
@@ -208,5 +187,58 @@ section.decoration-login {
       height: 552px;
       background-image: url("../img/banana@1x.png");
     }
+  }
+}
+//todo ======================CALCULATION PAGE =================================
+@media screen and (min-width: 650px) {
+  section.decoration-calculation {
+    position: absolute;
+    top: 0;
+    z-index: -1000;
+    width: 100vw;
+    height: 200vh;
+    overflow: hidden;
+    background: linear-gradient(
+      180deg,
+      #fff,
+      #fff 674px,
+      $secondary-beckground 674px,
+      $secondary-beckground 100%
+    );
+  }
+  // .dec-leaves {
+  //   width: 505px;
+  //   height: 777px;
+  //   position: absolute;
+  //   top: 35px;
+  //   right: 0px;
+  //   background-image: url('../img/rightSideBar@1x.png');
+  //   background-repeat: no-repeat;
+  // }
+}
+@media screen and (min-width: 1100px) {
+  section.decoration-calculation {
+    position: absolute;
+    top: 0;
+    z-index: -1000;
+    width: 100vw;
+    height: 200vh;
+    overflow: hidden;
+    background: linear-gradient(
+      90deg,
+      #fff,
+      #fff 58%,
+      $secondary-beckground 58%,
+      $secondary-beckground 100%
+    );
+  }
+  .dec-leaves {
+    width: 505px;
+    height: 777px;
+    position: absolute;
+    top: 35px;
+    right: 0px;
+    background-image: url('../img/rightSideBar@1x.png');
+    background-repeat: no-repeat;
   }
 }
