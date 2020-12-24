@@ -1,7 +1,7 @@
 import authActions from './authActions';
 import api from '../../services/backend.service';
 
-const register = credentials => dispatch => {
+const register = (credentials, history) => dispatch => {
     
     dispatch(authActions.registerRequest());
 
@@ -9,6 +9,7 @@ const register = credentials => dispatch => {
         .then(({data}) => {
             dispatch(authActions.registerSuccess(data));
         })
+        .then(() => history.push('/login'))
         .catch( err => dispatch(authActions.loginError(err)));
 }
 
