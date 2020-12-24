@@ -19,9 +19,9 @@ const getProductsRequest = createAction('user/getProductsRequest');
 const getProductsSuccess = createAction('user/getProductsSuccess');
 const getProductsError = createAction('user/getProductsError');
 
-const addProductRequest = createAction('user/addProduct');
-const addProductSuccess = createAction('user/addProduct');
-const addProductError = createAction('user/addProduct');
+const addProductRequest = createAction('user/addProductRequest');
+const addProductSuccess = createAction('user/addProductSuccess');
+const addProductError = createAction('user/addProductError');
 
 const setCurrentDay = createAction('user/setCurrentDay');
 

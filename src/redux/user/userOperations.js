@@ -45,24 +45,28 @@ const getDailyRate = (userCharacteristics, userId) => dispatch => {
   });
 };
 
-const deleteEatenProduct = () => dispatch => {
+const deleteEatenProduct = product => dispatch => {
   dispatch(userActions.deleteEatenProductRequest());
+  console.log(product);
   api
-    .deleteEatenProduct()
+    .deleteEatenProduct(product)
     .then(({ data }) => {
-      return dispatch(userActions.deleteEatenProductSuccess(data));
+      console.log(data);
+      return dispatch(
+        userActions.deleteEatenProductSuccess(data.newDaySummary),
+      );
     })
     .catch(err => dispatch(userActions.deleteEatenProductError(err)));
 };
 
-// const addProduct = product => dispatch => {
-//   dispatch(userActions.addProductRequest());
+const addProduct = product => dispatch => {
+  dispatch(userActions.addProductRequest());
 
-//   api
-//     .addProduct(product)
-//     .then(({ data }) => console.log(data))
-//     .catch(err => dispatch(userActions.addProductError(err)));
-// };
+  api
+    .addProduct(product)
+    .then(({ data }) => dispatch(userActions.addProductSuccess(data.day)))
+    .catch(err => dispatch(userActions.addProductError(err)));
+};
 
 // {
 //   "date": "2020-12-31",
@@ -86,18 +90,24 @@ const getProducts = date => (dispatch, getState) => {
     .then(({ data }) => {
       console.log(data);
       let payload = {};
-      if(data.daySummary) {
-        const {daySummary, eatenProducts} = data;
-        payload = {daySummary, eatenProducts}
+      if (data.daySummary) {
+        const { daySummary, eatenProducts, id } = data;
+        payload = { daySummary, eatenProducts, currentDayId: id };
       } else {
-        payload.daySummary = {...data}
+        payload.daySummary = { ...data };
       }
       dispatch(userActions.getProductsSuccess(payload));
     })
     .catch(err => dispatch(userActions.getProductsError(err)));
 };
 
-export { getCurrentUser, getDailyRate, deleteEatenProduct, getProducts };
+export {
+  getCurrentUser,
+  getDailyRate,
+  addProduct,
+  deleteEatenProduct,
+  getProducts,
+};
 
 // dailyRate: 1351.5
 // kcalConsumed: 0
