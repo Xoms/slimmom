@@ -5,6 +5,8 @@ import back from '../../img/back-arrow.svg';
 import api from '../../services/backend.service';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import debounce from 'lodash.debounce';
+import { connect } from 'react-redux';
+import { addProduct } from '../../redux/user/userOperations';
 
 class DiaryAddProductForm extends Component {
   state = {
@@ -48,10 +50,12 @@ class DiaryAddProductForm extends Component {
       weight: weight,
     };
 
-    api
-      .addProduct(product)
-      .then(data => console.log(data))
-      .catch(err => this.setState({ error: err.message }));
+    this.props.addProduct(product);
+
+    // api
+    //   .addProduct(product)
+    //   .then(data => console.log(data))
+    //   .catch(err => this.setState({ error: err.message }));
   };
 
   render() {
@@ -162,4 +166,8 @@ class DiaryAddProductForm extends Component {
   }
 }
 
-export default DiaryAddProductForm;
+const mapDispatchToProps = {
+  addProduct,
+};
+
+export default connect(null, mapDispatchToProps)(DiaryAddProductForm);
