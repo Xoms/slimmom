@@ -16,15 +16,19 @@ section.decoration {
   // }
   //!dec-spot ----------------------------------
   .dec-spot {
-    position: absolute;
-    background-repeat: no-repeat;
-    bottom: -187px;
-    right: -32px;
-    width: 553px;
-    height: 750px;
-    background-image: url("../img/spot-tablet.png");
+    display: none;
+    @media screen and (min-width: 650px) {
+      display: block;
+      position: absolute;
+      background-repeat: no-repeat;
+      top: 461px;
+      right: -32px;
+      width: 553px;
+      height: 750px;
+      background-image: url("../img/spot-tablet.png");
+    }
     @media screen and (min-width: 1100px) {
-      bottom: 0;
+      top: 34px;
       right: 0;
       width: 603px;
       height: 816px;
@@ -33,16 +37,20 @@ section.decoration {
   }
   //!dec-strawberry ----------------------------------
   .dec-strawberry {
-    position: absolute;
-    background-repeat: no-repeat;
-    background-size: contain;
-    bottom: 204px;
-    right: 68px;
-    width: 265px;
-    height: 273px;
-    background-image: url("../img/strawberry@1x.png");
+    display: none;
+    @media screen and (min-width: 650px) {
+      display: block;
+      position: absolute;
+      background-repeat: no-repeat;
+      background-size: contain;
+      top: 547px;
+      right: 68px;
+      width: 265px;
+      height: 273px;
+      background-image: url("../img/strawberry@1x.png");
+    }
     @media screen and (min-width: 1100px) {
-      bottom: 30px;
+      top: 458px;
       right: 2px;
       width: 362px;
       height: 374px;
@@ -51,15 +59,19 @@ section.decoration {
   }
   //!dec-leaves ----------------------------------
   .dec-leaves {
-    position: absolute;
-    background-repeat: no-repeat;
-    background-size: contain;
-    left: 0px;
-    bottom: -35px;
-    width: 531px;
-    height: 602px;
-    transform: rotate(90deg);
-    background-image: url("../img/leaves@1x.png");
+    display: none;
+    @media screen and (min-width: 650px) {
+      display: block;
+      position: absolute;
+      background-repeat: no-repeat;
+      background-size: contain;
+      right: 215px;
+      top: 455px;
+      width: 531px;
+      height: 602px;
+      transform: rotate(90deg);
+      background-image: url("../img/leaves@1x.png");
+    }
     @media screen and (min-width: 1100px) {
       top: -26px;
       right: 195px;
@@ -71,13 +83,17 @@ section.decoration {
   }
   //!dec-banana ----------------------------------
   .dec-banana {
-    position: absolute;
-    background-repeat: no-repeat;
-    bottom: -96px;
-    right: -249px;
-    width: 740px;
-    height: 527px;
-    background-image: url("../img/banana@1x.png");
+    display: none;
+    @media screen and (min-width: 650px) {
+      display: block;
+      position: absolute;
+      background-repeat: no-repeat;
+      top: 593px;
+      right: -249px;
+      width: 740px;
+      height: 527px;
+      background-image: url("../img/banana@1x.png");
+    }
     @media screen and (min-width: 1100px) {
       top: -102px;
       right: -287px;
@@ -108,15 +124,19 @@ section.decoration-login {
   // }
   //?dec-spot ----------------------------------
   .dec-spot {
-    position: absolute;
-    background-repeat: no-repeat;
-    bottom: -187px;
-    right: -32px;
-    width: 553px;
-    height: 750px;
-    background-image: url("../img/spot-tablet.png");
+    display: none;
+    @media screen and (min-width: 650px) {
+      display: block;
+      position: absolute;
+      background-repeat: no-repeat;
+      top: 461px;
+      right: -32px;
+      width: 553px;
+      height: 750px;
+      background-image: url("../img/spot-tablet.png");
+    }
     @media screen and (min-width: 1100px) {
-      bottom: 0px;
+      top: 0px;
       right: 0px;
       width: 715px;
       height: 849px;
@@ -125,13 +145,17 @@ section.decoration-login {
   }
   //?dec-strawberry ----------------------------------
   .dec-strawberry {
-    position: absolute;
-    background-repeat: no-repeat;
-    bottom: 230px;
-    right: -66px;
-    width: 370px;
-    height: 382px;
-    background-image: url("../img/strawberry@1x.png");
+    display: none;
+    @media screen and (min-width: 650px) {
+      display: block;
+      position: absolute;
+      background-repeat: no-repeat;
+      top: 412px;
+      right: -66px;
+      width: 370px;
+      height: 382px;
+      background-image: url("../img/strawberry@1x.png");
+    }
     @media screen and (min-width: 1100px) {
       top: 165px;
       right: 27px;
@@ -142,14 +166,18 @@ section.decoration-login {
   }
   //?dec-leaves ----------------------------------
   .dec-leaves {
-    position: absolute;
-    background-repeat: no-repeat;
-    top: -97px;
-    left: 16px;
-    width: 740px;
-    height: 842px;
-    background-image: url("../img/leaves-login-tablet@1x.png");
-    @media screen and (min-width: 1100px){
+    display: none;
+    @media screen and (min-width: 650px) {
+      display: block;
+      position: absolute;
+      background-repeat: no-repeat;
+      top: -97px;
+      right: 12px;
+      width: 740px;
+      height: 842px;
+      background-image: url("../img/leaves-login-tablet@1x.png");
+    }
+    @media screen and (min-width: 1100px) {
       top: -26px;
       right: 250px;
       width: 746px;
@@ -159,15 +187,19 @@ section.decoration-login {
   }
   //?dec-banana ----------------------------------
   .dec-banana {
-    position: absolute;
-    background-repeat: no-repeat;
-    bottom: -96px;
-    right: -249px;
-    width: 740px;
-    height: 527px;
-    background-image: url("../img/banana@1x.png");
-    @media screen and (min-width: 1100px){
-      bottom: -42px;
+    display: none;
+    @media screen and (min-width: 650px) {
+      display: block;
+      position: absolute;
+      background-repeat: no-repeat;
+      top: 593px;
+      right: -249px;
+      width: 740px;
+      height: 527px;
+      background-image: url("../img/banana@1x.png");
+    }
+    @media screen and (min-width: 1100px) {
+      top: 366px;
       right: -204px;
       width: 773px;
       height: 552px;
@@ -175,4 +207,3 @@ section.decoration-login {
     }
   }
 }
-
