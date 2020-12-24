@@ -1,8 +1,21 @@
-import React from 'react';
+import React, { Fragment } from "react";
 // import PropTypes from 'prop-types';
-import DailyCaloriesForm from '../../components/DailyCaloriesForm';
+import DailyCaloriesForm from "../../components/DailyCaloriesForm";
+import Decoration from '../../components/Decoration';
 
-const HomePage = () => <DailyCaloriesForm />;
+//styles
+// import styles from "./HomePage.module.scss";
+
+const HomePage = () => {
+  return (
+    <Fragment>
+      <Decoration/>
+      <section className='container'>
+        <DailyCaloriesForm />
+      </section>
+    </Fragment>
+  );
+};
 
 HomePage.propTypes = {
   // bla: PropTypes.string,
