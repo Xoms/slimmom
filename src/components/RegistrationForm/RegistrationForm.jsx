@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Button from '../shared/Button/Button';
 import ops from '../../redux/auth/authOperations';
 import {connect} from 'react-redux';
-import './RegistrationForm.scss';
+import css from './RegistrationForm.module.scss';
 import Notification from "../shared/Notification/Notification";
 import {Formik, Form, Field, ErrorMessage} from "formik";
 import * as Yup from "yup";
@@ -10,9 +10,9 @@ import {authActions} from "../../redux/auth"
 import globalSelectors from "../../redux/global/globalSelectors"
 
 const RegisterSchema = Yup.object().shape({
-    username: Yup.string().min(2, "Too short!").max(50, "Too long!").required("Required!"),
-    email: Yup.string().min(2, "Too short!").max(50, "Too long!").required("Required!"),
-    password: Yup.string().required("Required!").min(8, "Too short!"),
+    username: Yup.string().min(2, "Too short!").max(50, "Too long!").required("Обязательное поле *"),
+    email: Yup.string().min(2, "Too short!").max(50, "Too long!").required("Обязательное поле *"),
+    password: Yup.string().required("Обязательное поле *").min(8, "Too short!"),
 });
 
 class RegistrationForm extends Component {
@@ -37,28 +37,52 @@ class RegistrationForm extends Component {
         return (
             <>
                 <Notification error={Boolean(this.props.error)} message="Пользователь с такими данными уже существует"></Notification>
-                <Formik initialValues={{email: "", password: "", username: ""}} onSubmit={this.handleSubmit} validationSchema={RegisterSchema}>
-                <Form className="registration-form">
+                <Formik 
+                initialValues={{email: "", password: "", username: ""}} 
+                onSubmit={this.handleSubmit} 
+                validationSchema={RegisterSchema}>
+                     {({ errors, touched }) => (
+                <Form className={css.registrationForm}>
                     <h1>РЕГИСТРАЦИЯ</h1>
-                    <div className="registration-inputs">
-                        <label className="formLabel">
-                            <Field className="input" type="text" name="username" placeholder="Имя *"/>
-                            <ErrorMessage className='validField' name="username" component="span" />
+                    <div className={css.registrationInputs}>
+                        <label className={css.formLabel}>
+                            <Field className={`${css.inputField} ${errors.username && touched.username ? css.errorInput : ""}`} 
+                            type="text" 
+                            name="username" 
+                            placeholder="Имя *"/>
+                            <ErrorMessage 
+                            className={css.validField} 
+                            name="username" 
+                            component="span" />
                         </label>
-                        <label className="formLabel">
-                            <Field className="input" type="email" name="email" placeholder="E-mail *"/>
-                            <ErrorMessage className='validField' name="email" component="span" />
+                        <label className={css.formLabel}>
+                            <Field className={`${css.inputField} ${errors.email && touched.email ? css.errorInput : ""}`} 
+                            type="email" 
+                            name="email" 
+                            placeholder="E-mail *"/>
+                            <ErrorMessage 
+                            className={css.validField} 
+                            name="email" 
+                            component="span" />
                         </label>
-                        <label className="formLabel">
-                            <Field className="input" type="password" name="password" placeholder="Пароль *"/>
-                            <ErrorMessage className='validField' name="password" component="span" />
+                        <label className={css.formLabel}>
+                            <Field 
+                            className={`${css.inputField} ${errors.password && touched.password ? css.errorInput : ""}`} 
+                            type="password" 
+                            name="password" 
+                            placeholder="Пароль *"/>
+                            <ErrorMessage 
+                            className={css.validField} 
+                            name="password" 
+                            component="span" />
                         </label>
                     </div>
-                    <div className="registration-buttons">
+                    <div className={css.registrationButtons}>
                         <Button clickHandler={this.handleClick} >Вход</Button>
                         <Button type="submit" className="secondary-button">Регистрация</Button>
                     </div>
                 </Form>
+                )}
                 </Formik>
             </>
         )

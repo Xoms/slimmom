@@ -9,8 +9,8 @@ import Button from "../shared/Button"
 import css from "./LoginForm.module.scss"
 
 const SignupSchema = Yup.object().shape({
-  email: Yup.string().min(2, "Минимум два символа!").max(50, "Превышен лимит символов").required("Обязательное поле *"),
-  password: Yup.string().required("Обязательное поле *").min(8, "Минимум два символа!"),
+  email: Yup.string().min(2, "Некорректная длинна поля").max(50, "Превышен лимит символов").required("Обязательное поле *"),
+  password: Yup.string().required("Обязательное поле *").min(8, "Некорректная длинна поля"),
 })
 
 const LoginForm = (props) => {
@@ -32,16 +32,28 @@ const LoginForm = (props) => {
       <div className={css.loginPage}>
         <h2 className={css.loginTitle}>Вход</h2>
 
-        <Formik initialValues={{email: "", password: ""}} onSubmit={handleSubmit} validationSchema={SignupSchema}>
+        <Formik 
+        initialValues={{email: "", password: ""}} 
+        onSubmit={handleSubmit} 
+        validationSchema={SignupSchema}>
+          {({ errors, touched }) => (
           <Form className={css.loginForm}>
             <label className={css.formLabel}>
-              <Field className={css.login} type="email" name="email" placeholder="Логин *" />
+              <Field className={`${css.login} ${errors.email && touched.email ? css.errorInput : ""}`} 
+              type="email" name="email" placeholder="Логин *" />
               <ErrorMessage className={css.validField} name="email" component="span" />
             </label>
 
             <label className={css.formLabel}>
-              <Field className={css.password} type="password" name="password" placeholder="Пароль *" />
-              <ErrorMessage className={css.validField} name="password" component="span" />
+              <Field 
+              className={`${css.password} ${errors.password && touched.password ? css.errorInput : ""}`} 
+              type="password" 
+              name="password" 
+              placeholder="Пароль *" />
+              <ErrorMessage 
+              className={css.validField} 
+              name="password" 
+              component="span" />
             </label>
 
             <div className={css.buttons}>
@@ -51,6 +63,7 @@ const LoginForm = (props) => {
               </Button>
             </div>
           </Form>
+          )}
         </Formik>
       </div>
     </>
