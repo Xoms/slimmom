@@ -1,8 +1,10 @@
 import { connect } from "react-redux";
 import React from "react";
 import styles from "./DiaryProductListItem.module.scss";
-import {deleteEatenProduct} from "../../redux/user/userOperations";
+import { deleteEatenProduct } from "../../redux/user/userOperations";
 import IconClose from "../shared/IconClose/IconClose";
+
+// ПОПРАВИТЬ ВЫРАВНИВАНИЕ КНОПКИ
 
 const DiaryProductListItem = ({
   name,
@@ -20,9 +22,12 @@ const DiaryProductListItem = ({
         {cal} <span className={styles.ccal}>ккал</span>
       </span>
 
-  <button className={styles.listButton} onClick={() => deleteProduct({dayId, productId})}>
-<IconClose/>
-  </button>
+      <button
+        className={styles.listButton}
+        onClick={() => deleteProduct({ dayId, productId })}
+      >
+        <IconClose />
+      </button>
     </li>
   );
 };
