@@ -2,18 +2,19 @@
 @import '../../shared-styles/_mixins.scss';
 
 .section__rightSideBar {
-  padding-top: 40px;
+  // padding-top: 40px;
   padding-bottom: 55px;
 
   background-color: $secondary-beckground;
-
+  
   @include for-size(tablet) {
-    padding-top: 91px;
+    // padding-top: 91px;
     padding-bottom: 91px;
     position: relative;
   }
   @include for-size(desktop) {
-    padding-top: 300px;
+    background-color:unset;
+    // padding-top: 300px;
     // min-width: 535px;
     min-height: 600px;
     width: 100%;
@@ -80,14 +81,15 @@
     background-repeat: no-repeat;
   }
   @include for-size(desktop) {
-    width: 505px;
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    height: 777px;
+    background-image: none;
+  //   width: 505px;
+  //   position: absolute;
+  //   top: 0px;
+  //   right: 0px;
+  //   height: 777px;
 
-    background-image: url('../../img/rightSideBar@1x.png');
-    background-repeat: no-repeat;
+  //   background-image: url('../../img/rightSideBar@1x.png');
+  //   background-repeat: no-repeat;
   }
 }
 
@@ -125,11 +127,12 @@
   width: 290px;
   @include for-size(tablet) {
     width: 594px;
-
+    
     display: flex;
     justify-content: space-between;
   }
   @include for-size(desktop) {
+    margin-right: 0;
     width: 330px;
     display: block;
   }
