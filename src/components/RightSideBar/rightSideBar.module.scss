@@ -5,19 +5,20 @@
   padding-top: 40px;
   padding-bottom: 24px;
   position: relative;
+  background-color: $secondary-beckground;
 
   @include for-size(tablet) {
     padding-top: 91px;
     padding-bottom: 91px;
   }
   @include for-size(desktop) {
-    padding-top: 150px;
-    padding-bottom: 218px;
-    width: 535px;
-    height: 600px;
-    
+    padding-top: 300px;
+    /* padding-bottom: 218px; */
+    min-width: 535px;
+    min-height: 600px;
   }
 }
+
 .notAllowedProductsList {
   max-height: 152px;
   margin-top: 25px;
@@ -112,24 +113,6 @@
   @include for-size(desktop) {
     padding: 0 25px;
   }
-}
-
-// .section__background {
-//   @include for-size(desktop) {
-//     background-color: $secondary-beckground;
-//     width: 43vw;
-//     height: 100%;
-//     position: absolute;
-//     top: 0px;
-//     bottom: 0;
-//     right: -76px;
-//     z-index: -10;
-//   }
-// }
-
-// сеції background рендр на планшет і мобілі
-.section__rightSideBar {
-  background-color: $secondary-beckground;
 }
 
 .rightSideBar {

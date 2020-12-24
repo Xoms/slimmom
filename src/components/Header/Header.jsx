@@ -26,7 +26,7 @@ class Header extends Component {
       <>
         <header>
           <div className={styles.container}>
-            <NavLink exact to="/diary" className={styles.logoLink}>
+            <NavLink exact to="/" className={styles.logoLink}>
               <div className={styles.logoContainer}>
               
                 <Media
@@ -76,7 +76,7 @@ class Header extends Component {
                         ) : (
                           <div className={styles.navigation}> <NavigationBar /></div> //тут будет комп NAV
                         )}
-                        {isAuth && <div><UserInfo /></div>} 
+                        {/* {isAuth && <div className={styles.mobUserInfoWrap}><UserInfo /></div>}  */}
                         </>
                       )}
                       {matches.medium && (
@@ -117,7 +117,22 @@ class Header extends Component {
           </div>
           
         </header>
-        {this.state.isOpen && <BurgerMenu />}
+        {<Media
+                  queries={{
+                    small: "(min-width: 320px) and (max-width: 767px)",
+                    medium: "(min-width: 768px) and (max-width: 1099px)",
+                    large: "(min-width: 1100px)",
+                  }}
+                > 
+                {(matches) => (
+                  <Fragment>
+                  {matches.small && isAuth && <div className={styles.mobUserInfoWrap}><UserInfo /></div>}
+                  </Fragment>
+                  )
+                }
+
+        </Media>}
+        {this.state.isOpen && <BurgerMenu onClick={this.handleToggle}/>}
       </>
     )
   }

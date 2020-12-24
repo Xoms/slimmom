@@ -2,15 +2,15 @@
 @import "../../shared-styles/mixins";
 
 .loginPage {
-  margin-top: 40px;
+  padding-top: 40px;
   text-align: center;
   @include for-size(tablet) {
     text-align: left;
-    margin-top: 191px;
+    padding-top: 191px;
     margin-left: 92px;
     @include for-size(desktop) {
       text-align: left;
-      margin-top: 213px;
+      padding-top: 213px;
       margin-left: 115px;
     }
   }
