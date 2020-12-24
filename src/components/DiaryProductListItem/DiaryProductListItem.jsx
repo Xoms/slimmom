@@ -1,7 +1,8 @@
-import { connect } from 'react-redux';
-import React from 'react';
-import styles from './DiaryProductListItem.module.scss';
-import { deleteEatenProduct } from '../../redux/user/userOperations';
+import { connect } from "react-redux";
+import React from "react";
+import styles from "./DiaryProductListItem.module.scss";
+import {deleteEatenProduct} from "../../redux/user/userOperations";
+import IconClose from "../shared/IconClose/IconClose";
 
 const DiaryProductListItem = ({
   name,
@@ -19,12 +20,9 @@ const DiaryProductListItem = ({
         {cal} <span className={styles.ccal}>ккал</span>
       </span>
 
-      <button
-        className={styles.listButton}
-        onClick={() => deleteProduct({ dayId, productId })}
-      >
-        x
-      </button>
+  <button className={styles.listButton} onClick={() => deleteProduct({dayId, productId})}>
+<IconClose/>
+  </button>
     </li>
   );
 };
