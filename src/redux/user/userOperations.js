@@ -54,6 +54,13 @@ const addProduct = product => dispatch => {
     .then(({ data }) => console.log(data))
     .catch(err => dispatch(userActions.addProductError(err)));
 };
+
+// {
+//   "date": "2020-12-31",
+//   "productId": "5d51694802b2373622ff552c",
+//   "weight": 100
+// }
+
 const getProducts = date => (dispatch, getState) => {
   const {
     auth: { accessToken },

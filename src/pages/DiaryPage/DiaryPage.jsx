@@ -4,22 +4,39 @@ import RightSideBar from '../../components/RightSideBar';
 import DiaryAddProductForm from '../../components/DiaryAddProductForm/DiaryAddProductForm';
 import { connect } from 'react-redux';
 import { getProducts } from '../../redux/user/userOperations';
+import SetDate from '../../components/SetDate';
 
 class DiaryPage extends Component {
   state = {
-    date: 'date',
+    date: '',
     screenWidth: window.visualViewport.width,
   };
 
   componentDidMount() {
+    const today = this.getCurrentDate();
+    this.setState({ date: today });
     this.props.getProducts({
-      date: '2020-12-23',
+      date: today,
     });
   }
 
   componentDidUpdate(prevProps, prevState) {
-    //логика апдейта списка при изменении даты из стейта
+    const { date } = this.state;
+    if (prevState.date !== date) {
+      this.props.getProducts({
+        date: date,
+      });
+    }
   }
+
+  getCurrentDate = () => {
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, '0');
+    dd.length === 1 ? (dd = `0${dd}`) : (dd = dd);
+    const mm = String(today.getMonth()).padStart(2, '0');
+    const yyyy = today.getFullYear();
+    return (today = `${yyyy}-${mm}-${dd}`);
+  };
 
   changeDate = value => {
     this.setState({ date: value });
@@ -28,13 +45,16 @@ class DiaryPage extends Component {
   render() {
     return this.state.screenWidth < 650 ? (
       <>
+        <SetDate value={this.changeDate} />
+        {/* прокинуть пропсами айди дня */}
         <DiaryProductsList />
         <DiaryAddProductForm date={this.state.date} mobile={true} />
         <RightSideBar />
       </>
     ) : (
       <>
-        <DiaryAddProductForm mobile={false} />
+        <SetDate value={this.changeDate} />
+        <DiaryAddProductForm date={this.state.date} mobile={false} />
         <DiaryProductsList />
         <RightSideBar />
       </>
