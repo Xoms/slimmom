@@ -35,14 +35,26 @@ class PhonebookService {
     return axios.post(`/daily-rate/`, userCharacteristics);
   }
 
-  deleteEatenProduct (product) { // product = (dayId, productId)
+  deleteEatenProduct(product) {
+    // product = (dayId, productId)
     return axios.delete(`/day`, product);
   }
 
-  getProducts (date) {
-    return axios.post(`/day/info`, date) // дата из календаря для запроса
+  searchProduct(query) {
+    return axios.get(`/product/?search=${query}`);
   }
 
+  addProduct(product) {
+    //  product = {
+    //     "date": "2020-12-31",
+    //     "productId": "5d51694802b2373622ff552c",
+    //     "weight": 100
+    //   }
+    return axios.post('/day', product);
+  }
+  getProducts(date) {
+    return axios.post(`/day/info`, date); // дата из календаря для запроса
+  }
 }
 
 export default new PhonebookService();
