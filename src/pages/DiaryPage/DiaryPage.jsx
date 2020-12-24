@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import DiaryProductsList from '../../components/DiaryProductsList';
 import RightSideBar from '../../components/RightSideBar';
 import DiaryAddProductForm from '../../components/DiaryAddProductForm/DiaryAddProductForm';
+import SetDate from '../../components/SetDate/SetDate';
 import { connect } from 'react-redux';
 import { getProducts } from '../../redux/user/userOperations';
+import css from'./DiaryPage.module.scss';
 
 class DiaryPage extends Component {
   state = {
@@ -33,11 +35,16 @@ class DiaryPage extends Component {
         <RightSideBar />
       </>
     ) : (
-      <>
+      <div className={css.diarypageWrapper}>
+      <div className={css.diaryWrapper}>
+        <SetDate/>
         <DiaryAddProductForm mobile={false} />
         <DiaryProductsList />
+      </div>
+      <div className={css.sidebarWrapper}>
         <RightSideBar />
-      </>
+      </div>
+      </div>
     );
   }
 }
