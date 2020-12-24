@@ -7,7 +7,7 @@ class CalculatorPage extends Component {
   render() {
     return (
       <div className={styles.wrapper}>
-        <DailyCaloriesForm />
+        <DailyCaloriesForm noModal={true} />
         <RightSideBar></RightSideBar>
       </div>
     );
