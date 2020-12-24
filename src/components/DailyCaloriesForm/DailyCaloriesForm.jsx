@@ -5,6 +5,8 @@ import { getDailyRate } from "../../redux/user/userOperations";
 import { connect } from "react-redux";
 import Button from "../shared/Button";
 import styles from "./DailyCaloriesForm.module.scss";
+import Modal from "../Modal";
+import globalSelectors from "../../redux/global/globalSelectors";
 
 const formSchema = Yup.object().shape({
   height: Yup.string()
@@ -27,7 +29,23 @@ class DailyCaloriesForm extends Component {
     showModal: false,
   };
 
-  toggleModal = () => {};
+  toggleModal = () => {
+    this.setState((prevState) => ({
+      showModal: !prevState.showModal,
+    }));
+  };
+
+  getCalculations = (values) => {
+    const userCharacteristics = {
+      height: +values.height,
+      weight: +values.weight,
+      age: +values.age,
+      desiredWeight: +values.desiredWeight,
+      bloodType: +values.bloodType,
+    };
+    this.props.getDailyRate(userCharacteristics);
+    this.toggleModal();
+  };
 
   render() {
     return (
@@ -37,27 +55,20 @@ class DailyCaloriesForm extends Component {
         </h2>
         <Formik
           initialValues={{
-            height: "",
-            weight: "",
-            age: "",
-            desiredWeight: "",
+            height: "170",
+            weight: "83",
+            age: "26",
+            desiredWeight: "75",
             bloodType: "1",
           }}
           validationSchema={formSchema}
           onSubmit={(values) => {
-            const userCharacteristics = {
-              height: +values.height,
-              weight: +values.weight,
-              age: +values.age,
-              desiredWeight: +values.desiredWeight,
-              bloodType: +values.bloodType,
-            };
-            this.props.getDailyRate(userCharacteristics);
+            this.getCalculations(values);
           }}
         >
           {({ errors, touched }) => (
-            <>
-              <Form className={styles.DailyCaloriesForm}>
+            <Form className={styles.DailyCaloriesForm}>
+              <div className={styles.DailyCaloriesFormFirstWrapper}>
                 <div className={styles.DailyCaloriesFormFieldsWrappers}>
                   <div className={styles.DailyCaloriesFormFieldsWrapper}>
                     <Field
@@ -173,23 +184,35 @@ class DailyCaloriesForm extends Component {
                     </label>
                   </div>
                 </div>
-              </Form>
+              </div>
               <Button
                 type="submit"
                 className={`primary-button ${styles.DailyCaloriesFormButton}`}
               >
                 Похудеть
               </Button>
-            </>
+            </Form>
           )}
         </Formik>
+        {this.state.showModal &&
+          !this.props.isLoading &&
+          !this.props.noModal && (
+            <Modal
+              toggleModal={this.toggleModal}
+              showModal={this.state.showModal}
+            />
+          )}
       </div>
     );
   }
 }
 
+const mapStateToProps = (state) => ({
+  isLoading: globalSelectors.getLoading(state),
+});
+
 const mapDispatchToProps = {
   getDailyRate,
 };
 
-export default connect(null, mapDispatchToProps)(DailyCaloriesForm);
+export default connect(mapStateToProps, mapDispatchToProps)(DailyCaloriesForm);
