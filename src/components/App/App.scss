@@ -1,8 +1,9 @@
 @import "../../shared-styles/colors";
 @import "../../shared-styles/reset";
 @import "../../shared-styles/mixins";
-@import "../../shared-styles/decoration";
+@import '../../shared-styles/container';
 
+@import "../../shared-styles/decoration";
 @import "../../shared-styles/setdate";
 
 html {
@@ -15,7 +16,7 @@ html {
 *::before,
 *::after {
   box-sizing: inherit;
-  // outline: 1px dotted dodgerblue;
+  outline: 1px dotted dodgerblue;
 }
 
 body {
