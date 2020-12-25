@@ -23,6 +23,7 @@
 
 .react-calendar {
   position: absolute;
+  z-index: 1001;
   top: 25px;
   border-radius: 6px;
   width: 320px;
