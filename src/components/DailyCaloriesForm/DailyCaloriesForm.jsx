@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { getDailyRate, getDailyRateWithId } from "../../redux/user/userOperations";
-import userSelectors from '../../redux/user/userSelectors';
+import {
+  getDailyRate,
+  getDailyRateWithId,
+} from "../../redux/user/userOperations";
+import userSelectors from "../../redux/user/userSelectors";
 import { connect } from "react-redux";
 import Button from "../shared/Button";
 import styles from "./DailyCaloriesForm.module.scss";
@@ -44,7 +47,7 @@ class DailyCaloriesForm extends Component {
       desiredWeight: +values.desiredWeight,
       bloodType: +values.bloodType,
     };
-    if (!this.props.userId){
+    if (!this.props.userId) {
       this.props.getDailyRate(userCharacteristics);
       this.toggleModal();
     } else {
@@ -56,16 +59,16 @@ class DailyCaloriesForm extends Component {
     return (
       <div className={styles.DailyCaloriesFormWrapper}>
         <h2 className={styles.DailyCaloriesFormTitle}>
-          {this.props.userId ? 
-          'Узнай свою суточную норму калорий': 
-          'Посчитай свою суточную норму калорий прямо сейчас'}
+          {this.props.userId
+            ? "Узнай свою суточную норму калорий"
+            : "Посчитай свою суточную норму калорий прямо сейчас"}
         </h2>
         <Formik
           initialValues={{
-            height: "",
-            weight: "",
-            age: "",
-            desiredWeight: "",
+            height: "170",
+            weight: "99",
+            age: "26",
+            desiredWeight: "55",
             bloodType: "1",
           }}
           validationSchema={formSchema}
@@ -233,7 +236,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   getDailyRate,
-  getDailyRateWithId
+  getDailyRateWithId,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DailyCaloriesForm);

@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import dailyRateSelector from "../../redux/user/userSelectors";
 import IconClose from "../shared/IconClose/IconClose";
+import IconBack from "../shared/IconBack/IconBack";
 
 class Modal extends Component {
   static propTypes = {
@@ -34,8 +35,14 @@ class Modal extends Component {
         <div className={styles.modal}>
           <button
             type="button"
-            className={styles.closeModalBtn}
+            className={styles.closeModalMobileBtn}
+            onClick={this.props.toggleModal}
+          >
+            <IconBack />
+          </button>
+          <button
             type="button"
+            className={styles.closeModalBtn}
             onClick={this.props.toggleModal}
           >
             <IconClose />
