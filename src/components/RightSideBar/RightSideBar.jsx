@@ -40,7 +40,9 @@ function RightSideBar(props) {
 
             <div className={classes.sideBar__BlocDescription}>
               <h2 className={classes.title}>Нерекомендуемые продукты</h2>
-              <div className={classes.notAllowedProductsList}>
+              <div
+                className={`${classes.notAllowedProductsList} ${classes.scrollbar}`}
+              >
                 {notAllowedProducts.map(product => (
                   <span key={product}>{product}, </span>
                 ))}
@@ -51,6 +53,13 @@ function RightSideBar(props) {
       </section>
     </>
   );
+}
+RightSideBar.defaultProps = {
+  kcalLeft: 0,
+  kcalConsumed: 0,
+  dailyRate: 0,
+  percentsOfDailyRate: 0,
+  date: new Date().toJSON().slice(0,10),
 }
 
 const mapStateToProps = state => ({
