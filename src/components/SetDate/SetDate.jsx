@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { CSSTransition } from 'react-transition-group';
-import Calendar from 'react-calendar';
+import { CSSTransition } from "react-transition-group";
+import Calendar from "react-calendar";
+import './SetDate.scss';
 
 import 'react-calendar/dist/Calendar.css';
 

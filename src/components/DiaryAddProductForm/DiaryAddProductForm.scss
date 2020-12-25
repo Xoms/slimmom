@@ -1,7 +1,6 @@
 @import '../../shared-styles/colors';
 
 .trigger-button {
-  font-family: Verdana;
   width: 50px;
   height: 50px;
   border: none;
@@ -16,11 +15,60 @@
 }
 
 .autocomplete {
+  background-color: #fff;
   color: black;
-  height: 50px;
+  height: 100%;
   width: 100%;
   overflow-y: auto;
   overflow-x: hidden;
+
+  border: solid $accent 2px;
+  border-radius: 5px;
+
+  & li {
+    margin-bottom: 5px;
+    border-bottom: $secondary-text solid 1px;
+
+    text-align: center;
+
+    transition: all 250ms linear;
+
+    &:hover,
+    &:focus {
+      color: $accent;
+    }
+  }
+}
+
+.product-list-wrapper {
+  position: absolute;
+  left: 5px;
+  top: 20px;
+
+  height: 100px;
+  width: 290px;
+
+  overflow: hidden;
+
+  background-color: transparent;
+}
+
+.search-list-enter {
+  transform: translateY(-100%);
+}
+
+.search-list-enter-active {
+  transform: translateY(0);
+  transition: all 250ms linear;
+}
+
+.search-list-exit {
+  transform: translateY(0);
+}
+
+.search-list-exit-active {
+  transform: translateY(-100%);
+  transition: all 250ms linear;
 }
 
 .button-wrapper {
@@ -30,7 +78,7 @@
 
   & button {
     position: absolute;
-    top: -20px;
+    top: 0;
     left: 0;
 
     background-color: transparent;
@@ -55,6 +103,8 @@
 .modal-form {
   min-width: 300px;
   margin-top: 80px;
+
+  position: relative;
 
   display: flex;
   flex-direction: column;
@@ -129,6 +179,58 @@
   }
 }
 
-.gramms::placeholder {
-  text-align: right;
+@media screen and (min-width: 650px) {
+  .gramms::placeholder {
+    text-align: right;
+  }
+
+  .modal-form {
+    flex-direction: row;
+    align-items: center;
+
+    & input.gramms {
+      width: 105px;
+    }
+
+    & button {
+      margin: 0;
+      margin-left: 48px;
+    }
+
+    & input {
+      min-height: 35px;
+
+      &:first-child {
+        margin-bottom: 0;
+        margin-right: 30px;
+        min-width: 220px;
+      }
+    }
+  }
+
+  .product-list-wrapper {
+    position: absolute;
+    left: 0px;
+    top: 40px;
+  }
+}
+
+.plus-button {
+  width: 50px;
+  height: 50px;
+
+  background-color: $accent;
+  color: #fff;
+
+  border: none;
+  outline: none;
+  border-radius: 50%;
+  font-size: 40px;
+}
+
+@media screen and (min-width: 1100px) {
+  .modal-form {
+    margin-top: 0px;
+    margin-bottom: 60px;
+  }
 }

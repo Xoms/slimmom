@@ -7,6 +7,7 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 import debounce from 'lodash.debounce';
 import { connect } from 'react-redux';
 import { addProduct } from '../../redux/user/userOperations';
+import {CSSTransition} from 'react-transition-group';
 
 class DiaryAddProductForm extends Component {
   state = {
@@ -14,6 +15,7 @@ class DiaryAddProductForm extends Component {
     products: [],
     choosenProductId: '',
     error: null,
+    showUl: false,
   };
 
   handleClick = () => {
@@ -41,7 +43,12 @@ class DiaryAddProductForm extends Component {
 
   hanleChange = ({ target }) => {
     this.debouncedSearch(target.value);
+    this.setState({showUl: true});
   };
+
+  // handleBlur = ({target}) => {
+  //   this.setState({showUl: false});
+  // };
 
   handleSubmit = ({ weight }) => {
     const product = {
@@ -83,13 +90,17 @@ class DiaryAddProductForm extends Component {
                 handleChange(e);
                 this.hanleChange(e);
               }}
+              //onBlur={this.handleBlur}
               //   value={product}
               name="product"
               placeholder="Введите название продукта"
               type="text"
               autoComplete="off"
             />
+
             {!!products.length && (
+            <div className="product-list-wrapper">
+            <CSSTransition in={this.state.showUl} unmountOnExit classNames="search-list" timeout={500}>
               <ul className="autocomplete">
                 {products.map(product => (
                   <li
@@ -105,12 +116,13 @@ class DiaryAddProductForm extends Component {
                     {product.title.ru}
                   </li>
                 ))}
-              </ul>
-            )}
-            <Field name="weight" placeholder="Граммы" type="number" />
-            <Button type="submit" className="secondary-button">
-              Добавить
-            </Button>
+
+            </ul>
+            </CSSTransition>
+            </div> )}
+            <Field className="gramms" name="weight" placeholder="Граммы" type="number" />
+            {window.visualViewport.width < 650 ? <Button type="submit" className="secondary-button">Добавить</Button> : <Button type="submit" className="plus-button">+</Button>}
+
           </Form>
         )}
       </Formik>
