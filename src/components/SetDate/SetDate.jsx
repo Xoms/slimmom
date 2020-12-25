@@ -24,8 +24,8 @@ class SetDate extends Component {
 
   setDate = (value) => {
     const year = value.getFullYear();
-    const month = value.getMonth() || '01' ;
-    const day = value.getDate() || '01';
+    const month = value.getMonth() < 10 ?  `0${value.getMonth()+1}` : value.getMonth();
+    const day = value.getDate()  < 10 ? `0${value.getDate()+1}` : value.getDate();
     this.setState((state) => {
       return {
         isShowCalendar: !state.isShowCalendar,
@@ -40,8 +40,8 @@ class SetDate extends Component {
   componentDidMount(){
     const currentDate = new Date();
     const year = currentDate.getFullYear();
-    const month = currentDate.getMonth() || '01' ;
-    const day = currentDate.getDate() || '01';
+    const month = currentDate.getMonth() < 10 ?  `0${currentDate.getMonth()+1}` : currentDate.getMonth();
+    const day = currentDate.getDate()  < 10 ? `0${currentDate.getDate()+1}` : currentDate.getDate();
     this.setState((state) => {
       return {
         outputValue: `${day}.${month}.${year}`,
