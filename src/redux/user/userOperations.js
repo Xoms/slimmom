@@ -23,17 +23,34 @@ const getCurrentUser = () => (dispatch, getState) => {
     .catch(err => dispatch(userActions.getCurrentUserError(err)));
 };
 
-const getDailyRate = userCharacteristics => dispatch => {
+const getDailyRate = (userCharacteristics, userId) => dispatch => {
   //   const token =
   //     'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI1ZmUxZGNiODVjMmJhNzAwMDQ0NDA5NjUiLCJzaWQiOiI1ZmUxZjdmNTVjMmJhNzAwMDQ0NDA5NmUiLCJpYXQiOjE2MDg2NDQ1OTcsImV4cCI6MTYwODY0ODE5N30.mynRviNExi5wDgG9Mhxc-mNUEw-0FNycFKYL1LoNiJs'; // надо поменять логику, пока захардкодили
 
   //   const id = '5fcffaa7f7ae5300043515a6'; // надо поменять логику, пока захардкодили
   //   api.setToken(token);
-  dispatch(userActions.getCurrentUserRequest());
+  dispatch(userActions.getDailyRateRequest());
 
-  api.getDailyRate(userCharacteristics).then(({ data }) => {
+  api.getDailyRate(userCharacteristics, userId).then(({ data }) => {
+    
+    if (userId) {
+      const { summaries } = data; 
+      return dispatch(userActions.getDailyRateSuccess(summaries));
+    }
     return dispatch(userActions.getDailyRateSuccess(data));
   });
+};
+
+const getDailyRateWithId = (userCharacteristics, userId) => dispatch => {
+
+  dispatch(userActions.getDailyRateWithIdRequest());
+  api.getDailyRate(userCharacteristics, userId)
+    .then(({ data }) => {
+        const { summaries, dailyRate } = data; 
+        const payload = { summaries, dailyRate }
+        return dispatch(userActions.getDailyRateWithIdSuccess(payload));
+    })
+    .catch(err => dispatch(userActions.getDailyRateWithIdError(err)) );
 };
 
 const deleteEatenProduct = product => dispatch => {
@@ -58,12 +75,6 @@ const addProduct = product => dispatch => {
     .then(({ data }) => dispatch(userActions.addProductSuccess(data.day)))
     .catch(err => dispatch(userActions.addProductError(err)));
 };
-
-// {
-//   "date": "2020-12-31",
-//   "productId": "5d51694802b2373622ff552c",
-//   "weight": 100
-// }
 
 const getProducts = date => (dispatch, getState) => {
   const {
@@ -98,6 +109,7 @@ export {
   addProduct,
   deleteEatenProduct,
   getProducts,
+  getDailyRateWithId
 };
 
 // dailyRate: 1351.5

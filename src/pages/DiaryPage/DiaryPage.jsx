@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import DiaryProductsList from '../../components/DiaryProductsList';
 import RightSideBar from '../../components/RightSideBar';
 import DiaryAddProductForm from '../../components/DiaryAddProductForm/DiaryAddProductForm';
+import SetDate from '../../components/SetDate/SetDate';
 import { connect } from 'react-redux';
 import { getProducts } from '../../redux/user/userOperations';
-import SetDate from '../../components/SetDate';
+import css from'./DiaryPage.module.scss';
 
 class DiaryPage extends Component {
   state = {
@@ -15,9 +16,9 @@ class DiaryPage extends Component {
   componentDidMount() {
     const today = this.getCurrentDate();
     this.setState({ date: today });
-    this.props.getProducts({
-      date: today,
-    });
+    // this.props.getProducts({
+    //   date: today,
+    // });
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -52,12 +53,17 @@ class DiaryPage extends Component {
         <RightSideBar />
       </>
     ) : (
-      <>
-        <SetDate value={this.changeDate} />
-        <DiaryAddProductForm date={this.state.date} mobile={false} />
+
+      <div className={css.diarypageWrapper}>
+      <div className={css.diaryWrapper}>
+        <SetDate value={this.changeDate}/>
+        <DiaryAddProductForm  date={this.state.date} mobile={false} />
         <DiaryProductsList />
+      </div>
+      <div className={css.sidebarWrapper}>
         <RightSideBar />
-      </>
+      </div>
+      </div>
     );
   }
 }
