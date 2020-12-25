@@ -30,7 +30,7 @@ const routes = [
     path: "/diary",
     exact: true,
     component: lazy(() => import("./pages/DiaryPage")),
-    privated: true, //поменять на true
+    privated: true,
     restricted: false,
   },
   {
@@ -38,7 +38,7 @@ const routes = [
     path: "/calculator",
     exact: true,
     component: lazy(() => import("./pages/CalculatorPage")),
-    privated: false, //nado sdeat' TRUE
+    privated: true,
     restricted: false,
   },
 ];

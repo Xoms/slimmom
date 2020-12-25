@@ -52,6 +52,12 @@ function RightSideBar(props) {
     </>
   );
 }
+RightSideBar.defaultProps = {
+  kcalLeft: 0,
+  kcalConsumed: 0,
+  dailyRate: 0,
+  percentsOfDailyRate: 0
+}
 
 const mapStateToProps = state => ({
   daySummary: selectors.getDaySummary(state),
