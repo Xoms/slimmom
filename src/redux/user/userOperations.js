@@ -46,18 +46,6 @@ const getDailyRateWithId = (userCharacteristics, userId) => dispatch => {
     .catch(err => dispatch(userActions.getDailyRateWithIdError(err)));
 };
 
-const deleteEatenProduct = product => dispatch => {
-  dispatch(userActions.deleteEatenProductRequest());
-  api
-    .deleteEatenProduct(product)
-    .then(({ data }) => {
-      return dispatch(
-        userActions.deleteEatenProductSuccess(data.newDaySummary),
-      );
-    })
-    .catch(err => dispatch(userActions.deleteEatenProductError(err)));
-};
-
 const addProduct = product => dispatch => {
   dispatch(userActions.addProductRequest());
   api
@@ -111,6 +99,20 @@ const getProducts = date => (dispatch, getState) => {
       dispatch(userActions.getProductsSuccess(payload));
     })
     .catch(err => dispatch(userActions.getProductsError(err)));
+};
+
+const deleteEatenProduct = (product, date) => dispatch => {
+  dispatch(userActions.deleteEatenProductRequest());
+  api
+    .deleteEatenProduct(product)
+    .then(({ data }) => {
+      // console.log(data);
+      getProducts(date);
+      return dispatch(
+        userActions.deleteEatenProductSuccess(data.newDaySummary),
+      );
+    })
+    .catch(err => dispatch(userActions.deleteEatenProductError(err)));
 };
 
 export {

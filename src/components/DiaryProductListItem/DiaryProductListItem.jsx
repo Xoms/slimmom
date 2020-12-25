@@ -14,6 +14,7 @@ const DiaryProductListItem = ({
   dayId,
   productId,
   deleteProduct,
+  date,
 }) => {
   return (
     <li className={styles.list}>
@@ -26,10 +27,13 @@ const DiaryProductListItem = ({
       <button
         className={styles.listButton}
         onClick={() =>
-          deleteProduct({
-            dayId,
-            eatenProductId: productId,
-          })
+          deleteProduct(
+            {
+              dayId,
+              eatenProductId: productId,
+            },
+            date,
+          )
         }
       >
         <IconClose />
@@ -44,6 +48,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = state => ({
   dayId: selectors.getCurrentDayId(state),
+  date: selectors.getDaySummary(state).date,
 });
 
 export default connect(
