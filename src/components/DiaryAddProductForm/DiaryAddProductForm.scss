@@ -59,7 +59,7 @@
 
 .search-list-enter-active {
   transform: translateY(0);
-  transition: all 250ms linear;
+  transition: all 500ms linear;
 }
 
 .search-list-exit {
@@ -68,7 +68,7 @@
 
 .search-list-exit-active {
   transform: translateY(-100%);
-  transition: all 250ms linear;
+  transition: all 500ms linear;
 }
 
 .button-wrapper {
@@ -97,7 +97,8 @@
 
   position: absolute;
   top: 147px;
-  left: 58px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .modal-form {
@@ -244,4 +245,25 @@
 
   display: flex;
   justify-content: center;
+}
+
+.error-mes {
+  color: red;
+}
+
+.valid-field {
+  font-family: "Verdana";
+  position: absolute;
+  color: rgb(238, 20, 20);
+  top: 25px;
+  left: 0px;
+
+  font-size: 12px;
+line-height: 1.415;
+letter-spacing: 0.04em;
+}
+
+.form-label {
+  position: relative;
+  width: fit-content;
 }
