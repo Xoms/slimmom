@@ -24,7 +24,6 @@ class App extends Component {
 
   render() {
     
-    
     const routesMap = routes.map(route => {
       return route.privated ? (
         <PrivateRoute key={route.path} {...route} />
@@ -34,6 +33,8 @@ class App extends Component {
     });
 
     return (
+     <>
+      {this.props.isLoading && <Loader />}
         <Layout>
           <Suspense fallback={<Loader />}>
             <Switch>
@@ -42,6 +43,7 @@ class App extends Component {
             </Switch>
           </Suspense>
         </Layout>
+     </>
     );
   }
 }
@@ -52,7 +54,8 @@ App.propTypes = {
 
 const mapStateToProps = (state) => ({
   authError : globalSelectors.getError(state),
-  sid : authSelectors.sid(state) 
+  sid : authSelectors.sid(state),
+  isLoading: globalSelectors.getLoading(state), 
 })
 const mapDispatch = {
   getCurrentUser,
