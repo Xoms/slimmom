@@ -1,13 +1,13 @@
-@import "../../shared-styles/colors";
-@import "../../shared-styles/mixins";
+@import '../../shared-styles/colors';
+@import '../../shared-styles/mixins';
 .DailyCaloriesFormFirstWrapper {
   display: flex;
   flex-direction: column;
 }
 .DailyCaloriesFormWrapper {
-  padding-top: 30px;
+  // padding-top: 30px;
   width: 100%;
-  font-family: "Verdana";
+  font-family: 'Verdana';
   margin-bottom: 40px;
 }
 .DailyCaloriesFormTitle {
@@ -39,7 +39,7 @@
   position: relative;
 }
 .DailyCaloriesFormInput {
-  font-family: "VerdanaBold";
+  font-family: 'VerdanaBold';
   font-size: 14px;
   line-height: 1.215;
   letter-spacing: 0.04em;
@@ -98,13 +98,13 @@
   margin: 0 auto;
 }
 
-[type="radio"]:checked,
-[type="radio"]:not(:checked) {
+[type='radio']:checked,
+[type='radio']:not(:checked) {
   position: absolute;
   left: -9999px;
 }
-[type="radio"] + label,
-[type="radio"] + label {
+[type='radio'] + label,
+[type='radio'] + label {
   position: relative;
   padding-left: 28px;
   cursor: pointer;
@@ -112,9 +112,9 @@
   display: inline-block;
   color: #666;
 }
-[type="radio"] + label:before,
-[type="radio"] + label:before {
-  content: "";
+[type='radio'] + label:before,
+[type='radio'] + label:before {
+  content: '';
   position: absolute;
   left: 0;
   top: 0;
@@ -124,9 +124,9 @@
   border-radius: 100%;
   background: #fff;
 }
-[type="radio"] + label:after,
-[type="radio"] + label:after {
-  content: "";
+[type='radio'] + label:after,
+[type='radio'] + label:after {
+  content: '';
   width: 12px;
   height: 12px;
   background: $accent;
@@ -137,12 +137,12 @@
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
 }
-[type="radio"]:not(:checked) + label:after {
+[type='radio']:not(:checked) + label:after {
   opacity: 0;
   -webkit-transform: scale(0);
   transform: scale(0);
 }
-[type="radio"]:checked + label:after {
+[type='radio']:checked + label:after {
   opacity: 1;
   -webkit-transform: scale(1);
   transform: scale(1);
