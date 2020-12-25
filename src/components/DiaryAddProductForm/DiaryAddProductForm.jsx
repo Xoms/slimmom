@@ -134,6 +134,7 @@ class DiaryAddProductForm extends Component {
     if (this.props.mobile) {
       return (
         <>
+        <div className="trigger-button-wrapper">
           <button
             type="button"
             onClick={this.handleClick}
@@ -141,6 +142,7 @@ class DiaryAddProductForm extends Component {
           >
             +
           </button>
+        </div>
           {this.state.renderMarker ? (
             <div className="modal">
               <div className="button-wrapper">

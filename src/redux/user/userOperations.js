@@ -17,13 +17,13 @@ const getCurrentUser = () => (dispatch, getState) => {
     .getCurrentUser()
     .then(({ data }) => {
       const { username, id, userData } = data;
-      const userInfo = { username, id, userData };
+      const userInfo = { username, id, userData, summaries: [] };
       dispatch(userActions.getCurrentUserSuccess(userInfo));
     })
     .catch(err => dispatch(userActions.getCurrentUserError(err)));
 };
 
-const getDailyRate = (userCharacteristics, userId) => dispatch => {
+const getDailyRate = (userCharacteristics) => dispatch => {
   //   const token =
   //     'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI1ZmUxZGNiODVjMmJhNzAwMDQ0NDA5NjUiLCJzaWQiOiI1ZmUxZjdmNTVjMmJhNzAwMDQ0NDA5NmUiLCJpYXQiOjE2MDg2NDQ1OTcsImV4cCI6MTYwODY0ODE5N30.mynRviNExi5wDgG9Mhxc-mNUEw-0FNycFKYL1LoNiJs'; // надо поменять логику, пока захардкодили
 
@@ -31,14 +31,11 @@ const getDailyRate = (userCharacteristics, userId) => dispatch => {
   //   api.setToken(token);
   dispatch(userActions.getDailyRateRequest());
 
-  api.getDailyRate(userCharacteristics, userId).then(({ data }) => {
-    
-    if (userId) {
-      const { summaries } = data; 
-      return dispatch(userActions.getDailyRateSuccess(summaries));
-    }
-    return dispatch(userActions.getDailyRateSuccess(data));
-  });
+  api.getDailyRate(userCharacteristics)
+    .then(({ data }) => {    
+      return dispatch(userActions.getDailyRateSuccess(data));
+    })
+    .catch(err => dispatch(userActions.getDailyRateWithIdError(err)) );
 };
 
 const getDailyRateWithId = (userCharacteristics, userId) => dispatch => {
