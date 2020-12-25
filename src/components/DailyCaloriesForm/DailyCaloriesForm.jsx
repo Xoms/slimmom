@@ -55,7 +55,16 @@ class DailyCaloriesForm extends Component {
     }
   };
 
+  userInfo = {
+    height: this.props.userInfo.height,
+    age: this.props.userInfo.age,
+    weight: this.props.userInfo.weight,
+    desiredWeight: this.props.userInfo.desiredWeight,
+    bloodType: this.props.userInfo.bloodType,
+  };
+
   render() {
+    console.log(this.userInfo);
     return (
       <div className={styles.DailyCaloriesFormWrapper}>
         <h2 className={styles.DailyCaloriesFormTitle}>
@@ -65,11 +74,13 @@ class DailyCaloriesForm extends Component {
         </h2>
         <Formik
           initialValues={{
-            height: "",
-            weight: "",
-            age: "",
-            desiredWeight: "",
-            bloodType: "1",
+            height: this.userInfo.height ? this.userInfo.height : "",
+            age: this.userInfo.age ? this.userInfo.age : "",
+            weight: this.userInfo.weight ? this.userInfo.weight : "",
+            desiredWeight: this.userInfo.desiredWeight
+              ? this.userInfo.desiredWeight
+              : "",
+            bloodType: this.userInfo.bloodType ? this.userInfo.bloodType : "",
           }}
           validationSchema={formSchema}
           onSubmit={(values) => {
@@ -134,7 +145,6 @@ class DailyCaloriesForm extends Component {
                         errors.weight && touched.weight ? styles.errorInput : ""
                       }`}
                     />
-
                     <ErrorMessage
                       name="weight"
                       component="p"
@@ -159,7 +169,6 @@ class DailyCaloriesForm extends Component {
                           : ""
                       }`}
                     />
-
                     <ErrorMessage
                       name="desiredWeight"
                       component="p"
@@ -258,6 +267,7 @@ class DailyCaloriesForm extends Component {
 const mapStateToProps = (state) => ({
   isLoading: globalSelectors.getLoading(state),
   userId: userSelectors.getUserId(state),
+  userInfo: userSelectors.getUserInfo(state),
 });
 
 const mapDispatchToProps = {
