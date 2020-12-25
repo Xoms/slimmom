@@ -40,7 +40,9 @@ function RightSideBar(props) {
 
             <div className={classes.sideBar__BlocDescription}>
               <h2 className={classes.title}>Нерекомендуемые продукты</h2>
-              <div className={classes.notAllowedProductsList}>
+              <div
+                className={`${classes.notAllowedProductsList} ${classes.scrollbar}`}
+              >
                 {notAllowedProducts.map(product => (
                   <span key={product}>{product}, </span>
                 ))}
