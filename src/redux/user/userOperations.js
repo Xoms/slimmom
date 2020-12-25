@@ -86,7 +86,12 @@ const getProducts = date => (dispatch, getState) => {
         const { daySummary, eatenProducts, id } = data;
         payload = { daySummary, eatenProducts, currentDayId: id };
       } else {
-        payload.daySummary = { ...data };
+        payload = {
+          daySummary: { ...data },
+          eatenProducts: [],
+          currentDayId: null,
+        };
+        // payload.daySummary = { ...data };
       }
       dispatch(userActions.getProductsSuccess(payload));
     })
