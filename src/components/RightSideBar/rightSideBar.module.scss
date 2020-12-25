@@ -6,14 +6,14 @@
   padding-bottom: 55px;
 
   background-color: $secondary-beckground;
-  
+
   @include for-size(tablet) {
     // padding-top: 91px;
     padding-bottom: 91px;
     position: relative;
   }
   @include for-size(desktop) {
-    background-color:unset;
+    background-color: unset;
     // padding-top: 300px;
     // min-width: 535px;
     min-height: 600px;
@@ -21,13 +21,44 @@
   }
 }
 
+// Scroll-bar customisation
+
+.scrollbar {
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  scrollbar-width: thin;
+  scrollbar-color: $burger-background $secondary-beckground;
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.scrollbar::-webkit-scrollbar-track {
+  background-color: #afb1b6;
+}
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: $burger-background;
+  border-radius: 0px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb:vertical {
+  min-height: 1.5rem;
+}
+.scrollbar::-webkit-scrollbar-thumb:horizontal {
+  min-width: 1.5rem;
+}
+
+//* scroll standard
 .notAllowedProductsList {
   max-height: 152px;
   margin-top: 25px;
   color: $secondary-text;
-  overflow-y: scroll;
+  // overflow-y: scroll;
   z-index: 10;
   position: relative;
+  overscroll-behavior: contain;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .title {
@@ -82,14 +113,14 @@
   }
   @include for-size(desktop) {
     background-image: none;
-  //   width: 505px;
-  //   position: absolute;
-  //   top: 0px;
-  //   right: 0px;
-  //   height: 777px;
+    //   width: 505px;
+    //   position: absolute;
+    //   top: 0px;
+    //   right: 0px;
+    //   height: 777px;
 
-  //   background-image: url('../../img/rightSideBar@1x.png');
-  //   background-repeat: no-repeat;
+    //   background-image: url('../../img/rightSideBar@1x.png');
+    //   background-repeat: no-repeat;
   }
 }
 
@@ -127,7 +158,7 @@
   width: 290px;
   @include for-size(tablet) {
     width: 594px;
-    
+
     display: flex;
     justify-content: space-between;
   }
