@@ -4,12 +4,24 @@ import Button from '../shared/Button/Button';
 import back from '../../img/back-arrow.svg';
 import api from '../../services/backend.service';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
+import * as Yup from "yup";
 import debounce from 'lodash.debounce';
+import { connect } from 'react-redux';
+import { addProduct } from '../../redux/user/userOperations';
+import { CSSTransition } from 'react-transition-group';
+
+const AddProdSchema = Yup.object().shape({
+  product: Yup.string().required('Обязательное поле *'),
+  weight: Yup.number().required('Обязательное поле *'),
+});
 
 class DiaryAddProductForm extends Component {
   state = {
     renderMarker: false,
     products: [],
+    choosenProductId: '',
+    error: null,
+    showUl: false,
   };
 
   handleClick = () => {
@@ -18,24 +30,47 @@ class DiaryAddProductForm extends Component {
     });
   };
 
-  debouncedSearch = debounce(
-    query =>
-      api
-        .searchProduct(query)
-        .then(({ data }) => {
-          console.log(data);
-          this.setState({ products: data });
-        })
-        .catch(err => this.setState({ products: [] })),
-    2000,
-  );
+  debouncedSearch = debounce(query => {
+    if (query === '') {
+      return;
+    }
+
+    api
+      .searchProduct(query)
+      .then(({ data }) => {
+        console.log(data);
+        this.setState({ products: data });
+        if (data.length === 1) {
+          this.setState({ choosenProductId: data[0]._id });
+        }
+      })
+      .catch(err => this.setState({ products: [], error: err.message })); //добавить обработку ошибки и её отображение вместо списка подсказок
+  }, 400);
 
   hanleChange = ({ target }) => {
+    this.setState({showUl: true});
     this.debouncedSearch(target.value);
+    this.setState({error: null})
+
   };
 
-  handleSubmit = event => {
-    event.preventDefault();
+  // handleBlur = ({target}) => {
+  //   this.setState({showUl: false});
+  // };
+
+  handleSubmit = ({ weight }) => {
+    const product = {
+      date: this.props.date,
+      productId: this.state.choosenProductId,
+      weight: weight,
+    };
+
+    this.props.addProduct(product);
+
+    // api
+    //   .addProduct(product)
+    //   .then(data => console.log(data))
+    //   .catch(err => this.setState({ error: err.message }));
   };
 
   render() {
@@ -46,43 +81,72 @@ class DiaryAddProductForm extends Component {
           weight: '',
           product: '',
         }}
-        onSubmit={this.handleSubmit}
+        onSubmit={values => {
+          this.handleSubmit(values);
+        }}
+        validationSchema={AddProdSchema}
       >
         {({ setFieldValue, handleChange, handleBlur }) => (
           <Form className="modal-form">
+            <label className='form-label'>
             <Field
-              // onBlur={e => {
-              //   handleBlur(e);
-              //   this.setState({ products: [] });
-              // }} поставить задержку
+              onBlur={e => {
+                handleBlur(e);
+                this.setState({ showUl: false });
+                setTimeout(() => {
+                  this.setState({ products: [] });
+                }, 300);
+              }} //поставить задержку
               onChange={e => {
                 handleChange(e);
                 this.hanleChange(e);
               }}
+              //onBlur={this.handleBlur}
               //   value={product}
               name="product"
               placeholder="Введите название продукта"
               type="text"
               autoComplete="off"
             />
-            <div className="autocomplete">
-              {!!products.length &&
-                products.map(product => (
+
+            <ErrorMessage
+                      className='valid-field'
+                      name="product"
+                      component="span"
+                    />
+                    </label>
+            <div className="product-list-wrapper">
+            {!!products.length ? (
+            <CSSTransition in={this.state.showUl} unmountOnExit classNames="search-list" timeout={500}>
+              <ul className="autocomplete">
+                {products.map(product => (
                   <li
                     key={product._id}
                     onClick={() => {
                       setFieldValue('product', product.title.ru);
-                      this.setState({ products: [] });
+                      this.setState({
+                        products: [],
+                        choosenProductId: product._id,
+                      });
                     }}
                   >
                     {product.title.ru}
                   </li>
                 ))}
-            </div>
-            <Field name="weight" placeholder="Граммы" type="number" />
-            <Button type="submit" className="secondary-button">
-              Добавить
-            </Button>
+            </ul>
+            </CSSTransition>
+            ) : this.state.error && <p className="error-mes">{this.state.error}</p>}
+            </div> 
+            <label className='form-label'>
+            <Field className="gramms" name="weight" placeholder="Граммы" type="number" />
+            <ErrorMessage
+                      className='valid-field'
+                      name="weight"
+                      component="span"
+                    />
+                    </label>
+            {window.visualViewport.width < 650 ? <Button type="submit" className="secondary-button">Добавить</Button> : <Button type="submit" className="plus-button">+</Button>}
+
           </Form>
         )}
       </Formik>
@@ -91,6 +155,7 @@ class DiaryAddProductForm extends Component {
     if (this.props.mobile) {
       return (
         <>
+        <div className="trigger-button-wrapper">
           <button
             type="button"
             onClick={this.handleClick}
@@ -98,6 +163,7 @@ class DiaryAddProductForm extends Component {
           >
             +
           </button>
+        </div>
           {this.state.renderMarker ? (
             <div className="modal">
               <div className="button-wrapper">
@@ -138,4 +204,8 @@ class DiaryAddProductForm extends Component {
   }
 }
 
-export default DiaryAddProductForm;
+const mapDispatchToProps = {
+  addProduct,
+};
+
+export default connect(null, mapDispatchToProps)(DiaryAddProductForm);

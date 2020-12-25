@@ -2,32 +2,30 @@
 @import "../../shared-styles/mixins";
 
 .loginPage {
-  margin-top: 40px;
+  padding-top: 40px;
   text-align: center;
   @include for-size(tablet) {
     text-align: left;
-    margin-top: 191px;
-    margin-left: 92px;
+    padding-top: 191px;
     @include for-size(desktop) {
-      text-align: left;
-      margin-top: 213px;
-      margin-left: 115px;
+      padding-top: 217px;
     }
   }
 }
 .formLabel {
   position: relative;
+  width: fit-content;
 }
 .validField {
-  font-family: "GothamPro-Bold";
+  font-family: "Verdana";
   position: absolute;
   color: rgb(238, 20, 20);
-  top: 40px;
-  left: 55px;
+  top: 45px;
+  left: 0px;
 
-  @include for-size(tablet) {
-    left: 40px;
-  }
+  font-size: 12px;
+  line-height: 1.415;
+  letter-spacing: 0.04em;
 }
 .loginTitle {
   margin-bottom: 60px;
@@ -42,6 +40,10 @@
 .loginForm {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  @include for-size(tablet) {
+   align-items: flex-start;
+  }
 }
 input {
   font-family: "VerdanaBold";
@@ -70,7 +72,12 @@ input:focus {
   box-shadow: 0px 4px 10px rgba(252, 132, 45, 0.5);
   border: none;
 }
-
+.errorInput {
+  border: 1px solid red;
+  box-shadow: 0px 2px 4px -1px rgba(226, 13, 13, 0.4),
+    0px 4px 5px 0px rgba(226, 13, 13, 0.24),
+    0px 1px 10px 0px rgba(226, 13, 13, 0.22);
+}
 .login {
   margin-bottom: 40px;
 }

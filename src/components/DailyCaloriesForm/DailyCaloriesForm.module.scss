@@ -1,9 +1,14 @@
 @import "../../shared-styles/colors";
 @import "../../shared-styles/mixins";
-
+.DailyCaloriesFormFirstWrapper {
+  display: flex;
+  flex-direction: column;
+}
 .DailyCaloriesFormWrapper {
+  // padding-top: 30px;
   width: 100%;
   font-family: "Verdana";
+  margin-bottom: 40px;
 }
 .DailyCaloriesFormTitle {
   color: $main-text;
@@ -22,10 +27,12 @@
 }
 .DailyCaloriesForm {
   width: 240px;
-  height: 354px;
+  height: 100%;
   margin-bottom: 40px;
+  // height: 354px;
 }
 .DailyCaloriesFormBloodWrapper {
+  display: flex;
   margin-bottom: 42px;
 }
 .DailyCaloriesFormFieldsWrapper {
@@ -68,30 +75,94 @@
   color: $main-text;
   margin-right: 20px;
 }
-.DailyCaloriesLabelField {
-  display: inline-block;
-  padding: 6px;
-  margin-right: 6px;
-  position: relative;
-  top: 1px;
-  appearance: none;
-  width: 15px;
-  height: 15px;
-  border: 1px solid $secondary-text;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: 0.2s;
-}
-input[type="radio"]:checked {
-  background-color: $accent;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.5);
-}
+// .DailyCaloriesLabelField {
+//   display: inline-block;
+//   padding: 6px;
+//   margin-right: 6px;
+//   position: relative;
+//   top: 1px;
+//   appearance: none;
+//   width: 15px;
+//   height: 15px;
+//   border: 1px solid $secondary-text;
+//   border-radius: 50%;
+//   cursor: pointer;
+//   transition: 0.2s;
+// }
+// input[type='radio']:checked {
+//   background-color: $accent;
+//   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.5);
+// }
 .DailyCaloriesFormButton {
   display: block;
   margin: 0 auto;
-  margin-bottom: 60px;
+}
+
+[type="radio"]:checked,
+[type="radio"]:not(:checked) {
+  position: absolute;
+  left: -9999px;
+}
+[type="radio"] + label,
+[type="radio"] + label {
+  position: relative;
+  padding-left: 28px;
+  cursor: pointer;
+  line-height: 20px;
+  display: inline-block;
+  color: #666;
+}
+[type="radio"] + label:before,
+[type="radio"] + label:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #ddd;
+  border-radius: 100%;
+  background: #fff;
+}
+[type="radio"] + label:after,
+[type="radio"] + label:after {
+  content: "";
+  width: 12px;
+  height: 12px;
+  background: $accent;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  border-radius: 100%;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+[type="radio"]:not(:checked) + label:after {
+  opacity: 0;
+  -webkit-transform: scale(0);
+  transform: scale(0);
+}
+[type="radio"]:checked + label:after {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  transform: scale(1);
 }
 @media screen and (min-width: 650px) {
+  .DailyCaloriesFormWrapper {
+    margin-bottom: 60px;
+    margin-top: 100px;
+    width: 605px;
+    height: 420px;
+  }
+  .DailyCaloriesFormGeneralWrapper {
+    display: flex;
+  }
+  .DailyCaloriesFormFieldsContainer {
+    margin-right: 30px;
+  }
+  .DailyCaloriesFormFirstWrapper {
+    flex-direction: row;
+  }
   .DailyCaloriesFormTitle {
     font-size: 30px;
     line-height: 1.529;
@@ -100,28 +171,30 @@ input[type="radio"]:checked {
   .DailyCaloriesFormInput {
     margin-bottom: 40px;
   }
-  .DailyCaloriesFormButton {
-    display: block;
-    margin: 0;
-    margin-bottom: 74px;
-  }
   .DailyCaloriesForm {
-    display: flex;
     width: 510px;
-    height: 186px;
-    margin-bottom: 60px;
+    // height: 186px;
+    // margin-bottom: 60px;
+    height: 290px;
   }
   .DailyCaloriesFormFieldsWrappers {
     margin-right: 31px;
   }
+  .DailyCaloriesFormButton {
+    margin: 0;
+  }
 }
 @media screen and (min-width: 1100px) {
+  // .DailyCaloriesFormFirstWrapper {
+  //   display: flex;
+  // }
   .DailyCaloriesFormWrapper {
-    width: 580px;
+    // padding-top: 137px;
+    width: 607px;
     height: 447px;
-    margin-top: 146px;
-    margin-left: 115px;
-    margin-right: 15px;
+    margin-top: 137px;
+    // margin-left: 115px;
+    // margin-right: 15px;
   }
   .DailyCaloriesFormTitle {
     font-size: 34px;
@@ -129,10 +202,10 @@ input[type="radio"]:checked {
     margin-bottom: 68px;
   }
   .DailyCaloriesForm {
-    margin-bottom: 25px;
+    width: 552px;
+    height: 294px;
   }
   .DailyCaloriesFormButton {
     margin-left: 300px;
-    margin-bottom: 111px;
   }
 }

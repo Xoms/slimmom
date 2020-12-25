@@ -1,15 +1,21 @@
 @import "../../shared-styles/reset";
 @import "../../shared-styles/mixins";
 @import "../../shared-styles/colors";
+// @import "../../shared-styles/container";
 
-header > .container {
+
+.mainHeader {
+  position: relative;
   display: flex;
   justify-content: space-between;
-  padding-top: 18px;
+  padding-top: 17px;
   padding-bottom: 18px;
+  border-bottom: 2px solid $header-border;
 
   @include for-size(desktop) {
+    border: 0;
     padding-top: 82px;
+    padding-bottom: 0;
     justify-content: start;
   }
 }
@@ -30,11 +36,17 @@ header > .container {
       content: "";
       display: inline-block;
       width: 3px;
-      height: 32px;
+      height: 30px;
       top: 35px;
       left: 190px;
     }
   }
+}
+.mobUserInfoWrap {
+  background-color: $secondary-beckground;
+  min-height: 40px;
+  padding-top: 13px;
+  padding-left: 200px;
 }
 
 .navigationAuth {
@@ -66,12 +78,13 @@ header > .container {
 .closeBtn {
   border: none;
   outline: none;
-  background-color: $main-background;
+  background-color: transparent;
   color: $main-text;
   font-size: 20px;
- 
+  padding-right: 30px;
+
   @include for-size(tablet){
-    margin-left: 50px;  
+    margin-left: 50px;
     padding-right: 30px;
   }
 

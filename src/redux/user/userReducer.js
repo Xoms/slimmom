@@ -10,24 +10,43 @@ const initialState = {
     notAllowedProducts: [],
   },
   eatenProducts: [],
-  daySummary: {}
+  daySummary: {},
+  currentDayId: null,
+  summaries: [],
 };
 
-
-
 const user = createReducer(initialState, {
+  [authActions.loginSuccess]: (state, { payload }) => ({
+    ...state,
+    ...payload,
+  }),
   [authActions.loginSuccess]: (state, { payload }) => payload.user,
-  [userActions.getCurrentUserSuccess]: (state, { payload }) => ({...state, ...payload}),
+  [userActions.getCurrentUserSuccess]: (state, { payload }) => ({
+    ...state,
+    ...payload,
+  }),
 
   [authActions.logoutSuccess]: () => initialState,
   [userActions.getDailyRateSuccess]: (state, { payload }) => ({
     ...state,
     ...payload,
   }),
-  [userActions.getProductsSuccess]: (state, {payload}) => ({
+  [userActions.getProductsSuccess]: (state, { payload }) => ({
     ...state,
-    daySummary: payload
-  })
+    ...payload,
+  }),
+  [userActions.addProductSuccess]: (state, { payload }) => ({
+    ...state,
+    ...payload,
+  }),
+  [userActions.deleteEatenProductSuccess]: (state, { payload }) => ({
+    ...state,
+    daySummary: { ...payload },
+  }),
+  [userActions.getDailyRateWithIdSuccess]: (state, { payload }) => ({
+    ...state,
+    ...payload,
+  }),
 });
 
 export default user;

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'https://slimmom-backend.goit.global/' //'https://slimmom-backend.herokuapp.com/';
+const url = 'https://slimmom-backend.goit.global/'; //'https://slimmom-backend.herokuapp.com/';
 
 axios.defaults.baseURL = url;
 
@@ -31,13 +31,15 @@ class PhonebookService {
     axios.defaults.headers.common.Authorization = ``;
   }
 
-  getDailyRate(userCharacteristics) {
+  getDailyRate(userCharacteristics, userId) {
+    if(userId) {
+      return axios.post(`/daily-rate/${userId}`, userCharacteristics);
+    } 
     return axios.post(`/daily-rate/`, userCharacteristics);
   }
 
   deleteEatenProduct(product) {
-    // product = (dayId, productId)
-    return axios.delete(`/day`, product);
+    return axios.delete(`/day`, { data: product });
   }
 
   searchProduct(query) {
