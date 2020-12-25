@@ -21,7 +21,7 @@ class DiaryProductsList extends Component {
     // }
     return (
       <ul className={`${styles.productList} ${styles.scrollbar}`}>
-        {products.length &&
+        {!!products.length &&
           products.map(product => {
             return (
               <DiaryProductsListItem
