@@ -5,16 +5,14 @@ import selectors from '../../redux/user/userSelectors';
 import classes from './rightSideBar.module.scss';
 
 function RightSideBar(props) {
-  const {
-    dailyRate,
-    percentsOfDailyRate,
-    kcalLeft,
-    kcalConsumed,
-    date,
-  } = props.daySummary;
-  const { notAllowedProducts } = props;
-
+  
+  const { notAllowedProducts, daySummary, summary } = props;
+  
+  const dailyNorm = summary ? summary : daySummary;
+  
+  const {date, kcalLeft,  kcalConsumed, dailyRate, percentsOfDailyRate} = dailyNorm
   return (
+    
     <>
       <section className={classes.section__rightSideBar}>
         <div className={classes.conteiner__rightSideBar}>
@@ -63,6 +61,7 @@ RightSideBar.defaultProps = {
 }
 
 const mapStateToProps = state => ({
+  summary: selectors.getCurrentDaySummary(state),
   daySummary: selectors.getDaySummary(state),
   notAllowedProducts: selectors.getnotAllowedProducts(state),
 });
