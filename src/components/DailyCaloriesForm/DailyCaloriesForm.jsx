@@ -65,10 +65,10 @@ class DailyCaloriesForm extends Component {
         </h2>
         <Formik
           initialValues={{
-            height: "170",
-            weight: "99",
-            age: "26",
-            desiredWeight: "55",
+            height: "",
+            weight: "",
+            age: "",
+            desiredWeight: "",
             bloodType: "1",
           }}
           validationSchema={formSchema}
@@ -81,9 +81,15 @@ class DailyCaloriesForm extends Component {
               <div className={styles.DailyCaloriesFormGeneralWrapper}>
                 <div className={styles.DailyCaloriesFormFieldsContainer}>
                   <div className={styles.DailyCaloriesFormFieldsWrapper}>
+                    <label
+                      htmlFor="height"
+                      className={styles.DailyCaloriesFormFieldsLabelText}
+                    >
+                      Рост *
+                    </label>
                     <Field
+                      id="height"
                       name="height"
-                      placeholder="Рост *"
                       className={`${styles.DailyCaloriesFormInput} ${
                         errors.height && touched.height ? styles.errorInput : ""
                       }`}
@@ -95,9 +101,15 @@ class DailyCaloriesForm extends Component {
                     />
                   </div>
                   <div className={styles.DailyCaloriesFormFieldsWrapper}>
+                    <label
+                      htmlFor="age"
+                      className={styles.DailyCaloriesFormFieldsLabelText}
+                    >
+                      Возраст *
+                    </label>
                     <Field
+                      id="age"
                       name="age"
-                      placeholder="Возраст *"
                       className={`${styles.DailyCaloriesFormInput} ${
                         errors.age && touched.age ? styles.errorInput : ""
                       }`}
@@ -109,13 +121,20 @@ class DailyCaloriesForm extends Component {
                     />
                   </div>
                   <div className={styles.DailyCaloriesFormFieldsWrapper}>
+                    <label
+                      htmlFor="weight"
+                      className={styles.DailyCaloriesFormFieldsLabelText}
+                    >
+                      Текущий вес *
+                    </label>
                     <Field
+                      id="weight"
                       name="weight"
-                      placeholder="Текущий вес *"
                       className={`${styles.DailyCaloriesFormInput} ${
                         errors.weight && touched.weight ? styles.errorInput : ""
                       }`}
                     />
+
                     <ErrorMessage
                       name="weight"
                       component="p"
@@ -125,15 +144,22 @@ class DailyCaloriesForm extends Component {
                 </div>
                 <div>
                   <div className={styles.DailyCaloriesFormFieldsWrapper}>
+                    <label
+                      htmlFor="desiredWeight"
+                      className={styles.DailyCaloriesFormFieldsLabelText}
+                    >
+                      Желаемый вес *
+                    </label>
                     <Field
+                      id="desiredWeight"
                       name="desiredWeight"
-                      placeholder="Желаемый вес *"
                       className={`${styles.DailyCaloriesFormInput} ${
                         errors.desiredWeight && touched.desiredWeight
                           ? styles.errorInput
                           : ""
                       }`}
                     />
+
                     <ErrorMessage
                       name="desiredWeight"
                       component="p"
