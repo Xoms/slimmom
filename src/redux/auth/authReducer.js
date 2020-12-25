@@ -13,8 +13,8 @@ const accessToken = createReducer(null, {
 // })
 
 const sid = createReducer(null, {
-    [authActions.refreshSuccess]: (state, { payload }) => payload.sid,
-    [authActions.loginSuccess]: (state, { payload }) => payload.sid,
+    [authActions.refreshSuccess]: (state, { payload }) => payload.auth.sid,
+    [authActions.loginSuccess]: (state, { payload }) => payload.auth.sid,
     [authActions.logoutSuccess]: () => null
 })
 
