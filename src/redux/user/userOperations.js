@@ -17,7 +17,7 @@ const getCurrentUser = () => (dispatch, getState) => {
     .getCurrentUser()
     .then(({ data }) => {
       const { username, id, userData } = data;
-      const userInfo = { username, id, userData };
+      const userInfo = { username, id, userData, summaries: [] };
       dispatch(userActions.getCurrentUserSuccess(userInfo));
     })
     .catch(err => dispatch(userActions.getCurrentUserError(err)));

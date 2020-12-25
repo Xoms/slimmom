@@ -28,7 +28,7 @@ class CalculatorPage extends Component {
   }
 
   render() {
-    const dailyNorm = {...this.props.summary } || this.dailyNorm 
+    const dailyNorm = {...this.getDailyNorm()}
     console.log(dailyNorm);
     return (
       <Fragment>
@@ -56,7 +56,8 @@ const mapStateToProps = (state)=> ({
   summmary: userSelectors.getCurrentDaySummary(state),
   //summmary: userSelectors.getSummary(state),
   dayId: userSelectors.getCurrentDayId(state),
-  daySummary: userSelectors.getDaySummary(state)
+  daySummary: userSelectors.getDaySummary(state),
+  
 })
 
 const mapDispatchToProps = {
