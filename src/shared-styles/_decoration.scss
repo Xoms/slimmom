@@ -190,6 +190,25 @@ section.decoration-login {
   }
 }
 //todo ======================CALCULATION PAGE =================================
+@media screen and (min-width: 320px) {
+  section.decoration-calculation {
+    position: absolute;
+    top: 110px;
+    z-index: -1000;
+    width: 100vw;
+    min-height: 1024px;
+    height: 100%;
+    overflow: hidden;
+    background: linear-gradient(
+      180deg,
+      #fff,
+      #fff 591px,
+      $secondary-beckground 591px,
+      $secondary-beckground 100%
+    );
+  }
+}
+
 @media screen and (min-width: 650px) {
   section.decoration-calculation {
     position: absolute;
