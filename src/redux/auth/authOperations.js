@@ -23,7 +23,7 @@ const login = credentials => (dispatch) => {
     
             const  { user: {username, id, userData}, accessToken, sid } = data;
             
-            const userInfo = { auth: {accessToken, sid}, user: {username, id, userData, eatenProducts : [], daySummary: {} } }
+            const userInfo = { auth: {accessToken, sid}, user: {username, id, userData, eatenProducts : [], daySummary: {}, summaries: [] } }
             dispatch(authActions.loginSuccess(userInfo));
         })
         .catch( err => dispatch(authActions.loginError(err)));
