@@ -1,5 +1,5 @@
-@import "../../shared-styles/colors";
-@import "../../shared-styles/mixins";
+@import '../../shared-styles/colors';
+@import '../../shared-styles/mixins';
 .DailyCaloriesFormFirstWrapper {
   display: flex;
   flex-direction: column;
@@ -7,7 +7,7 @@
 .DailyCaloriesFormWrapper {
   // padding-top: 30px;
   width: 100%;
-  font-family: "Verdana";
+  font-family: 'Verdana';
 }
 .DailyCaloriesFormTitle {
   color: $main-text;
@@ -26,7 +26,7 @@
 }
 .DailyCaloriesForm {
   width: 240px;
-  height: 354px;
+  height: 100%;
   margin-bottom: 40px;
 }
 .DailyCaloriesFormBloodWrapper {
@@ -36,7 +36,7 @@
   position: relative;
 }
 .DailyCaloriesFormInput {
-  font-family: "VerdanaBold";
+  font-family: 'VerdanaBold';
   font-size: 14px;
   line-height: 1.215;
   letter-spacing: 0.04em;
@@ -86,7 +86,7 @@
   cursor: pointer;
   transition: 0.2s;
 }
-input[type="radio"]:checked {
+input[type='radio']:checked {
   background-color: $accent;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.5);
 }
@@ -108,7 +108,7 @@ input[type="radio"]:checked {
   }
   .DailyCaloriesForm {
     width: 510px;
-    height: 186px;
+    // height: 186px;
     margin-bottom: 60px;
   }
   .DailyCaloriesFormFieldsWrappers {
@@ -128,7 +128,6 @@ input[type="radio"]:checked {
     height: 447px;
     // margin-left: 115px;
     // margin-right: 15px;
-
   }
   .DailyCaloriesFormTitle {
     font-size: 34px;
