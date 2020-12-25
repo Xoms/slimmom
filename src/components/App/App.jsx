@@ -1,6 +1,7 @@
 import React, { Component, Suspense, lazy } from 'react';
 import { Route, Switch } from 'react-router-dom';
-
+import jwt_decode from "jwt-decode";
+// import debounce from 'lodash.debounce';
 import { connect } from 'react-redux';
 import { getCurrentUser } from '../../redux/user/userOperations';
 import {authOperations, authSelectors} from '../../redux/auth';
@@ -21,10 +22,37 @@ class App extends Component {
   componentDidMount() {
     this.props.getCurrentUser();
   }
+  componentDidUpdate(prevProps, prevState, snapshot) {
+
+    if(prevProps.authError !== this.props.authError) {
+      this.props.refreshToken()
+    }
+    // if((this.props.authError && this.props.authError.toLowerCase().includes('unauthorized')) 
+    // || (this.props.authError && this.props.authError.toLowerCase().includes('invalid'))) {
+      
+    //}
+  }
+
+  handleCheckExpToken = () => {
+    // if(!this.props.accessToken) {
+    //   return
+    // }
+
+    // const token = this.props.accessToken;
+    // const exp = 1608901189898;
+    // // const {exp} = jwt_decode(token);
+    // const date = Date.now(); // Date.now() минус 5 мин до конца действия токена 
+    // console.log("date", date);
+    // console.log("exp", exp);
+    // // console.log(Date.now() + 60000);
+
+    // if(date > exp) {
+    //   console.log("object");
+    //   this.props.refreshToken()
+    // }
+  }
 
   render() {
-    
-    
     const routesMap = routes.map(route => {
       return route.privated ? (
         <PrivateRoute key={route.path} {...route} />
@@ -52,7 +80,7 @@ App.propTypes = {
 
 const mapStateToProps = (state) => ({
   authError : globalSelectors.getError(state),
-  sid : authSelectors.sid(state) 
+  accessToken: authSelectors.getToken(state),
 })
 const mapDispatch = {
   getCurrentUser,

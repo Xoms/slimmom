@@ -12,6 +12,7 @@ const {
   logoutSuccess,
   logoutError,
   clearError,
+  refreshError,
 } = { ...authActions };
 
 const {
@@ -35,6 +36,7 @@ const error = createReducer(null, {
   [clearError]: () => null,
   [getDailyRateError]: (state, { payload }) => payload.message,
   [clearError]: () => null,
+  [refreshError]: (state, { payload }) => payload.message,
 });
 
 const loading = createReducer(false, {

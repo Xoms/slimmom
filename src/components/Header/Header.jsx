@@ -8,6 +8,7 @@ import NavigationBar from '../NavigationBar';
 import UserInfo from '../UserInfo';
 import AuthNavigations from '../AuthNavigations';
 import styles from "./Header.module.scss"
+import '../../shared-styles/_container.scss'
 import withAuth from "../hocs/withAuth"
 
 class Header extends Component {
@@ -16,6 +17,9 @@ class Header extends Component {
   }
   handleToggle = () => {
     this.setState({ isOpen: !this.state.isOpen })
+  }
+  handleIsOpenLogout = () => {
+    this.setState({ isOpen: false })
   }
 
   render() {
@@ -83,7 +87,7 @@ class Header extends Component {
                         <>{isAuth ? (
                           <div className={styles.navigationAuth}>
                             {/* сюда вставить UserMenu */}
-                            {isAuth && <div><UserInfo /></div>}
+                            {isAuth && <div><UserInfo onClick={this.handleIsOpenLogout}/></div>}
 
                             {!isOpen ? (
                               <Burger onClick={this.handleToggle}/>
@@ -126,7 +130,19 @@ class Header extends Component {
                 >
                 {(matches) => (
                   <Fragment>
-                  {matches.small && isAuth && <div className={styles.mobUserInfoWrap}><UserInfo /></div>}
+                  {matches.small && isAuth && 
+                  <section className={styles.userInfoSection}>
+
+                  <div className="container">
+
+                  <div 
+                  className={`${styles.mobUserInfoWrap}`}>
+                    <UserInfo 
+                  onClick={this.handleIsOpenLogout}/>
+                  </div>
+                  </div>
+                  </section>
+                  }
                   </Fragment>
                   )
                 }

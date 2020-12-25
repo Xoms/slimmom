@@ -21,9 +21,9 @@ const login = credentials => (dispatch) => {
         .then(({data}) => {
             api.setToken(data.accessToken);
     
-            const  { user: {username, id, userData}, accessToken } = data;
+            const  { user: {username, id, userData}, accessToken, refreshToken, sid } = data;
             
-            const userInfo = { auth: {accessToken}, user: {username, id, userData, eatenProducts : [], daySummary: {} } }
+            const userInfo = { auth: {accessToken, refreshToken, sid}, user: {username, id, userData, eatenProducts : [], daySummary: {} } }
             dispatch(authActions.loginSuccess(userInfo));
         })
         .catch( err => dispatch(authActions.loginError(err)));
@@ -40,13 +40,19 @@ const logout = () => dispatch => {
         .catch( err => dispatch(authActions.logoutError(err)));
 }
 
-const refresh = sid => dispatch => {
+const refresh = () => (dispatch, getState) => {
     dispatch(authActions.refreshRequest());
+    const {auth: {sid, refreshToken, accessToken}} = getState();
 
-    api.refresh(sid)
+    api.setToken(refreshToken);
+
+    api.refresh({sid: sid})
         .then(({data}) => {
-            api.setToken(data.newAccessToken);
+            console.log("refresh Data",data);
             dispatch(authActions.refreshSuccess(data.newAccessToken));
+        })
+        .catch(err => {
+            return dispatch(authActions.refreshError(err))
         })
 }
 
