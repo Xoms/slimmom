@@ -39,6 +39,7 @@ const getDailyRateWithId = (userCharacteristics, userId) => dispatch => {
   api
     .getDailyRate(userCharacteristics, userId)
     .then(({ data }) => {
+      console.log(data);
       const { summaries, dailyRate } = data;
       const payload = { summaries, dailyRate };
       return dispatch(userActions.getDailyRateWithIdSuccess(payload));
