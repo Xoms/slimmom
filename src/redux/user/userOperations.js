@@ -106,8 +106,25 @@ const deleteEatenProduct = (product, date) => dispatch => {
   api
     .deleteEatenProduct(product)
     .then(({ data }) => {
-      // console.log(data);
-      getProducts(date);
+      api
+        .getProducts({ date })
+        .then(({ data }) => {
+          let payload = {};
+          if (data.daySummary) {
+            const { daySummary, eatenProducts, id } = data;
+            payload = { daySummary, eatenProducts, currentDayId: id };
+          } else {
+            payload = {
+              daySummary: { ...data },
+              eatenProducts: [],
+              currentDayId: null,
+            };
+            // payload.daySummary = { ...data };
+          }
+          dispatch(userActions.getProductsSuccess(payload));
+        })
+        .catch(err => dispatch(userActions.getProductsError(err)));
+
       return dispatch(
         userActions.deleteEatenProductSuccess(data.newDaySummary),
       );

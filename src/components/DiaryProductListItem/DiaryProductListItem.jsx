@@ -16,6 +16,7 @@ const DiaryProductListItem = ({
   deleteProduct,
   date,
 }) => {
+  console.log(date);
   return (
     <li className={styles.list}>
       <span className={styles.listName}>{name}</span>
