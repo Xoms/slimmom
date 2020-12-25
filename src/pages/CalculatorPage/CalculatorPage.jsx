@@ -16,21 +16,12 @@ class CalculatorPage extends Component {
       const today = new Date().toJSON().slice(0, 10);
       this.props.getProducts({ date: today });
     }
-    // } else {
-    // this.dailyNorm = this.getDailyNorm();
-    // }
-    // console.log(this.dailyNorm);
+
   }
 
-  // getDailyNorm() {
-  //   if (this.props.summary) {
-  //     return this.props.summary;
-  //   }
-  //   return this.props.daySummary;
-  // }
+
 
   render() {
-    // const dailyNorm = { ...this.getDailyNorm() };
     return (
       <Fragment>
         <Decoration isCalculationPage={true} />
