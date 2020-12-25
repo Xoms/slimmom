@@ -16,7 +16,6 @@ function RightSideBar(props) {
 
   return (
     <>
-      <div className={classes.section__background}></div>
       <section className={classes.section__rightSideBar}>
         <div className={classes.conteiner__rightSideBar}>
           <div className={classes.rightSideBar}>
@@ -32,9 +31,9 @@ function RightSideBar(props) {
                 </ul>
                 <ul className={classes.sideBar__list}>
                   <li>{kcalLeft} ккал</li>
-                  <li>{kcalConsumed} ккал</li>
+                  <li>{Math.round(kcalConsumed)} ккал</li>
                   <li>{dailyRate} ккал</li>
-                  <li>{percentsOfDailyRate} %</li>
+                  <li>{Math.round(percentsOfDailyRate)} %</li>
                 </ul>
               </div>
             </div>

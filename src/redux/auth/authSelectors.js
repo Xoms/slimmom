@@ -1,6 +1,6 @@
-const getUserName = (state) => state.auth.user.name;
+const sid = (state) => state.auth.sid;
 const getToken = state => state.auth.accessToken;
 
 
-const selectors =  {getUserName, getToken}
+const selectors =  {sid, getToken}
 export default selectors

@@ -2,7 +2,7 @@
     margin: 0 auto;
     padding-left: 15px;
     padding-right: 15px;
-    width: 320px;  
+    width: 320px;
     @include for-size(tablet) {
       width: 650px;
     }

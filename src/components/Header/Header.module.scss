@@ -4,26 +4,19 @@
 // @import "../../shared-styles/container";
 
 
-header {
-  background-color: transparent;
-  position: static;
-  @include for-size(desktop) {
-    position: fixed;
-    z-index: 2;
-    
-  }
-}
-header > .container {
+.mainHeader {
+  position: relative;
   display: flex;
   justify-content: space-between;
-  padding-top: 18px;
+  padding-top: 17px;
   padding-bottom: 18px;
-  border-bottom: 2px silver;
+  border-bottom: 2px solid $header-border;
 
   @include for-size(desktop) {
     border: 0;
-    // padding-top: 82px;
-    // justify-content: start;
+    padding-top: 82px;
+    padding-bottom: 0;
+    justify-content: start;
   }
 }
 
@@ -89,9 +82,9 @@ header > .container {
   color: $main-text;
   font-size: 20px;
   padding-right: 30px;
- 
+
   @include for-size(tablet){
-    margin-left: 50px;  
+    margin-left: 50px;
     padding-right: 30px;
   }
 

@@ -5,11 +5,15 @@ import back from '../../img/back-arrow.svg';
 import api from '../../services/backend.service';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import debounce from 'lodash.debounce';
+import { connect } from 'react-redux';
+import { addProduct } from '../../redux/user/userOperations';
 
 class DiaryAddProductForm extends Component {
   state = {
     renderMarker: false,
     products: [],
+    choosenProductId: '',
+    error: null,
   };
 
   handleClick = () => {
@@ -18,24 +22,40 @@ class DiaryAddProductForm extends Component {
     });
   };
 
-  debouncedSearch = debounce(
-    query =>
-      api
-        .searchProduct(query)
-        .then(({ data }) => {
-          console.log(data);
-          this.setState({ products: data });
-        })
-        .catch(err => this.setState({ products: [] })),
-    2000,
-  );
+  debouncedSearch = debounce(query => {
+    if (query === '') {
+      return;
+    }
+
+    api
+      .searchProduct(query)
+      .then(({ data }) => {
+        console.log(data);
+        this.setState({ products: data });
+        if (data.length === 1) {
+          this.setState({ choosenProductId: data[0]._id });
+        }
+      })
+      .catch(err => this.setState({ products: [], error: err.message })); //добавить обработку ошибки и её отображение вместо списка подсказок
+  }, 400);
 
   hanleChange = ({ target }) => {
     this.debouncedSearch(target.value);
   };
 
-  handleSubmit = event => {
-    event.preventDefault();
+  handleSubmit = ({ weight }) => {
+    const product = {
+      date: this.props.date,
+      productId: this.state.choosenProductId,
+      weight: weight,
+    };
+
+    this.props.addProduct(product);
+
+    // api
+    //   .addProduct(product)
+    //   .then(data => console.log(data))
+    //   .catch(err => this.setState({ error: err.message }));
   };
 
   render() {
@@ -46,15 +66,19 @@ class DiaryAddProductForm extends Component {
           weight: '',
           product: '',
         }}
-        onSubmit={this.handleSubmit}
+        onSubmit={values => {
+          this.handleSubmit(values);
+        }}
       >
         {({ setFieldValue, handleChange, handleBlur }) => (
           <Form className="modal-form">
             <Field
-              // onBlur={e => {
-              //   handleBlur(e);
-              //   this.setState({ products: [] });
-              // }} поставить задержку
+              onBlur={e => {
+                handleBlur(e);
+                setTimeout(() => {
+                  this.setState({ products: [] });
+                }, 300);
+              }} //поставить задержку
               onChange={e => {
                 handleChange(e);
                 this.hanleChange(e);
@@ -65,20 +89,24 @@ class DiaryAddProductForm extends Component {
               type="text"
               autoComplete="off"
             />
-            <div className="autocomplete">
-              {!!products.length &&
-                products.map(product => (
+            {!!products.length && (
+              <ul className="autocomplete">
+                {products.map(product => (
                   <li
                     key={product._id}
                     onClick={() => {
                       setFieldValue('product', product.title.ru);
-                      this.setState({ products: [] });
+                      this.setState({
+                        products: [],
+                        choosenProductId: product._id,
+                      });
                     }}
                   >
                     {product.title.ru}
                   </li>
                 ))}
-            </div>
+              </ul>
+            )}
             <Field name="weight" placeholder="Граммы" type="number" />
             <Button type="submit" className="secondary-button">
               Добавить
@@ -138,4 +166,8 @@ class DiaryAddProductForm extends Component {
   }
 }
 
-export default DiaryAddProductForm;
+const mapDispatchToProps = {
+  addProduct,
+};
+
+export default connect(null, mapDispatchToProps)(DiaryAddProductForm);

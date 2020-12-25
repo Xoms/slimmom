@@ -5,6 +5,8 @@ import { getDailyRate } from "../../redux/user/userOperations";
 import { connect } from "react-redux";
 import Button from "../shared/Button";
 import styles from "./DailyCaloriesForm.module.scss";
+import Modal from "../Modal";
+import globalSelectors from "../../redux/global/globalSelectors";
 
 const formSchema = Yup.object().shape({
   height: Yup.string()
@@ -27,7 +29,23 @@ class DailyCaloriesForm extends Component {
     showModal: false,
   };
 
-  toggleModal = () => {};
+  toggleModal = () => {
+    this.setState((prevState) => ({
+      showModal: !prevState.showModal,
+    }));
+  };
+
+  getCalculations = (values) => {
+    const userCharacteristics = {
+      height: +values.height,
+      weight: +values.weight,
+      age: +values.age,
+      desiredWeight: +values.desiredWeight,
+      bloodType: +values.bloodType,
+    };
+    this.props.getDailyRate(userCharacteristics);
+    this.toggleModal();
+  };
 
   render() {
     return (
@@ -45,20 +63,13 @@ class DailyCaloriesForm extends Component {
           }}
           validationSchema={formSchema}
           onSubmit={(values) => {
-            const userCharacteristics = {
-              height: +values.height,
-              weight: +values.weight,
-              age: +values.age,
-              desiredWeight: +values.desiredWeight,
-              bloodType: +values.bloodType,
-            };
-            this.props.getDailyRate(userCharacteristics);
+            this.getCalculations(values);
           }}
         >
           {({ errors, touched }) => (
-            <>
-              <Form className={styles.DailyCaloriesForm}>
-                <div className={styles.DailyCaloriesFormFieldsWrappers}>
+            <Form className={styles.DailyCaloriesForm}>
+              <div className={styles.DailyCaloriesFormGeneralWrapper}>
+                <div className={styles.DailyCaloriesFormFieldsContainer}>
                   <div className={styles.DailyCaloriesFormFieldsWrapper}>
                     <Field
                       name="height"
@@ -119,77 +130,101 @@ class DailyCaloriesForm extends Component {
                       className={styles.errorMessage}
                     />
                   </div>
+                  <h3 className={styles.DailyCaloriesFormBloodTitle}>
+                    Группа крови *
+                  </h3>
                   <div className={styles.DailyCaloriesFormBloodWrapper}>
-                    <h3 className={styles.DailyCaloriesFormBloodTitle}>
-                      Группа крови *
-                    </h3>
-                    <label
-                      htmlFor="bloodType_1"
-                      className={styles.DailyCaloriesFormLabel}
-                    >
+                    <div>
                       <Field
+                        id="I"
                         type="radio"
                         name="bloodType"
                         value="1"
                         className={styles.DailyCaloriesLabelField}
                       />
-                      1
-                    </label>
-                    <label
-                      htmlFor="bloodType_2"
-                      className={styles.DailyCaloriesFormLabel}
-                    >
+                      <label
+                        htmlFor="I"
+                        className={styles.DailyCaloriesFormLabel}
+                      >
+                        1
+                      </label>
+                    </div>
+                    <div>
                       <Field
+                        id="II"
                         type="radio"
                         name="bloodType"
                         value="2"
                         className={styles.DailyCaloriesLabelField}
                       />
-                      2
-                    </label>
-                    <label
-                      htmlFor="bloodType_3"
-                      className={styles.DailyCaloriesFormLabel}
-                    >
+                      <label
+                        htmlFor="II"
+                        className={styles.DailyCaloriesFormLabel}
+                      >
+                        2
+                      </label>
+                    </div>
+                    <div>
                       <Field
+                        id="III"
                         type="radio"
                         name="bloodType"
                         value="3"
                         className={styles.DailyCaloriesLabelField}
                       />
-                      3
-                    </label>
-                    <label
-                      htmlFor="bloodType_4"
-                      className={styles.DailyCaloriesFormLabel}
-                    >
+                      <label
+                        htmlFor="III"
+                        className={styles.DailyCaloriesFormLabel}
+                      >
+                        3
+                      </label>
+                    </div>
+                    <div>
                       <Field
+                        id="IV"
                         type="radio"
                         name="bloodType"
                         value="4"
                         className={styles.DailyCaloriesLabelField}
                       />
-                      4
-                    </label>
+                      <label
+                        htmlFor="IV"
+                        className={styles.DailyCaloriesFormLabel}
+                      >
+                        4
+                      </label>
+                    </div>
                   </div>
                 </div>
-              </Form>
+              </div>
               <Button
                 type="submit"
                 className={`primary-button ${styles.DailyCaloriesFormButton}`}
               >
                 Похудеть
               </Button>
-            </>
+            </Form>
           )}
         </Formik>
+        {this.state.showModal &&
+          !this.props.isLoading &&
+          !this.props.noModal && (
+            <Modal
+              toggleModal={this.toggleModal}
+              showModal={this.state.showModal}
+            />
+          )}
       </div>
     );
   }
 }
 
+const mapStateToProps = (state) => ({
+  isLoading: globalSelectors.getLoading(state),
+});
+
 const mapDispatchToProps = {
   getDailyRate,
 };
 
-export default connect(null, mapDispatchToProps)(DailyCaloriesForm);
+export default connect(mapStateToProps, mapDispatchToProps)(DailyCaloriesForm);
