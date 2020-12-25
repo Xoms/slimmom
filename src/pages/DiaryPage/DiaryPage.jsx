@@ -46,11 +46,13 @@ class DiaryPage extends Component {
   render() {
     return this.state.screenWidth < 650 ? (
       <>
+      <div className={css.pageWrapper}>
         <SetDate value={this.changeDate} />
-        {/* прокинуть пропсами айди дня */}
-        <DiaryProductsList />
-        <DiaryAddProductForm date={this.state.date} mobile={true} />
-        <RightSideBar />
+          {/* прокинуть пропсами айди дня */}
+          <DiaryProductsList />
+          <DiaryAddProductForm date={this.state.date} mobile={true} />
+      </div>
+      <RightSideBar />
       </>
     ) : (
 
