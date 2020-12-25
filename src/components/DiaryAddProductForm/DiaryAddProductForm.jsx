@@ -82,6 +82,7 @@ class DiaryAddProductForm extends Component {
             <Field
               onBlur={e => {
                 handleBlur(e);
+                this.setState({showUl: false});
                 setTimeout(() => {
                   this.setState({ products: [] });
                 }, 300);
@@ -97,7 +98,7 @@ class DiaryAddProductForm extends Component {
               type="text"
               autoComplete="off"
             />
-
+            
             {!!products.length && (
             <div className="product-list-wrapper">
             <CSSTransition in={this.state.showUl} unmountOnExit classNames="search-list" timeout={500}>
@@ -119,7 +120,9 @@ class DiaryAddProductForm extends Component {
 
             </ul>
             </CSSTransition>
-            </div> )}
+            </div> 
+            )}
+            
             <Field className="gramms" name="weight" placeholder="Граммы" type="number" />
             {window.visualViewport.width < 650 ? <Button type="submit" className="secondary-button">Добавить</Button> : <Button type="submit" className="plus-button">+</Button>}
 
