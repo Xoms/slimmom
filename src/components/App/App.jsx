@@ -34,7 +34,6 @@ class App extends Component {
 
     return (
      <>
-      {this.props.isLoading && <Loader />}
         <Layout>
           <Suspense fallback={<Loader />}>
             <Switch>
