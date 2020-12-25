@@ -147,21 +147,6 @@ class DiaryAddProductForm extends Component {
                     </label>
             {window.visualViewport.width < 650 ? <Button type="submit" className="secondary-button">Добавить</Button> : <Button type="submit" className="plus-button">+</Button>}
 
-            <Field
-              className="gramms"
-              name="weight"
-              placeholder="Граммы"
-              type="number"
-            />
-            {window.visualViewport.width < 650 ? (
-              <Button type="submit" className="secondary-button">
-                Добавить
-              </Button>
-            ) : (
-              <Button type="submit" className="plus-button">
-                +
-              </Button>
-            )}
           </Form>
         )}
       </Formik>
