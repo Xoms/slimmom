@@ -4,7 +4,6 @@ import styles from './DiaryProductsList.module.scss';
 import DiaryProductsListItem from '../DiaryProductListItem';
 import { getProducts } from '../../redux/user/userOperations.js';
 import selectors from '../../redux/user/userSelectors';
-// import withAuth from "../hocs/withAuth"
 import { connect } from 'react-redux';
 
 class DiaryProductsList extends Component {
@@ -20,12 +19,10 @@ class DiaryProductsList extends Component {
     // if (!products) {
     //   products = [];
     // }
-    console.log(products);
     return (
       <ul className={`${styles.productList} ${styles.scrollbar}`}>
         {products.length &&
           products.map(product => {
-            console.log(product);
             return (
               <DiaryProductsListItem
                 key={product.id}

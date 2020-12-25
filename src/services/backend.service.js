@@ -39,7 +39,6 @@ class PhonebookService {
   }
 
   deleteEatenProduct(product) {
-    // product = (dayId, productId)
     return axios.delete(`/day`, { data: product });
   }
 
