@@ -7,7 +7,7 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 import debounce from 'lodash.debounce';
 import { connect } from 'react-redux';
 import { addProduct } from '../../redux/user/userOperations';
-import {CSSTransition} from 'react-transition-group';
+import { CSSTransition } from 'react-transition-group';
 
 class DiaryAddProductForm extends Component {
   state = {
@@ -43,7 +43,7 @@ class DiaryAddProductForm extends Component {
 
   hanleChange = ({ target }) => {
     this.debouncedSearch(target.value);
-    this.setState({showUl: true});
+    this.setState({ showUl: true });
   };
 
   // handleBlur = ({target}) => {
@@ -82,7 +82,7 @@ class DiaryAddProductForm extends Component {
             <Field
               onBlur={e => {
                 handleBlur(e);
-                this.setState({showUl: false});
+                this.setState({ showUl: false });
                 setTimeout(() => {
                   this.setState({ products: [] });
                 }, 300);
@@ -98,34 +98,45 @@ class DiaryAddProductForm extends Component {
               type="text"
               autoComplete="off"
             />
-            
+
             {!!products.length && (
-            <div className="product-list-wrapper">
-            <CSSTransition in={this.state.showUl} unmountOnExit classNames="search-list" timeout={500}>
-              <ul className="autocomplete">
-                {products.map(product => (
-                  <li
-                    key={product._id}
-                    onClick={() => {
-                      setFieldValue('product', product.title.ru);
-                      this.setState({
-                        products: [],
-                        choosenProductId: product._id,
-                      });
-                    }}
-                  >
-                    {product.title.ru}
-                  </li>
-                ))}
-
-            </ul>
-            </CSSTransition>
-            </div> 
+              <div className="product-list-wrapper">
+                {/* <CSSTransition in={this.state.showUl} unmountOnExit classNames="search-list" timeout={500}> */}
+                <ul className="autocomplete">
+                  {products.map(product => (
+                    <li
+                      key={product._id}
+                      onClick={() => {
+                        setFieldValue('product', product.title.ru);
+                        this.setState({
+                          products: [],
+                          choosenProductId: product._id,
+                        });
+                      }}
+                    >
+                      {product.title.ru}
+                    </li>
+                  ))}
+                </ul>
+                {/* </CSSTransition> */}
+              </div>
             )}
-            
-            <Field className="gramms" name="weight" placeholder="Граммы" type="number" />
-            {window.visualViewport.width < 650 ? <Button type="submit" className="secondary-button">Добавить</Button> : <Button type="submit" className="plus-button">+</Button>}
 
+            <Field
+              className="gramms"
+              name="weight"
+              placeholder="Граммы"
+              type="number"
+            />
+            {window.visualViewport.width < 650 ? (
+              <Button type="submit" className="secondary-button">
+                Добавить
+              </Button>
+            ) : (
+              <Button type="submit" className="plus-button">
+                +
+              </Button>
+            )}
           </Form>
         )}
       </Formik>
