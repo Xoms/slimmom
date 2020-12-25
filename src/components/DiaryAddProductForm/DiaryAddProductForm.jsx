@@ -4,10 +4,16 @@ import Button from '../shared/Button/Button';
 import back from '../../img/back-arrow.svg';
 import api from '../../services/backend.service';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
+import * as Yup from "yup";
 import debounce from 'lodash.debounce';
 import { connect } from 'react-redux';
 import { addProduct } from '../../redux/user/userOperations';
 import {CSSTransition} from 'react-transition-group';
+
+const AddProdSchema = Yup.object().shape({
+  product: Yup.string().required('Обязательное поле *'),
+  weight: Yup.number().required('Обязательное поле *'),
+});
 
 class DiaryAddProductForm extends Component {
   state = {
@@ -42,8 +48,9 @@ class DiaryAddProductForm extends Component {
   }, 400);
 
   hanleChange = ({ target }) => {
-    this.debouncedSearch(target.value);
     this.setState({showUl: true});
+    this.debouncedSearch(target.value);
+    this.setState({error: null})
   };
 
   // handleBlur = ({target}) => {
@@ -76,9 +83,11 @@ class DiaryAddProductForm extends Component {
         onSubmit={values => {
           this.handleSubmit(values);
         }}
+        validationSchema={AddProdSchema}
       >
         {({ setFieldValue, handleChange, handleBlur }) => (
           <Form className="modal-form">
+            <label className='form-label'>
             <Field
               onBlur={e => {
                 handleBlur(e);
@@ -98,9 +107,14 @@ class DiaryAddProductForm extends Component {
               type="text"
               autoComplete="off"
             />
-            
-            {!!products.length && (
+            <ErrorMessage
+                      className='valid-field'
+                      name="product"
+                      component="span"
+                    />
+                    </label>
             <div className="product-list-wrapper">
+            {!!products.length ? (
             <CSSTransition in={this.state.showUl} unmountOnExit classNames="search-list" timeout={500}>
               <ul className="autocomplete">
                 {products.map(product => (
@@ -117,13 +131,18 @@ class DiaryAddProductForm extends Component {
                     {product.title.ru}
                   </li>
                 ))}
-
             </ul>
             </CSSTransition>
+            ) : this.state.error && <p className="error-mes">{this.state.error}</p>}
             </div> 
-            )}
-            
+            <label className='form-label'>
             <Field className="gramms" name="weight" placeholder="Граммы" type="number" />
+            <ErrorMessage
+                      className='valid-field'
+                      name="weight"
+                      component="span"
+                    />
+                    </label>
             {window.visualViewport.width < 650 ? <Button type="submit" className="secondary-button">Добавить</Button> : <Button type="submit" className="plus-button">+</Button>}
 
           </Form>
