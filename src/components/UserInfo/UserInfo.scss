@@ -1,5 +1,5 @@
-@import "../../shared-styles/colors";
-@import "../../shared-styles//mixins";
+@import '../../shared-styles/colors';
+@import '../../shared-styles//mixins';
 
 .user-info-wrapper {
   font-family: Verdana;
@@ -19,19 +19,19 @@
   }
 }
 .user-info-wrapper-item:last-child {
-//   @include for-size(desktop) {
-    &::after {
-      position: absolute;
+  //   @include for-size(desktop) {
+  &::after {
+    position: absolute;
 
-      background-color: #e0e0e0;
-      content: "";
-      display: inline-block;
-      width: 3px;
-      height: 30px;
-      top: -8px;
-      left: 42px;
-    }
-//   }
+    background-color: #e0e0e0;
+    content: '';
+    display: inline-block;
+    width: 3px;
+    height: 30px;
+    top: -8px;
+    left: 42px;
+  }
+  //   }
 }
 
 .user-info-wrapper-item:not(:last-child) {
@@ -68,8 +68,12 @@
   color: $main-text;
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 1100px) {
   .user-info-wrapper-item:not(:last-child) {
     margin-right: 22px;
   }
 }
+
+// @include for-size(tablet) {
+//   width: 650px;
+// }

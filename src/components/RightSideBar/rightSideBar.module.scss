@@ -5,10 +5,10 @@
   // padding-top: 40px;
   padding-bottom: 55px;
 
-  background-color: $secondary-beckground;
+  // background-color: $secondary-beckground;
 
   @include for-size(tablet) {
-    // padding-top: 91px;
+    padding-top: 91px;
     padding-bottom: 91px;
     position: relative;
   }
@@ -29,7 +29,7 @@
   scrollbar-width: thin;
   scrollbar-color: $burger-background $secondary-beckground;
 }
-
+// #FC842D
 .scrollbar::-webkit-scrollbar {
   width: 6px;
 }
@@ -67,7 +67,7 @@
   font-size: 14px;
   line-height: 1.214;
   letter-spacing: 0.04em;
-  margin-bottom: 17px;
+  margin-bottom: 38px;
   color: $main-text;
 }
 
@@ -101,16 +101,16 @@
   }
 }
 .backgroundSideBar {
-  @include for-size(tablet) {
-    width: 270px;
-    position: absolute;
-    top: 13px;
-    right: 38px;
-    height: 362px;
+  // @include for-size(tablet) {
+  //   width: 270px;
+  //   position: absolute;
+  //   top: 13px;
+  //   right: 38px;
+  //   height: 362px;
 
-    background-image: url('../../img/rightSideBarBottom@1x.png');
-    background-repeat: no-repeat;
-  }
+  //   background-image: url('../../img/rightSideBarBottom@1x.png');
+  //   background-repeat: no-repeat;
+  // }
   @include for-size(desktop) {
     background-image: none;
     //   width: 505px;
