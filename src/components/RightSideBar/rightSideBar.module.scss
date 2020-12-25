@@ -2,14 +2,15 @@
 @import '../../shared-styles/_mixins.scss';
 
 .section__rightSideBar {
-  // padding-top: 40px;
-  padding-bottom: 55px;
-
+  padding-top: 40px;
+  padding-bottom: 25px;
+  // background-color: rgb(228, 180, 180);
   // background-color: $secondary-beckground;
 
   @include for-size(tablet) {
+    background-color: unset;
     padding-top: 91px;
-    padding-bottom: 91px;
+    padding-bottom: 0px;
     position: relative;
   }
   @include for-size(desktop) {
@@ -67,7 +68,7 @@
   font-size: 14px;
   line-height: 1.214;
   letter-spacing: 0.04em;
-  margin-bottom: 38px;
+  margin-bottom: 22px;
   color: $main-text;
 }
 
