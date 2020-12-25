@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import './DiaryAddProductForm.scss';
+import css from './DiaryAddProductForm.module.scss';
+import './DiaryAddProductFormAnimation.scss';
 import Button from '../shared/Button/Button';
 import back from '../../img/back-arrow.svg';
 import api from '../../services/backend.service';
@@ -87,8 +88,8 @@ class DiaryAddProductForm extends Component {
         validationSchema={AddProdSchema}
       >
         {({ setFieldValue, handleChange, handleBlur }) => (
-          <Form className="modal-form">
-            <label className='form-label'>
+          <Form className={css.modalForm}>
+            <label className={css.formLabel}>
             <Field
               onBlur={e => {
                 handleBlur(e);
@@ -110,15 +111,15 @@ class DiaryAddProductForm extends Component {
             />
 
             <ErrorMessage
-                      className='valid-field'
+                      className={css.validField}
                       name="product"
                       component="span"
                     />
                     </label>
-            <div className="product-list-wrapper">
+            <div className={css.productListWrapper}>
             {!!products.length ? (
             <CSSTransition in={this.state.showUl} unmountOnExit classNames="search-list" timeout={500}>
-              <ul className="autocomplete">
+              <ul className={css.autocomplete}>
                 {products.map(product => (
                   <li
                     key={product._id}
@@ -135,17 +136,17 @@ class DiaryAddProductForm extends Component {
                 ))}
             </ul>
             </CSSTransition>
-            ) : this.state.error && <p className="error-mes">{this.state.error}</p>}
+            ) : this.state.error && <p className={css.errorMes}>{this.state.error}</p>}
             </div> 
-            <label className='form-label'>
-            <Field className="gramms" name="weight" placeholder="Граммы" type="number" />
+            <label className={css.formLabel}>
+            <Field className={css.gramms} name="weight" placeholder="Граммы" type="number" />
             <ErrorMessage
-                      className='valid-field'
+                      className={css.validField}
                       name="weight"
                       component="span"
                     />
                     </label>
-            {window.visualViewport.width < 650 ? <Button type="submit" className="secondary-button">Добавить</Button> : <Button type="submit" className="plus-button">+</Button>}
+            {window.visualViewport.width < 650 ? <Button type="submit" className={css.secondaryButton}>Добавить</Button> : <Button type="submit" className={css.plusButton}>+</Button>}
 
           </Form>
         )}
@@ -155,22 +156,22 @@ class DiaryAddProductForm extends Component {
     if (this.props.mobile) {
       return (
         <>
-        <div className="trigger-button-wrapper">
+        <div className={css.triggerButtonWrapper}>
           <button
             type="button"
             onClick={this.handleClick}
-            className="trigger-button"
+            className={css.triggerButton}
           >
             +
           </button>
         </div>
           {this.state.renderMarker ? (
-            <div className="modal">
-              <div className="button-wrapper">
+            <div className={css.modal}>
+              <div className={css.buttonWrapper}>
                 <button
                   onClick={this.handleClick}
                   type="button"
-                  className="close-modal"
+                  className={css.closeModal}
                 >
                   <img src={back} alt="back-arrow" />
                 </button>
