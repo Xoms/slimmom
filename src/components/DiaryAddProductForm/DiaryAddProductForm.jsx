@@ -87,10 +87,13 @@ class DiaryAddProductForm extends Component {
         }}
         validationSchema={AddProdSchema}
       >
-        {({ setFieldValue, handleChange, handleBlur }) => (
+        {({ setFieldValue, handleChange, handleBlur, errors, touched }) => (
           <Form className={css.modalForm}>
             <label className={css.formLabel}>
             <Field
+            className={`${css.productValid} ${
+              errors.email && touched.email ? css.errorInput : ""
+            }`}
               onBlur={e => {
                 handleBlur(e);
                 this.setState({ showUl: false });
@@ -139,8 +142,14 @@ class DiaryAddProductForm extends Component {
             ) : this.state.error && <p className={css.errorMes}>{this.state.error}</p>}
             </div> 
             <label className={css.formLabel}>
-            <Field className={css.gramms} name="weight" placeholder="Граммы" type="number" />
+
+            <Field 
+            className={css.gramms} 
+            name="weight" 
+            placeholder="Граммы" 
+            type="number" />
             <ErrorMessage
+            
                       className={css.validField}
                       name="weight"
                       component="span"
