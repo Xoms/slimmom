@@ -9,17 +9,12 @@ import userSelectors from '../../redux/user/userSelectors';
 import { getProducts } from '../../redux/user/userOperations';
 
 class CalculatorPage extends Component {
-  
-
   componentDidMount() {
     if (!this.props.dayId) {
       const today = new Date().toJSON().slice(0, 10);
       this.props.getProducts({ date: today });
     }
-
   }
-
-
 
   render() {
     return (
