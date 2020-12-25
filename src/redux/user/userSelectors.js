@@ -10,7 +10,7 @@ const getSummaries = (state) => state.user.summaries;
 const getCurrentDaySummary = (state) => {
     const dayId = getCurrentDayId(state);
     const summaries = getSummaries(state);
-    if (dayId) {
+    if (dayId && summaries.length) {
         return summaries.find(daySummary => daySummary._id === dayId);
     }
     const today = new Date().toJSON().slice(0,10);
