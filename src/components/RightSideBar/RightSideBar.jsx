@@ -56,7 +56,8 @@ RightSideBar.defaultProps = {
   kcalLeft: 0,
   kcalConsumed: 0,
   dailyRate: 0,
-  percentsOfDailyRate: 0
+  percentsOfDailyRate: 0,
+  date: new Date().toJSON().slice(0,10),
 }
 
 const mapStateToProps = state => ({
