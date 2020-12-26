@@ -1,4 +1,4 @@
-import React, { Component, Suspense, lazy } from 'react';
+import React, { Component, Suspense, lazy, Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import { connect } from 'react-redux';
@@ -12,6 +12,7 @@ import PrivateRoute from '../PrivateRoute/PrivateRoute';
 
 import Loader from '../shared/Loader';
 import Layout from '../Layout';
+import Alert from '../Alert';
 
 //style
 import './App.scss';
@@ -34,6 +35,8 @@ class App extends Component {
     });
 
     return (
+      <Fragment>
+      <Alert/>
         <Layout>
           <Suspense fallback={<Loader />}>
             <Switch>
@@ -42,6 +45,7 @@ class App extends Component {
             </Switch>
           </Suspense>
         </Layout>
+      </Fragment>
     );
   }
 }

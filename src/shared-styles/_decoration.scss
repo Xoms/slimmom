@@ -236,10 +236,10 @@ section.decoration-login {
     height: 200vh;
     overflow: hidden;
     background: linear-gradient(
-      90deg,
-      #fff,
-      #fff 58.203125%,
-      $secondary-beckground 58.203125%,
+      180deg,
+      red,
+      #fff calc(50%+105px),
+      $secondary-beckground calc(50%+105px),
       $secondary-beckground 100%
     );
   }
