@@ -61,7 +61,7 @@ class DailyCaloriesForm extends Component {
         <h2 className={styles.DailyCaloriesFormTitle}>
           {this.props.userId
             ? "Узнай свою суточную норму калорий"
-            : "Посчитай свою суточную норму калорий прямо сейчас"}
+            : "Посчитай свою суточну норму калорий прямо сейчас"}
         </h2>
         <Formik
           initialValues={{
@@ -81,6 +81,12 @@ class DailyCaloriesForm extends Component {
               <div className={styles.DailyCaloriesFormGeneralWrapper}>
                 <div className={styles.DailyCaloriesFormFieldsContainer}>
                   <div className={styles.DailyCaloriesFormFieldsWrapper}>
+                    <ErrorMessage
+                      name="height"
+                      htmlFor="height"
+                      component="label"
+                      className={styles.errorMessage}
+                    />
                     <label
                       htmlFor="height"
                       className={styles.DailyCaloriesFormFieldsLabelText}
@@ -94,13 +100,14 @@ class DailyCaloriesForm extends Component {
                         errors.height && touched.height ? styles.errorInput : ""
                       }`}
                     />
-                    <ErrorMessage
-                      name="height"
-                      component="p"
-                      className={styles.errorMessage}
-                    />
                   </div>
                   <div className={styles.DailyCaloriesFormFieldsWrapper}>
+                    <ErrorMessage
+                      name="age"
+                      htmlFor="age"
+                      component="label"
+                      className={styles.errorMessage}
+                    />
                     <label
                       htmlFor="age"
                       className={styles.DailyCaloriesFormFieldsLabelText}
@@ -114,13 +121,14 @@ class DailyCaloriesForm extends Component {
                         errors.age && touched.age ? styles.errorInput : ""
                       }`}
                     />
-                    <ErrorMessage
-                      name="age"
-                      component="p"
-                      className={styles.errorMessage}
-                    />
                   </div>
                   <div className={styles.DailyCaloriesFormFieldsWrapper}>
+                    <ErrorMessage
+                      name="weight"
+                      component="label"
+                      htmlFor="weight"
+                      className={styles.errorMessage}
+                    />
                     <label
                       htmlFor="weight"
                       className={styles.DailyCaloriesFormFieldsLabelText}
@@ -134,21 +142,20 @@ class DailyCaloriesForm extends Component {
                         errors.weight && touched.weight ? styles.errorInput : ""
                       }`}
                     />
-
-                    <ErrorMessage
-                      name="weight"
-                      component="p"
-                      className={styles.errorMessage}
-                    />
                   </div>
                 </div>
                 <div>
                   <div className={styles.DailyCaloriesFormFieldsWrapper}>
+                    <ErrorMessage
+                      name="desiredWeight"
+                      component="label"
+                      htmlFor="desiredWeight"
+                      className={styles.errorMessage}
+                    />
                     <label
                       htmlFor="desiredWeight"
                       className={styles.DailyCaloriesFormFieldsLabelText}
-                    >
-                      Желаемый вес *
+                    >Желаемый вес *
                     </label>
                     <Field
                       id="desiredWeight"
@@ -158,12 +165,6 @@ class DailyCaloriesForm extends Component {
                           ? styles.errorInput
                           : ""
                       }`}
-                    />
-
-                    <ErrorMessage
-                      name="desiredWeight"
-                      component="p"
-                      className={styles.errorMessage}
                     />
                   </div>
                   <h3 className={styles.DailyCaloriesFormBloodTitle}>
