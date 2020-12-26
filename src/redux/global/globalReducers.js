@@ -59,6 +59,7 @@ const error = createReducer(null, {
   [addProductError]: (state, { payload }) => payload.message,
   [getProductsRequest]: () => null,
   [clearError]: () => null,
+  [refreshError]: (state, { payload }) => payload.message,
 });
 
 const loading = createReducer(false, {

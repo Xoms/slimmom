@@ -11,6 +11,7 @@ import Button from "../shared/Button";
 import styles from "./DailyCaloriesForm.module.scss";
 import Modal from "../Modal";
 import globalSelectors from "../../redux/global/globalSelectors";
+import SmallLoader from '../../components/shared/SmallLoader';
 
 const formSchema = Yup.object().shape({
   height: Yup.string()
@@ -47,6 +48,10 @@ class DailyCaloriesForm extends Component {
       desiredWeight: +values.desiredWeight,
       bloodType: +values.bloodType,
     };
+    this.setState({loading : true});
+    setTimeout(() => {
+  this.setState({loading: false})
+    },1000)
     if (!this.props.userId) {
       this.props.getDailyRate(userCharacteristics);
       this.toggleModal();
@@ -56,20 +61,30 @@ class DailyCaloriesForm extends Component {
   };
 
   render() {
+    const {loading} = this.state
+    const {
+      height,
+      age,
+      weight,
+      desiredWeight,
+      bloodType,
+    } = this.props.userInfo;
     return (
       <div className={styles.DailyCaloriesFormWrapper}>
         <h2 className={styles.DailyCaloriesFormTitle}>
           {this.props.userId
             ? "Узнай свою суточную норму калорий"
-            : "Посчитай свою суточную норму калорий прямо сейчас"}
+            : "Посчитай свою суточну норму калорий прямо сейчас"}
         </h2>
         <Formik
+          enableReinitialize
           initialValues={{
-            height: "",
-            weight: "",
-            age: "",
-            desiredWeight: "",
-            bloodType: "1",
+            height: !!height ? height : "",
+            age: !!age ? age : "",
+            weight: !!weight ? weight : "",
+            desiredWeight: !!desiredWeight ? desiredWeight : "",
+            bloodType: !!bloodType ? String(bloodType) : "1",
+            loading: false,
           }}
           validationSchema={formSchema}
           onSubmit={(values) => {
@@ -81,6 +96,12 @@ class DailyCaloriesForm extends Component {
               <div className={styles.DailyCaloriesFormGeneralWrapper}>
                 <div className={styles.DailyCaloriesFormFieldsContainer}>
                   <div className={styles.DailyCaloriesFormFieldsWrapper}>
+                    <ErrorMessage
+                      name="height"
+                      htmlFor="height"
+                      component="label"
+                      className={styles.errorMessage}
+                    />
                     <label
                       htmlFor="height"
                       className={styles.DailyCaloriesFormFieldsLabelText}
@@ -90,17 +111,20 @@ class DailyCaloriesForm extends Component {
                     <Field
                       id="height"
                       name="height"
+                      type="number"
+                      autoComplete="off"
                       className={`${styles.DailyCaloriesFormInput} ${
                         errors.height && touched.height ? styles.errorInput : ""
                       }`}
                     />
-                    <ErrorMessage
-                      name="height"
-                      component="p"
-                      className={styles.errorMessage}
-                    />
                   </div>
                   <div className={styles.DailyCaloriesFormFieldsWrapper}>
+                    <ErrorMessage
+                      name="age"
+                      htmlFor="age"
+                      component="label"
+                      className={styles.errorMessage}
+                    />
                     <label
                       htmlFor="age"
                       className={styles.DailyCaloriesFormFieldsLabelText}
@@ -110,17 +134,20 @@ class DailyCaloriesForm extends Component {
                     <Field
                       id="age"
                       name="age"
+                      type='number'
+                      autoComplete="off"
                       className={`${styles.DailyCaloriesFormInput} ${
                         errors.age && touched.age ? styles.errorInput : ""
                       }`}
                     />
-                    <ErrorMessage
-                      name="age"
-                      component="p"
-                      className={styles.errorMessage}
-                    />
                   </div>
                   <div className={styles.DailyCaloriesFormFieldsWrapper}>
+                    <ErrorMessage
+                      name="weight"
+                      component="label"
+                      htmlFor="weight"
+                      className={styles.errorMessage}
+                    />
                     <label
                       htmlFor="weight"
                       className={styles.DailyCaloriesFormFieldsLabelText}
@@ -130,40 +157,37 @@ class DailyCaloriesForm extends Component {
                     <Field
                       id="weight"
                       name="weight"
+                      type='number'
+                      autoComplete="off"
                       className={`${styles.DailyCaloriesFormInput} ${
                         errors.weight && touched.weight ? styles.errorInput : ""
                       }`}
-                    />
-
-                    <ErrorMessage
-                      name="weight"
-                      component="p"
-                      className={styles.errorMessage}
                     />
                   </div>
                 </div>
                 <div>
                   <div className={styles.DailyCaloriesFormFieldsWrapper}>
+                    <ErrorMessage
+                      name="desiredWeight"
+                      component="label"
+                      htmlFor="desiredWeight"
+                      className={styles.errorMessage}
+                    />
                     <label
                       htmlFor="desiredWeight"
                       className={styles.DailyCaloriesFormFieldsLabelText}
-                    >
-                      Желаемый вес *
+                    >Желаемый вес *
                     </label>
                     <Field
                       id="desiredWeight"
                       name="desiredWeight"
+                      type='number'
+                      autoComplete="off"
                       className={`${styles.DailyCaloriesFormInput} ${
                         errors.desiredWeight && touched.desiredWeight
                           ? styles.errorInput
                           : ""
                       }`}
-                    />
-
-                    <ErrorMessage
-                      name="desiredWeight"
-                      component="p"
-                      className={styles.errorMessage}
                     />
                   </div>
                   <h3 className={styles.DailyCaloriesFormBloodTitle}>
@@ -236,9 +260,13 @@ class DailyCaloriesForm extends Component {
               <Button
                 type="submit"
                 className={`primary-button ${styles.DailyCaloriesFormButton}`}
+                disabled={loading}
               >
                 Похудеть
               </Button>
+              <div className={styles.SmallLoaderContainerHome}>
+              {loading && <SmallLoader />}
+              </div>
             </Form>
           )}
         </Formik>
@@ -258,6 +286,7 @@ class DailyCaloriesForm extends Component {
 const mapStateToProps = (state) => ({
   isLoading: globalSelectors.getLoading(state),
   userId: userSelectors.getUserId(state),
+  userInfo: userSelectors.getUserInfo(state),
 });
 
 const mapDispatchToProps = {

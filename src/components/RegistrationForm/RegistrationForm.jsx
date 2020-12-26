@@ -3,7 +3,6 @@ import Button from '../shared/Button/Button';
 import ops from '../../redux/auth/authOperations';
 import { connect } from 'react-redux';
 import css from './RegistrationForm.module.scss';
-import Notification from '../shared/Notification/Notification';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { authActions } from '../../redux/auth';
@@ -12,12 +11,12 @@ import Decoration from '../Decoration';
 
 const RegisterSchema = Yup.object().shape({
   username: Yup.string()
-    .min(2, 'Too short!')
-    .max(50, 'Too long!')
+    .min(2, 'Некорректная длинна поля')
+    .max(50, 'Превышен лимит символов')
     .required('Обязательное поле *'),
   email: Yup.string()
-    .min(2, 'Too short!')
-    .max(50, 'Too long!')
+    .min(2, 'Некорректная длинна поля')
+    .max(50, 'Превышен лимит символов')
     .required('Обязательное поле *'),
   password: Yup.string().required('Обязательное поле *').min(8, 'Too short!'),
 });

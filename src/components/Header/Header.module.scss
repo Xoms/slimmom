@@ -1,11 +1,11 @@
 @import '../../shared-styles/reset';
 @import '../../shared-styles/mixins';
 @import '../../shared-styles/colors';
-// @import "../../shared-styles/container";
 
-@media screen and (max-width: 1099px) {
-  .sectionHeader {
-    border-bottom: 2px solid $header-border;
+.sectionHeader {
+  border-bottom: 2px solid $header-border;
+  @include for-size(desktop){
+    border-bottom: 0;
   }
 }
 
@@ -48,12 +48,14 @@
   }
 }
 .mobUserInfoWrap {
-  background-color: $secondary-beckground;
   min-height: 40px;
-  padding-top: 13px;
-  padding-left: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: end;
 }
-
+.userInfoSection {
+  background-color: $secondary-beckground; 
+}
 .navigationAuth {
   margin-left: 106px;
   // padding: 13px 0px;
@@ -63,9 +65,13 @@
     margin-left: 40px;
     padding: 0;
     padding-top: 40px;
+
+    width: 850px;
+    display: flex;
+    justify-content: space-between;
+  
   }
 }
-
 .navigation {
   margin-left: 65px;
   padding: 12px 0px;
@@ -80,7 +86,6 @@
 .logoLink {
   text-decoration: none;
 }
-
 .closeBtn {
   border: none;
   outline: none;

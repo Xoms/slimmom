@@ -63,14 +63,24 @@ const logout = () => dispatch => {
     .catch(err => dispatch(authActions.logoutError(err)));
 };
 
-const refresh = sid => dispatch => {
+const refresh = () => (dispatch, getState) => {
   dispatch(authActions.refreshRequest());
+  const {
+    auth: { sid, refreshToken, accessToken },
+  } = getState();
 
-  api.refresh(sid).then(({ data }) => {
-    api.setToken(data.newAccessToken);
-    dispatch(authActions.refreshSuccess(data.newAccessToken));
-  });
+  api.setToken(refreshToken);
+
+  api
+    .refresh({ sid: sid })
+    .then(({ data }) => {
+      dispatch(authActions.refreshSuccess(data.newAccessToken));
+    })
+    .catch(err => {
+      return dispatch(authActions.refreshError(err));
+    });
 };
 
 const ops = { register, login, logout, refresh };
+
 export default ops;

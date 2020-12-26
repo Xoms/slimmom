@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import dailyRateSelector from "../../redux/user/userSelectors";
 import IconClose from "../shared/IconClose/IconClose";
 import IconBack from "../shared/IconBack/IconBack";
+import { CSSTransition } from "react-transition-group";
 
 class Modal extends Component {
   static propTypes = {
@@ -32,51 +33,59 @@ class Modal extends Component {
   render() {
     return (
       <div id="overlay" className={styles.overlay}>
-        <div className={styles.modal}>
-          <button
-            type="button"
-            className={styles.closeModalMobileBtn}
-            onClick={this.props.toggleModal}
-          >
-            <IconBack />
-          </button>
-          <button
-            type="button"
-            className={styles.closeModalBtn}
-            onClick={this.props.toggleModal}
-          >
-            <IconClose />
-          </button>
-          <div className={styles.wrapper}>
-            <p className={styles.title}>
-              Ваша рекомендуемая суточная норма калорий составляет
-            </p>
-            <div className={styles.container}>
-              <p className={styles.caloriesText}>
-                <span className={styles.caloriesValue}>
-                  {this.props.calories}
-                </span>
-                ккал
+        <CSSTransition
+          in={this.props.showModal}
+          appear
+          timeout={250}
+          classNames={styles}
+          unmountOnExit
+        >
+          <div className={styles.modal}>
+            <button
+              type="button"
+              className={styles.closeModalMobileBtn}
+              onClick={this.props.toggleModal}
+            >
+              <IconBack />
+            </button>
+            <button
+              type="button"
+              className={styles.closeModalBtn}
+              onClick={this.props.toggleModal}
+            >
+              <IconClose />
+            </button>
+            <div className={styles.wrapper}>
+              <p className={styles.title}>
+                Ваша рекомендуемая суточная норма калорий составляет
               </p>
-              <p className={styles.productsTitle}>
-                Продукты, которые вам не рекомендуется употреблять
-              </p>
-              <ol className={`${styles.productsList} ${styles.scrollbar}`}>
-                {this.props.products &&
-                  this.props.products.map((product, id) => (
-                    <li key={id} className={styles.productsItem}>
-                      {product}
-                    </li>
-                  ))}
-              </ol>
-              <Button className={`primary-button ${styles.modalButton}`}>
-                <NavLink to="/register" className={styles.buttonLink}>
-                  Начать худеть
-                </NavLink>
-              </Button>
+              <div className={styles.container}>
+                <p className={styles.caloriesText}>
+                  <span className={styles.caloriesValue}>
+                    {this.props.calories}
+                  </span>
+                  ккал
+                </p>
+                <p className={styles.productsTitle}>
+                  Продукты, которые вам не рекомендуется употреблять
+                </p>
+                <ol className={`${styles.productsList} ${styles.scrollbar}`}>
+                  {this.props.products &&
+                    this.props.products.map((product, id) => (
+                      <li key={id} className={styles.productsItem}>
+                        {product}
+                      </li>
+                    ))}
+                </ol>
+                <Button className={`primary-button ${styles.modalButton}`}>
+                  <NavLink to="/register" className={styles.buttonLink}>
+                    Начать худеть
+                  </NavLink>
+                </Button>
+              </div>
             </div>
           </div>
-        </div>
+        </CSSTransition>
       </div>
     );
   }
