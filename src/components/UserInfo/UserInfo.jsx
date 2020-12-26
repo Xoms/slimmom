@@ -22,6 +22,7 @@ class UserInfo extends Component {
                 {/* <span className="user-info-wrapper-item"></span> */}
                 <button onClick={this.handleClick} className="user-info-wrapper-item" type="button">Выйти</button>
             </div>
+
         )
     };
 

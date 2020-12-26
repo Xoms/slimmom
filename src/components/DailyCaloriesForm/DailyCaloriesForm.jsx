@@ -11,6 +11,7 @@ import Button from "../shared/Button";
 import styles from "./DailyCaloriesForm.module.scss";
 import Modal from "../Modal";
 import globalSelectors from "../../redux/global/globalSelectors";
+import SmallLoader from '../../components/shared/SmallLoader';
 
 const formSchema = Yup.object().shape({
   height: Yup.string()
@@ -47,6 +48,10 @@ class DailyCaloriesForm extends Component {
       desiredWeight: +values.desiredWeight,
       bloodType: +values.bloodType,
     };
+    this.setState({loading : true});
+    setTimeout(() => {
+  this.setState({loading: false})
+    },1000)
     if (!this.props.userId) {
       this.props.getDailyRate(userCharacteristics);
       this.toggleModal();
@@ -56,6 +61,7 @@ class DailyCaloriesForm extends Component {
   };
 
   render() {
+    const {loading} = this.state
     const {
       height,
       age,
@@ -78,6 +84,7 @@ class DailyCaloriesForm extends Component {
             weight: !!weight ? weight : "",
             desiredWeight: !!desiredWeight ? desiredWeight : "",
             bloodType: !!bloodType ? String(bloodType) : "1",
+            loading: false,
           }}
           validationSchema={formSchema}
           onSubmit={(values) => {
@@ -242,9 +249,13 @@ class DailyCaloriesForm extends Component {
               <Button
                 type="submit"
                 className={`primary-button ${styles.DailyCaloriesFormButton}`}
+                disabled={loading}
               >
                 Похудеть
               </Button>
+              <div className={styles.SmallLoaderContainerHome}>
+              {loading && <SmallLoader />}
+              </div>
             </Form>
           )}
         </Formik>

@@ -197,3 +197,16 @@
     margin-left: 300px;
   }
 }
+.SmallLoaderContainerHome{
+  position: absolute;
+  top: 83%;
+  left: 40%;
+  @include for-size(tablet) {
+    top: 66%;
+    left: 50%;
+  }
+  @include for-size(desktop)  {
+    top: 90%;
+    left: 50%;
+  }
+}
