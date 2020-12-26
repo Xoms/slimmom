@@ -12,7 +12,7 @@ import css from './DiaryPage.module.scss';
 class DiaryPage extends Component {
   state = {
     date: '',
-    screenWidth: window.visualViewport.width,
+    screenWidth: window.innerWidth,
   };
 
   componentDidMount() {
