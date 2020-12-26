@@ -32,9 +32,9 @@ class PhonebookService {
   }
 
   getDailyRate(userCharacteristics, userId) {
-    if(userId) {
+    if (userId) {
       return axios.post(`/daily-rate/${userId}`, userCharacteristics);
-    } 
+    }
     return axios.post(`/daily-rate/`, userCharacteristics);
   }
 

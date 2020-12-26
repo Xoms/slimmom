@@ -1,12 +1,19 @@
 section.decoration {
+  display: none;
   position: absolute;
   top: 0;
   z-index: -1000;
-  // width: 100vw;
-  min-height: 850px;
   width: 100%;
   height: 100%;
   overflow: hidden;
+  @media screen and (min-width: 650px){
+    display: block;
+    min-height: 1024px;
+    height: 100%;
+  }
+  @media screen and (min-width: 650px){
+    min-height: 850px;
+  }
   //!dec-spot ----------------------------------
   .dec-spot {
     display: none;
@@ -98,12 +105,21 @@ section.decoration {
 }
 //? ======================LOGN PAGE =================================
 section.decoration-login {
+  display: none;
   position: absolute;
   top: 0;
   z-index: -1000;
-  width: 100vw;
+  width: 100%;
   height: 100%;
   overflow: hidden;
+  @media screen and (min-width: 650px){
+    display: block;
+    min-height: 1024px;
+    height: 100%;
+  }
+  @media screen and (min-width: 650px){
+    min-height: 850px;
+  }
   //?dec-spot ----------------------------------
   .dec-spot {
     display: none;
@@ -190,6 +206,25 @@ section.decoration-login {
   }
 }
 //todo ======================CALCULATION PAGE =================================
+@media screen and (min-width: 320px) {
+  section.decoration-calculation {
+    position: absolute;
+    top: 110px;
+    z-index: -1000;
+    width: 100vw;
+    min-height: 1024px;
+    height: 100%;
+    overflow: hidden;
+    background: linear-gradient(
+      180deg,
+      #fff,
+      #fff 591px,
+      $secondary-beckground 591px,
+      $secondary-beckground 100%
+    );
+  }
+}
+
 @media screen and (min-width: 650px) {
   section.decoration-calculation {
     position: absolute;
@@ -233,16 +268,25 @@ section.decoration-login {
     top: 0;
     z-index: -1000;
     width: 100vw;
-    height: 200vh;
+    height: 100%;
+    min-height: 850px;
     overflow: hidden;
     background: linear-gradient(
+<<<<<<< HEAD
       180deg,
       red,
       #fff calc(50%+105px),
       $secondary-beckground calc(50%+105px),
+=======
+      90deg,
+      #fff,
+      #fff calc(50% + 105px),
+      $secondary-beckground calc(50% + 105px),
+>>>>>>> 3cc7dd906828cf09499b5dab94e610cf4815286f
       $secondary-beckground 100%
     );
   }
+  
   .dec-leaves {
     width: 505px;
     height: 777px;

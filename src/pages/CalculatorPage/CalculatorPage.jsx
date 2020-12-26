@@ -16,22 +16,14 @@ class CalculatorPage extends Component {
     }
   }
 
-  getDailyNorm() {
-    if (this.props.summary) {
-      return this.props.summary;
-    }
-    return this.props.daySummary;
-  }
-
   render() {
-    const dailyNorm = { ...this.getDailyNorm() };
     return (
       <Fragment>
         <Decoration isCalculationPage={true} />
         <section className="container">
           <div className={styles.wrapper}>
             <DailyCaloriesForm noModal={true} />
-            <RightSideBar {...dailyNorm} />
+            <RightSideBar />
           </div>
         </section>
       </Fragment>
@@ -48,10 +40,10 @@ class CalculatorPage extends Component {
 }
 
 const mapStateToProps = state => ({
-  summmary: userSelectors.getCurrentDaySummary(state),
-  //summmary: userSelectors.getSummary(state),
+  // summmary: userSelectors.getCurrentDaySummary(state),
+  // //summmary: userSelectors.getSummary(state),
   dayId: userSelectors.getCurrentDayId(state),
-  daySummary: userSelectors.getDaySummary(state),
+  // daySummary: userSelectors.getDaySummary(state),
 });
 
 const mapDispatchToProps = {

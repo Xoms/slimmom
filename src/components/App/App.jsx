@@ -25,7 +25,6 @@ class App extends Component {
 
   render() {
     
-    
     const routesMap = routes.map(route => {
       return route.privated ? (
         <PrivateRoute key={route.path} {...route} />
@@ -35,8 +34,12 @@ class App extends Component {
     });
 
     return (
+<<<<<<< HEAD
       <Fragment>
       <Alert/>
+=======
+     <>
+>>>>>>> 3cc7dd906828cf09499b5dab94e610cf4815286f
         <Layout>
           <Suspense fallback={<Loader />}>
             <Switch>
@@ -45,7 +48,11 @@ class App extends Component {
             </Switch>
           </Suspense>
         </Layout>
+<<<<<<< HEAD
       </Fragment>
+=======
+     </>
+>>>>>>> 3cc7dd906828cf09499b5dab94e610cf4815286f
     );
   }
 }
@@ -56,7 +63,8 @@ App.propTypes = {
 
 const mapStateToProps = (state) => ({
   authError : globalSelectors.getError(state),
-  sid : authSelectors.sid(state) 
+  sid : authSelectors.sid(state),
+  isLoading: globalSelectors.getLoading(state), 
 })
 const mapDispatch = {
   getCurrentUser,
