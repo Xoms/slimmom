@@ -1,10 +1,12 @@
 import React, { Component, Suspense, lazy, Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom';
-
+import jwt_decode from "jwt-decode";
+// import debounce from 'lodash.debounce';
 import { connect } from 'react-redux';
 import { getCurrentUser } from '../../redux/user/userOperations';
 import {authOperations, authSelectors} from '../../redux/auth';
 import globalSelectors from '../../redux/global/globalSelectors';
+import authActions from '../../redux/auth/authActions';
 
 import routes from '../../routes';
 import PublicRoute from '../PublicRoute/PublicRoute';
@@ -21,6 +23,12 @@ class App extends Component {
 
   componentDidMount() {
     this.props.getCurrentUser();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if(this.props.authError) {
+      this.props.clearError();
+    }
   }
 
   render() {
@@ -55,12 +63,14 @@ App.propTypes = {
 
 const mapStateToProps = (state) => ({
   authError : globalSelectors.getError(state),
+  accessToken: authSelectors.getToken(state),
   sid : authSelectors.sid(state),
   isLoading: globalSelectors.getLoading(state), 
 })
 const mapDispatch = {
   getCurrentUser,
-  refreshToken: authOperations.refresh
+  refreshToken: authOperations.refresh,
+  clearError: authActions.clearError,
 };
 
 export default connect(mapStateToProps, mapDispatch)(App);

@@ -25,7 +25,7 @@ const defaultMiddleware = getDefaultMiddleware({
 const authPersistConfig = {
   key: 'auth',
   storage,
-  whitelist: ['accessToken', 'sid']
+  whitelist: ['accessToken', 'refreshToken', 'sid']
 }
 
 export const store = configureStore({
