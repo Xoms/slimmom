@@ -48,17 +48,6 @@
   letter-spacing: 4%;
 
   color: $main-text;
-  &::after {
-    // position: absolute;
-
-    background-color: #e0e0e0;
-    content: '';
-    display: block;
-    width: 3px;
-    height: 30px;
-    top: -8px;
-    left: 42px;
-  }
 }
 
 .user-info-wrapper > button {
