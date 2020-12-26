@@ -48,11 +48,13 @@
   }
 }
 .mobUserInfoWrap {
-  display: flex;
-  background-color: $secondary-beckground;
+ 
   min-height: 40px;
-  // padding-top: 13px;
+  padding-top: 13px;
   // padding-left: 200px;
+}
+.userInfoSection {
+  background-color: $secondary-beckground; 
 }
 
 .navigationAuth {

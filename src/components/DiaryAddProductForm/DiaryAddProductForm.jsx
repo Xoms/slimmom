@@ -84,7 +84,7 @@ class DiaryAddProductForm extends Component {
     const form = (
       <Formik
         initialValues={{
-          weight: '',
+          weight: '100',
           product: '',
         }}
         onSubmit={values => {
@@ -123,7 +123,7 @@ class DiaryAddProductForm extends Component {
                     </label>
             <div className={css.productListWrapper}>
             {!!products.length ? (
-            <CSSTransition in={this.state.showUl} unmountOnExit classNames="search-list" timeout={500}>
+            // <CSSTransition in={this.state.showUl} unmountOnExit classNames="search-list" timeout={500}>
               <ul className={css.autocomplete}>
                 {products.map(product => (
                   <li
@@ -140,7 +140,7 @@ class DiaryAddProductForm extends Component {
                   </li>
                 ))}
             </ul>
-            </CSSTransition>
+            // </CSSTransition>
             ) : this.state.error && <p className={css.errorMes}>{this.state.error}</p>}
             </div> 
             <label className={css.formLabel}>
@@ -151,7 +151,7 @@ class DiaryAddProductForm extends Component {
                       component="span"
                     />
                     </label>
-            {window.visualViewport.width < 650 ? 
+           {window.innerWidth < 650 ? 
             <Button type="submit" className={css.secondaryButton} disabled={loading}>
               Добавить</Button> : 
               <Button type="submit" className={css.plusButton} disabled={loading}>
