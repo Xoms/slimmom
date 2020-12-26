@@ -30,8 +30,8 @@ const actions = {
     logoutError,
     refreshRequest,
     refreshSuccess,
-    refreshError,
     clearError,
+    refreshError,
 }
 
 export default actions

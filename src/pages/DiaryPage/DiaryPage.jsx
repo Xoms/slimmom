@@ -12,7 +12,7 @@ import css from './DiaryPage.module.scss';
 class DiaryPage extends Component {
   state = {
     date: '',
-    screenWidth: window.visualViewport.width,
+    screenWidth: window.innerWidth,
   };
 
   componentDidMount() {
@@ -56,7 +56,7 @@ class DiaryPage extends Component {
     return this.state.screenWidth < 650 ? (
       <>
       <div className={css.pageWrapper}>
-        <SetDate value={this.changeDate} />
+        <SetDate value={this.changeDate} currentDate={this.state.date}/>
           {/* прокинуть пропсами айди дня */}
           <DiaryProductsList />
           <DiaryAddProductForm date={this.state.date} mobile={true} />

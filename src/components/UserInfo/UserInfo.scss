@@ -2,10 +2,13 @@
 @import '../../shared-styles//mixins';
 
 .user-info-wrapper {
+  width: 135px;
   font-family: Verdana;
   display: flex;
   align-items: center;
-  position: relative;
+  justify-content: end;
+  margin-right: 0;
+  margin-left: auto;
 }
 
 .user-info-wrapper > span {
@@ -19,19 +22,18 @@
   }
 }
 .user-info-wrapper-item:last-child {
-  //   @include for-size(desktop) {
+  position: relative;
+
   &::after {
     position: absolute;
-
     background-color: #e0e0e0;
-    content: '';
+    content: "";
     display: inline-block;
     width: 3px;
     height: 30px;
     top: -8px;
-    left: 42px;
+    left: -5px;
   }
-  //   }
 }
 
 .user-info-wrapper-item:not(:last-child) {
