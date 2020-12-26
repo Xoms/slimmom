@@ -26,7 +26,7 @@ class Alert extends Component {
   }
 
   render() {
-    console.log(this.props.state.error);
+    //console.log(this.props.state.error);
     return (
       <CSSTransition
         in={this.state.isAlertShow}
