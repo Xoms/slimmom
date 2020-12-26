@@ -56,7 +56,7 @@ class DiaryPage extends Component {
     return this.state.screenWidth < 650 ? (
       <>
       <div className={css.pageWrapper}>
-        <SetDate value={this.changeDate} />
+        <SetDate value={this.changeDate} currentDate={this.state.date}/>
           {/* прокинуть пропсами айди дня */}
           <DiaryProductsList />
           <DiaryAddProductForm date={this.state.date} mobile={true} />
