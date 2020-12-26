@@ -10,6 +10,7 @@ import debounce from 'lodash.debounce';
 import { connect } from 'react-redux';
 import { addProduct } from '../../redux/user/userOperations';
 import { CSSTransition } from 'react-transition-group';
+import SmallLoader from '../../components/shared/SmallLoader';
 
 const AddProdSchema = Yup.object().shape({
   product: Yup.string().required('Обязательное поле *'),
@@ -23,6 +24,7 @@ class DiaryAddProductForm extends Component {
     choosenProductId: '',
     error: null,
     showUl: false,
+    loading: false,
   };
 
   handleClick = () => {
@@ -65,7 +67,10 @@ class DiaryAddProductForm extends Component {
       productId: this.state.choosenProductId,
       weight: weight,
     };
-
+    this.setState({loading : true});
+    setTimeout(() => {
+  this.setState({loading: false})
+    },1000)
     this.props.addProduct(product);
 
     // api
@@ -75,7 +80,7 @@ class DiaryAddProductForm extends Component {
   };
 
   render() {
-    const { products } = this.state;
+    const { products, loading } = this.state;
     const form = (
       <Formik
         initialValues={{
@@ -87,13 +92,10 @@ class DiaryAddProductForm extends Component {
         }}
         validationSchema={AddProdSchema}
       >
-        {({ setFieldValue, handleChange, handleBlur, errors, touched }) => (
+        {({ setFieldValue, handleChange, handleBlur }) => (
           <Form className={css.modalForm}>
             <label className={css.formLabel}>
             <Field
-            className={`${css.productValid} ${
-              errors.email && touched.email ? css.errorInput : ""
-            }`}
               onBlur={e => {
                 handleBlur(e);
                 this.setState({ showUl: false });
@@ -142,21 +144,21 @@ class DiaryAddProductForm extends Component {
             ) : this.state.error && <p className={css.errorMes}>{this.state.error}</p>}
             </div> 
             <label className={css.formLabel}>
-
-            <Field 
-            className={css.gramms} 
-            name="weight" 
-            placeholder="Граммы" 
-            type="number" />
+            <Field className={css.gramms} name="weight" placeholder="Граммы" type="number" />
             <ErrorMessage
-            
                       className={css.validField}
                       name="weight"
                       component="span"
                     />
                     </label>
-            {window.visualViewport.width < 650 ? <Button type="submit" className={css.secondaryButton}>Добавить</Button> : <Button type="submit" className={css.plusButton}>+</Button>}
-
+            {window.visualViewport.width < 650 ? 
+            <Button type="submit" className={css.secondaryButton} disabled={loading}>
+              Добавить</Button> : 
+              <Button type="submit" className={css.plusButton} disabled={loading}>
+                +</Button>}
+                <div className={css.SmallLoaderContainer}>
+                {loading && <SmallLoader />}
+                </div>
           </Form>
         )}
       </Formik>

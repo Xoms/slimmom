@@ -244,9 +244,6 @@
   font-size: 12px;
 line-height: 1.415;
 letter-spacing: 0.04em;
-@include for-size(tablet) {
-  top: 40px;
-}
 }
 
 .formLabel {
@@ -259,4 +256,12 @@ letter-spacing: 0.04em;
     width: 290px;
   }
 }
-
+.SmallLoaderContainer{
+  position: absolute;
+  top: 250px;
+  left: 120px;
+  @include for-size(tablet) {
+    top: 50px;
+    left: 200px;
+  }
+}
