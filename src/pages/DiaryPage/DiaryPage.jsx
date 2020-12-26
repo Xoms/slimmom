@@ -8,6 +8,7 @@ import { getProducts } from '../../redux/user/userOperations';
 import userActions from '../../redux/user/userActions';
 import userSelectors from '../../redux/user/userSelectors';
 import css from './DiaryPage.module.scss';
+import { Redirect } from 'react-router-dom';
 
 class DiaryPage extends Component {
   state = {
@@ -53,7 +54,9 @@ class DiaryPage extends Component {
   };
 
   render() {
-    return this.state.screenWidth < 650 ? (
+    return(
+    this.props.dailyRate || this.props.userDataDailyRate ?
+    this.state.screenWidth < 650 ? (
       <>
       <div className={css.pageWrapper}>
         <SetDate value={this.changeDate} currentDate={this.state.date}/>
@@ -74,10 +77,14 @@ class DiaryPage extends Component {
           <RightSideBar />
         </div>
       </div>
-    );
+    )
+    :  <Redirect to="/calculator" />
+    )
   }
 }
 const mapStateToProps = (state) => ({
   currentDate:  userSelectors.getCurrentDay(state),
+  dailyRate: userSelectors.getCalories(state),
+  userDataDailyRate: userSelectors.getUserDataDailyRate(state),
 })
 export default connect(mapStateToProps, { getProducts, setCurrentDay: userActions.setCurrentDay })(DiaryPage);
