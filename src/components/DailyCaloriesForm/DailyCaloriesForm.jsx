@@ -16,16 +16,16 @@ import SmallLoader from '../../components/shared/SmallLoader';
 const formSchema = Yup.object().shape({
   height: Yup.string()
     .max(3, "Укажите значение в 3 цифры")
-    .required("Обязательное поле *"),
+    .required("Рост*"),
   age: Yup.string()
     .max(2, "Укажите значение в 2 цифры")
-    .required("Обязательное поле *"),
+    .required("Возраст*"),
   weight: Yup.string()
     .max(3, "Укажите значение в 3 цифры")
-    .required("Обязательное поле *"),
+    .required("Текущий вес*"),
   desiredWeight: Yup.string()
     .max(3, "Укажите значение в 3 цифры")
-    .required("Обязательное поле *"),
+    .required("Желаемый вес*"),
   bloodType: Yup.string().required(),
 });
 
