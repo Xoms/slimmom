@@ -49,7 +49,7 @@ const actions = {
   setCurrentDay,
   getDailyRateWithIdRequest,
   getDailyRateWithIdSuccess,
-  getDailyRateWithIdError
+  getDailyRateWithIdError,
 };
 
 export default actions;
