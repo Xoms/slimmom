@@ -7,15 +7,8 @@ const getCurrentDayId = (state) => state.user.currentDayId;
 const getUserId = (state) => state.user.id;
 const getSummaries = (state) => state.user.summaries;
 const getUserInfo = (state) => state.user.userData;
-
-// const getCurrentDaySummary = state => {
-//   const dayId = getCurrentDayId(state);
-//   const summaries = getSummaries(state);
-//   if (dayId && summaries.length) {
-//     return summaries.find(daySummary => daySummary._id === dayId);
-//   }
-//   return getDaySummary(state);
-// };
+const getUserDataDailyRate = (state) => state.user.userData.dailyRate; //для только что зареганного польз-ля
+const getCurrentDay = (state) => state.user.currentDay;
 
 const selectors = {
   getProductsSelectors,
@@ -25,7 +18,8 @@ const selectors = {
   getCalories,
   getUserId,
   getCurrentDayId,
-  // getCurrentDaySummary,
+  getCurrentDay,
+  getUserDataDailyRate,
   getSummaries,
   getUserInfo,
 };
