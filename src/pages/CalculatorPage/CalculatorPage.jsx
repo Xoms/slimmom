@@ -10,10 +10,13 @@ import { getProducts } from '../../redux/user/userOperations';
 
 class CalculatorPage extends Component {
   componentDidMount() {
-    if (!this.props.dayId) {
+    if(!this.props.dailyRate && !this.props.userDataDailyRate){
+      return
+    }
+    if (!this.props.day) {
       const today = new Date().toJSON().slice(0, 10);
       this.props.getProducts({ date: today });
-    }
+    } else this.props.getProducts({ date: this.props.day });
   }
 
   render() {
@@ -27,23 +30,14 @@ class CalculatorPage extends Component {
           </div>
         </section>
       </Fragment>
-      //   <section className={styles.DailyCaloriesSection}>
-      //     <div className={styles.container}>
-      //     </div>
-      //   </section>
-      //   <section className={styles.SideBarSection}>
-      //     <div className={styles.sidebarContainer}>
-      //   </section>
-      // </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  // summmary: userSelectors.getCurrentDaySummary(state),
-  // //summmary: userSelectors.getSummary(state),
-  dayId: userSelectors.getCurrentDayId(state),
-  // daySummary: userSelectors.getDaySummary(state),
+  day: userSelectors.getCurrentDay(state),
+  dailyRate: userSelectors.getCalories(state),
+  userDataDailyRate: userSelectors.getUserDataDailyRate(state)
 });
 
 const mapDispatchToProps = {
