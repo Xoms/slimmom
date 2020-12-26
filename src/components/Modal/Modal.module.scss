@@ -1,5 +1,5 @@
-@import "../../shared-styles/colors";
-@import "../../shared-styles/mixins";
+@import '../../shared-styles/colors';
+@import '../../shared-styles/mixins';
 
 .title {
   font-family: Verdana;
@@ -89,7 +89,7 @@
   position: relative;
 }
 .caloriesText::after {
-  content: "";
+  content: '';
   position: absolute;
   left: 0;
   width: 100%;
@@ -99,7 +99,7 @@
   margin-top: 30px;
 }
 .overlay {
-  position: fixed;
+  position: absolute;
   top: 80px;
   left: 0;
   width: 100vw;
@@ -123,9 +123,12 @@
 .closeModalMobileBtn {
   width: 100%;
   height: 40px;
-  position: fixed;
-  top: 80px;
+  position: absolute;
+  top: -40px;
   left: 0;
+  background: #eff1f3;
+  border: 1px solid transparent;
+  border-top: 1px solid $header-border;
 }
 @media screen and (min-width: 650px) {
   .title {
@@ -145,7 +148,7 @@
     width: 594px;
     height: 580px;
     padding: 64px 43px;
-    top: 230px;
+    top: 150px;
   }
   .overlay {
     top: 0;
@@ -179,16 +182,13 @@
     top: 135px;
   }
 }
-
 // Scroll-bar customisation
-
 .scrollbar {
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: -ms-autohiding-scrollbar;
   scrollbar-width: thin;
   scrollbar-color: $burger-background $secondary-beckground;
 }
-
 .scrollbar::-webkit-scrollbar {
   width: 6px;
 }
@@ -199,7 +199,6 @@
   background-color: $burger-background;
   border-radius: 0px;
 }
-
 .scrollbar::-webkit-scrollbar-thumb:vertical {
   min-height: 1.5rem;
 }

@@ -5,6 +5,7 @@ import DiaryAddProductForm from '../../components/DiaryAddProductForm/DiaryAddPr
 import SetDate from '../../components/SetDate/SetDate';
 import { connect } from 'react-redux';
 import { getProducts } from '../../redux/user/userOperations';
+import userActions from '../../redux/user/userActions';
 import css from './DiaryPage.module.scss';
 
 class DiaryPage extends Component {
@@ -42,6 +43,7 @@ class DiaryPage extends Component {
 
   changeDate = value => {
     this.setState({ date: value });
+    this.props.setCurrentDay(value);
   };
 
   render() {
@@ -70,4 +72,4 @@ class DiaryPage extends Component {
   }
 }
 
-export default connect(null, { getProducts })(DiaryPage);
+export default connect(null, { getProducts, setCurrentDay: userActions.setCurrentDay })(DiaryPage);
