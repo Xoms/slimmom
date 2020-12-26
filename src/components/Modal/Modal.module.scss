@@ -1,6 +1,23 @@
-@import '../../shared-styles/colors';
-@import '../../shared-styles/mixins';
-
+@import "../../shared-styles/colors";
+@import "../../shared-styles/mixins";
+.appear {
+  opacity: 0;
+  transform: scale(0.1);
+  transition: transform 250ms linear;
+}
+.appearActive {
+  opacity: 1;
+  transform: scale(1);
+}
+.exit {
+  transform: scale(1);
+  opacity: 1;
+}
+.exitActive {
+  opacity: 0;
+  transform: scale(0);
+  transition: all 250ms linear;
+}
 .title {
   font-family: Verdana;
   font-style: normal;
@@ -89,7 +106,7 @@
   position: relative;
 }
 .caloriesText::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   width: 100%;

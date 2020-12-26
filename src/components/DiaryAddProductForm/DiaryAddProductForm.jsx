@@ -10,6 +10,7 @@ import debounce from 'lodash.debounce';
 import { connect } from 'react-redux';
 import { addProduct } from '../../redux/user/userOperations';
 import { CSSTransition } from 'react-transition-group';
+import SmallLoader from '../../components/shared/SmallLoader';
 
 const AddProdSchema = Yup.object().shape({
   product: Yup.string().required('Обязательное поле *'),
@@ -23,6 +24,7 @@ class DiaryAddProductForm extends Component {
     choosenProductId: '',
     error: null,
     showUl: false,
+    loading: false,
   };
 
   handleClick = () => {
@@ -65,7 +67,10 @@ class DiaryAddProductForm extends Component {
       productId: this.state.choosenProductId,
       weight: weight,
     };
-
+    this.setState({loading : true});
+    setTimeout(() => {
+  this.setState({loading: false})
+    },1000)
     this.props.addProduct(product);
 
     // api
@@ -75,7 +80,7 @@ class DiaryAddProductForm extends Component {
   };
 
   render() {
-    const { products } = this.state;
+    const { products, loading } = this.state;
     const form = (
       <Formik
         initialValues={{
@@ -146,8 +151,14 @@ class DiaryAddProductForm extends Component {
                       component="span"
                     />
                     </label>
-            {window.innerWidth < 650 ? <Button type="submit" className={css.secondaryButton}>Добавить</Button> : <Button type="submit" className={css.plusButton}>+</Button>}
-
+           {window.innerWidth < 650 ? 
+            <Button type="submit" className={css.secondaryButton} disabled={loading}>
+              Добавить</Button> : 
+              <Button type="submit" className={css.plusButton} disabled={loading}>
+                +</Button>}
+                <div className={css.SmallLoaderContainer}>
+                {loading && <SmallLoader />}
+                </div>
           </Form>
         )}
       </Formik>
