@@ -20,10 +20,10 @@ class RightSideBar extends Component {
 
   dataToRender = () => {
     const { summaries, daySummary, currentDay, dailyRate, userDataDailyRate } = this.props;
-    console.log('data to render => ', summaries)
+    //console.log('data to render => ', summaries)
     const date = currentDay ? currentDay : new Date().toJSON().slice(0,10);
-    console.log('data to render => date = ', date)
-    if(!dailyRate && !userDataDailyRate) {
+    //console.log('data to render => date = ', date)
+    if( (!dailyRate && !userDataDailyRate) || !daySummary.dailyRate) {
       this.setState({
         dailyNorm: {...initialState, date}
       });
@@ -50,13 +50,12 @@ class RightSideBar extends Component {
       prevProps.summaries !== this.props.summaries ||
       prevProps.daySummary !== this.props.daySummary
     ) {
-      console.log('я выпролнился');
       this.dataToRender();
     }
   }
 
   render() {
-    console.log("Render daily norm",this.state.dailyNorm);
+    //console.log("Render daily norm",this.state.dailyNorm);
     const { notAllowedProducts } = this.props;
     const {
       date,

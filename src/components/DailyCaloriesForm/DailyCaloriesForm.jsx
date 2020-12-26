@@ -56,6 +56,13 @@ class DailyCaloriesForm extends Component {
   };
 
   render() {
+    const {
+      height,
+      age,
+      weight,
+      desiredWeight,
+      bloodType,
+    } = this.props.userInfo;
     return (
       <div className={styles.DailyCaloriesFormWrapper}>
         <h2 className={styles.DailyCaloriesFormTitle}>
@@ -65,11 +72,11 @@ class DailyCaloriesForm extends Component {
         </h2>
         <Formik
           initialValues={{
-            height: "",
-            weight: "",
-            age: "",
-            desiredWeight: "",
-            bloodType: "1",
+            height: height,
+            age: age,
+            weight: weight,
+            desiredWeight: desiredWeight,
+            bloodType: !!bloodType ? String(bloodType) : "1",
           }}
           validationSchema={formSchema}
           onSubmit={(values) => {
@@ -134,7 +141,6 @@ class DailyCaloriesForm extends Component {
                         errors.weight && touched.weight ? styles.errorInput : ""
                       }`}
                     />
-
                     <ErrorMessage
                       name="weight"
                       component="p"
@@ -159,7 +165,6 @@ class DailyCaloriesForm extends Component {
                           : ""
                       }`}
                     />
-
                     <ErrorMessage
                       name="desiredWeight"
                       component="p"
@@ -258,6 +263,7 @@ class DailyCaloriesForm extends Component {
 const mapStateToProps = (state) => ({
   isLoading: globalSelectors.getLoading(state),
   userId: userSelectors.getUserId(state),
+  userInfo: userSelectors.getUserInfo(state),
 });
 
 const mapDispatchToProps = {
