@@ -26,7 +26,7 @@ class App extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if(this.props.authError) {
+    if(this.props.authError && this.props.authError.includes('401')) {      
       this.props.clearError();
     }
   }
