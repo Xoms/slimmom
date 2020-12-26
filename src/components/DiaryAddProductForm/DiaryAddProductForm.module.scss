@@ -18,7 +18,12 @@
   background-color: #fff;
   color: black;
   height: 100%;
-  width: 240px;
+  width: 290px;
+
+  @media screen and (min-width: 650px) {
+    width: 240px;
+  }
+
   overflow-y: auto;
   overflow-x: hidden;
 
@@ -39,6 +44,7 @@
   position: absolute;
   left: 5px;
   top: 20px;
+  z-index: 3;
 
   height: 100px;
   width: 290px;
@@ -196,7 +202,7 @@
 
   .productListWrapper {
     position: absolute;
-    z-index: 2;
+    z-index: 3;
 
     left: 0px;
     top: 34px;
@@ -260,6 +266,10 @@ letter-spacing: 0.04em;
 }
 
 @media screen  and (max-width: 650px) {
+  input.gramms {
+    z-index: 0;
+  }
+
   .modalForm input {
     width: 290px;
   }
