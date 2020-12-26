@@ -4,46 +4,49 @@ import selectors from '../../redux/user/userSelectors';
 // import PropTypes from 'prop-types';
 import classes from './rightSideBar.module.scss';
 
-
-const initialState  = {
+const initialState = {
   kcalLeft: 0,
   kcalConsumed: 0,
   dailyRate: 0,
   percentsOfDailyRate: 0,
-}
+};
 
 class RightSideBar extends Component {
-  
   state = {
     dailyNorm: {},
   };
 
   dataToRender = () => {
-    const { summaries, daySummary, currentDay, dailyRate, userDataDailyRate } = this.props;
-    console.log('data to render => ', summaries)
-    const date = currentDay ? currentDay : new Date().toJSON().slice(0,10);
-    console.log('data to render => date = ', date)
-    if(!dailyRate && !userDataDailyRate) {
+    const {
+      summaries,
+      daySummary,
+      currentDay,
+      dailyRate,
+      userDataDailyRate,
+    } = this.props;
+    const date = currentDay ? currentDay : new Date().toJSON().slice(0, 10);
+    if (!dailyRate && !userDataDailyRate) {
       this.setState({
-        dailyNorm: {...initialState, date}
+        dailyNorm: { ...initialState, date },
       });
       return;
     }
     if (summaries.length) {
       this.setState({
-        dailyNorm: summaries.find(summary => summary.date === (daySummary.date ? daySummary.date : date)) || {...daySummary, date },
+        dailyNorm: summaries.find(
+          summary =>
+            summary.date === (daySummary.date ? daySummary.date : date),
+        ) || { ...daySummary, date },
       });
-      
     } else {
       this.setState({
-        dailyNorm: {...daySummary, date }
+        dailyNorm: { ...daySummary, date },
       });
     }
   };
-  componentDidMount(){
+  componentDidMount() {
     this.dataToRender();
   }
-  
 
   componentDidUpdate(prevProps, prevState) {
     if (
@@ -56,7 +59,6 @@ class RightSideBar extends Component {
   }
 
   render() {
-    console.log("Render daily norm",this.state.dailyNorm);
     const { notAllowedProducts } = this.props;
     const {
       date,
@@ -65,7 +67,6 @@ class RightSideBar extends Component {
       dailyRate,
       percentsOfDailyRate,
     } = this.state.dailyNorm ? this.state.dailyNorm : initialState;
-    //console.log("Render daily norm",this.state.dailyNorm);
     return (
       <>
         <section className={classes.section__rightSideBar}>

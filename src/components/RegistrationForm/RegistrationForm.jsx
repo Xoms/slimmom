@@ -1,53 +1,53 @@
-import React, { Component } from "react";
-import Button from "../shared/Button/Button";
-import ops from "../../redux/auth/authOperations";
-import { connect } from "react-redux";
-import css from "./RegistrationForm.module.scss";
-import Notification from "../shared/Notification/Notification";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import { authActions } from "../../redux/auth";
-import globalSelectors from "../../redux/global/globalSelectors";
-import Decoration from "../Decoration";
+import React, { Component } from 'react';
+import Button from '../shared/Button/Button';
+import ops from '../../redux/auth/authOperations';
+import { connect } from 'react-redux';
+import css from './RegistrationForm.module.scss';
+import Notification from '../shared/Notification/Notification';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import { authActions } from '../../redux/auth';
+import globalSelectors from '../../redux/global/globalSelectors';
+import Decoration from '../Decoration';
 
 const RegisterSchema = Yup.object().shape({
   username: Yup.string()
-    .min(2, "Too short!")
-    .max(50, "Too long!")
-    .required("Обязательное поле *"),
+    .min(2, 'Too short!')
+    .max(50, 'Too long!')
+    .required('Обязательное поле *'),
   email: Yup.string()
-    .min(2, "Too short!")
-    .max(50, "Too long!")
-    .required("Обязательное поле *"),
-  password: Yup.string().required("Обязательное поле *").min(8, "Too short!"),
+    .min(2, 'Too short!')
+    .max(50, 'Too long!')
+    .required('Обязательное поле *'),
+  password: Yup.string().required('Обязательное поле *').min(8, 'Too short!'),
 });
 
 class RegistrationForm extends Component {
   handleClick = () => {
-    this.props.history.push("/login");
+    this.props.history.push('/login');
   };
 
-    handleSubmit = async (values) => {
-        this.props.register(values, this.props.history);     
-    };
+  handleSubmit = async values => {
+    this.props.register(values, this.props.history);
+  };
 
   render() {
-    if (this.props.error) {
-      setTimeout(() => {
-        this.props.clearError();
-      }, 3000);
-    }
+    // if (this.props.error) {
+    //   setTimeout(() => {
+    //     this.props.clearError();
+    //   }, 3000);
+    // }
 
     return (
       <>
-        <Notification
+        {/* <Notification
           error={Boolean(this.props.error)}
           message="Пользователь с такими данными уже существует"
-        ></Notification>
-        <Decoration isLoginPage={true}/>
+        ></Notification> */}
+        <Decoration isLoginPage={true} />
         <section className="container">
           <Formik
-            initialValues={{ email: "", password: "", username: "" }}
+            initialValues={{ email: '', password: '', username: '' }}
             onSubmit={this.handleSubmit}
             validationSchema={RegisterSchema}
           >
@@ -60,7 +60,7 @@ class RegistrationForm extends Component {
                       className={`${css.inputField} ${
                         errors.username && touched.username
                           ? css.errorInput
-                          : ""
+                          : ''
                       }`}
                       type="text"
                       name="username"
@@ -75,7 +75,7 @@ class RegistrationForm extends Component {
                   <label className={css.formLabel}>
                     <Field
                       className={`${css.inputField} ${
-                        errors.email && touched.email ? css.errorInput : ""
+                        errors.email && touched.email ? css.errorInput : ''
                       }`}
                       type="email"
                       name="email"
@@ -92,7 +92,7 @@ class RegistrationForm extends Component {
                       className={`${css.inputField} ${
                         errors.password && touched.password
                           ? css.errorInput
-                          : ""
+                          : ''
                       }`}
                       type="password"
                       name="password"
@@ -125,7 +125,7 @@ const mapDispatchToProps = {
   register: ops.register,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   error: globalSelectors.getError(state),
 });
 
