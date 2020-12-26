@@ -79,7 +79,7 @@ class DiaryAddProductForm extends Component {
     const form = (
       <Formik
         initialValues={{
-          weight: '',
+          weight: '100',
           product: '',
         }}
         onSubmit={values => {
@@ -146,7 +146,7 @@ class DiaryAddProductForm extends Component {
                       component="span"
                     />
                     </label>
-            {window.visualViewport.width < 650 ? <Button type="submit" className={css.secondaryButton}>Добавить</Button> : <Button type="submit" className={css.plusButton}>+</Button>}
+            {window.innerWidth < 650 ? <Button type="submit" className={css.secondaryButton}>Добавить</Button> : <Button type="submit" className={css.plusButton}>+</Button>}
 
           </Form>
         )}
