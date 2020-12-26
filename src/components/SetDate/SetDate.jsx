@@ -40,19 +40,27 @@ class SetDate extends Component {
   };
 
   componentDidMount() {
-    const currentDate = new Date();
-    const year = currentDate.getFullYear();
-    const month =
-      currentDate.getMonth() < 10
-        ? `0${currentDate.getMonth() + 1}`
-        : currentDate.getMonth() + 1;
-    const day =
-      currentDate.getDate() < 10
-        ? `0${currentDate.getDate()}`
-        : currentDate.getDate();
+    // const currentDate = new Date();
+    // const year = currentDate.getFullYear();
+    // const month =
+    //   currentDate.getMonth() < 10
+    //     ? `0${currentDate.getMonth() + 1}`
+    //     : currentDate.getMonth() + 1;
+    // const day =
+    //   currentDate.getDate() < 10
+    //     ? `0${currentDate.getDate()}`
+    //     : currentDate.getDate();
+
+    console.log(this.props.currentDate)
+    const dateArr = this.props.currentDate.split('-');
+    const outputValue = dateArr.reverse().join('.')
+    
+    
     this.setState(state => {
       return {
-        outputValue: `${day}.${month}.${year}`,
+        outputValue: outputValue, //`${day}.${month}.${year}`,
+        currentValue: new Date(this.props.currentDate),
+        currentDate: new Date(this.props.currentDate)
       };
     });
   }
@@ -60,7 +68,7 @@ class SetDate extends Component {
   render() {
     return (
       <div className="setdate">
-        <p className="setdate-title">{`${this.state.outputValue}`}</p>
+        <p className="setdate-title">{this.state.outputValue}</p>
         <input
           className="setdate-btn"
           type="button"
@@ -73,7 +81,7 @@ class SetDate extends Component {
           classNames="react-calendar"
           unmountOnExit
         >
-          <Calendar onChange={this.setDate} value={this.state.currentValue} />
+          <Calendar onChange={this.setDate} value={this.state.currentValue}/>
         </CSSTransition>
       </div>
     );
@@ -84,8 +92,10 @@ export default SetDate;
 
 SetDate.propTypes = {
   value: PropTypes.func,
+  currentDate: PropTypes.string,
 };
 
 SetDate.defaultProps = {
   value() {},
+  //currentDate: new Date().toJSON().slice(0,10)
 };
