@@ -29,7 +29,7 @@ const {
 
 const error = createReducer(null, {
   [loginError]: (state, { payload }) => payload.message,
-  [getCurrentUserError]: (state, { payload }) => payload.error,
+  [getCurrentUserError]: (state, { payload }) => payload.message,
   [registerError]: (state, { payload }) => payload.error,
   [logoutError]: (state, { payload }) => payload.error,
   [getProductsError]: (state, { payload }) => payload.message,

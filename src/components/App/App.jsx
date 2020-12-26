@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { getCurrentUser } from '../../redux/user/userOperations';
 import {authOperations, authSelectors} from '../../redux/auth';
 import globalSelectors from '../../redux/global/globalSelectors';
+import authActions from '../../redux/auth/authActions';
 
 import routes from '../../routes';
 import PublicRoute from '../PublicRoute/PublicRoute';
@@ -22,34 +23,11 @@ class App extends Component {
   componentDidMount() {
     this.props.getCurrentUser();
   }
-  componentDidUpdate(prevProps, prevState, snapshot) {
 
-    if(prevProps.authError !== this.props.authError) {
-      this.props.refreshToken()
+  componentDidUpdate(prevProps, prevState) {
+    if(this.props.authError) {
+      this.props.clearError();
     }
-    // if((this.props.authError && this.props.authError.toLowerCase().includes('unauthorized')) 
-    // || (this.props.authError && this.props.authError.toLowerCase().includes('invalid'))) {
-      
-    //}
-  }
-
-  handleCheckExpToken = () => {
-    // if(!this.props.accessToken) {
-    //   return
-    // }
-
-    // const token = this.props.accessToken;
-    // const exp = 1608901189898;
-    // // const {exp} = jwt_decode(token);
-    // const date = Date.now(); // Date.now() минус 5 мин до конца действия токена 
-    // console.log("date", date);
-    // console.log("exp", exp);
-    // // console.log(Date.now() + 60000);
-
-    // if(date > exp) {
-    //   console.log("object");
-    //   this.props.refreshToken()
-    // }
   }
 
   render() {
@@ -84,7 +62,8 @@ const mapStateToProps = (state) => ({
 })
 const mapDispatch = {
   getCurrentUser,
-  refreshToken: authOperations.refresh
+  refreshToken: authOperations.refresh,
+  clearError: authActions.clearError,
 };
 
 export default connect(mapStateToProps, mapDispatch)(App);

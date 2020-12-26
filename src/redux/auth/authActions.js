@@ -14,7 +14,6 @@ const logoutError = createAction('auth/logoutError');
 
 const refreshRequest = createAction('auth/refreshRequest');
 const refreshSuccess = createAction('auth/refreshSuccess');
-// const refreshError = createAction('auth/refreshError');
 const refreshError = createAction('auth/refreshError');
 
 const clearError = createAction('clearError');
