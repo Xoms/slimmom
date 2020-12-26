@@ -72,10 +72,10 @@ class DailyCaloriesForm extends Component {
         </h2>
         <Formik
           initialValues={{
-            height: height,
-            age: age,
-            weight: weight,
-            desiredWeight: desiredWeight,
+            height: !!height ? height : "",
+            age: !!age ? age : "",
+            weight: !!weight ? weight : "",
+            desiredWeight: !!desiredWeight ? desiredWeight : "",
             bloodType: !!bloodType ? String(bloodType) : "1",
           }}
           validationSchema={formSchema}
