@@ -6,6 +6,7 @@ import SetDate from '../../components/SetDate/SetDate';
 import { connect } from 'react-redux';
 import { getProducts } from '../../redux/user/userOperations';
 import userActions from '../../redux/user/userActions';
+import userSelectors from '../../redux/user/userSelectors';
 import css from './DiaryPage.module.scss';
 
 class DiaryPage extends Component {
@@ -15,9 +16,12 @@ class DiaryPage extends Component {
   };
 
   componentDidMount() {
+    if(this.props.currentDate) {
+      this.setState({ date: this.props.currentDate });
+      return;
+    } 
     const today = this.getCurrentDate();
     this.setState({ date: today });
-    console.log(today);
     // this.props.getProducts({
     //   date: today,
     // });
@@ -25,6 +29,7 @@ class DiaryPage extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     const { date } = this.state;
+    console.log(date);
     if (prevState.date !== date) {
       this.props.getProducts({
         date: date,
@@ -42,7 +47,8 @@ class DiaryPage extends Component {
   };
 
   changeDate = value => {
-    this.setState({ date: value });
+    console.log(value)
+    this.setState({ date: String(value) });
     this.props.setCurrentDay(value);
   };
 
@@ -71,5 +77,7 @@ class DiaryPage extends Component {
     );
   }
 }
-
-export default connect(null, { getProducts, setCurrentDay: userActions.setCurrentDay })(DiaryPage);
+const mapStateToProps = (state) => ({
+  currentDate:  userSelectors.getCurrentDay(state),
+})
+export default connect(mapStateToProps, { getProducts, setCurrentDay: userActions.setCurrentDay })(DiaryPage);

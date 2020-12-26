@@ -103,7 +103,7 @@ const getProducts = date => (dispatch, getState) => {
   api.setToken(accessToken);
 
   dispatch(userActions.getProductsRequest());
-
+  
   api
     .getProducts(date)
     .then(({ data }) => {

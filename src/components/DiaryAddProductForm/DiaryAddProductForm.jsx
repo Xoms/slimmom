@@ -118,7 +118,7 @@ class DiaryAddProductForm extends Component {
                     </label>
             <div className={css.productListWrapper}>
             {!!products.length ? (
-            <CSSTransition in={this.state.showUl} unmountOnExit classNames="search-list" timeout={500}>
+            // <CSSTransition in={this.state.showUl} unmountOnExit classNames="search-list" timeout={500}>
               <ul className={css.autocomplete}>
                 {products.map(product => (
                   <li
@@ -135,7 +135,7 @@ class DiaryAddProductForm extends Component {
                   </li>
                 ))}
             </ul>
-            </CSSTransition>
+            // </CSSTransition>
             ) : this.state.error && <p className={css.errorMes}>{this.state.error}</p>}
             </div> 
             <label className={css.formLabel}>
