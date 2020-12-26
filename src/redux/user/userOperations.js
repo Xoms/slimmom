@@ -34,12 +34,14 @@ const getDailyRate = userCharacteristics => dispatch => {
     .catch(err => dispatch(userActions.getDailyRateWithIdError(err)));
 };
 
-const getDailyRateWithId = (userCharacteristics, userId) => dispatch => {
+const getDailyRateWithId = (userCharacteristics, userId, date) => dispatch => {
   dispatch(userActions.getDailyRateWithIdRequest());
   api
     .getDailyRate(userCharacteristics, userId)
     .then(({ data }) => {
-      let date = new Date().toJSON().slice(0, 10);
+      if (!date) {
+        date = new Date().toJSON().slice(0, 10);
+      }
       api
         .getProducts({ date })
         .then(({ data }) => {
@@ -105,6 +107,7 @@ const getProducts = date => (dispatch, getState) => {
   api
     .getProducts(date)
     .then(({ data }) => {
+      console.log(data)
       let payload = {};
       if (data.daySummary) {
         const { daySummary, eatenProducts, id } = data;

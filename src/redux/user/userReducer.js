@@ -12,6 +12,7 @@ const initialState = {
   eatenProducts: [],
   daySummary: {},
   currentDayId: null,
+  currentDay: null,
   summaries: [],
 };
 
@@ -46,6 +47,10 @@ const user = createReducer(initialState, {
   [userActions.getDailyRateWithIdSuccess]: (state, { payload }) => ({
     ...state,
     ...payload,
+  }),
+  [userActions.setCurrentDay]: (state, { payload }) => ({
+    ...state,
+    currentDay: payload,
   }),
 });
 

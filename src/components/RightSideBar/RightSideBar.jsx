@@ -4,43 +4,58 @@ import selectors from '../../redux/user/userSelectors';
 // import PropTypes from 'prop-types';
 import classes from './rightSideBar.module.scss';
 
+
+const initialState  = {
+  kcalLeft: 0,
+  kcalConsumed: 0,
+  dailyRate: 0,
+  percentsOfDailyRate: 0,
+}
+
 class RightSideBar extends Component {
+  
   state = {
     dailyNorm: {},
   };
 
   dataToRender = () => {
-    const { summaries, daySummary } = this.props;
+    const { summaries, daySummary, currentDay, dailyRate, userDataDailyRate } = this.props;
+    //console.log('data to render => ', summaries)
+    const date = currentDay ? currentDay : new Date().toJSON().slice(0,10);
+    //console.log('data to render => date = ', date)
+    if( (!dailyRate && !userDataDailyRate) || !daySummary.dailyRate) {
+      this.setState({
+        dailyNorm: {...initialState, date}
+      });
+      return;
+    }
     if (summaries.length) {
       this.setState({
-        dailyNorm: summaries.find(summary => summary.date === daySummary.date),
+        dailyNorm: summaries.find(summary => summary.date === (daySummary.date ? daySummary.date : date)) || {...daySummary, date },
       });
+      
     } else {
       this.setState({
-        dailyNorm: daySummary,
+        dailyNorm: {...daySummary, date }
       });
     }
   };
-
-  // componentDidMount() {
-  //   const { daySummary } = this.props;
-  //   console.log(daySummary);
-  //   this.setState({
-  //     dailyNorm: daySummary,
-  //   });
-  // }
+  componentDidMount(){
+    this.dataToRender();
+  }
+  
 
   componentDidUpdate(prevProps, prevState) {
     if (
       prevProps.summaries !== this.props.summaries ||
       prevProps.daySummary !== this.props.daySummary
     ) {
-      console.log('я выпролнился');
       this.dataToRender();
     }
   }
 
   render() {
+    //console.log("Render daily norm",this.state.dailyNorm);
     const { notAllowedProducts } = this.props;
     const {
       date,
@@ -48,8 +63,8 @@ class RightSideBar extends Component {
       kcalConsumed,
       dailyRate,
       percentsOfDailyRate,
-    } = this.state.dailyNorm;
-
+    } = this.state.dailyNorm ? this.state.dailyNorm : initialState;
+    //console.log("Render daily norm",this.state.dailyNorm);
     return (
       <>
         <section className={classes.section__rightSideBar}>
@@ -91,19 +106,14 @@ class RightSideBar extends Component {
     );
   }
 }
-RightSideBar.defaultProps = {
-  kcalLeft: 0,
-  kcalConsumed: 0,
-  dailyRate: 0,
-  percentsOfDailyRate: 0,
-  date: new Date().toJSON().slice(0, 10),
-};
 
 const mapStateToProps = state => ({
   summaries: selectors.getSummaries(state),
   currentDayId: selectors.getCurrentDayId(state),
-  // summary: selectors.getCurrentDaySummary(state),
+  currentDay: selectors.getCurrentDay(state),
   daySummary: selectors.getDaySummary(state),
+  dailyRate: selectors.getCalories(state),
+  userDataDailyRate: selectors.getUserDataDailyRate(state),
   notAllowedProducts: selectors.getnotAllowedProducts(state),
 });
 

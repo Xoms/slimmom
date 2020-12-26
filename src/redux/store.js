@@ -14,6 +14,7 @@ import storage from 'redux-persist/lib/storage';
 import { loading, error } from '../redux/global/globalReducers';
 import authReducer from './auth/authReducer';
 import user from './user/userReducer';
+import alertReducer from './alert/alertReducer'
 
 const defaultMiddleware = getDefaultMiddleware({
   serializableCheck: {
@@ -24,7 +25,7 @@ const defaultMiddleware = getDefaultMiddleware({
 const authPersistConfig = {
   key: 'auth',
   storage,
-  whitelist: ['accessToken', 'sid']
+  whitelist: ['accessToken', 'refreshToken', 'sid']
 }
 
 export const store = configureStore({
@@ -32,7 +33,8 @@ export const store = configureStore({
     auth: persistReducer(authPersistConfig, authReducer),
     loading,
     error,
-    user 
+    user ,
+    alertReducer
   },
   middleware: [...defaultMiddleware, ],
 })

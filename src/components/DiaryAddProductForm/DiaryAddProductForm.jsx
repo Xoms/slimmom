@@ -10,6 +10,7 @@ import debounce from 'lodash.debounce';
 import { connect } from 'react-redux';
 import { addProduct } from '../../redux/user/userOperations';
 import { CSSTransition } from 'react-transition-group';
+import SmallLoader from '../../components/shared/SmallLoader';
 
 const AddProdSchema = Yup.object().shape({
   product: Yup.string().required('Обязательное поле *'),
@@ -23,6 +24,7 @@ class DiaryAddProductForm extends Component {
     choosenProductId: '',
     error: null,
     showUl: false,
+    loading: false,
   };
 
   handleClick = () => {
@@ -65,7 +67,10 @@ class DiaryAddProductForm extends Component {
       productId: this.state.choosenProductId,
       weight: weight,
     };
-
+    this.setState({loading : true});
+    setTimeout(() => {
+  this.setState({loading: false})
+    },1000)
     this.props.addProduct(product);
 
     // api
@@ -75,11 +80,11 @@ class DiaryAddProductForm extends Component {
   };
 
   render() {
-    const { products } = this.state;
+    const { products, loading } = this.state;
     const form = (
       <Formik
         initialValues={{
-          weight: '',
+          weight: '100',
           product: '',
         }}
         onSubmit={values => {
@@ -118,7 +123,7 @@ class DiaryAddProductForm extends Component {
                     </label>
             <div className={css.productListWrapper}>
             {!!products.length ? (
-            <CSSTransition in={this.state.showUl} unmountOnExit classNames="search-list" timeout={500}>
+            // <CSSTransition in={this.state.showUl} unmountOnExit classNames="search-list" timeout={500}>
               <ul className={css.autocomplete}>
                 {products.map(product => (
                   <li
@@ -135,7 +140,7 @@ class DiaryAddProductForm extends Component {
                   </li>
                 ))}
             </ul>
-            </CSSTransition>
+            // </CSSTransition>
             ) : this.state.error && <p className={css.errorMes}>{this.state.error}</p>}
             </div> 
             <label className={css.formLabel}>
@@ -146,8 +151,14 @@ class DiaryAddProductForm extends Component {
                       component="span"
                     />
                     </label>
-            {window.visualViewport.width < 650 ? <Button type="submit" className={css.secondaryButton}>Добавить</Button> : <Button type="submit" className={css.plusButton}>+</Button>}
-
+           {window.innerWidth < 650 ? 
+            <Button type="submit" className={css.secondaryButton} disabled={loading}>
+              Добавить</Button> : 
+              <Button type="submit" className={css.plusButton} disabled={loading}>
+                +</Button>}
+                <div className={css.SmallLoaderContainer}>
+                {loading && <SmallLoader />}
+                </div>
           </Form>
         )}
       </Formik>
