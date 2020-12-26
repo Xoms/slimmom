@@ -1,4 +1,4 @@
-import React, { Component, Suspense, lazy } from 'react';
+import React, { Component, Suspense, lazy, Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import jwt_decode from "jwt-decode";
 // import debounce from 'lodash.debounce';
@@ -14,6 +14,7 @@ import PrivateRoute from '../PrivateRoute/PrivateRoute';
 
 import Loader from '../shared/Loader';
 import Layout from '../Layout';
+import Alert from '../Alert';
 
 //style
 import './App.scss';
@@ -31,6 +32,7 @@ class App extends Component {
   }
 
   render() {
+    
     const routesMap = routes.map(route => {
       return route.privated ? (
         <PrivateRoute key={route.path} {...route} />
@@ -40,14 +42,17 @@ class App extends Component {
     });
 
     return (
+      <Fragment>
+      <Alert/>
         <Layout>
           <Suspense fallback={<Loader />}>
             <Switch>
               {routesMap}
-              {/* <Route component={lazy(() => import('../../pages/NotFound'))} /> */}
+              <Route component={lazy(() => import('../../pages/NotFound'))} />
             </Switch>
           </Suspense>
         </Layout>
+      </Fragment>
     );
   }
 }
@@ -59,6 +64,8 @@ App.propTypes = {
 const mapStateToProps = (state) => ({
   authError : globalSelectors.getError(state),
   accessToken: authSelectors.getToken(state),
+  sid : authSelectors.sid(state),
+  isLoading: globalSelectors.getLoading(state), 
 })
 const mapDispatch = {
   getCurrentUser,

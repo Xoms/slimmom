@@ -17,49 +17,81 @@ const getCurrentUser = () => (dispatch, getState) => {
     .getCurrentUser()
     .then(({ data }) => {
       const { username, id, userData } = data;
-      const userInfo = { username, id, userData };
+      const userInfo = { username, id, userData, summaries: [] };
       dispatch(userActions.getCurrentUserSuccess(userInfo));
     })
     .catch(err => dispatch(userActions.getCurrentUserError(err)));
 };
 
 const getDailyRate = userCharacteristics => dispatch => {
-  //   const token =
-  //     'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI1ZmUxZGNiODVjMmJhNzAwMDQ0NDA5NjUiLCJzaWQiOiI1ZmUxZjdmNTVjMmJhNzAwMDQ0NDA5NmUiLCJpYXQiOjE2MDg2NDQ1OTcsImV4cCI6MTYwODY0ODE5N30.mynRviNExi5wDgG9Mhxc-mNUEw-0FNycFKYL1LoNiJs'; // надо поменять логику, пока захардкодили
+  dispatch(userActions.getDailyRateRequest());
 
-  //   const id = '5fcffaa7f7ae5300043515a6'; // надо поменять логику, пока захардкодили
-  //   api.setToken(token);
-  dispatch(userActions.getCurrentUserRequest());
-
-  api.getDailyRate(userCharacteristics).then(({ data }) => {
-    return dispatch(userActions.getDailyRateSuccess(data));
-  });
-};
-
-const deleteEatenProduct = () => dispatch => {
-  dispatch(userActions.deleteEatenProductRequest());
   api
-    .deleteEatenProduct()
+    .getDailyRate(userCharacteristics)
     .then(({ data }) => {
-      return dispatch(userActions.deleteEatenProductSuccess(data));
+      return dispatch(userActions.getDailyRateSuccess(data));
     })
-    .catch(err => dispatch(userActions.deleteEatenProductError(err)));
+    .catch(err => dispatch(userActions.getDailyRateWithIdError(err)));
 };
 
-// const addProduct = product => dispatch => {
-//   dispatch(userActions.addProductRequest());
+const getDailyRateWithId = (userCharacteristics, userId, date) => dispatch => {
+  dispatch(userActions.getDailyRateWithIdRequest());
+  api
+    .getDailyRate(userCharacteristics, userId)
+    .then(({ data }) => {
+      if (!date) {
+        date = new Date().toJSON().slice(0, 10);
+      }
+      api
+        .getProducts({ date })
+        .then(({ data }) => {
+          let payload = {};
+          if (data.daySummary) {
+            const { daySummary, eatenProducts, id } = data;
+            payload = { daySummary, eatenProducts, currentDayId: id };
+          } else {
+            payload = {
+              daySummary: { ...data },
+              eatenProducts: [],
+              currentDayId: null,
+            };
+            // payload.daySummary = { ...data };
+          }
+          dispatch(userActions.getProductsSuccess(payload));
+        })
+        .catch(err => dispatch(userActions.getProductsError(err)));
+      // console.log(data);
+      const { summaries, dailyRate } = data;
+      const payload = { summaries, dailyRate };
+      return dispatch(userActions.getDailyRateWithIdSuccess(payload));
+    })
+    .catch(err => dispatch(userActions.getDailyRateWithIdError(err)));
+};
 
-//   api
-//     .addProduct(product)
-//     .then(({ data }) => console.log(data))
-//     .catch(err => dispatch(userActions.addProductError(err)));
-// };
-
-// {
-//   "date": "2020-12-31",
-//   "productId": "5d51694802b2373622ff552c",
-//   "weight": 100
-// }
+const addProduct = product => dispatch => {
+  dispatch(userActions.addProductRequest());
+  api
+    .addProduct(product)
+    .then(({ data }) => {
+      console.log(data);
+      let payload = {};
+      if (data.newDay) {
+        payload = {
+          eatenProducts: data.newDay.eatenProducts,
+          daySummary: data.newSummary,
+          currentDayId: data.newDay.id,
+        };
+        dispatch(userActions.addProductSuccess(payload));
+      } else {
+        payload = {
+          eatenProducts: data.day.eatenProducts,
+          daySummary: data.daySummary,
+        };
+        dispatch(userActions.addProductSuccess(payload));
+      }
+    })
+    .catch(err => dispatch(userActions.addProductError(err)));
+};
 
 const getProducts = date => (dispatch, getState) => {
   const {
@@ -71,26 +103,64 @@ const getProducts = date => (dispatch, getState) => {
   api.setToken(accessToken);
 
   dispatch(userActions.getProductsRequest());
-
+  
   api
     .getProducts(date)
     .then(({ data }) => {
-      console.log(data);
+      console.log(data)
       let payload = {};
-      if(data.daySummary) {
-        const {daySummary, eatenProducts} = data;
-        payload = {daySummary, eatenProducts}
+      if (data.daySummary) {
+        const { daySummary, eatenProducts, id } = data;
+        payload = { daySummary, eatenProducts, currentDayId: id };
       } else {
-        payload.daySummary = {...data}
+        payload = {
+          daySummary: { ...data },
+          eatenProducts: [],
+          // currentDayId: null,
+        };
+        // payload.daySummary = { ...data };
       }
       dispatch(userActions.getProductsSuccess(payload));
     })
     .catch(err => dispatch(userActions.getProductsError(err)));
 };
 
-export { getCurrentUser, getDailyRate, deleteEatenProduct, getProducts };
+const deleteEatenProduct = (product, date) => dispatch => {
+  dispatch(userActions.deleteEatenProductRequest());
+  api
+    .deleteEatenProduct(product)
+    .then(({ data }) => {
+      api
+        .getProducts({ date })
+        .then(({ data }) => {
+          let payload = {};
+          if (data.daySummary) {
+            const { daySummary, eatenProducts, id } = data;
+            payload = { daySummary, eatenProducts, currentDayId: id };
+          } else {
+            payload = {
+              daySummary: { ...data },
+              eatenProducts: [],
+              currentDayId: null,
+            };
+            // payload.daySummary = { ...data };
+          }
+          dispatch(userActions.getProductsSuccess(payload));
+        })
+        .catch(err => dispatch(userActions.getProductsError(err)));
 
-// dailyRate: 1351.5
-// kcalConsumed: 0
-// kcalLeft: 1351.5
-// percentsOfDailyRate: 0
+      return dispatch(
+        userActions.deleteEatenProductSuccess(data.newDaySummary),
+      );
+    })
+    .catch(err => dispatch(userActions.deleteEatenProductError(err)));
+};
+
+export {
+  getCurrentUser,
+  getDailyRate,
+  addProduct,
+  deleteEatenProduct,
+  getProducts,
+  getDailyRateWithId,
+};

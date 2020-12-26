@@ -1,10 +1,20 @@
 import React, { Component } from 'react';
-import './DiaryAddProductForm.scss';
+import css from './DiaryAddProductForm.module.scss';
+import './DiaryAddProductFormAnimation.scss';
 import Button from '../shared/Button/Button';
 import back from '../../img/back-arrow.svg';
 import api from '../../services/backend.service';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
+import * as Yup from "yup";
 import debounce from 'lodash.debounce';
+import { connect } from 'react-redux';
+import { addProduct } from '../../redux/user/userOperations';
+import { CSSTransition } from 'react-transition-group';
+
+const AddProdSchema = Yup.object().shape({
+  product: Yup.string().required('Обязательное поле *'),
+  weight: Yup.number().required('Обязательное поле *'),
+});
 
 class DiaryAddProductForm extends Component {
   state = {
@@ -12,6 +22,7 @@ class DiaryAddProductForm extends Component {
     products: [],
     choosenProductId: '',
     error: null,
+    showUl: false,
   };
 
   handleClick = () => {
@@ -38,8 +49,15 @@ class DiaryAddProductForm extends Component {
   }, 400);
 
   hanleChange = ({ target }) => {
+    this.setState({showUl: true});
     this.debouncedSearch(target.value);
+    this.setState({error: null})
+
   };
+
+  // handleBlur = ({target}) => {
+  //   this.setState({showUl: false});
+  // };
 
   handleSubmit = ({ weight }) => {
     const product = {
@@ -48,10 +66,12 @@ class DiaryAddProductForm extends Component {
       weight: weight,
     };
 
-    api
-      .addProduct(product)
-      .then(data => console.log(data))
-      .catch(err => this.setState({ error: err.message }));
+    this.props.addProduct(product);
+
+    // api
+    //   .addProduct(product)
+    //   .then(data => console.log(data))
+    //   .catch(err => this.setState({ error: err.message }));
   };
 
   render() {
@@ -59,18 +79,21 @@ class DiaryAddProductForm extends Component {
     const form = (
       <Formik
         initialValues={{
-          weight: '',
+          weight: '100',
           product: '',
         }}
         onSubmit={values => {
           this.handleSubmit(values);
         }}
+        validationSchema={AddProdSchema}
       >
         {({ setFieldValue, handleChange, handleBlur }) => (
-          <Form className="modal-form">
+          <Form className={css.modalForm}>
+            <label className={css.formLabel}>
             <Field
               onBlur={e => {
                 handleBlur(e);
+                this.setState({ showUl: false });
                 setTimeout(() => {
                   this.setState({ products: [] });
                 }, 300);
@@ -79,14 +102,24 @@ class DiaryAddProductForm extends Component {
                 handleChange(e);
                 this.hanleChange(e);
               }}
+              //onBlur={this.handleBlur}
               //   value={product}
               name="product"
               placeholder="Введите название продукта"
               type="text"
               autoComplete="off"
             />
-            {!!products.length && (
-              <ul className="autocomplete">
+
+            <ErrorMessage
+                      className={css.validField}
+                      name="product"
+                      component="span"
+                    />
+                    </label>
+            <div className={css.productListWrapper}>
+            {!!products.length ? (
+            // <CSSTransition in={this.state.showUl} unmountOnExit classNames="search-list" timeout={500}>
+              <ul className={css.autocomplete}>
                 {products.map(product => (
                   <li
                     key={product._id}
@@ -101,12 +134,20 @@ class DiaryAddProductForm extends Component {
                     {product.title.ru}
                   </li>
                 ))}
-              </ul>
-            )}
-            <Field name="weight" placeholder="Граммы" type="number" />
-            <Button type="submit" className="secondary-button">
-              Добавить
-            </Button>
+            </ul>
+            // </CSSTransition>
+            ) : this.state.error && <p className={css.errorMes}>{this.state.error}</p>}
+            </div> 
+            <label className={css.formLabel}>
+            <Field className={css.gramms} name="weight" placeholder="Граммы" type="number" />
+            <ErrorMessage
+                      className={css.validField}
+                      name="weight"
+                      component="span"
+                    />
+                    </label>
+            {window.innerWidth < 650 ? <Button type="submit" className={css.secondaryButton}>Добавить</Button> : <Button type="submit" className={css.plusButton}>+</Button>}
+
           </Form>
         )}
       </Formik>
@@ -115,20 +156,22 @@ class DiaryAddProductForm extends Component {
     if (this.props.mobile) {
       return (
         <>
+        <div className={css.triggerButtonWrapper}>
           <button
             type="button"
             onClick={this.handleClick}
-            className="trigger-button"
+            className={css.triggerButton}
           >
             +
           </button>
+        </div>
           {this.state.renderMarker ? (
-            <div className="modal">
-              <div className="button-wrapper">
+            <div className={css.modal}>
+              <div className={css.buttonWrapper}>
                 <button
                   onClick={this.handleClick}
                   type="button"
-                  className="close-modal"
+                  className={css.closeModal}
                 >
                   <img src={back} alt="back-arrow" />
                 </button>
@@ -162,4 +205,8 @@ class DiaryAddProductForm extends Component {
   }
 }
 
-export default DiaryAddProductForm;
+const mapDispatchToProps = {
+  addProduct,
+};
+
+export default connect(null, mapDispatchToProps)(DiaryAddProductForm);

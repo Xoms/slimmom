@@ -1,16 +1,21 @@
-@import "../../shared-styles/reset";
-@import "../../shared-styles/mixins";
-@import "../../shared-styles/colors";
+@import '../../shared-styles/reset';
+@import '../../shared-styles/mixins';
+@import '../../shared-styles/colors';
 // @import "../../shared-styles/container";
 
+@media screen and (max-width: 1099px) {
+  .sectionHeader {
+    border-bottom: 2px solid $header-border;
+  }
+}
 
 .mainHeader {
   position: relative;
   display: flex;
   justify-content: space-between;
   padding-top: 17px;
-  padding-bottom: 18px;
-  border-bottom: 2px silver;
+  // padding-bottom: 18px;
+  // border-bottom: 2px solid $header-border;
 
   @include for-size(desktop) {
     border: 0;
@@ -32,8 +37,8 @@
   &::after {
     position: absolute;
     @include for-size(desktop) {
-      background-color: #E0E0E0;
-      content: "";
+      background-color: #e0e0e0;
+      content: '';
       display: inline-block;
       width: 3px;
       height: 30px;
@@ -54,7 +59,8 @@
 
 .navigationAuth {
   margin-left: 106px;
-  padding: 13px 0px;
+  // padding: 13px 0px;
+  padding-top: 13px;
   display: flex;
   @include for-size(desktop) {
     margin-left: 40px;
@@ -86,7 +92,7 @@
   font-size: 20px;
   padding-right: 30px;
 
-  @include for-size(tablet){
+  @include for-size(tablet) {
     margin-left: 50px;
     padding-right: 30px;
   }

@@ -3,30 +3,63 @@
 
 .section__rightSideBar {
   padding-top: 40px;
-  padding-bottom: 55px;
-
-  background-color: $secondary-beckground;
+  padding-bottom: 25px;
+  // background-color: rgb(228, 180, 180);
+  // background-color: $secondary-beckground;
 
   @include for-size(tablet) {
+    background-color: unset;
     padding-top: 91px;
-    padding-bottom: 91px;
+    padding-bottom: 0px;
     position: relative;
   }
   @include for-size(desktop) {
-    padding-top: 300px;
+    background-color: unset;
+    // padding-top: 300px;
     // min-width: 535px;
     min-height: 600px;
     width: 100%;
   }
 }
 
+// Scroll-bar customisation
+
+.scrollbar {
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  scrollbar-width: thin;
+  scrollbar-color: $burger-background $secondary-beckground;
+}
+// #FC842D
+.scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.scrollbar::-webkit-scrollbar-track {
+  background-color: #afb1b6;
+}
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: $burger-background;
+  border-radius: 0px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb:vertical {
+  min-height: 1.5rem;
+}
+.scrollbar::-webkit-scrollbar-thumb:horizontal {
+  min-width: 1.5rem;
+}
+
+//* scroll standard
 .notAllowedProductsList {
   max-height: 152px;
   margin-top: 25px;
   color: $secondary-text;
-  overflow-y: scroll;
-  z-index: 10;
+  // overflow-y: scroll;
+  z-index: 1;
   position: relative;
+  overscroll-behavior: contain;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .title {
@@ -35,7 +68,7 @@
   font-size: 14px;
   line-height: 1.214;
   letter-spacing: 0.04em;
-  margin-bottom: 17px;
+  margin-bottom: 22px;
   color: $main-text;
 }
 
@@ -69,25 +102,26 @@
   }
 }
 .backgroundSideBar {
-  @include for-size(tablet) {
-    width: 270px;
-    position: absolute;
-    top: 13px;
-    right: 38px;
-    height: 362px;
+  // @include for-size(tablet) {
+  //   width: 270px;
+  //   position: absolute;
+  //   top: 13px;
+  //   right: 38px;
+  //   height: 362px;
 
-    background-image: url('../../img/rightSideBarBottom@1x.png');
-    background-repeat: no-repeat;
-  }
+  //   background-image: url('../../img/rightSideBarBottom@1x.png');
+  //   background-repeat: no-repeat;
+  // }
   @include for-size(desktop) {
-    width: 505px;
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    height: 777px;
+    background-image: none;
+    //   width: 505px;
+    //   position: absolute;
+    //   top: 0px;
+    //   right: 0px;
+    //   height: 777px;
 
-    background-image: url('../../img/rightSideBar@1x.png');
-    background-repeat: no-repeat;
+    //   background-image: url('../../img/rightSideBar@1x.png');
+    //   background-repeat: no-repeat;
   }
 }
 
@@ -130,6 +164,7 @@
     justify-content: space-between;
   }
   @include for-size(desktop) {
+    margin-right: 0;
     width: 330px;
     display: block;
   }

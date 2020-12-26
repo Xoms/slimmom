@@ -11,8 +11,10 @@ const {
   logoutRequest,
   logoutSuccess,
   logoutError,
-  clearError,
+  refreshRequest,
+  refreshSuccess,
   refreshError,
+  clearError,
 } = { ...authActions };
 
 const {
@@ -22,9 +24,19 @@ const {
   getDailyRateRequest,
   getDailyRateSuccess,
   getDailyRateError,
+  deleteEatenProductRequest,
+  deleteEatenProductSuccess,
+  deleteEatenProductError,
+  addProductRequest,
+  addProductSuccess,
+  addProductError,
   getProductsRequest,
   getProductsSuccess,
   getProductsError,
+  setCurrentDay,
+  getDailyRateWithIdRequest,
+  getDailyRateWithIdSuccess,
+  getDailyRateWithIdError,
 } = userActions;
 
 const error = createReducer(null, {
@@ -58,6 +70,20 @@ const loading = createReducer(false, {
   [getDailyRateRequest]: () => true,
   [getDailyRateSuccess]: () => false,
   [getDailyRateError]: () => false,
+  [refreshRequest]: () => true,
+  [refreshSuccess]: () => false,
+  [refreshError]: () => false,
+  [clearError]: () => false,
+  [deleteEatenProductRequest]: () => true,
+  [deleteEatenProductSuccess]: () => false,
+  [deleteEatenProductError]: () => false,
+  [addProductRequest]: () => true,
+  [addProductSuccess]: () => false,
+  [addProductError]: () => false,
+  [setCurrentDay]: () => false,
+  [getDailyRateWithIdRequest]: () => true,
+  [getDailyRateWithIdSuccess]: () => false,
+  [getDailyRateWithIdError]: () => false,
 });
 
 export { loading, error };

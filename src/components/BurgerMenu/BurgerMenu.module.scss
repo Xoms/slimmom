@@ -1,6 +1,6 @@
-@import "../../shared-styles/reset";
-@import "../../shared-styles/mixins";
-@import "../../shared-styles/colors";
+@import '../../shared-styles/reset';
+@import '../../shared-styles/mixins';
+@import '../../shared-styles/colors';
 
 .burgerMenu {
   background-color: $burger-background;
@@ -38,18 +38,16 @@
 
   & :not(:last-child) {
     margin-bottom: 15px;
-    @include for-size (tablet) {
+    @include for-size(tablet) {
       margin-bottom: 15px;
     }
   }
-  @include for-size (tablet) {
+  @include for-size(tablet) {
     padding-top: 108px;
     height: 944px;
   }
-
 }
 .burgerMenuItemDiary {
-
   text-align: center;
   text-decoration: none;
   color: $secondary-text;
@@ -57,14 +55,13 @@
   font-size: 18px;
   @include for-size(tablet) {
     font-size: 24px;
-  } 
+  }
 }
 .burgerMenuItemCalc {
-
   text-align: center;
   text-decoration: none;
   color: $main-background;
-  font-family: 'VerdanaBold'; 
+  font-family: 'VerdanaBold';
   font-size: 18px;
   @include for-size(tablet) {
     font-size: 24px;

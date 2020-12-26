@@ -3,7 +3,13 @@ import React, { Component } from 'react';
 class Decoration extends Component {
   state = {  }
   render() {
-    const addStyle = this.props.isLoginPage ? "-login" : '';
+    let addStyle = '';
+    if(this.props.isLoginPage){
+      addStyle = "-login"
+    }else if(this.props.isCalculationPage) {
+      addStyle = "-calculation"
+    }
+    // const addStyle = this.props.isLoginPage ? "-login" : '';
     return ( 
       <section className={`decoration${addStyle}`} >
         {/* <div className="dec-container"> */}

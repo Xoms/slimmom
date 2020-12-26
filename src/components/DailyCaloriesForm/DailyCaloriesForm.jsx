@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { getDailyRate } from "../../redux/user/userOperations";
+import {
+  getDailyRate,
+  getDailyRateWithId,
+} from "../../redux/user/userOperations";
+import userSelectors from "../../redux/user/userSelectors";
 import { connect } from "react-redux";
 import Button from "../shared/Button";
 import styles from "./DailyCaloriesForm.module.scss";
@@ -43,23 +47,36 @@ class DailyCaloriesForm extends Component {
       desiredWeight: +values.desiredWeight,
       bloodType: +values.bloodType,
     };
-    this.props.getDailyRate(userCharacteristics);
-    this.toggleModal();
+    if (!this.props.userId) {
+      this.props.getDailyRate(userCharacteristics);
+      this.toggleModal();
+    } else {
+      this.props.getDailyRateWithId(userCharacteristics, this.props.userId);
+    }
   };
 
   render() {
+    const {
+      height,
+      age,
+      weight,
+      desiredWeight,
+      bloodType,
+    } = this.props.userInfo;
     return (
       <div className={styles.DailyCaloriesFormWrapper}>
         <h2 className={styles.DailyCaloriesFormTitle}>
-          Посчитай свою суточную норму калорий прямо сейчас
+          {this.props.userId
+            ? "Узнай свою суточную норму калорий"
+            : "Посчитай свою суточную норму калорий прямо сейчас"}
         </h2>
         <Formik
           initialValues={{
-            height: "170",
-            weight: "83",
-            age: "26",
-            desiredWeight: "75",
-            bloodType: "1",
+            height: !!height ? height : "",
+            age: !!age ? age : "",
+            weight: !!weight ? weight : "",
+            desiredWeight: !!desiredWeight ? desiredWeight : "",
+            bloodType: !!bloodType ? String(bloodType) : "1",
           }}
           validationSchema={formSchema}
           onSubmit={(values) => {
@@ -68,12 +85,18 @@ class DailyCaloriesForm extends Component {
         >
           {({ errors, touched }) => (
             <Form className={styles.DailyCaloriesForm}>
-              <div className={styles.DailyCaloriesFormFirstWrapper}>
-                <div className={styles.DailyCaloriesFormFieldsWrappers}>
+              <div className={styles.DailyCaloriesFormGeneralWrapper}>
+                <div className={styles.DailyCaloriesFormFieldsContainer}>
                   <div className={styles.DailyCaloriesFormFieldsWrapper}>
+                    <label
+                      htmlFor="height"
+                      className={styles.DailyCaloriesFormFieldsLabelText}
+                    >
+                      Рост *
+                    </label>
                     <Field
+                      id="height"
                       name="height"
-                      placeholder="Рост *"
                       className={`${styles.DailyCaloriesFormInput} ${
                         errors.height && touched.height ? styles.errorInput : ""
                       }`}
@@ -85,9 +108,15 @@ class DailyCaloriesForm extends Component {
                     />
                   </div>
                   <div className={styles.DailyCaloriesFormFieldsWrapper}>
+                    <label
+                      htmlFor="age"
+                      className={styles.DailyCaloriesFormFieldsLabelText}
+                    >
+                      Возраст *
+                    </label>
                     <Field
+                      id="age"
                       name="age"
-                      placeholder="Возраст *"
                       className={`${styles.DailyCaloriesFormInput} ${
                         errors.age && touched.age ? styles.errorInput : ""
                       }`}
@@ -99,9 +128,15 @@ class DailyCaloriesForm extends Component {
                     />
                   </div>
                   <div className={styles.DailyCaloriesFormFieldsWrapper}>
+                    <label
+                      htmlFor="weight"
+                      className={styles.DailyCaloriesFormFieldsLabelText}
+                    >
+                      Текущий вес *
+                    </label>
                     <Field
+                      id="weight"
                       name="weight"
-                      placeholder="Текущий вес *"
                       className={`${styles.DailyCaloriesFormInput} ${
                         errors.weight && touched.weight ? styles.errorInput : ""
                       }`}
@@ -115,9 +150,15 @@ class DailyCaloriesForm extends Component {
                 </div>
                 <div>
                   <div className={styles.DailyCaloriesFormFieldsWrapper}>
+                    <label
+                      htmlFor="desiredWeight"
+                      className={styles.DailyCaloriesFormFieldsLabelText}
+                    >
+                      Желаемый вес *
+                    </label>
                     <Field
+                      id="desiredWeight"
                       name="desiredWeight"
-                      placeholder="Желаемый вес *"
                       className={`${styles.DailyCaloriesFormInput} ${
                         errors.desiredWeight && touched.desiredWeight
                           ? styles.errorInput
@@ -130,58 +171,70 @@ class DailyCaloriesForm extends Component {
                       className={styles.errorMessage}
                     />
                   </div>
+                  <h3 className={styles.DailyCaloriesFormBloodTitle}>
+                    Группа крови *
+                  </h3>
                   <div className={styles.DailyCaloriesFormBloodWrapper}>
-                    <h3 className={styles.DailyCaloriesFormBloodTitle}>
-                      Группа крови *
-                    </h3>
-                    <label
-                      htmlFor="bloodType_1"
-                      className={styles.DailyCaloriesFormLabel}
-                    >
+                    <div>
                       <Field
+                        id="I"
                         type="radio"
                         name="bloodType"
                         value="1"
                         className={styles.DailyCaloriesLabelField}
                       />
-                      1
-                    </label>
-                    <label
-                      htmlFor="bloodType_2"
-                      className={styles.DailyCaloriesFormLabel}
-                    >
+                      <label
+                        htmlFor="I"
+                        className={styles.DailyCaloriesFormLabel}
+                      >
+                        1
+                      </label>
+                    </div>
+                    <div>
                       <Field
+                        id="II"
                         type="radio"
                         name="bloodType"
                         value="2"
                         className={styles.DailyCaloriesLabelField}
                       />
-                      2
-                    </label>
-                    <label
-                      htmlFor="bloodType_3"
-                      className={styles.DailyCaloriesFormLabel}
-                    >
+                      <label
+                        htmlFor="II"
+                        className={styles.DailyCaloriesFormLabel}
+                      >
+                        2
+                      </label>
+                    </div>
+                    <div>
                       <Field
+                        id="III"
                         type="radio"
                         name="bloodType"
                         value="3"
                         className={styles.DailyCaloriesLabelField}
                       />
-                      3
-                    </label>
-                    <label
-                      htmlFor="bloodType_4"
-                      className={styles.DailyCaloriesFormLabel}
-                    >
+                      <label
+                        htmlFor="III"
+                        className={styles.DailyCaloriesFormLabel}
+                      >
+                        3
+                      </label>
+                    </div>
+                    <div>
                       <Field
+                        id="IV"
                         type="radio"
                         name="bloodType"
                         value="4"
                         className={styles.DailyCaloriesLabelField}
                       />
-                      4
-                    </label>
+                      <label
+                        htmlFor="IV"
+                        className={styles.DailyCaloriesFormLabel}
+                      >
+                        4
+                      </label>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -209,10 +262,13 @@ class DailyCaloriesForm extends Component {
 
 const mapStateToProps = (state) => ({
   isLoading: globalSelectors.getLoading(state),
+  userId: userSelectors.getUserId(state),
+  userInfo: userSelectors.getUserInfo(state),
 });
 
 const mapDispatchToProps = {
   getDailyRate,
+  getDailyRateWithId,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DailyCaloriesForm);
