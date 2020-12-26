@@ -71,6 +71,7 @@ class DailyCaloriesForm extends Component {
             : "Посчитай свою суточную норму калорий прямо сейчас"}
         </h2>
         <Formik
+          enableReinitialize
           initialValues={{
             height: !!height ? height : "",
             age: !!age ? age : "",
