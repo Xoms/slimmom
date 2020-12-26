@@ -55,16 +55,14 @@ class DailyCaloriesForm extends Component {
     }
   };
 
-  userInfo = {
-    height: this.props.userInfo.height,
-    age: this.props.userInfo.age,
-    weight: this.props.userInfo.weight,
-    desiredWeight: this.props.userInfo.desiredWeight,
-    bloodType: this.props.userInfo.bloodType,
-  };
-
   render() {
-    console.log(this.userInfo);
+    const {
+      height,
+      age,
+      weight,
+      desiredWeight,
+      bloodType,
+    } = this.props.userInfo;
     return (
       <div className={styles.DailyCaloriesFormWrapper}>
         <h2 className={styles.DailyCaloriesFormTitle}>
@@ -74,13 +72,11 @@ class DailyCaloriesForm extends Component {
         </h2>
         <Formik
           initialValues={{
-            height: this.userInfo.height ? this.userInfo.height : "",
-            age: this.userInfo.age ? this.userInfo.age : "",
-            weight: this.userInfo.weight ? this.userInfo.weight : "",
-            desiredWeight: this.userInfo.desiredWeight
-              ? this.userInfo.desiredWeight
-              : "",
-            bloodType: this.userInfo.bloodType ? this.userInfo.bloodType : "",
+            height: height,
+            age: age,
+            weight: weight,
+            desiredWeight: desiredWeight,
+            bloodType: !!bloodType ? String(bloodType) : "1",
           }}
           validationSchema={formSchema}
           onSubmit={(values) => {
