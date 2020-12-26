@@ -97,5 +97,5 @@ SetDate.propTypes = {
 
 SetDate.defaultProps = {
   value() {},
-  //currentDate: new Date().toJSON().slice(0,10)
+  currentDate: new Date().toJSON().slice(0,10)
 };
