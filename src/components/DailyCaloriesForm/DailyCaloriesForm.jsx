@@ -96,6 +96,8 @@ class DailyCaloriesForm extends Component {
                     <Field
                       id="height"
                       name="height"
+                      type="number"
+                      autoComplete="off"
                       className={`${styles.DailyCaloriesFormInput} ${
                         errors.height && touched.height ? styles.errorInput : ""
                       }`}
@@ -117,6 +119,8 @@ class DailyCaloriesForm extends Component {
                     <Field
                       id="age"
                       name="age"
+                      type='number'
+                      autoComplete="off"
                       className={`${styles.DailyCaloriesFormInput} ${
                         errors.age && touched.age ? styles.errorInput : ""
                       }`}
@@ -138,6 +142,8 @@ class DailyCaloriesForm extends Component {
                     <Field
                       id="weight"
                       name="weight"
+                      type='number'
+                      autoComplete="off"
                       className={`${styles.DailyCaloriesFormInput} ${
                         errors.weight && touched.weight ? styles.errorInput : ""
                       }`}
@@ -160,6 +166,8 @@ class DailyCaloriesForm extends Component {
                     <Field
                       id="desiredWeight"
                       name="desiredWeight"
+                      type='number'
+                      autoComplete="off"
                       className={`${styles.DailyCaloriesFormInput} ${
                         errors.desiredWeight && touched.desiredWeight
                           ? styles.errorInput
