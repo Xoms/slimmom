@@ -33,7 +33,6 @@ const {
   getProductsRequest,
   getProductsSuccess,
   getProductsError,
-  setCurrentDay,
   getDailyRateWithIdRequest,
   getDailyRateWithIdSuccess,
   getDailyRateWithIdError,
@@ -92,7 +91,6 @@ const loading = createReducer(false, {
   [addProductRequest]: () => true,
   [addProductSuccess]: () => false,
   [addProductError]: () => false,
-  [setCurrentDay]: () => false,
 });
 
 export { loading, error };

@@ -9,8 +9,8 @@ import * as Yup from 'yup';
 import debounce from 'lodash.debounce';
 import { connect } from 'react-redux';
 import { addProduct } from '../../redux/user/userOperations';
+import globalSelectors from '../../redux/global/globalSelectors';
 import { CSSTransition } from 'react-transition-group';
-import SmallLoader from '../../components/shared/SmallLoader';
 
 const AddProdSchema = Yup.object().shape({
   product: Yup.string().required('Обязательное поле *'),
@@ -24,7 +24,6 @@ class DiaryAddProductForm extends Component {
     choosenProductId: '',
     error: null,
     showUl: false,
-    loading: false,
   };
 
   handleClick = () => {
@@ -61,15 +60,11 @@ class DiaryAddProductForm extends Component {
       productId: this.state.choosenProductId,
       weight: weight,
     };
-    this.setState({ loading: true });
-    setTimeout(() => {
-      this.setState({ loading: false });
-    }, 1000);
     this.props.addProduct(product);
   };
 
   render() {
-    const { products, loading } = this.state;
+    const { products} = this.state;
     const form = (
       <Formik
         initialValues={{
@@ -152,7 +147,7 @@ class DiaryAddProductForm extends Component {
               <Button
                 type="submit"
                 className={css.secondaryButton}
-                disabled={loading}
+                disabled={this.props.isLoading}
               >
                 Добавить
               </Button>
@@ -160,14 +155,11 @@ class DiaryAddProductForm extends Component {
               <Button
                 type="submit"
                 className={css.plusButton}
-                disabled={loading}
+                disabled={this.props.isLoading}
               >
                 +
               </Button>
             )}
-            <div className={css.SmallLoaderContainer}>
-              {loading && <SmallLoader />}
-            </div>
           </Form>
         )}
       </Formik>
@@ -206,9 +198,11 @@ class DiaryAddProductForm extends Component {
     }
   }
 }
-
+const mapStateToProps = (state)=>({
+  isLoading:  globalSelectors.getLoading(state),
+})
 const mapDispatchToProps = {
   addProduct,
 };
 
-export default connect(null, mapDispatchToProps)(DiaryAddProductForm);
+export default connect(mapStateToProps, mapDispatchToProps)(DiaryAddProductForm);
