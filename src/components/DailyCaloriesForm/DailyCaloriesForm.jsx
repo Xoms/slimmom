@@ -12,20 +12,21 @@ import styles from './DailyCaloriesForm.module.scss';
 import Modal from '../Modal';
 import globalSelectors from '../../redux/global/globalSelectors';
 import SmallLoader from '../../components/shared/SmallLoader';
+import withAuth from '../hocs/withAuth'
 
 const formSchema = Yup.object().shape({
-  height: Yup.number().max(250, 'Укажите значение до 250').required('Рост*'),
-  age: Yup.number()
-    .min(18, 'Укажите значение больше 17')
-    .max(99, 'Укажите значение меньше 100')
-    .required('Возраст*'),
-  weight: Yup.number()
-    .min(20, 'Укажите значение больше 20')
-    .required('Текущий вес*'),
-  desiredWeight: Yup.number()
-    .min(20, 'Укажите значение больше 20')
-    .max(500, 'Укажите значение меньше 500')
-    .required('Желаемый вес*'),
+  height: Yup.string()
+    .max(3, "Укажите 3 цифры")
+    .required("Рост *"),
+  age: Yup.string()
+    .max(2, "Укажите 2 цифры")
+    .required("Возраст *"),
+  weight: Yup.string()
+    .max(3, "Укажите 3 цифры")
+    .required("Текущий вес *"),
+  desiredWeight: Yup.string()
+    .max(3, "Укажите 3 цифры")
+    .required("Желаемый вес *"),
   bloodType: Yup.string().required(),
 });
 
@@ -61,7 +62,6 @@ class DailyCaloriesForm extends Component {
   };
 
   render() {
-    const { loading } = this.state;
     const {
       height,
       age,
@@ -72,9 +72,9 @@ class DailyCaloriesForm extends Component {
     return (
       <div className={styles.DailyCaloriesFormWrapper}>
         <h2 className={styles.DailyCaloriesFormTitle}>
-          {this.props.userId
-            ? 'Узнай свою суточную норму калорий'
-            : 'Посчитай свою суточну норму калорий прямо сейчас'}
+          {this.props.isAuth
+            ? "Узнай свою суточную норму калорий"
+            : "Посчитай свою суточную норму калорий прямо сейчас"}
         </h2>
         <Formik
           enableReinitialize
@@ -84,7 +84,6 @@ class DailyCaloriesForm extends Component {
             weight: !!weight ? weight : '',
             desiredWeight: !!desiredWeight ? desiredWeight : '',
             bloodType: !!bloodType ? String(bloodType) : '1',
-            loading: false,
           }}
           validationSchema={formSchema}
           onSubmit={values => {
@@ -261,12 +260,12 @@ class DailyCaloriesForm extends Component {
               <Button
                 type="submit"
                 className={`primary-button ${styles.DailyCaloriesFormButton}`}
-                disabled={loading}
+                disabled={this.props.isLoading}
               >
                 Похудеть
               </Button>
               <div className={styles.SmallLoaderContainerHome}>
-                {loading && <SmallLoader />}
+                {this.props.isloading &&  <SmallLoader />}
               </div>
             </Form>
           )}
@@ -295,4 +294,4 @@ const mapDispatchToProps = {
   getDailyRateWithId,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DailyCaloriesForm);
+export default connect(mapStateToProps, mapDispatchToProps)(withAuth(DailyCaloriesForm));
