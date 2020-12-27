@@ -47,6 +47,7 @@ const user = createReducer(initialState, {
   [userActions.getDailyRateWithIdSuccess]: (state, { payload }) => ({
     ...state,
     ...payload,
+    userData: { notAllowedProducts: [...payload.notAllowedProducts] },
   }),
   [userActions.setCurrentDay]: (state, { payload }) => ({
     ...state,
