@@ -10,7 +10,6 @@ import debounce from 'lodash.debounce';
 import { connect } from 'react-redux';
 import { addProduct } from '../../redux/user/userOperations';
 import globalSelectors from '../../redux/global/globalSelectors';
-import { CSSTransition } from 'react-transition-group';
 
 const AddProdSchema = Yup.object().shape({
   product: Yup.string().required('Обязательное поле *'),
@@ -45,7 +44,11 @@ class DiaryAddProductForm extends Component {
           this.setState({ choosenProductId: data[0]._id });
         }
       })
-      .catch(err => this.setState({ products: [], error: err.message }));
+      .catch(err => {
+        err.response.data
+          ? this.setState({ products: [], error: err.response.data.message })
+          : this.setState({ products: [], error: err.message });
+      });
   }, 400);
 
   hanleChange = ({ target }) => {
@@ -74,9 +77,9 @@ class DiaryAddProductForm extends Component {
           weight: '100',
           product: '',
         }}
-        onSubmit={(values, initialValues) => {
+        onSubmit={(values, { resetForm }) => {
           this.handleSubmit(values);
-          values = initialValues;
+          resetForm();
         }}
         validationSchema={AddProdSchema}
       >
@@ -113,10 +116,11 @@ class DiaryAddProductForm extends Component {
             <div className={css.productListWrapper}>
               {!!products.length ? (
                 // <CSSTransition in={this.state.showUl} unmountOnExit classNames="search-list" timeout={500}>
-                <ul className={css.autocomplete}>
+                <ul className={`${css.autocomplete}  ${css.scrollbar}`}>
                   {products.map(product => (
                     <li
                       key={product._id}
+                      className={css.autocompleteItem}
                       onClick={() => {
                         setFieldValue('product', product.title.ru);
                         this.setState({
