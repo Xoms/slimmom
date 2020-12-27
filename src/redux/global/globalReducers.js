@@ -56,7 +56,7 @@ const error = createReducer(null, {
   [getDailyRateRequest]: () => null,
   [getDailyRateWithIdError]: (state, { payload }) => payload.message,
   [getDailyRateWithIdRequest]: () => null,
-  [addProductError]: (state, { payload }) => payload.message,
+  [addProductError]: (state, { payload }) => payload,
   [addProductRequest]: () => null,
   [clearError]: () => null,
 });

@@ -89,7 +89,6 @@ const getDailyRateWithId = (userCharacteristics, userId, date) => dispatch => {
 };
 
 const addProduct = product => dispatch => {
-  console.log('hello');
   dispatch(userActions.addProductRequest());
   api
     .addProduct(product)
@@ -110,7 +109,17 @@ const addProduct = product => dispatch => {
         dispatch(userActions.addProductSuccess(payload));
       }
     })
-    .catch(err => dispatch(userActions.addProductError(err)));
+    .catch(err => {
+      if (
+        err.response.data.message === '"productId" is not allowed to be empty'
+      ) {
+        dispatch(
+          userActions.addProductError(
+            'Please, choose a product from dropdown list',
+          ),
+        );
+      } else dispatch(userActions.addProductError(err.message));
+    });
 };
 
 const getProducts = date => (dispatch, getState) => {

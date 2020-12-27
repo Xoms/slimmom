@@ -46,7 +46,11 @@ class DiaryAddProductForm extends Component {
           this.setState({ choosenProductId: data[0]._id });
         }
       })
-      .catch(err => this.setState({ products: [], error: err.message }));
+      .catch(err => {
+        err.response.data
+          ? this.setState({ products: [], error: err.response.data.message })
+          : this.setState({ products: [], error: err.message });
+      });
   }, 400);
 
   hanleChange = ({ target }) => {
@@ -76,9 +80,9 @@ class DiaryAddProductForm extends Component {
           weight: '100',
           product: '',
         }}
-        onSubmit={(values, initialValues) => {
+        onSubmit={(values, { resetForm }) => {
           this.handleSubmit(values);
-          values = initialValues;
+          resetForm();
         }}
         validationSchema={AddProdSchema}
       >
