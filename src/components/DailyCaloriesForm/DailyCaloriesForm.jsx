@@ -100,6 +100,11 @@ class DailyCaloriesForm extends Component {
                       className={styles.DailyCaloriesFormFieldsLabelText}
                     >
                       Рост *
+                      {/* <ErrorMessage
+                        className={styles.validField}
+                        name="height"
+                        component="span"
+                      /> */}
                     </label>
                     <Field
                       id="height"

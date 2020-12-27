@@ -23,7 +23,6 @@
   color: black;
   height: 100%;
   width: 290px;
-  cursor: pointer;
   pointer-events: all;
 
   @media screen and (min-width: 650px) {
@@ -282,11 +281,23 @@
   justify-content: center;
 }
 
+// .errorMes {
+//   // @extend .errorInput;
+//   color: red;
+//   border-bottom: none;
+//   background-color: none;
+// }
+//? ----input ------
+.errorInput {
+  // @extend .errorMes;
+  border-bottom: 1px solid red;
+  background-color: rgba(228, 161, 161, 0.1);
+}
+.errorInput::placeholder {
+  color: red;
+}
 .errorMes {
-  font-size: 12px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  font-family: 'Verdana';
+  // @extend .errorInput;
   color: red;
 
   @include for-size(desktop) {

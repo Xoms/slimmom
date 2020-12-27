@@ -67,6 +67,12 @@ class DiaryAddProductForm extends Component {
   };
 
   render() {
+<<<<<<< HEAD
+=======
+    // console.log(css.errorMes);
+    // const adderrorInput = css.errorMes ? css.errorInput : '';
+
+>>>>>>> c624538e5e65f8dd3c26e97d3dc224c7bc4a4c45
     const { products } = this.state;
     const form = (
       <Formik
@@ -80,10 +86,13 @@ class DiaryAddProductForm extends Component {
         }}
         validationSchema={AddProdSchema}
       >
-        {({ setFieldValue, handleChange, handleBlur }) => (
+        {({ setFieldValue, handleChange, handleBlur, errors, touched }) => (
           <Form className={css.modalForm}>
             <label className={css.formLabel}>
               <Field
+                className={`${css.DailyCaloriesFormInput} ${
+                  errors.product && touched.product ? css.errorInput : ''
+                }`}
                 onBlur={e => {
                   handleBlur(e);
                   this.setState({ showUl: false });
@@ -96,16 +105,16 @@ class DiaryAddProductForm extends Component {
                   this.hanleChange(e);
                 }}
                 name="product"
-                placeholder="Введите название продукта"
+                placeholder="Введите название продукта*"
                 type="text"
                 autoComplete="off"
               />
 
-              <ErrorMessage
+              {/* <ErrorMessage
                 className={css.validField}
                 name="product"
                 component="span"
-              />
+              /> */}
             </label>
             <div className={css.productListWrapper}>
               {!!products.length ? (
@@ -136,16 +145,18 @@ class DiaryAddProductForm extends Component {
             </div>
             <label className={css.formLabel}>
               <Field
-                className={css.gramms}
+                className={` ${css.gramms} ${css.DailyCaloriesFormInput} ${
+                  errors.weight && touched.weight ? css.errorInput : ''
+                }`}
                 name="weight"
-                placeholder="Граммы"
+                placeholder="Граммы*"
                 type="number"
               />
-              <ErrorMessage
+              {/* <ErrorMessage
                 className={css.validField}
                 name="weight"
                 component="span"
-              />
+              /> */}
             </label>
             {window.innerWidth < 650 ? (
               <Button
