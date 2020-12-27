@@ -1,14 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import DiaryProductsList from '../../components/DiaryProductsList';
 import RightSideBar from '../../components/RightSideBar';
 import DiaryAddProductForm from '../../components/DiaryAddProductForm/DiaryAddProductForm';
 import SetDate from '../../components/SetDate/SetDate';
+import Decoration from '../../components/Decoration';
 import { connect } from 'react-redux';
 import { getProducts } from '../../redux/user/userOperations';
 import userActions from '../../redux/user/userActions';
 import userSelectors from '../../redux/user/userSelectors';
 import css from './DiaryPage.module.scss';
 import { Redirect } from 'react-router-dom';
+
 
 class DiaryPage extends Component {
   state = {
@@ -29,8 +31,12 @@ class DiaryPage extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    if(prevState.date !== this.state.date){
+      const today = this.getCurrentDate();
+      this.setState({ date: today });
+    }
+
     const { date } = this.state;
-    console.log(date);
     if (prevState.date !== date) {
       this.props.getProducts({
         date: date,
@@ -48,7 +54,6 @@ class DiaryPage extends Component {
   };
 
   changeDate = value => {
-    console.log(value)
     this.setState({ date: String(value) });
     this.props.setCurrentDay(value);
   };
@@ -57,26 +62,34 @@ class DiaryPage extends Component {
     return(
     this.props.dailyRate || this.props.userDataDailyRate ?
     this.state.screenWidth < 650 ? (
-      <>
-      <div className={css.pageWrapper}>
-        <SetDate value={this.changeDate} currentDate={this.state.date}/>
-          {/* прокинуть пропсами айди дня */}
-          <DiaryProductsList />
-          <DiaryAddProductForm date={this.state.date} mobile={true} />
-      </div>
-      <RightSideBar />
-      </>
+      <Fragment>
+        <Decoration isCalculationPage={true} />
+        <section className="container">
+          <div className={css.pageWrapper}>
+            <div className={css.diarypageWrapper}>
+              <SetDate value={this.changeDate} currentDate={this.state.date}/>
+              {/* прокинуть пропсами айди дня */}
+              <DiaryProductsList />
+              <DiaryAddProductForm date={this.state.date} mobile={true} />
+            </div>
+            <RightSideBar />
+          </div>
+        </section>
+      </Fragment>
     ) : (
-      <div className={css.diarypageWrapper}>
-        <div className={css.diaryWrapper}>
-          <SetDate value={this.changeDate} />
-          <DiaryAddProductForm date={this.state.date} mobile={false} />
-          <DiaryProductsList />
-        </div>
-        <div className={css.sidebarWrapper}>
-          <RightSideBar />
-        </div>
-      </div>
+      <Fragment>
+        <Decoration isCalculationPage={true} />
+        <section className="container">
+          <div className={css.pageWrapper}>
+            <div className={css.diarypageWrapper}>
+              <SetDate value={this.changeDate} />
+              <DiaryAddProductForm date={this.state.date} mobile={false} />
+              <DiaryProductsList />
+            </div>
+            <RightSideBar />
+          </div>
+        </section>
+      </Fragment>
     )
     :  <Redirect to="/calculator" />
     )
