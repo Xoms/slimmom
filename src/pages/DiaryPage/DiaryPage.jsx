@@ -11,7 +11,6 @@ import userSelectors from '../../redux/user/userSelectors';
 import css from './DiaryPage.module.scss';
 import { Redirect } from 'react-router-dom';
 
-
 class DiaryPage extends Component {
   state = {
     date: '',
@@ -19,22 +18,19 @@ class DiaryPage extends Component {
   };
 
   componentDidMount() {
-    if(this.props.currentDate) {
+    if (this.props.currentDate) {
       this.setState({ date: this.props.currentDate });
       return;
-    } 
+    }
     const today = this.getCurrentDate();
     this.setState({ date: today });
-    // this.props.getProducts({
-    //   date: today,
-    // });
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if(prevState.date !== this.state.date){
-      const today = this.getCurrentDate();
-      this.setState({ date: today });
-    }
+    // if (prevState.date !== this.state.date) {
+    //   const today = this.getCurrentDate();
+    //   this.setState({ date: today });
+    // }
 
     const { date } = this.state;
     if (prevState.date !== date) {
@@ -59,45 +55,51 @@ class DiaryPage extends Component {
   };
 
   render() {
-    return(
-    this.props.dailyRate || this.props.userDataDailyRate ?
-    this.state.screenWidth < 650 ? (
-      <Fragment>
-        <Decoration isCalculationPage={true} />
-        <section className="container">
-          <div className={css.pageWrapper}>
-            <div className={css.diarypageWrapper}>
-              <SetDate value={this.changeDate} currentDate={this.state.date}/>
-              {/* прокинуть пропсами айди дня */}
-              <DiaryProductsList />
-              <DiaryAddProductForm date={this.state.date} mobile={true} />
+    return this.props.dailyRate || this.props.userDataDailyRate ? (
+      this.state.screenWidth < 650 ? (
+        <Fragment>
+          <Decoration isCalculationPage={true} />
+          <section className="container">
+            <div className={css.pageWrapper}>
+              <div className={css.diarypageWrapper}>
+                <SetDate
+                  value={this.changeDate}
+                  currentDate={this.state.date}
+                />
+                {/* прокинуть пропсами айди дня */}
+                <DiaryProductsList />
+                <DiaryAddProductForm date={this.state.date} mobile={true} />
+              </div>
+              <RightSideBar />
             </div>
-            <RightSideBar />
-          </div>
-        </section>
-      </Fragment>
+          </section>
+        </Fragment>
+      ) : (
+        <Fragment>
+          <Decoration isCalculationPage={true} />
+          <section className="container">
+            <div className={css.pageWrapper}>
+              <div className={css.diarypageWrapper}>
+                <SetDate value={this.changeDate} />
+                <DiaryAddProductForm date={this.state.date} mobile={false} />
+                <DiaryProductsList />
+              </div>
+              <RightSideBar />
+            </div>
+          </section>
+        </Fragment>
+      )
     ) : (
-      <Fragment>
-        <Decoration isCalculationPage={true} />
-        <section className="container">
-          <div className={css.pageWrapper}>
-            <div className={css.diarypageWrapper}>
-              <SetDate value={this.changeDate} />
-              <DiaryAddProductForm date={this.state.date} mobile={false} />
-              <DiaryProductsList />
-            </div>
-            <RightSideBar />
-          </div>
-        </section>
-      </Fragment>
-    )
-    :  <Redirect to="/calculator" />
-    )
+      <Redirect to="/calculator" />
+    );
   }
 }
-const mapStateToProps = (state) => ({
-  currentDate:  userSelectors.getCurrentDay(state),
+const mapStateToProps = state => ({
+  currentDate: userSelectors.getCurrentDay(state),
   dailyRate: userSelectors.getCalories(state),
   userDataDailyRate: userSelectors.getUserDataDailyRate(state),
-})
-export default connect(mapStateToProps, { getProducts, setCurrentDay: userActions.setCurrentDay })(DiaryPage);
+});
+export default connect(mapStateToProps, {
+  getProducts,
+  setCurrentDay: userActions.setCurrentDay,
+})(DiaryPage);

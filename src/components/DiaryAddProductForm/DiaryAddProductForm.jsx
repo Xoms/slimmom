@@ -10,7 +10,6 @@ import debounce from 'lodash.debounce';
 import { connect } from 'react-redux';
 import { addProduct } from '../../redux/user/userOperations';
 import globalSelectors from '../../redux/global/globalSelectors';
-import { CSSTransition } from 'react-transition-group';
 
 const AddProdSchema = Yup.object().shape({
   product: Yup.string().required('Обязательное поле *'),
@@ -68,7 +67,7 @@ class DiaryAddProductForm extends Component {
   };
 
   render() {
-    const { products} = this.state;
+    const { products } = this.state;
     const form = (
       <Formik
         initialValues={{
@@ -111,10 +110,11 @@ class DiaryAddProductForm extends Component {
             <div className={css.productListWrapper}>
               {!!products.length ? (
                 // <CSSTransition in={this.state.showUl} unmountOnExit classNames="search-list" timeout={500}>
-                <ul className={css.autocomplete}>
+                <ul className={`${css.autocomplete}  ${css.scrollbar}`}>
                   {products.map(product => (
                     <li
                       key={product._id}
+                      className={css.autocompleteItem}
                       onClick={() => {
                         setFieldValue('product', product.title.ru);
                         this.setState({
@@ -202,11 +202,14 @@ class DiaryAddProductForm extends Component {
     }
   }
 }
-const mapStateToProps = (state)=>({
-  isLoading:  globalSelectors.getLoading(state),
-})
+const mapStateToProps = state => ({
+  isLoading: globalSelectors.getLoading(state),
+});
 const mapDispatchToProps = {
   addProduct,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DiaryAddProductForm);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(DiaryAddProductForm);

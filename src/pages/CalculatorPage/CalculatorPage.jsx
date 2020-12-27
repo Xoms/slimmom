@@ -18,7 +18,6 @@ class CalculatorPage extends Component {
       const today = new Date().toJSON().slice(0, 10);
       this.props.getProducts({ date: today });
     } else {
-      console.log('calculator day', this.props.day);
       this.props.getProducts({ date: this.props.day });
     }
   }

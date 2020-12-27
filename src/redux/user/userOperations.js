@@ -38,8 +38,28 @@ const getCurrentUser = () => (dispatch, getState) => {
     .getCurrentUser()
     .then(({ data }) => {
       const { username, id, userData } = data;
-      const userInfo = { username, id, userData, summaries: [] };
-      dispatch(userActions.getCurrentUserSuccess(userInfo));
+      if (data.days && data.days.length) {
+        const today = new Date().toJSON().slice(0, 10);
+        const todaySummary = {
+          ...data.days.find(day => day.date === today).daySummary,
+        };
+        const userInfo = {
+          username,
+          id,
+          userData,
+          daySummary: todaySummary,
+          summaries: [],
+        };
+        dispatch(userActions.getCurrentUserSuccess(userInfo));
+      } else {
+        const userInfo = {
+          username,
+          id,
+          userData,
+          summaries: [],
+        };
+        dispatch(userActions.getCurrentUserSuccess(userInfo));
+      }
     })
     .catch(err => dispatch(userActions.getCurrentUserError(err)));
 };
@@ -137,7 +157,6 @@ const getProducts = date => (dispatch, getState) => {
   api
     .getProducts(date)
     .then(({ data }) => {
-      console.log(data);
       let payload = {};
       if (data.daySummary) {
         const { daySummary, eatenProducts, id } = data;
