@@ -46,8 +46,8 @@ const error = createReducer(null, {
   [registerRequest]: () => null,
   [logoutError]: (state, { payload }) => payload.message,
   [logoutRequest]: () => null,
-  [refreshRequest]: (state, { payload }) => payload.message,
-  [refreshError]: () => null,
+  [refreshError]: (state, { payload }) => payload.message,
+  [refreshRequest]: () => null,
   [getCurrentUserError]: (state, { payload }) => payload.message,
   [getCurrentUserRequest]: () => null,
   [getProductsError]: (state, { payload }) => payload.message,
@@ -57,9 +57,8 @@ const error = createReducer(null, {
   [getDailyRateWithIdError]: (state, { payload }) => payload.message,
   [getDailyRateWithIdRequest]: () => null,
   [addProductError]: (state, { payload }) => payload.message,
-  [getProductsRequest]: () => null,
+  [addProductRequest]: () => null,
   [clearError]: () => null,
-  [refreshError]: (state, { payload }) => payload.message,
 });
 
 const loading = createReducer(false, {
@@ -94,8 +93,6 @@ const loading = createReducer(false, {
   [addProductSuccess]: () => false,
   [addProductError]: () => false,
   [setCurrentDay]: () => false,
-
-  // [clearError]: () => false,
 });
 
 export { loading, error };

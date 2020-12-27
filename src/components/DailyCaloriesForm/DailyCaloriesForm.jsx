@@ -1,31 +1,31 @@
-import React, { Component } from "react";
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
+import React, { Component } from 'react';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 import {
   getDailyRate,
   getDailyRateWithId,
-} from "../../redux/user/userOperations";
-import userSelectors from "../../redux/user/userSelectors";
-import { connect } from "react-redux";
-import Button from "../shared/Button";
-import styles from "./DailyCaloriesForm.module.scss";
-import Modal from "../Modal";
-import globalSelectors from "../../redux/global/globalSelectors";
+} from '../../redux/user/userOperations';
+import userSelectors from '../../redux/user/userSelectors';
+import { connect } from 'react-redux';
+import Button from '../shared/Button';
+import styles from './DailyCaloriesForm.module.scss';
+import Modal from '../Modal';
+import globalSelectors from '../../redux/global/globalSelectors';
 import SmallLoader from '../../components/shared/SmallLoader';
 
 const formSchema = Yup.object().shape({
-  height: Yup.string()
-    .max(3, "Укажите значение в 3 цифры")
-    .required("Рост*"),
-  age: Yup.string()
-    .max(2, "Укажите значение в 2 цифры")
-    .required("Возраст*"),
-  weight: Yup.string()
-    .max(3, "Укажите значение в 3 цифры")
-    .required("Текущий вес*"),
-  desiredWeight: Yup.string()
-    .max(3, "Укажите значение в 3 цифры")
-    .required("Желаемый вес*"),
+  height: Yup.number().max(250, 'Укажите значение до 250').required('Рост*'),
+  age: Yup.number()
+    .min(18, 'Укажите значение больше 17')
+    .max(99, 'Укажите значение меньше 100')
+    .required('Возраст*'),
+  weight: Yup.number()
+    .min(20, 'Укажите значение больше 20')
+    .required('Текущий вес*'),
+  desiredWeight: Yup.number()
+    .min(20, 'Укажите значение больше 20')
+    .max(500, 'Укажите значение меньше 500')
+    .required('Желаемый вес*'),
   bloodType: Yup.string().required(),
 });
 
@@ -35,12 +35,12 @@ class DailyCaloriesForm extends Component {
   };
 
   toggleModal = () => {
-    this.setState((prevState) => ({
+    this.setState(prevState => ({
       showModal: !prevState.showModal,
     }));
   };
 
-  getCalculations = (values) => {
+  getCalculations = values => {
     const userCharacteristics = {
       height: +values.height,
       weight: +values.weight,
@@ -48,10 +48,10 @@ class DailyCaloriesForm extends Component {
       desiredWeight: +values.desiredWeight,
       bloodType: +values.bloodType,
     };
-    this.setState({loading : true});
+    this.setState({ loading: true });
     setTimeout(() => {
-  this.setState({loading: false})
-    },1000)
+      this.setState({ loading: false });
+    }, 1000);
     if (!this.props.userId) {
       this.props.getDailyRate(userCharacteristics);
       this.toggleModal();
@@ -61,7 +61,7 @@ class DailyCaloriesForm extends Component {
   };
 
   render() {
-    const {loading} = this.state
+    const { loading } = this.state;
     const {
       height,
       age,
@@ -73,21 +73,21 @@ class DailyCaloriesForm extends Component {
       <div className={styles.DailyCaloriesFormWrapper}>
         <h2 className={styles.DailyCaloriesFormTitle}>
           {this.props.userId
-            ? "Узнай свою суточную норму калорий"
-            : "Посчитай свою суточну норму калорий прямо сейчас"}
+            ? 'Узнай свою суточную норму калорий'
+            : 'Посчитай свою суточну норму калорий прямо сейчас'}
         </h2>
         <Formik
           enableReinitialize
           initialValues={{
-            height: !!height ? height : "",
-            age: !!age ? age : "",
-            weight: !!weight ? weight : "",
-            desiredWeight: !!desiredWeight ? desiredWeight : "",
-            bloodType: !!bloodType ? String(bloodType) : "1",
+            height: !!height ? height : '',
+            age: !!age ? age : '',
+            weight: !!weight ? weight : '',
+            desiredWeight: !!desiredWeight ? desiredWeight : '',
+            bloodType: !!bloodType ? String(bloodType) : '1',
             loading: false,
           }}
           validationSchema={formSchema}
-          onSubmit={(values) => {
+          onSubmit={values => {
             this.getCalculations(values);
           }}
         >
@@ -114,7 +114,7 @@ class DailyCaloriesForm extends Component {
                       type="number"
                       autoComplete="off"
                       className={`${styles.DailyCaloriesFormInput} ${
-                        errors.height && touched.height ? styles.errorInput : ""
+                        errors.height && touched.height ? styles.errorInput : ''
                       }`}
                     />
                   </div>
@@ -134,10 +134,10 @@ class DailyCaloriesForm extends Component {
                     <Field
                       id="age"
                       name="age"
-                      type='number'
+                      type="number"
                       autoComplete="off"
                       className={`${styles.DailyCaloriesFormInput} ${
-                        errors.age && touched.age ? styles.errorInput : ""
+                        errors.age && touched.age ? styles.errorInput : ''
                       }`}
                     />
                   </div>
@@ -157,10 +157,10 @@ class DailyCaloriesForm extends Component {
                     <Field
                       id="weight"
                       name="weight"
-                      type='number'
+                      type="number"
                       autoComplete="off"
                       className={`${styles.DailyCaloriesFormInput} ${
-                        errors.weight && touched.weight ? styles.errorInput : ""
+                        errors.weight && touched.weight ? styles.errorInput : ''
                       }`}
                     />
                   </div>
@@ -176,17 +176,18 @@ class DailyCaloriesForm extends Component {
                     <label
                       htmlFor="desiredWeight"
                       className={styles.DailyCaloriesFormFieldsLabelText}
-                    >Желаемый вес *
+                    >
+                      Желаемый вес *
                     </label>
                     <Field
                       id="desiredWeight"
                       name="desiredWeight"
-                      type='number'
+                      type="number"
                       autoComplete="off"
                       className={`${styles.DailyCaloriesFormInput} ${
                         errors.desiredWeight && touched.desiredWeight
                           ? styles.errorInput
-                          : ""
+                          : ''
                       }`}
                     />
                   </div>
@@ -265,7 +266,7 @@ class DailyCaloriesForm extends Component {
                 Похудеть
               </Button>
               <div className={styles.SmallLoaderContainerHome}>
-              {loading && <SmallLoader />}
+                {loading && <SmallLoader />}
               </div>
             </Form>
           )}
@@ -283,7 +284,7 @@ class DailyCaloriesForm extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   isLoading: globalSelectors.getLoading(state),
   userId: userSelectors.getUserId(state),
   userInfo: userSelectors.getUserInfo(state),
