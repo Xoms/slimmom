@@ -24,6 +24,7 @@
   height: 100%;
   width: 290px;
   cursor: pointer;
+  pointer-events: all;
 
   @media screen and (min-width: 650px) {
     width: 240px;
@@ -83,6 +84,7 @@
   left: 5px;
   top: 20px;
   z-index: 3;
+  pointer-events: none;
 
   height: 100px;
   width: 290px;
