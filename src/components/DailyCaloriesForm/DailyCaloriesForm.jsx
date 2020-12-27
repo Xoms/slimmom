@@ -12,21 +12,15 @@ import styles from './DailyCaloriesForm.module.scss';
 import Modal from '../Modal';
 import globalSelectors from '../../redux/global/globalSelectors';
 import SmallLoader from '../../components/shared/SmallLoader';
-import withAuth from '../hocs/withAuth'
+import withAuth from '../hocs/withAuth';
 
 const formSchema = Yup.object().shape({
-  height: Yup.string()
-    .max(3, "Укажите 3 цифры")
-    .required("Рост *"),
-  age: Yup.string()
-    .max(2, "Укажите 2 цифры")
-    .required("Возраст *"),
-  weight: Yup.string()
-    .max(3, "Укажите 3 цифры")
-    .required("Текущий вес *"),
+  height: Yup.string().max(3, 'Укажите 3 цифры').required('Рост *'),
+  age: Yup.string().max(2, 'Укажите 2 цифры').required('Возраст *'),
+  weight: Yup.string().max(3, 'Укажите 3 цифры').required('Текущий вес *'),
   desiredWeight: Yup.string()
-    .max(3, "Укажите 3 цифры")
-    .required("Желаемый вес *"),
+    .max(3, 'Укажите 3 цифры')
+    .required('Желаемый вес *'),
   bloodType: Yup.string().required(),
 });
 
@@ -73,8 +67,8 @@ class DailyCaloriesForm extends Component {
       <div className={styles.DailyCaloriesFormWrapper}>
         <h2 className={styles.DailyCaloriesFormTitle}>
           {this.props.isAuth
-            ? "Узнай свою суточную норму калорий"
-            : "Посчитай свою суточную норму калорий прямо сейчас"}
+            ? 'Узнай свою суточную норму калорий'
+            : 'Посчитай свою суточную норму калорий прямо сейчас'}
         </h2>
         <Formik
           enableReinitialize
@@ -106,6 +100,11 @@ class DailyCaloriesForm extends Component {
                       className={styles.DailyCaloriesFormFieldsLabelText}
                     >
                       Рост *
+                      {/* <ErrorMessage
+                        className={styles.validField}
+                        name="height"
+                        component="span"
+                      /> */}
                     </label>
                     <Field
                       id="height"
@@ -265,7 +264,7 @@ class DailyCaloriesForm extends Component {
                 Похудеть
               </Button>
               <div className={styles.SmallLoaderContainerHome}>
-                {this.props.isloading &&  <SmallLoader />}
+                {this.props.isloading && <SmallLoader />}
               </div>
             </Form>
           )}
@@ -294,4 +293,7 @@ const mapDispatchToProps = {
   getDailyRateWithId,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withAuth(DailyCaloriesForm));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(withAuth(DailyCaloriesForm));

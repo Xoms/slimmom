@@ -60,6 +60,14 @@
   overscroll-behavior: contain;
   overflow-y: auto;
   overflow-x: hidden;
+  padding-right: 10px;
+  @include for-size(tablet) {
+    max-height: 109px;
+    line-height: 22px;
+  }
+  @include for-size(desktop) {
+    max-height: 152px;
+  }
 }
 
 .title {
@@ -160,7 +168,7 @@
   width: 290px;
   @include for-size(tablet) {
     width: 594px;
-    
+
     display: flex;
     justify-content: space-between;
   }
