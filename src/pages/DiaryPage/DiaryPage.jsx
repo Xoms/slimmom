@@ -4,10 +4,12 @@ import RightSideBar from '../../components/RightSideBar';
 import DiaryAddProductForm from '../../components/DiaryAddProductForm/DiaryAddProductForm';
 import SetDate from '../../components/SetDate/SetDate';
 import Decoration from '../../components/Decoration';
+
 import { connect } from 'react-redux';
 import { getProducts } from '../../redux/user/userOperations';
 import userActions from '../../redux/user/userActions';
 import userSelectors from '../../redux/user/userSelectors';
+
 import css from './DiaryPage.module.scss';
 import { Redirect } from 'react-router-dom';
 
@@ -24,6 +26,14 @@ class DiaryPage extends Component {
     }
     const today = this.getCurrentDate();
     this.setState({ date: today });
+
+    // this.props.getProducts({
+    //   date: today,
+    // });
+    if(!this.props.dailyRate || !this.props.userDataDailyRate) {
+      this.props.notifyGetDailyRate('At first you need to calculate your daily calorie rate!');
+    }
+
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -38,6 +48,11 @@ class DiaryPage extends Component {
         date: date,
       });
     }
+
+    if(!this.props.dailyRate || !this.props.userDataDailyRate) {
+      this.props.notifyGetDailyRate('At first you need to calculate your daily calorie rate!');
+    }
+
   }
 
   getCurrentDate = () => {
@@ -53,7 +68,7 @@ class DiaryPage extends Component {
     this.setState({ date: String(value) });
     this.props.setCurrentDay(value);
   };
-
+  
   render() {
     return this.props.dailyRate || this.props.userDataDailyRate ? (
       this.state.screenWidth < 650 ? (
@@ -86,20 +101,22 @@ class DiaryPage extends Component {
               </div>
               <RightSideBar />
             </div>
-          </section>
-        </Fragment>
-      )
-    ) : (
-      <Redirect to="/calculator" />
-    );
+        </section>
+      </Fragment>
+    )
+    :  (
+    <Redirect to="/calculator" /> 
+    )
   }
 }
 const mapStateToProps = state => ({
   currentDate: userSelectors.getCurrentDay(state),
   dailyRate: userSelectors.getCalories(state),
   userDataDailyRate: userSelectors.getUserDataDailyRate(state),
-});
-export default connect(mapStateToProps, {
-  getProducts,
-  setCurrentDay: userActions.setCurrentDay,
+})
+export default connect(mapStateToProps, { 
+  getProducts, 
+  setCurrentDay: userActions.setCurrentDay, 
+  notifyGetDailyRate: userActions.notifyGetDailyRate,
+
 })(DiaryPage);
