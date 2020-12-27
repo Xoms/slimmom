@@ -246,7 +246,7 @@
 }
 
 .validField {
-  font-family: "Verdana";
+  font-family: 'Verdana';
   position: absolute;
   color: rgb(238, 20, 20);
   top: 25px;
@@ -257,8 +257,8 @@
   }
 
   font-size: 12px;
-line-height: 1.415;
-letter-spacing: 0.04em;
+  line-height: 1.415;
+  letter-spacing: 0.04em;
 }
 
 .formLabel {
@@ -266,7 +266,7 @@ letter-spacing: 0.04em;
   width: fit-content;
 }
 
-@media screen  and (max-width: 650px) {
+@media screen and (max-width: 650px) {
   input.gramms {
     z-index: 0;
   }
@@ -275,4 +275,3 @@ letter-spacing: 0.04em;
     width: 290px;
   }
 }
-
