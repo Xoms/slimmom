@@ -70,7 +70,7 @@ class RightSideBar extends Component {
         <section className={classes.section__rightSideBar}>
           <div className={classes.conteiner__rightSideBar}>
             <div className={classes.rightSideBar}>
-              <div className={classes.backgroundSideBar}></div>
+              {/* <div className={classes.backgroundSideBar}></div> */}
               <div className={classes.sideBar__BlocList}>
                 <h2 className={classes.title}>Сводка за {date}</h2>
                 <div className={classes.rightSideBar__lists}>

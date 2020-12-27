@@ -1,33 +1,33 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { CSSTransition } from 'react-transition-group';
-import Calendar from 'react-calendar';
-import './SetDate.scss';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { CSSTransition } from "react-transition-group";
+import Calendar from "react-calendar";
+import "./SetDate.scss";
 
-import 'react-calendar/dist/Calendar.css';
+import "react-calendar/dist/Calendar.css";
 
 class SetDate extends Component {
   state = {
     isShowCalendar: false,
     currentDate: new Date(),
     currentValue: new Date(),
-    outputValue: '',
+    outputValue: "",
   };
 
-  showCalendar = event => {
-    this.setState(state => {
+  showCalendar = (event) => {
+    this.setState((state) => {
       return {
         isShowCalendar: !state.isShowCalendar,
       };
     });
   };
 
-  setDate = value => {
+  setDate = (value) => {
     const year = value.getFullYear();
     const month =
       value.getMonth() < 10 ? `0${value.getMonth() + 1}` : value.getMonth() + 1;
     const day = value.getDate() < 10 ? `0${value.getDate()}` : value.getDate();
-    this.setState(state => {
+    this.setState((state) => {
       return {
         isShowCalendar: !state.isShowCalendar,
         currentValue: value,
@@ -50,19 +50,31 @@ class SetDate extends Component {
     //   currentDate.getDate() < 10
     //     ? `0${currentDate.getDate()}`
     //     : currentDate.getDate();
+    
+    const dateArr = this.props.currentDate.split("-");
+    const outputValue = dateArr.reverse().join(".");
 
-    console.log(this.props.currentDate)
-    const dateArr = this.props.currentDate.split('-');
-    const outputValue = dateArr.reverse().join('.')
-    
-    
-    this.setState(state => {
+    this.setState((state) => {
       return {
         outputValue: outputValue, //`${day}.${month}.${year}`,
         currentValue: new Date(this.props.currentDate),
-        currentDate: new Date(this.props.currentDate)
+        currentDate: new Date(this.props.currentDate),
       };
     });
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if(prevProps.currentDate !== this.props.currentDate) {
+      const dateArr = this.props.currentDate.split("-");
+      const outputValue = dateArr.reverse().join(".");
+  
+      this.setState((state) => {
+        return {
+          outputValue: outputValue, //`${day}.${month}.${year}`,
+          currentValue: new Date(this.props.currentDate),
+          currentDate: new Date(this.props.currentDate),
+        };
+      });
+    }
   }
 
   render() {
@@ -81,7 +93,7 @@ class SetDate extends Component {
           classNames="react-calendar"
           unmountOnExit
         >
-          <Calendar onChange={this.setDate} value={this.state.currentValue}/>
+          <Calendar onChange={this.setDate} value={this.state.currentValue} />
         </CSSTransition>
       </div>
     );
@@ -97,5 +109,5 @@ SetDate.propTypes = {
 
 SetDate.defaultProps = {
   value() {},
-  currentDate: new Date().toJSON().slice(0,10)
+  currentDate: new Date().toJSON().slice(0, 10),
 };

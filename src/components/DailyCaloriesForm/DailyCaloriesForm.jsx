@@ -15,17 +15,17 @@ import SmallLoader from '../../components/shared/SmallLoader';
 
 const formSchema = Yup.object().shape({
   height: Yup.string()
-    .max(3, "Укажите значение в 3 цифры")
-    .required("Рост*"),
+    .max(3, "Укажите 3 цифры")
+    .required("Рост *"),
   age: Yup.string()
-    .max(2, "Укажите значение в 2 цифры")
-    .required("Возраст*"),
+    .max(2, "Укажите 2 цифры")
+    .required("Возраст *"),
   weight: Yup.string()
-    .max(3, "Укажите значение в 3 цифры")
-    .required("Текущий вес*"),
+    .max(3, "Укажите 3 цифры")
+    .required("Текущий вес *"),
   desiredWeight: Yup.string()
-    .max(3, "Укажите значение в 3 цифры")
-    .required("Желаемый вес*"),
+    .max(3, "Укажите 3 цифры")
+    .required("Желаемый вес *"),
   bloodType: Yup.string().required(),
 });
 
@@ -74,7 +74,7 @@ class DailyCaloriesForm extends Component {
         <h2 className={styles.DailyCaloriesFormTitle}>
           {this.props.userId
             ? "Узнай свою суточную норму калорий"
-            : "Посчитай свою суточну норму калорий прямо сейчас"}
+            : "Посчитай свою суточную норму калорий прямо сейчас"}
         </h2>
         <Formik
           enableReinitialize
