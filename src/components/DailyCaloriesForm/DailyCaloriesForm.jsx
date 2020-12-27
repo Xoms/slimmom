@@ -12,6 +12,7 @@ import styles from "./DailyCaloriesForm.module.scss";
 import Modal from "../Modal";
 import globalSelectors from "../../redux/global/globalSelectors";
 import SmallLoader from '../../components/shared/SmallLoader';
+import withAuth from '../hocs/withAuth'
 
 const formSchema = Yup.object().shape({
   height: Yup.string()
@@ -72,7 +73,7 @@ class DailyCaloriesForm extends Component {
     return (
       <div className={styles.DailyCaloriesFormWrapper}>
         <h2 className={styles.DailyCaloriesFormTitle}>
-          {this.props.userId
+          {this.props.isAuth
             ? "Узнай свою суточную норму калорий"
             : "Посчитай свою суточну норму калорий прямо сейчас"}
         </h2>
@@ -294,4 +295,4 @@ const mapDispatchToProps = {
   getDailyRateWithId,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DailyCaloriesForm);
+export default connect(mapStateToProps, mapDispatchToProps)(withAuth(DailyCaloriesForm));
