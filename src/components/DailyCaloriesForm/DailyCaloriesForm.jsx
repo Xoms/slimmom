@@ -14,18 +14,18 @@ import globalSelectors from '../../redux/global/globalSelectors';
 import SmallLoader from '../../components/shared/SmallLoader';
 
 const formSchema = Yup.object().shape({
-  height: Yup.number().max(250, 'Укажите значение до 250').required('Рост*'),
-  age: Yup.number()
-    .min(18, 'Укажите значение больше 17')
-    .max(99, 'Укажите значение меньше 100')
-    .required('Возраст*'),
-  weight: Yup.number()
-    .min(20, 'Укажите значение больше 20')
-    .required('Текущий вес*'),
-  desiredWeight: Yup.number()
-    .min(20, 'Укажите значение больше 20')
-    .max(500, 'Укажите значение меньше 500')
-    .required('Желаемый вес*'),
+  height: Yup.string()
+    .max(3, "Укажите 3 цифры")
+    .required("Рост *"),
+  age: Yup.string()
+    .max(2, "Укажите 2 цифры")
+    .required("Возраст *"),
+  weight: Yup.string()
+    .max(3, "Укажите 3 цифры")
+    .required("Текущий вес *"),
+  desiredWeight: Yup.string()
+    .max(3, "Укажите 3 цифры")
+    .required("Желаемый вес *"),
   bloodType: Yup.string().required(),
 });
 
@@ -73,8 +73,8 @@ class DailyCaloriesForm extends Component {
       <div className={styles.DailyCaloriesFormWrapper}>
         <h2 className={styles.DailyCaloriesFormTitle}>
           {this.props.userId
-            ? 'Узнай свою суточную норму калорий'
-            : 'Посчитай свою суточну норму калорий прямо сейчас'}
+            ? "Узнай свою суточную норму калорий"
+            : "Посчитай свою суточную норму калорий прямо сейчас"}
         </h2>
         <Formik
           enableReinitialize
