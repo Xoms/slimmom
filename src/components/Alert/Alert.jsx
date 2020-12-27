@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { CSSTransition } from "react-transition-group";
+import React, { Component } from 'react';
+import { CSSTransition } from 'react-transition-group';
 
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import action from '../../redux/alert/alertAction';
 
 class Alert extends Component {
@@ -10,13 +10,15 @@ class Alert extends Component {
   };
   delayToCloseAlert = null;
 
-  
   componentDidUpdate(prevProps, prevState) {
-    if(this.props.state.error && this.props.state.error !== prevProps.state.error){
+    if (
+      this.props.state.error &&
+      this.props.state.error !== prevProps.state.error
+    ) {
       clearTimeout(this.delayToCloseAlert);
-      this.setState((state)=>({isAlertShow:true}));
-      this.delayToCloseAlert = setTimeout(()=>{
-        this.setState((state)=>({isAlertShow: false}));
+      this.setState(state => ({ isAlertShow: true }));
+      this.delayToCloseAlert = setTimeout(() => {
+        this.setState(state => ({ isAlertShow: false }));
         this.props.action_alertOff();
       }, 3000);
     }
@@ -30,30 +32,28 @@ class Alert extends Component {
     return (
       <CSSTransition
         in={this.state.isAlertShow}
-        classNames='alert-global'
+        classNames="alert-global"
         timeout={250}
         unmountOnExit
       >
         <div className="alert-global">
-          <p>
-            {`${this.props.state.error}`}
-          </p>
+          <p>{`${this.props.state.error}`}</p>
         </div>
       </CSSTransition>
     );
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     state: state,
   };
 };
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    action_alertOff: ()=>{
+    action_alertOff: () => {
       dispatch(action.alertOff());
-    }
+    },
   };
 };
 

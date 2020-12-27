@@ -1,49 +1,55 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import selectors from '../../redux/user/userSelectors';
+import globalSelectors from '../../redux/global/globalSelectors';
 // import PropTypes from 'prop-types';
 import classes from './rightSideBar.module.scss';
+import SmallLoader from '../shared/SmallLoader';
 
-
-const initialState  = {
+const initialState = {
   kcalLeft: 0,
   kcalConsumed: 0,
   dailyRate: 0,
   percentsOfDailyRate: 0,
-}
+};
 
 class RightSideBar extends Component {
-  
   state = {
     dailyNorm: {},
   };
 
   dataToRender = () => {
-    const { summaries, daySummary, currentDay, dailyRate, userDataDailyRate } = this.props;
-    //console.log('data to render => ', summaries)
-    const date = currentDay ? currentDay : new Date().toJSON().slice(0,10);
-    //console.log('data to render => date = ', date)
-    if( (!dailyRate && !userDataDailyRate) || !daySummary.dailyRate) {
+    const {
+      summaries,
+      daySummary,
+      currentDay,
+      dailyRate,
+      userDataDailyRate,
+    } = this.props;
+    const date = currentDay ? currentDay : new Date().toJSON().slice(0, 10);
+
+    if ((!dailyRate && !userDataDailyRate) || !daySummary.dailyRate) {
       this.setState({
-        dailyNorm: {...initialState, date}
+        dailyNorm: { ...initialState, date },
       });
       return;
     }
     if (summaries.length) {
       this.setState({
-        dailyNorm: summaries.find(summary => summary.date === (daySummary.date ? daySummary.date : date)) || {...daySummary, date },
+        dailyNorm: summaries.find(
+          summary =>
+            summary.date === (daySummary.date ? daySummary.date : date),
+        ) || { ...daySummary, date },
       });
-      
     } else {
       this.setState({
-        dailyNorm: {...daySummary, date }
+        dailyNorm: { ...daySummary, date },
       });
     }
   };
-  componentDidMount(){
+  componentDidMount() {
     this.dataToRender();
   }
-  
 
   componentDidUpdate(prevProps, prevState) {
     if (
@@ -55,7 +61,6 @@ class RightSideBar extends Component {
   }
 
   render() {
-    //console.log("Render daily norm",this.state.dailyNorm);
     const { notAllowedProducts } = this.props;
     const {
       date,
@@ -64,16 +69,16 @@ class RightSideBar extends Component {
       dailyRate,
       percentsOfDailyRate,
     } = this.state.dailyNorm ? this.state.dailyNorm : initialState;
-    //console.log("Render daily norm",this.state.dailyNorm);
     return (
-      <>
+      <> 
         <section className={classes.section__rightSideBar}>
           <div className={classes.conteiner__rightSideBar}>
             <div className={classes.rightSideBar}>
               <div className={classes.backgroundSideBar}></div>
               <div className={classes.sideBar__BlocList}>
                 <h2 className={classes.title}>Сводка за {date}</h2>
-                <div className={classes.rightSideBar__lists}>
+                {this.props.isLoading ? <SmallLoader/> : 
+                <div className={classes.rightSideBar__lists}>                
                   <ul className={classes.sideBar__list}>
                     <li>Осталось</li>
                     <li>Употреблено</li>
@@ -85,8 +90,9 @@ class RightSideBar extends Component {
                     <li>{Math.round(kcalConsumed)} ккал</li>
                     <li>{dailyRate} ккал</li>
                     <li>{Math.round(percentsOfDailyRate)} %</li>
-                  </ul>
+                  </ul>                 
                 </div>
+               }
               </div>
 
               <div className={classes.sideBar__BlocDescription}>
@@ -115,6 +121,7 @@ const mapStateToProps = state => ({
   dailyRate: selectors.getCalories(state),
   userDataDailyRate: selectors.getUserDataDailyRate(state),
   notAllowedProducts: selectors.getnotAllowedProducts(state),
+  c: globalSelectors.getLoading(state)
 });
 
 export default connect(mapStateToProps)(RightSideBar);

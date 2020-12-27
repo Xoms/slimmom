@@ -50,17 +50,14 @@ class SetDate extends Component {
     //   currentDate.getDate() < 10
     //     ? `0${currentDate.getDate()}`
     //     : currentDate.getDate();
-
-    console.log(this.props.currentDate)
     const dateArr = this.props.currentDate.split('-');
-    const outputValue = dateArr.reverse().join('.')
-    
-    
+    const outputValue = dateArr.reverse().join('.');
+
     this.setState(state => {
       return {
         outputValue: outputValue, //`${day}.${month}.${year}`,
         currentValue: new Date(this.props.currentDate),
-        currentDate: new Date(this.props.currentDate)
+        currentDate: new Date(this.props.currentDate),
       };
     });
   }
@@ -81,7 +78,7 @@ class SetDate extends Component {
           classNames="react-calendar"
           unmountOnExit
         >
-          <Calendar onChange={this.setDate} value={this.state.currentValue}/>
+          <Calendar onChange={this.setDate} value={this.state.currentValue} />
         </CSSTransition>
       </div>
     );
@@ -97,5 +94,5 @@ SetDate.propTypes = {
 
 SetDate.defaultProps = {
   value() {},
-  currentDate: new Date().toJSON().slice(0,10)
+  currentDate: new Date().toJSON().slice(0, 10),
 };

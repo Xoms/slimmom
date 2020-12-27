@@ -1,6 +1,6 @@
-import { createReducer } from "@reduxjs/toolkit";
-import authActions from "../auth/authActions";
-import userActions from "../user/userActions";
+import { createReducer } from '@reduxjs/toolkit';
+import authActions from '../auth/authActions';
+import userActions from '../user/userActions';
 const {
   registerRequest,
   registerSuccess,
@@ -33,7 +33,6 @@ const {
   getProductsRequest,
   getProductsSuccess,
   getProductsError,
-  setCurrentDay,
   getDailyRateWithIdRequest,
   getDailyRateWithIdSuccess,
   getDailyRateWithIdError,
@@ -41,14 +40,24 @@ const {
 
 const error = createReducer(null, {
   [loginError]: (state, { payload }) => payload.message,
-  [getCurrentUserError]: (state, { payload }) => payload.message,
-  [registerError]: (state, { payload }) => payload.error,
-  [logoutError]: (state, { payload }) => payload.error,
-  [getProductsError]: (state, { payload }) => payload.message,
-  [clearError]: () => null,
-  [getDailyRateError]: (state, { payload }) => payload.message,
-  [clearError]: () => null,
+  [loginRequest]: () => null,
+  [registerError]: (state, { payload }) => payload.message,
+  [registerRequest]: () => null,
+  [logoutError]: (state, { payload }) => payload.message,
+  [logoutRequest]: () => null,
   [refreshError]: (state, { payload }) => payload.message,
+  [refreshRequest]: () => null,
+  [getCurrentUserError]: (state, { payload }) => payload.message,
+  [getCurrentUserRequest]: () => null,
+  [getProductsError]: (state, { payload }) => payload.message,
+  [getProductsRequest]: () => null,
+  [getDailyRateError]: (state, { payload }) => payload.message,
+  [getDailyRateRequest]: () => null,
+  [getDailyRateWithIdError]: (state, { payload }) => payload.message,
+  [getDailyRateWithIdRequest]: () => null,
+  [addProductError]: (state, { payload }) => payload.message,
+  [addProductRequest]: () => null,
+  [clearError]: () => null,
 });
 
 const loading = createReducer(false, {
@@ -61,6 +70,9 @@ const loading = createReducer(false, {
   [logoutRequest]: () => true,
   [logoutSuccess]: () => false,
   [logoutError]: () => false,
+  [refreshRequest]: () => true,
+  [refreshSuccess]: () => false,
+  [refreshError]: () => false,
   [getCurrentUserRequest]: () => true,
   [getCurrentUserSuccess]: () => false,
   [getCurrentUserError]: () => false,
@@ -70,20 +82,15 @@ const loading = createReducer(false, {
   [getDailyRateRequest]: () => true,
   [getDailyRateSuccess]: () => false,
   [getDailyRateError]: () => false,
-  [refreshRequest]: () => true,
-  [refreshSuccess]: () => false,
-  [refreshError]: () => false,
-  [clearError]: () => false,
+  [getDailyRateWithIdRequest]: () => true,
+  [getDailyRateWithIdSuccess]: () => false,
+  [getDailyRateWithIdError]: () => false,
   [deleteEatenProductRequest]: () => true,
   [deleteEatenProductSuccess]: () => false,
   [deleteEatenProductError]: () => false,
   [addProductRequest]: () => true,
   [addProductSuccess]: () => false,
   [addProductError]: () => false,
-  [setCurrentDay]: () => false,
-  [getDailyRateWithIdRequest]: () => true,
-  [getDailyRateWithIdSuccess]: () => false,
-  [getDailyRateWithIdError]: () => false,
 });
 
 export { loading, error };

@@ -275,12 +275,4 @@ letter-spacing: 0.04em;
     width: 290px;
   }
 }
-.SmallLoaderContainer{
-  position: absolute;
-  top: 250px;
-  left: 120px;
-  @include for-size(tablet) {
-    top: 50px;
-    left: 200px;
-  }
-}
+
