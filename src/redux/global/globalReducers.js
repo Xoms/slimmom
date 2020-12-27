@@ -94,8 +94,6 @@ const loading = createReducer(false, {
   [addProductSuccess]: () => false,
   [addProductError]: () => false,
   [setCurrentDay]: () => false,
-
-  // [clearError]: () => false,
 });
 
 export { loading, error };
