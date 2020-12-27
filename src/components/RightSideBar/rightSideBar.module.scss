@@ -2,20 +2,20 @@
 @import '../../shared-styles/_mixins.scss';
 
 .section__rightSideBar {
-  padding-top: 40px;
+  padding-top: 100px;
   padding-bottom: 25px;
   // background-color: rgb(228, 180, 180);
   // background-color: $secondary-beckground;
 
   @include for-size(tablet) {
     background-color: unset;
-    padding-top: 91px;
+    padding-top: 165px;
     padding-bottom: 0px;
     position: relative;
   }
   @include for-size(desktop) {
     background-color: unset;
-    // padding-top: 300px;
+    padding-top: 137px;
     // min-width: 535px;
     min-height: 600px;
     width: 100%;
@@ -60,6 +60,14 @@
   overscroll-behavior: contain;
   overflow-y: auto;
   overflow-x: hidden;
+  padding-right: 10px;
+  @include for-size(tablet) {
+    max-height: 109px;
+    line-height: 22px;
+  }
+  @include for-size(desktop) {
+    max-height: 152px;
+  }
 }
 
 .title {
@@ -133,6 +141,7 @@
   }
   // ----------desktop-------
   @include for-size(desktop) {
+    width: 330px;
   }
 }
 .sideBar__BlocDescription p {
@@ -140,17 +149,17 @@
   color: $secondary-text;
 }
 
-.conteiner__rightSideBar {
-  padding: 0 15px;
-  margin-left: auto;
-  margin-right: auto;
-  @include for-size(tablet) {
-    padding: 0 28px;
-  }
-  @include for-size(desktop) {
-    padding: 0 25px;
-  }
-}
+// .conteiner__rightSideBar {
+//   padding: 0 15px;
+//   margin-left: auto;
+//   margin-right: auto;
+//   @include for-size(tablet) {
+//     padding: 0 28px;
+//   }
+//   @include for-size(desktop) {
+//     padding: 0 25px;
+//   }
+// }
 
 .rightSideBar {
   display: block;
@@ -164,8 +173,11 @@
     justify-content: space-between;
   }
   @include for-size(desktop) {
+    width: unset;
     margin-right: 0;
-    width: 330px;
-    display: block;
+    // width: 330px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
   }
 }

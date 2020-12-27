@@ -50,3 +50,14 @@
 .scrollbar::-webkit-scrollbar-thumb:horizontal {
   min-width: 1.5rem;
 }
+
+.SmallLoaderContainer{
+  position: absolute;
+
+  left: 120px;
+  @include for-size(tablet) {
+    bottom: 0;
+    // top: 50px;
+    // left: 200px;
+  }
+}
