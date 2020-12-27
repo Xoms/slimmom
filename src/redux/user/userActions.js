@@ -8,8 +8,12 @@ const getDailyRateRequest = createAction('auth/getDailyRateRequest');
 const getDailyRateSuccess = createAction('auth/getDailyRateSuccess');
 const getDailyRateError = createAction('auth/getDailyRateError');
 
-const getDailyRateWithIdRequest = createAction('auth/getDailyRateWithIdRequest');
-const getDailyRateWithIdSuccess = createAction('auth/getDailyRateWithIdSuccess');
+const getDailyRateWithIdRequest = createAction(
+  'auth/getDailyRateWithIdRequest',
+);
+const getDailyRateWithIdSuccess = createAction(
+  'auth/getDailyRateWithIdSuccess',
+);
 const getDailyRateWithIdError = createAction('auth/getDailyRateWithIdError');
 
 const deleteEatenProductRequest = createAction(
@@ -19,6 +23,7 @@ const deleteEatenProductSuccess = createAction(
   'user/deleteEatenProductSuccess',
 );
 const deleteEatenProductError = createAction('user/deleteEatenProductError');
+
 const getProductsRequest = createAction('user/getProductsRequest');
 const getProductsSuccess = createAction('user/getProductsSuccess');
 const getProductsError = createAction('user/getProductsError');
@@ -28,7 +33,6 @@ const addProductSuccess = createAction('user/addProductSuccess');
 const addProductError = createAction('user/addProductError');
 
 const setCurrentDay = createAction('user/setCurrentDay');
-
 
 const actions = {
   getCurrentUserRequest,

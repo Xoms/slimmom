@@ -50,11 +50,10 @@ class SetDate extends Component {
     //   currentDate.getDate() < 10
     //     ? `0${currentDate.getDate()}`
     //     : currentDate.getDate();
-    
-    const dateArr = this.props.currentDate.split("-");
-    const outputValue = dateArr.reverse().join(".");
+    const dateArr = this.props.currentDate.split('-');
+    const outputValue = dateArr.reverse().join('.');
 
-    this.setState((state) => {
+    this.setState(state => {
       return {
         outputValue: outputValue, //`${day}.${month}.${year}`,
         currentValue: new Date(this.props.currentDate),
