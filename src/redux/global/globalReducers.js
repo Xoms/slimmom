@@ -36,8 +36,6 @@ const {
   getDailyRateWithIdRequest,
   getDailyRateWithIdSuccess,
   getDailyRateWithIdError,
-  notifyGetDailyRate,
-  clearNotify,
 } = userActions;
 
 const error = createReducer(null, {
@@ -60,8 +58,6 @@ const error = createReducer(null, {
   [addProductError]: (state, { payload }) => payload,
   [addProductRequest]: () => null,
   [clearError]: () => null,
-  [notifyGetDailyRate]: (state, { payload }) => payload,
-  [clearNotify]: () => null,
 });
 
 const loading = createReducer(false, {

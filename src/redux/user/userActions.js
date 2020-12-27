@@ -34,9 +34,6 @@ const addProductError = createAction('user/addProductError');
 
 const setCurrentDay = createAction('user/setCurrentDay');
 
-const notifyGetDailyRate = createAction('user/notifyGetDailyRate'); // для записис в стор меседжа
-const clearNotify = createAction('user/clearNotify'); // для очистки error
-
 const actions = {
   getCurrentUserRequest,
   getCurrentUserSuccess,
@@ -54,8 +51,6 @@ const actions = {
   getProductsSuccess,
   getProductsError,
   setCurrentDay,
-  notifyGetDailyRate,
-  clearNotify,
   getDailyRateWithIdRequest,
   getDailyRateWithIdSuccess,
   getDailyRateWithIdError,

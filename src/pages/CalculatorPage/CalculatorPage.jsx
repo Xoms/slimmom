@@ -6,9 +6,7 @@ import Decoration from '../../components/Decoration';
 import styles from './CalculatorPage.module.scss';
 import { connect } from 'react-redux';
 import userSelectors from '../../redux/user/userSelectors';
-import userActions from '../../redux/user/userActions';
 import { getProducts } from '../../redux/user/userOperations';
-import globalSelectors from '../../redux/global/globalSelectors';
 
 class CalculatorPage extends Component {
   componentDidMount() {
@@ -22,12 +20,6 @@ class CalculatorPage extends Component {
     } else {
       this.props.getProducts({ date: this.props.day });
     }
-  }
-
-  componentWillUnmount() {
-    setTimeout(() => {
-      this.props.clearNotify(); // очищает глобальный error от псевдо месседжа меседжа
-    }, 3500);
   }
 
   render() {
@@ -48,16 +40,10 @@ class CalculatorPage extends Component {
 const mapStateToProps = state => ({
   day: userSelectors.getCurrentDay(state),
   dailyRate: userSelectors.getCalories(state),
-  userDataDailyRate: userSelectors.getUserDataDailyRate(state)
-  error: globalSelectors.getError(state),
-  getAlertReducer: globalSelectors.getAlertReducer(state),
-
-
+  userDataDailyRate: userSelectors.getUserDataDailyRate(state),
 });
 
 const mapDispatchToProps = {
   getProducts,
-  notifyGetDailyRate: userActions.notifyGetDailyRate,
-  clearNotify: userActions.clearNotify,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(CalculatorPage);
