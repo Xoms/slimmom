@@ -40,17 +40,27 @@ const getCurrentUser = () => (dispatch, getState) => {
       const { username, id, userData } = data;
       if (data.days && data.days.length) {
         const today = new Date().toJSON().slice(0, 10);
-        const todaySummary = {
-          ...data.days.find(day => day.date === today).daySummary,
-        };
-        const userInfo = {
-          username,
-          id,
-          userData,
-          daySummary: todaySummary,
-          summaries: [],
-        };
-        dispatch(userActions.getCurrentUserSuccess(userInfo));
+        const todaySummary = data.days.find(day => day.date === today)
+          ? data.days.find(day => day.date === today).daySummary
+          : null;
+        if (!todaySummary) {
+          const userInfo = {
+            username,
+            id,
+            userData,
+            summaries: [],
+          };
+          dispatch(userActions.getCurrentUserSuccess(userInfo));
+        } else {
+          const userInfo = {
+            username,
+            id,
+            userData,
+            daySummary: todaySummary,
+            summaries: [],
+          };
+          dispatch(userActions.getCurrentUserSuccess(userInfo));
+        }
       } else {
         const userInfo = {
           username,
@@ -101,8 +111,8 @@ const getDailyRateWithId = (userCharacteristics, userId, date) => dispatch => {
       //     dispatch(userActions.getProductsSuccess(payload));
       //   })
       //   .catch(err => dispatch(userActions.getProductsError(err)));
-      const { summaries, dailyRate } = data;
-      const payload = { summaries, dailyRate };
+      const { summaries, dailyRate, notAllowedProducts } = data;
+      const payload = { summaries, dailyRate, notAllowedProducts };
       return dispatch(userActions.getDailyRateWithIdSuccess(payload));
     })
     .catch(err => dispatch(userActions.getDailyRateWithIdError(err)));

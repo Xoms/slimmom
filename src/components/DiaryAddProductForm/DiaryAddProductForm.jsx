@@ -67,12 +67,9 @@ class DiaryAddProductForm extends Component {
   };
 
   render() {
-<<<<<<< HEAD
-=======
     // console.log(css.errorMes);
     // const adderrorInput = css.errorMes ? css.errorInput : '';
 
->>>>>>> c624538e5e65f8dd3c26e97d3dc224c7bc4a4c45
     const { products } = this.state;
     const form = (
       <Formik
