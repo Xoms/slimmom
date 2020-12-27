@@ -20,6 +20,7 @@
   color: black;
   height: 100%;
   width: 290px;
+  pointer-events: all;
 
   @media screen and (min-width: 650px) {
     width: 240px;
@@ -46,6 +47,7 @@
   left: 5px;
   top: 20px;
   z-index: 3;
+  pointer-events: none;
 
   height: 100px;
   width: 290px;
@@ -241,7 +243,23 @@
   justify-content: center;
 }
 
+// .errorMes {
+//   // @extend .errorInput;
+//   color: red;
+//   border-bottom: none;
+//   background-color: none;
+// }
+//? ----input ------
+.errorInput {
+  // @extend .errorMes;
+  border-bottom: 1px solid red;
+  background-color: rgba(228, 161, 161, 0.1);
+}
+.errorInput::placeholder {
+  color: red;
+}
 .errorMes {
+  // @extend .errorInput;
   color: red;
 }
 
