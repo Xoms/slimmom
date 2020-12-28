@@ -15,13 +15,22 @@ import SmallLoader from '../../components/shared/SmallLoader';
 import withAuth from '../hocs/withAuth';
 
 const formSchema = Yup.object().shape({
-  height: Yup.string().max(3, 'Укажите 3 цифры').required('Рост *'),
-  age: Yup.string().max(2, 'Укажите 2 цифры').required('Возраст *'),
-  weight: Yup.string().max(3, 'Укажите 3 цифры').required('Текущий вес *'),
-  desiredWeight: Yup.string()
-    .max(3, 'Укажите 3 цифры')
-    .required('Желаемый вес *'),
-  bloodType: Yup.string().required(),
+  height: Yup.number()
+    .min(100, 'Укажите значение от 100')
+    .max(250, 'Укажите значение до 250')
+    .required('Рост*'),
+  age: Yup.number()
+    .min(18, 'Укажите значение от 18')
+    .max(99, 'Укажите значение до 100')
+    .required('Возраст*'),
+  weight: Yup.number()
+    .min(20, 'Укажите значение от 20')
+    .max(500, 'Укажите значение до 500')
+    .required('Текущий вес*'),
+  desiredWeight: Yup.number()
+    .min(20, 'Укажите значение от 20')
+    .max(500, 'Укажите значение до 500')
+    .required('Желаемый вес*'),
 });
 
 class DailyCaloriesForm extends Component {
