@@ -64,7 +64,7 @@ class Header extends Component {
                   </Media>
                 </div>
               </NavLink>
-              <div>
+              {/* <div> */}
                 <Media
                   queries={{
                     small: '(min-width: 320px) and (max-width: 649px)',
@@ -152,7 +152,7 @@ class Header extends Component {
                     </Fragment>
                   )}
                 </Media>
-              </div>
+              {/* </div> */}
             </div>
           
 

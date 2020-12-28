@@ -8,20 +8,32 @@ nav {
 }
 
 .container {
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 0px 15px;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
   @include for-size(desktop){
-    padding-top: 40px;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0px 15px;
+  }
+  @include for-size(desktop){
+    // padding-top: 40px;
   }
 }
 
 .navContainer {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
+  @include for-size(tablet){
+    align-items: flex-end;
+  }
+  @include for-size(desktop){
+    align-items: center;
+  }
 }
 
 .navContainer a {
@@ -43,7 +55,7 @@ nav {
     color: $main-text;
 }
 
-.active {
+.active > span {
   color: $main-text;
 }
 
