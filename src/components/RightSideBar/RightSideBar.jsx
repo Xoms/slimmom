@@ -13,7 +13,7 @@ const initialState  = {
 }
 
 class RightSideBar extends Component {
-  
+
   state = {
     dailyNorm: {},
   };
@@ -33,7 +33,7 @@ class RightSideBar extends Component {
       this.setState({
         dailyNorm: summaries.find(summary => summary.date === (daySummary.date ? daySummary.date : date)) || {...daySummary, date },
       });
-      
+
     } else {
       this.setState({
         dailyNorm: {...daySummary, date }
@@ -43,7 +43,7 @@ class RightSideBar extends Component {
   componentDidMount(){
     this.dataToRender();
   }
-  
+
 
   componentDidUpdate(prevProps, prevState) {
     if (
@@ -71,23 +71,26 @@ class RightSideBar extends Component {
         <section className={classes.section__rightSideBar}>
           <div className={classes.conteiner__rightSideBar}>
             <div className={classes.rightSideBar}>
-              <div className={classes.backgroundSideBar}></div>
               <div className={classes.sideBar__BlocList}>
                 <h2 className={classes.title}>Сводка за {date}</h2>
-                <div className={classes.rightSideBar__lists}>
-                  <ul className={classes.sideBar__list}>
-                    <li>Осталось</li>
-                    <li>Употреблено</li>
-                    <li>Дневная норма</li>
-                    <li>n% от нормы</li>
-                  </ul>
-                  <ul className={classes.sideBar__list}>
-                    <li>{kcalLeft} ккал</li>
-                    <li>{Math.round(kcalConsumed)} ккал</li>
-                    <li>{dailyRate} ккал</li>
-                    <li>{Math.round(percentsOfDailyRate)} %</li>
-                  </ul>
-                </div>
+                {this.props.isLoading ? (
+                  <SmallLoader />
+                ) : (
+                  <div className={classes.rightSideBar__lists}>
+                    <ul className={classes.sideBar__list}>
+                      <li>Осталось</li>
+                      <li>Употреблено</li>
+                      <li>Дневная норма</li>
+                      <li>n% от нормы</li>
+                    </ul>
+                    <ul className={classes.sideBar__list}>
+                      <li>{kcalLeft} ккал</li>
+                      <li>{Math.round(kcalConsumed)} ккал</li>
+                      <li>{dailyRate} ккал</li>
+                      <li>{Math.round(percentsOfDailyRate)} %</li>
+                    </ul>
+                  </div>
+                )}
               </div>
 
               <div className={classes.sideBar__BlocDescription}>
@@ -116,6 +119,7 @@ const mapStateToProps = state => ({
   dailyRate: selectors.getCalories(state),
   userDataDailyRate: selectors.getUserDataDailyRate(state),
   notAllowedProducts: selectors.getnotAllowedProducts(state),
+  c: globalSelectors.getLoading(state),
 });
 
 export default connect(mapStateToProps)(RightSideBar);
