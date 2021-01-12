@@ -17,3 +17,7 @@
   font-family: 'GothamPro-Bold';
   src: url('./fonts/GothamPro-Bold.woff');
 }
+
+button {
+  cursor: pointer;
+}

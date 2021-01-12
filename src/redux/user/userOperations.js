@@ -2,6 +2,27 @@ import userActions from './userActions';
 
 import api from '../../services/backend.service';
 
+const getProductListHelper = (date, dispatch) => {
+  dispatch(userActions.getProductsRequest());
+  api
+    .getProducts({ date })
+    .then(({ data }) => {
+      let payload = {};
+      if (data.daySummary) {
+        const { daySummary, eatenProducts, id } = data;
+        payload = { daySummary, eatenProducts, currentDayId: id };
+      } else {
+        payload = {
+          daySummary: { ...data },
+          eatenProducts: [],
+          currentDayId: null,
+        };
+      }
+      dispatch(userActions.getProductsSuccess(payload));
+    })
+    .catch(err => dispatch(userActions.getProductsError(err)));
+};
+
 const getCurrentUser = () => (dispatch, getState) => {
   const {
     auth: { accessToken },
@@ -17,8 +38,38 @@ const getCurrentUser = () => (dispatch, getState) => {
     .getCurrentUser()
     .then(({ data }) => {
       const { username, id, userData } = data;
-      const userInfo = { username, id, userData, summaries: [] };
-      dispatch(userActions.getCurrentUserSuccess(userInfo));
+      if (data.days && data.days.length) {
+        const today = new Date().toJSON().slice(0, 10);
+        const todaySummary = data.days.find(day => day.date === today)
+          ? data.days.find(day => day.date === today).daySummary
+          : null;
+        if (!todaySummary) {
+          const userInfo = {
+            username,
+            id,
+            userData,
+            summaries: [],
+          };
+          dispatch(userActions.getCurrentUserSuccess(userInfo));
+        } else {
+          const userInfo = {
+            username,
+            id,
+            userData,
+            daySummary: todaySummary,
+            summaries: [],
+          };
+          dispatch(userActions.getCurrentUserSuccess(userInfo));
+        }
+      } else {
+        const userInfo = {
+          username,
+          id,
+          userData,
+          summaries: [],
+        };
+        dispatch(userActions.getCurrentUserSuccess(userInfo));
+      }
     })
     .catch(err => dispatch(userActions.getCurrentUserError(err)));
 };
@@ -42,27 +93,26 @@ const getDailyRateWithId = (userCharacteristics, userId, date) => dispatch => {
       if (!date) {
         date = new Date().toJSON().slice(0, 10);
       }
-      api
-        .getProducts({ date })
-        .then(({ data }) => {
-          let payload = {};
-          if (data.daySummary) {
-            const { daySummary, eatenProducts, id } = data;
-            payload = { daySummary, eatenProducts, currentDayId: id };
-          } else {
-            payload = {
-              daySummary: { ...data },
-              eatenProducts: [],
-              currentDayId: null,
-            };
-            // payload.daySummary = { ...data };
-          }
-          dispatch(userActions.getProductsSuccess(payload));
-        })
-        .catch(err => dispatch(userActions.getProductsError(err)));
-      // console.log(data);
-      const { summaries, dailyRate } = data;
-      const payload = { summaries, dailyRate };
+      getProductListHelper(date, dispatch);
+      // api
+      //   .getProducts({ date })
+      //   .then(({ data }) => {
+      //     let payload = {};
+      //     if (data.daySummary) {
+      //       const { daySummary, eatenProducts, id } = data;
+      //       payload = { daySummary, eatenProducts, currentDayId: id };
+      //     } else {
+      //       payload = {
+      //         daySummary: { ...data },
+      //         eatenProducts: [],
+      //         currentDayId: null,
+      //       };
+      //     }
+      //     dispatch(userActions.getProductsSuccess(payload));
+      //   })
+      //   .catch(err => dispatch(userActions.getProductsError(err)));
+      const { summaries, dailyRate, notAllowedProducts } = data;
+      const payload = { summaries, dailyRate, notAllowedProducts };
       return dispatch(userActions.getDailyRateWithIdSuccess(payload));
     })
     .catch(err => dispatch(userActions.getDailyRateWithIdError(err)));
@@ -73,7 +123,6 @@ const addProduct = product => dispatch => {
   api
     .addProduct(product)
     .then(({ data }) => {
-      console.log(data);
       let payload = {};
       if (data.newDay) {
         payload = {
@@ -90,7 +139,17 @@ const addProduct = product => dispatch => {
         dispatch(userActions.addProductSuccess(payload));
       }
     })
-    .catch(err => dispatch(userActions.addProductError(err)));
+    .catch(err => {
+      if (
+        err.response.data.message === '"productId" is not allowed to be empty'
+      ) {
+        dispatch(
+          userActions.addProductError(
+            'Please, choose a product from dropdown list',
+          ),
+        );
+      } else dispatch(userActions.addProductError(err.message));
+    });
 };
 
 const getProducts = date => (dispatch, getState) => {
@@ -102,12 +161,12 @@ const getProducts = date => (dispatch, getState) => {
 
   api.setToken(accessToken);
 
+  // getProductListHelper(date, dispatch);
   dispatch(userActions.getProductsRequest());
 
   api
     .getProducts(date)
     .then(({ data }) => {
-      console.log(data)
       let payload = {};
       if (data.daySummary) {
         const { daySummary, eatenProducts, id } = data;
@@ -116,9 +175,7 @@ const getProducts = date => (dispatch, getState) => {
         payload = {
           daySummary: { ...data },
           eatenProducts: [],
-          // currentDayId: null,
         };
-        // payload.daySummary = { ...data };
       }
       dispatch(userActions.getProductsSuccess(payload));
     })
@@ -130,24 +187,24 @@ const deleteEatenProduct = (product, date) => dispatch => {
   api
     .deleteEatenProduct(product)
     .then(({ data }) => {
-      api
-        .getProducts({ date })
-        .then(({ data }) => {
-          let payload = {};
-          if (data.daySummary) {
-            const { daySummary, eatenProducts, id } = data;
-            payload = { daySummary, eatenProducts, currentDayId: id };
-          } else {
-            payload = {
-              daySummary: { ...data },
-              eatenProducts: [],
-              currentDayId: null,
-            };
-            // payload.daySummary = { ...data };
-          }
-          dispatch(userActions.getProductsSuccess(payload));
-        })
-        .catch(err => dispatch(userActions.getProductsError(err)));
+      getProductListHelper(date, dispatch);
+      // api
+      //   .getProducts({ date })
+      //   .then(({ data }) => {
+      //     let payload = {};
+      //     if (data.daySummary) {
+      //       const { daySummary, eatenProducts, id } = data;
+      //       payload = { daySummary, eatenProducts, currentDayId: id };
+      //     } else {
+      //       payload = {
+      //         daySummary: { ...data },
+      //         eatenProducts: [],
+      //         currentDayId: null,
+      //       };
+      //     }
+      //     dispatch(userActions.getProductsSuccess(payload));
+      //   })
+      //   .catch(err => dispatch(userActions.getProductsError(err)));
 
       return dispatch(
         userActions.deleteEatenProductSuccess(data.newDaySummary),

@@ -10,6 +10,7 @@
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
+  align-items: flex-end;
 }
 
 .listName {
@@ -19,7 +20,7 @@
   padding-bottom: 10px;
   margin-right: 10px;
   border-bottom: 1px solid #e0e0e0;
-  white-space: nowrap;
+  white-space: normal;
   overflow: auto;
   flex: 3;
   color: $main-text;
@@ -46,7 +47,7 @@
   display: inline-block;
   /* width: 60px; */
   padding-top: 20px;
-  padding-bottom: 10px;
+  padding-bottom: 8px;
   margin-right: 10px;
   border-bottom: 1px solid #e0e0e0;
   white-space: nowrap;
@@ -59,11 +60,10 @@
   font-size: 8px;
 }
 
-
 @media screen and (min-width: 650px) {
   .list {
     display: flex;
-    align-items: center;
+    // align-items: center;
     list-style: none;
     font-style: normal;
     font-weight: normal;
@@ -80,7 +80,7 @@
     padding-bottom: 19px;
     margin-right: 31px;
     border-bottom: 1px solid #e0e0e0;
-    white-space: nowrap;
+    white-space: normal;
     overflow: auto;
     color: $main-text;
     font-size: 14px;
@@ -111,18 +111,17 @@
     white-space: nowrap;
     overflow: auto;
     color: $main-text;
-    font-size: 16px;
+    font-size: 14px;
   }
   .ccal {
     font-size: 12px;
   }
-
 }
 
 @media screen and (min-width: 1100px) {
   .list {
     display: flex;
-    align-items: center;
+    // align-items: center;
     list-style: none;
     font-style: normal;
     font-weight: normal;
@@ -139,7 +138,7 @@
     padding-bottom: 10px;
     margin-right: 31px;
     border-bottom: 1px solid #e0e0e0;
-    white-space: nowrap;
+    white-space: normal;
     overflow: auto;
     color: $main-text;
     font-size: 16px;
@@ -175,22 +174,13 @@
   .ccal {
     font-size: 12px;
   }
-
 }
 
 .listButton {
-  // height: max-content;
-  display: inline-block;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  align-self: center;
-  font-size: 20px;
-  margin: 0;
-  padding: 0;
+  display: block;
+  padding-bottom: 10px;
   border: none;
-  width: 20px;
-  height: 20px;
   background-color: #fff;
   color: $secondary-text;
+  cursor: pointer;
 }
