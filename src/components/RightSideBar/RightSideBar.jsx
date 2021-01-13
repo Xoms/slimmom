@@ -5,6 +5,7 @@ import globalSelectors from '../../redux/global/globalSelectors';
 import PropTypes from 'prop-types';
 import classes from './rightSideBar.module.scss';
 import SmallLoader from '../shared/SmallLoader';
+import dateNormalise from '../../helpers/dateNormalise';
 
 const initialState = {
   kcalLeft: 0,
@@ -77,15 +78,13 @@ class RightSideBar extends Component {
       dailyRate,
       percentsOfDailyRate,
     } = this.state.dailyNorm ? this.state.dailyNorm : initialState;
-
-    // console.log(typeof percentsOfDailyRate);
     return (
       <>
         <section className={classes.section__rightSideBar}>
           <div className={classes.conteiner__rightSideBar}>
             <div className={classes.rightSideBar}>
               <div className={classes.sideBar__BlocList}>
-                <h2 className={classes.title}>Сводка за {date}</h2>
+                <h2 className={classes.title}>Сводка за {date ? dateNormalise(date): date}</h2>
                 {this.props.isLoading ? (
                   <SmallLoader />
                 ) : (

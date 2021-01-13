@@ -1,7 +1,6 @@
 import React, { Component, Suspense, lazy, Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import jwt_decode from "jwt-decode";
-// import debounce from 'lodash.debounce';
+
 import { connect } from 'react-redux';
 import { getCurrentUser } from '../../redux/user/userOperations';
 import {authOperations, authSelectors} from '../../redux/auth';
@@ -80,10 +79,6 @@ class App extends Component {
     );
   }
 }
-
-App.propTypes = {
-  // bla: PropTypes.string,
-};
 
 const mapStateToProps = (state) => ({
   authError : globalSelectors.getError(state),

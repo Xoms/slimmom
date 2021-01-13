@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { authOperations, authActions } from '../../redux/auth';
 import globalSelectors from '../../redux/global/globalSelectors';
-import Notification from '../shared/Notification/Notification';
 import Decoration from '../Decoration';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -27,18 +26,8 @@ const LoginForm = props => {
     props.login(values);
   };
 
-  // if (props.error) {
-  //   setTimeout(() => {
-  //     props.clearError();
-  //   }, 3000);
-  // }
-
   return (
     <>
-      {/* <Notification
-        error={Boolean(props.error)}
-        message="There is no such account!"
-      ></Notification> */}
       <Decoration isLoginPage={true} />
       <section className="container">
         <div className={css.loginPage}>
