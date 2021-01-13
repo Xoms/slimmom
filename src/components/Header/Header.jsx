@@ -1,26 +1,29 @@
 import React, { Component, Fragment } from 'react';
 import Media from 'react-media';
-// import PropTypes from "prop-types"
+import PropTypes from "prop-types";
 import { NavLink } from 'react-router-dom';
 import { BurgerMenu, Burger } from '../BurgerMenu';
 import { Logo, LogoText } from '../Logo';
 import NavigationBar from '../NavigationBar';
 import UserInfo from '../UserInfo';
 import AuthNavigations from '../AuthNavigations';
-import styles from "./Header.module.scss"
-import '../../shared-styles/_container.scss'
-import withAuth from "../hocs/withAuth"
+import styles from "./Header.module.scss";
+import '../../shared-styles/_container.scss';
+import withAuth from "../hocs/withAuth";
 
 class Header extends Component {
+  static propTypes = {
+    isAuth: PropTypes.string.isRequired,
+  };
   state = {
     isOpen: false,
   };
   handleToggle = () => {
     this.setState({ isOpen: !this.state.isOpen })
-  }
+  };
   handleIsOpenLogout = () => {
     this.setState({ isOpen: false })
-  }
+  };
 
   render() {
     const { isAuth } = this.props;
@@ -184,31 +187,12 @@ class Header extends Component {
                 }</Media>
         }
 
-        {/* {
-          <Media
-            queries={{
-              small: '(min-width: 320px) and (max-width: 649px)',
-              medium: '(min-width: 650px) and (max-width: 1099px)',
-              large: '(min-width: 1100px)',
-            }}
-          >
-            {matches => (
-              <Fragment>
-                {matches.small && isAuth && (
-                  <div className={styles.mobUserInfoWrap}>
-                    <UserInfo />
-                  </div>
-                )}
-              </Fragment>
-            )}
-          </Media>
-        } */}
         {this.state.isOpen && <BurgerMenu onClick={this.handleToggle} />}
         </section>
       </>
     
     );
-  }
-}
+  };
+};
 
 export default withAuth(Header);

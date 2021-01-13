@@ -28,11 +28,12 @@ const login = credentials => dispatch => {
       const {
         user: { username, id, userData },
         accessToken,
+        refreshToken,
         sid,
       } = data;
 
       const userInfo = {
-        auth: { accessToken, sid },
+        auth: { accessToken, refreshToken, sid },
         user: {
           username,
           id,
@@ -66,7 +67,7 @@ const logout = () => dispatch => {
 const refresh = () => (dispatch, getState) => {
   dispatch(authActions.refreshRequest());
   const {
-    auth: { sid, refreshToken, accessToken },
+    auth: { sid, refreshToken },
   } = getState();
 
   api.setToken(refreshToken);
@@ -74,7 +75,7 @@ const refresh = () => (dispatch, getState) => {
   api
     .refresh({ sid: sid })
     .then(({ data }) => {
-      dispatch(authActions.refreshSuccess(data.newAccessToken));
+      dispatch(authActions.refreshSuccess(data));
     })
     .catch(err => {
       return dispatch(authActions.refreshError(err));

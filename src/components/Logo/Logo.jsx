@@ -1,7 +1,7 @@
-import React from "react"
-import styles from "./Logo.module.scss"
+import React from "react";
+import styles from "./Logo.module.scss";
 
-export const Logo = (props) => {
+export const Logo = () => {
   return (
     <svg fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" className={styles.logoSvg}>
       <rect width="100%" height="100%" fill="url(#pattern0)" />
@@ -18,4 +18,4 @@ export const Logo = (props) => {
       </defs>
     </svg>
   )
-}
+};

@@ -58,7 +58,6 @@ class PhonebookService {
     return axios.post(`/day/info`, date); // дата из календаря для запроса
   }
   refresh(sid) {
-    console.log(sid);
     return axios.post(`/auth/refresh`, sid); //сид из store
   }
   
