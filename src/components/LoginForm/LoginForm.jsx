@@ -5,19 +5,20 @@ import globalSelectors from '../../redux/global/globalSelectors';
 import Notification from '../shared/Notification/Notification';
 import Decoration from '../Decoration';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
+// import * as Yup from 'yup';
 import Button from '../shared/Button';
 import css from './LoginForm.module.scss';
+import { SignupSchema } from '../shared/YupSchemas.js';
 
-const SignupSchema = Yup.object().shape({
-  email: Yup.string()
-    .min(2, 'Некорректная длинна поля')
-    .max(50, 'Превышен лимит символов')
-    .required('Обязательное поле *'),
-  password: Yup.string()
-    .required('Обязательное поле *')
-    .min(8, 'Некорректная длинна поля'),
-});
+// const SignupSchema = Yup.object().shape({
+//   email: Yup.string()
+//     .min(2, 'Некорректная длинна поля')
+//     .max(50, 'Превышен лимит символов')
+//     .required('Обязательное поле *'),
+//   password: Yup.string()
+//     .required('Обязательное поле *')
+//     .min(8, 'Некорректная длинна поля'),
+// });
 
 const LoginForm = props => {
   const handleClick = () => {
