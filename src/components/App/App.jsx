@@ -1,9 +1,8 @@
 import React, { Component, Suspense, lazy, Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom';
-
 import { connect } from 'react-redux';
 import { getCurrentUser } from '../../redux/user/userOperations';
-import {authOperations, authSelectors} from '../../redux/auth';
+import { authOperations, authSelectors } from '../../redux/auth';
 import globalSelectors from '../../redux/global/globalSelectors';
 import authActions from '../../redux/auth/authActions';
 
@@ -19,43 +18,40 @@ import Alert from '../Alert';
 import './App.scss';
 
 class App extends Component {
-
   componentDidMount() {
     this.props.getCurrentUser();
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if(this.props.authError) {   
-      if(
+    if (this.props.authError) {
+      if (
         //Unauthorized (invalid refresh token)
         this.props.authError.includes('401')
-        ) {
-        if(prevProps.authError !== this.props.authError){
+      ) {
+        if (prevProps.authError !== this.props.authError) {
           this.props.refreshToken();
         }
       }
 
-      if(this.props.authError.includes('404')) {
-        if(
+      if (this.props.authError.includes('404')) {
+        if (
           //Invalid user / Invalid session
           prevProps.authError !== this.props.authError
-          ){
-           this.props.clearError();
+        ) {
+          this.props.clearError();
         }
       }
-         
     }
 
-    if(
-        this.props.accessToken &&
-        this.props.accessToken !== prevProps.accessToken
-       ) {
-        this.props.getCurrentUser();
+    if (
+      this.props.accessToken &&
+      this.props.accessToken !== prevProps.accessToken
+    ) {
+      this.props.getCurrentUser();
     }
   }
 
   render() {
-    
     const routesMap = routes.map(route => {
       return route.privated ? (
         <PrivateRoute key={route.path} {...route} />
@@ -66,7 +62,7 @@ class App extends Component {
 
     return (
       <Fragment>
-      <Alert/>
+        <Alert />
         <Layout>
           <Suspense fallback={<Loader />}>
             <Switch>
@@ -80,12 +76,12 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  authError : globalSelectors.getError(state),
+const mapStateToProps = state => ({
+  authError: globalSelectors.getError(state),
   accessToken: authSelectors.getToken(state),
-  sid : authSelectors.sid(state),
-  isLoading: globalSelectors.getLoading(state), 
-})
+  sid: authSelectors.sid(state),
+  isLoading: globalSelectors.getLoading(state),
+});
 const mapDispatch = {
   getCurrentUser,
   refreshToken: authOperations.refresh,

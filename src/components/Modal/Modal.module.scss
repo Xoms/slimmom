@@ -1,23 +1,28 @@
-@import "../../shared-styles/colors";
-@import "../../shared-styles/mixins";
+@import '../../shared-styles/colors';
+@import '../../shared-styles/mixins';
+
 .appear {
   opacity: 0;
   transform: scale(0.1);
   transition: transform 250ms linear;
 }
+
 .appearActive {
   opacity: 1;
   transform: scale(1);
 }
+
 .exit {
   transform: scale(1);
   opacity: 1;
 }
+
 .exitActive {
   opacity: 0;
   transform: scale(0);
   transition: all 250ms linear;
 }
+
 .title {
   font-family: Verdana;
   font-style: normal;
@@ -27,13 +32,16 @@
   margin-bottom: 40px;
   color: $main-text;
 }
+
 .container {
   padding: 0;
 }
+
 .modalButton {
   display: block;
   margin: 0 auto;
 }
+
 .button {
   padding: 13px 0;
   margin: 0 auto;
@@ -50,15 +58,18 @@
   text-align: center;
   letter-spacing: 0.04em;
 }
+
 .button:hover {
   background-color: $accent;
   color: $main-background;
   box-shadow: 0px 4px 10px rgba(252, 132, 45, 0.5);
 }
+
 .buttonLink {
   text-decoration: none;
   color: white;
 }
+
 .caloriesText {
   font-family: Verdana;
   font-style: normal;
@@ -71,10 +82,12 @@
   line-height: 19.45px;
   color: $burger-background;
 }
+
 .caloriesValue {
   font-size: 48px;
   line-height: 58px;
 }
+
 .productsTitle {
   font-weight: bold;
   font-size: 14px;
@@ -83,6 +96,7 @@
   padding-top: 35px;
   color: $main-text;
 }
+
 .productsList {
   overscroll-behavior: contain;
   overflow-y: auto;
@@ -99,14 +113,17 @@
   list-style-type: decimal;
   list-style-position: inside;
 }
+
 .productsItem:not(:last-child) {
   margin-bottom: 10px;
 }
+
 .caloriesText {
   position: relative;
 }
+
 .caloriesText::after {
-  content: "";
+  content: '';
   position: absolute;
   left: 0;
   width: 100%;
@@ -115,6 +132,7 @@
   background-color: #e0e0e0;
   margin-top: 30px;
 }
+
 .overlay {
   position: absolute;
   top: 80px;
@@ -127,6 +145,7 @@
   overflow-y: hidden;
   background-color: rgba(33, 33, 33, 0.12);
 }
+
 .modal {
   position: absolute;
   top: 40px;
@@ -134,9 +153,11 @@
   padding: 40px 15px 80px;
   background-color: $main-background;
 }
+
 .closeModalBtn {
   display: none;
 }
+
 .closeModalMobileBtn {
   width: 100%;
   height: 40px;
@@ -147,6 +168,7 @@
   border: 1px solid transparent;
   border-top: 1px solid $header-border;
 }
+
 @media screen and (min-width: 650px) {
   .title {
     font-size: 26px;
@@ -199,6 +221,7 @@
     top: 135px;
   }
 }
+
 // Scroll-bar customisation
 .scrollbar {
   -webkit-overflow-scrolling: touch;

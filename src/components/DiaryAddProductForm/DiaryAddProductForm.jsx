@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Formik, Field, Form } from 'formik';
+import debounce from 'lodash.debounce';
 import css from './DiaryAddProductForm.module.scss';
 import './DiaryAddProductFormAnimation.scss';
 import Button from '../shared/Button/Button';
 import back from '../../img/back-arrow.svg';
 import api from '../../services/backend.service';
-import { Formik, Field, Form } from 'formik';
-import * as Yup from 'yup';
-import debounce from 'lodash.debounce';
-import { connect } from 'react-redux';
 import { addProduct } from '../../redux/user/userOperations';
 import globalSelectors from '../../redux/global/globalSelectors';
-
-const AddProdSchema = Yup.object().shape({
-  product: Yup.string().required('Обязательное поле *'),
-  weight: Yup.number().required('Обязательное поле *'),
-});
+import { AddProdSchema } from '../../helpers/yupSchemas.js';
 
 class DiaryAddProductForm extends Component {
+  static propTypes = {
+    isLoading: PropTypes.bool,
+    addProduct: PropTypes.func.isRequired,
+  };
+
   state = {
     renderMarker: false,
     products: [],
@@ -67,7 +68,6 @@ class DiaryAddProductForm extends Component {
   };
 
   render() {
-
     const { products } = this.state;
     const form = (
       <Formik
@@ -104,16 +104,9 @@ class DiaryAddProductForm extends Component {
                 type="text"
                 autoComplete="off"
               />
-
-              {/* <ErrorMessage
-                className={css.validField}
-                name="product"
-                component="span"
-              /> */}
             </label>
             <div className={css.productListWrapper}>
               {!!products.length ? (
-                // <CSSTransition in={this.state.showUl} unmountOnExit classNames="search-list" timeout={500}>
                 <ul className={`${css.autocomplete}  ${css.scrollbar}`}>
                   {products.map(product => (
                     <li
@@ -132,7 +125,6 @@ class DiaryAddProductForm extends Component {
                   ))}
                 </ul>
               ) : (
-                // </CSSTransition>
                 this.state.error && (
                   <p className={css.errorMes}>{this.state.error}</p>
                 )
@@ -147,11 +139,6 @@ class DiaryAddProductForm extends Component {
                 placeholder="Граммы*"
                 type="number"
               />
-              {/* <ErrorMessage
-                className={css.validField}
-                name="weight"
-                component="span"
-              /> */}
             </label>
             {window.innerWidth < 650 ? (
               <Button
@@ -208,9 +195,11 @@ class DiaryAddProductForm extends Component {
     }
   }
 }
+
 const mapStateToProps = state => ({
   isLoading: globalSelectors.getLoading(state),
 });
+
 const mapDispatchToProps = {
   addProduct,
 };
