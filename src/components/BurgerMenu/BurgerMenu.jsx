@@ -9,12 +9,12 @@ export const BurgerMenu = (props) => {
     <div className={styles.burgerMenu}>
       <ul className={styles.burgerMenuList}>
         <li>
-          <NavLink exact to="/diary" className={styles.burgerMenuItemDiary} onClick={onClick}>
+          <NavLink exact to="/diary" className={styles.burgerMenuLink} activeClassName={styles.burgerMenuLinkActive} onClick={onClick}>
             ДНЕВНИК
           </NavLink>
         </li>
         <li>
-          <NavLink exact to="/calculator" className={styles.burgerMenuItemCalc} onClick={onClick}>
+          <NavLink exact to="/calculator" className={styles.burgerMenuLink} activeClassName={styles.burgerMenuLinkActive} onClick={onClick}>
             КАЛЬКУЛЯТОР
           </NavLink>
         </li>

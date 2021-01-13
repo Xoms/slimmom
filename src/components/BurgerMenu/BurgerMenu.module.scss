@@ -16,12 +16,11 @@
 }
 .burgerSvg {
   display: block;
-  width: 18px;    //!------------
-  height: 12px;  //!-----------
+  width: 18px; 
+  height: 12px;
   @include for-size(tablet) {
     margin-left: 53px;
     margin-right: 3px;
-    // padding-top: 2px;
   }
   &:hover,
   &:focus {
@@ -49,7 +48,8 @@
     height: 944px;
   }
 }
-.burgerMenuItemDiary {
+
+.burgerMenuLink {
   text-align: center;
   text-decoration: none;
   color: $secondary-text;
@@ -59,13 +59,6 @@
     font-size: 24px;
   }
 }
-.burgerMenuItemCalc {
-  text-align: center;
-  text-decoration: none;
+.burgerMenuLinkActive {
   color: $main-background;
-  font-family: 'VerdanaBold';
-  font-size: 18px;
-  @include for-size(tablet) {
-    font-size: 24px;
-  }
 }
