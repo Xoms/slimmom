@@ -1,25 +1,14 @@
 import React, { Component } from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import css from './RegistrationForm.module.scss';
 import Button from '../shared/Button/Button';
 import ops from '../../redux/auth/authOperations';
-import { connect } from 'react-redux';
-import css from './RegistrationForm.module.scss';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
 import { authActions } from '../../redux/auth';
 import globalSelectors from '../../redux/global/globalSelectors';
 import Decoration from '../Decoration';
-
-const RegisterSchema = Yup.object().shape({
-  username: Yup.string()
-    .min(2, 'Некорректная длинна поля')
-    .max(50, 'Превышен лимит символов')
-    .required('Обязательное поле *'),
-  email: Yup.string()
-    .min(2, 'Некорректная длинна поля')
-    .max(50, 'Превышен лимит символов')
-    .required('Обязательное поле *'),
-  password: Yup.string().required('Обязательное поле *').min(8, 'Too short!'),
-});
+import { RegisterSchema } from '../../helpers/yupSchemas.js';
 
 class RegistrationForm extends Component {
   handleClick = () => {
@@ -31,18 +20,8 @@ class RegistrationForm extends Component {
   };
 
   render() {
-    // if (this.props.error) {
-    //   setTimeout(() => {
-    //     this.props.clearError();
-    //   }, 3000);
-    // }
-
     return (
       <>
-        {/* <Notification
-          error={Boolean(this.props.error)}
-          message="Пользователь с такими данными уже существует"
-        ></Notification> */}
         <Decoration isLoginPage={true} />
         <section className="container">
           <Formik
@@ -127,5 +106,9 @@ const mapDispatchToProps = {
 const mapStateToProps = state => ({
   error: globalSelectors.getError(state),
 });
+
+RegistrationForm.propTypes = {
+  register: PropTypes.func,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(RegistrationForm);

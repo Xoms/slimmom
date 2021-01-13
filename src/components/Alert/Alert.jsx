@@ -22,13 +22,9 @@ class Alert extends Component {
         this.props.action_alertOff();
       }, 3000);
     }
-    // if(this.props.state.error && this.props.state.error === prevProps.state.error){
-    //? ДЛЯ ДОДАТКОВОЇ АНІМАЦІЇ
-    // }
   }
 
   render() {
-    //console.log(this.props.state.error);
     return (
       <CSSTransition
         in={this.state.isAlertShow}

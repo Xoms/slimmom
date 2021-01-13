@@ -3,5 +3,5 @@ const getToken = state => state.auth.accessToken;
 const getRefreshToken = state => state.auth.refreshToken;
 
 
-const selectors =  {sid, getToken}
+const selectors =  {sid, getToken, getRefreshToken}
 export default selectors

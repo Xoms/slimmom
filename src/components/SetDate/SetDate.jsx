@@ -34,45 +34,27 @@ class SetDate extends Component {
         outputValue: `${day}.${month}.${year}`,
       };
     });
-    // day = String(day);
-    // day.length === 1 ? (day = `0${day}`) : (day = day);
     this.props.value(`${year}-${month}-${day}`);
   };
 
-  componentDidMount() {
-    // const currentDate = new Date();
-    // const year = currentDate.getFullYear();
-    // const month =
-    //   currentDate.getMonth() < 10
-    //     ? `0${currentDate.getMonth() + 1}`
-    //     : currentDate.getMonth() + 1;
-    // const day =
-    //   currentDate.getDate() < 10
-    //     ? `0${currentDate.getDate()}`
-    //     : currentDate.getDate();
-    const dateArr = this.props.currentDate.split('-');
-    const outputValue = dateArr.reverse().join('.');
-
-    this.setState(state => {
+  initCalendar() {
+    const dateArr = this.props.currentDate.split("-");
+    const outputValue = dateArr.reverse().join(".");
+    this.setState((state) => {
       return {
-        outputValue: outputValue, //`${day}.${month}.${year}`,
+        outputValue: outputValue,
         currentValue: new Date(this.props.currentDate),
         currentDate: new Date(this.props.currentDate),
       };
     });
   }
+
+  componentDidMount() {
+    this.initCalendar();
+  }
   componentDidUpdate(prevProps, prevState) {
-    if(prevProps.currentDate !== this.props.currentDate) {
-      const dateArr = this.props.currentDate.split("-");
-      const outputValue = dateArr.reverse().join(".");
-  
-      this.setState((state) => {
-        return {
-          outputValue: outputValue, //`${day}.${month}.${year}`,
-          currentValue: new Date(this.props.currentDate),
-          currentDate: new Date(this.props.currentDate),
-        };
-      });
+    if (prevProps.currentDate !== this.props.currentDate) {
+      this.initCalendar();
     }
   }
 

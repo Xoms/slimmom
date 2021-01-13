@@ -2,23 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { authOperations, authActions } from '../../redux/auth';
 import globalSelectors from '../../redux/global/globalSelectors';
-import Notification from '../shared/Notification/Notification';
 import Decoration from '../Decoration';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-// import * as Yup from 'yup';
 import Button from '../shared/Button';
 import css from './LoginForm.module.scss';
-import { SignupSchema } from '../shared/YupSchemas.js';
-
-// const SignupSchema = Yup.object().shape({
-//   email: Yup.string()
-//     .min(2, 'Некорректная длинна поля')
-//     .max(50, 'Превышен лимит символов')
-//     .required('Обязательное поле *'),
-//   password: Yup.string()
-//     .required('Обязательное поле *')
-//     .min(8, 'Некорректная длинна поля'),
-// });
+import { SignupSchema } from '../../helpers/yupSchemas.js';
 
 const LoginForm = props => {
   const handleClick = () => {
@@ -28,18 +16,8 @@ const LoginForm = props => {
     props.login(values);
   };
 
-  // if (props.error) {
-  //   setTimeout(() => {
-  //     props.clearError();
-  //   }, 3000);
-  // }
-
   return (
     <>
-      {/* <Notification
-        error={Boolean(props.error)}
-        message="There is no such account!"
-      ></Notification> */}
       <Decoration isLoginPage={true} />
       <section className="container">
         <div className={css.loginPage}>
@@ -59,7 +37,7 @@ const LoginForm = props => {
                     }`}
                     type="email"
                     name="email"
-                    placeholder="Логин *"
+                    placeholder="Электронная почта *"
                   />
                   <ErrorMessage
                     className={css.validField}

@@ -100,7 +100,7 @@
 
   & button {
     position: absolute;
-    top: -24px;
+    top: -45px;
     left: 2px;
 
     background-color: transparent;
@@ -299,6 +299,7 @@
 .errorMes {
   // @extend .errorInput;
   color: red;
+  font-size: 14px;
 
   @include for-size(desktop) {
     font-size: 14px;

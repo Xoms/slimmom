@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Formik, Field, Form } from 'formik';
-import * as Yup from 'yup';
 import debounce from 'lodash.debounce';
 import css from './DiaryAddProductForm.module.scss';
 import './DiaryAddProductFormAnimation.scss';
@@ -11,11 +10,7 @@ import back from '../../img/back-arrow.svg';
 import api from '../../services/backend.service';
 import { addProduct } from '../../redux/user/userOperations';
 import globalSelectors from '../../redux/global/globalSelectors';
-
-const AddProdSchema = Yup.object().shape({
-  product: Yup.string().required('Обязательное поле *'),
-  weight: Yup.number().required('Обязательное поле *'),
-});
+import { AddProdSchema } from '../../helpers/yupSchemas.js';
 
 class DiaryAddProductForm extends Component {
   static propTypes = {

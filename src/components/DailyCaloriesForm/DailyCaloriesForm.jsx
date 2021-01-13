@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
 import {
   getDailyRate,
   getDailyRateWithId,
 } from '../../redux/user/userOperations';
+import PropTypes from 'prop-types';
 import userSelectors from '../../redux/user/userSelectors';
 import { connect } from 'react-redux';
 import Button from '../shared/Button';
@@ -13,27 +13,18 @@ import Modal from '../Modal';
 import globalSelectors from '../../redux/global/globalSelectors';
 import SmallLoader from '../../components/shared/SmallLoader';
 import withAuth from '../hocs/withAuth';
-
-const formSchema = Yup.object().shape({
-  height: Yup.number()
-    .min(100, 'Укажите значение от 100')
-    .max(250, 'Укажите значение до 250')
-    .required('Рост*'),
-  age: Yup.number()
-    .min(18, 'Укажите значение от 18')
-    .max(99, 'Укажите значение до 100')
-    .required('Возраст*'),
-  weight: Yup.number()
-    .min(20, 'Укажите значение от 20')
-    .max(500, 'Укажите значение до 500')
-    .required('Текущий вес*'),
-  desiredWeight: Yup.number()
-    .min(20, 'Укажите значение от 20')
-    .max(500, 'Укажите значение до 500')
-    .required('Желаемый вес*'),
-});
+import { formSchema } from '../../helpers/yupSchemas.js';
 
 class DailyCaloriesForm extends Component {
+  static propTypes = {
+    toggleModal: PropTypes.func,
+    showModal: PropTypes.bool,
+    getCalculations: PropTypes.func,
+    isLoading: PropTypes.bool.isRequired,
+    userId: PropTypes.string,
+    userInfo: PropTypes.object.isRequired,
+  };
+
   state = {
     showModal: false,
   };
@@ -109,11 +100,6 @@ class DailyCaloriesForm extends Component {
                       className={styles.DailyCaloriesFormFieldsLabelText}
                     >
                       Рост *
-                      {/* <ErrorMessage
-                        className={styles.validField}
-                        name="height"
-                        component="span"
-                      /> */}
                     </label>
                     <Field
                       id="height"

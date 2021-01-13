@@ -1,7 +1,5 @@
 import React, { Component, Suspense, lazy, Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import jwt_decode from 'jwt-decode';
-// import debounce from 'lodash.debounce';
 import { connect } from 'react-redux';
 import { getCurrentUser } from '../../redux/user/userOperations';
 import { authOperations, authSelectors } from '../../redux/auth';
@@ -25,8 +23,31 @@ class App extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.props.authError && this.props.authError.includes('401')) {
-      this.props.clearError();
+    if (this.props.authError) {
+      if (
+        //Unauthorized (invalid refresh token)
+        this.props.authError.includes('401')
+      ) {
+        if (prevProps.authError !== this.props.authError) {
+          this.props.refreshToken();
+        }
+      }
+
+      if (this.props.authError.includes('404')) {
+        if (
+          //Invalid user / Invalid session
+          prevProps.authError !== this.props.authError
+        ) {
+          this.props.clearError();
+        }
+      }
+    }
+
+    if (
+      this.props.accessToken &&
+      this.props.accessToken !== prevProps.accessToken
+    ) {
+      this.props.getCurrentUser();
     }
   }
 
@@ -54,10 +75,6 @@ class App extends Component {
     );
   }
 }
-
-App.propTypes = {
-  // bla: PropTypes.string,
-};
 
 const mapStateToProps = state => ({
   authError: globalSelectors.getError(state),
