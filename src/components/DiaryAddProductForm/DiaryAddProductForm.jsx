@@ -4,7 +4,7 @@ import './DiaryAddProductFormAnimation.scss';
 import Button from '../shared/Button/Button';
 import back from '../../img/back-arrow.svg';
 import api from '../../services/backend.service';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import debounce from 'lodash.debounce';
 import { connect } from 'react-redux';
@@ -67,8 +67,6 @@ class DiaryAddProductForm extends Component {
   };
 
   render() {
-    // console.log(css.errorMes);
-    // const adderrorInput = css.errorMes ? css.errorInput : '';
 
     const { products } = this.state;
     const form = (

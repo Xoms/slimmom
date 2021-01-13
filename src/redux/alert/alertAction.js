@@ -15,5 +15,5 @@ const alertOn = (value) => {
     }
   }
 }
-
-export default {alertOff, alertOn}
+const alertActions = {alertOff, alertOn}
+export default alertActions

@@ -27,10 +27,6 @@ class DiaryPage extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // if (prevState.date !== this.state.date) {
-    //   const today = this.getCurrentDate();
-    //   this.setState({ date: today });
-    // }
 
     const { date } = this.state;
     if (prevState.date !== date) {
@@ -41,12 +37,7 @@ class DiaryPage extends Component {
   }
 
   getCurrentDate = () => {
-    let today = new Date();
-    let dd = String(today.getDate()).padStart(2, '0');
-    dd.length === 1 ? (dd = `0${dd}`) : (dd = dd);
-    const mm = String(today.getMonth() + 1).padStart(2, '0');
-    const yyyy = today.getFullYear();
-    return (today = `${yyyy}-${mm}-${dd}`);
+    return new Date().toJSON().slice(0, 10);
   };
 
   changeDate = value => {
@@ -66,7 +57,6 @@ class DiaryPage extends Component {
                   value={this.changeDate}
                   currentDate={this.state.date}
                 />
-                {/* прокинуть пропсами айди дня */}
                 <DiaryProductsList />
                 <DiaryAddProductForm date={this.state.date} mobile={true} />
               </div>
