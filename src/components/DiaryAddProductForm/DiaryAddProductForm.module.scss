@@ -13,6 +13,9 @@
   color: #fff;
   background-color: $accent;
   font-size: 40px;
+
+  cursor: pointer;
+  box-shadow: 0px 4px 10px rgba(252, 132, 45, 0.5);
 }
 
 .autocomplete {
@@ -20,11 +23,15 @@
   color: black;
   height: 100%;
   width: 290px;
+  pointer-events: all;
 
   @media screen and (min-width: 650px) {
     width: 240px;
+    font-size: 14px;
+    font-family: 'Verdana';
   }
 
+  overscroll-behavior: contain;
   overflow-y: auto;
   overflow-x: hidden;
 
@@ -41,11 +48,42 @@
   }
 }
 
+.autocompleteItem {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.scrollbar {
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  scrollbar-width: thin;
+  scrollbar-color: $burger-background $secondary-beckground;
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.scrollbar::-webkit-scrollbar-track {
+  background-color: $secondary-beckground;
+}
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: $burger-background;
+  border-radius: 0px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb:vertical {
+  min-height: 1.5rem;
+}
+.scrollbar::-webkit-scrollbar-thumb:horizontal {
+  min-width: 1.5rem;
+}
+
 .productListWrapper {
   position: absolute;
   left: 5px;
   top: 20px;
   z-index: 3;
+  pointer-events: none;
 
   height: 100px;
   width: 290px;
@@ -220,6 +258,8 @@
 
   background-color: $accent;
   color: #fff;
+  cursor: pointer;
+  box-shadow: 0px 4px 10px rgba(252, 132, 45, 0.5);
 
   border: none;
   outline: none;
@@ -241,12 +281,32 @@
   justify-content: center;
 }
 
-.errorMes {
+// .errorMes {
+//   // @extend .errorInput;
+//   color: red;
+//   border-bottom: none;
+//   background-color: none;
+// }
+//? ----input ------
+.errorInput {
+  // @extend .errorMes;
+  border-bottom: 1px solid red;
+  background-color: rgba(228, 161, 161, 0.1);
+}
+.errorInput::placeholder {
   color: red;
+}
+.errorMes {
+  // @extend .errorInput;
+  color: red;
+
+  @include for-size(desktop) {
+    font-size: 14px;
+  }
 }
 
 .validField {
-  font-family: "Verdana";
+  font-family: 'Verdana';
   position: absolute;
   color: rgb(238, 20, 20);
   top: 25px;
@@ -257,8 +317,8 @@
   }
 
   font-size: 12px;
-line-height: 1.415;
-letter-spacing: 0.04em;
+  line-height: 1.415;
+  letter-spacing: 0.04em;
 }
 
 .formLabel {
@@ -266,7 +326,7 @@ letter-spacing: 0.04em;
   width: fit-content;
 }
 
-@media screen  and (max-width: 650px) {
+@media screen and (max-width: 650px) {
   input.gramms {
     z-index: 0;
   }
@@ -275,4 +335,3 @@ letter-spacing: 0.04em;
     width: 290px;
   }
 }
-

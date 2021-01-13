@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './BurgerMenu.module.scss';
 import { NavLink } from 'react-router-dom';
 
@@ -21,5 +22,6 @@ export const BurgerMenu = (props) => {
     </div>
   );
 };
-
-// export default BurgerMenu;
+BurgerMenu.propTypes = {
+  onClick: PropTypes.func.isRequired,
+};

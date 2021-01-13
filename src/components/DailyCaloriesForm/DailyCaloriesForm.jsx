@@ -1,47 +1,54 @@
-import React, { Component } from 'react';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
+import React, { Component } from "react";
+import { Formik, Field, Form, ErrorMessage } from "formik";
+import * as Yup from "yup";
 import {
   getDailyRate,
   getDailyRateWithId,
-} from '../../redux/user/userOperations';
-import userSelectors from '../../redux/user/userSelectors';
-import { connect } from 'react-redux';
-import Button from '../shared/Button';
-import styles from './DailyCaloriesForm.module.scss';
-import Modal from '../Modal';
-import globalSelectors from '../../redux/global/globalSelectors';
-import SmallLoader from '../../components/shared/SmallLoader';
-import withAuth from '../hocs/withAuth'
+} from "../../redux/user/userOperations";
+import PropTypes from "prop-types";
+import userSelectors from "../../redux/user/userSelectors";
+import { connect } from "react-redux";
+import Button from "../shared/Button";
+import styles from "./DailyCaloriesForm.module.scss";
+import Modal from "../Modal";
+import globalSelectors from "../../redux/global/globalSelectors";
+import SmallLoader from "../../components/shared/SmallLoader";
+import withAuth from "../hocs/withAuth";
 
 const formSchema = Yup.object().shape({
-  height: Yup.string()
-    .max(3, "Укажите 3 цифры")
-    .required("Рост *"),
-  age: Yup.string()
-    .max(2, "Укажите 2 цифры")
-    .required("Возраст *"),
-  weight: Yup.string()
-    .max(3, "Укажите 3 цифры")
-    .required("Текущий вес *"),
-  desiredWeight: Yup.string()
-    .max(3, "Укажите 3 цифры")
-    .required("Желаемый вес *"),
-  bloodType: Yup.string().required(),
+  height: Yup.number()
+    .min(100, "Укажите значение от 100")
+    .max(250, "Укажите значение до 250")
+    .required("Рост*"),
+  age: Yup.number()
+    .min(18, "Укажите значение от 18")
+    .max(99, "Укажите значение до 100")
+    .required("Возраст*"),
+  weight: Yup.number()
+    .min(20, "Укажите значение от 20")
+    .max(500, "Укажите значение до 500")
+    .required("Текущий вес*"),
+  desiredWeight: Yup.number()
+    .min(20, "Укажите значение от 20")
+    .max(500, "Укажите значение до 500")
+    .required("Желаемый вес*"),
 });
 
 class DailyCaloriesForm extends Component {
+  static propTypes = {
+    toggleModal: PropTypes.func,
+  };
   state = {
     showModal: false,
   };
 
   toggleModal = () => {
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       showModal: !prevState.showModal,
     }));
   };
 
-  getCalculations = values => {
+  getCalculations = (values) => {
     const userCharacteristics = {
       height: +values.height,
       weight: +values.weight,
@@ -79,14 +86,14 @@ class DailyCaloriesForm extends Component {
         <Formik
           enableReinitialize
           initialValues={{
-            height: !!height ? height : '',
-            age: !!age ? age : '',
-            weight: !!weight ? weight : '',
-            desiredWeight: !!desiredWeight ? desiredWeight : '',
-            bloodType: !!bloodType ? String(bloodType) : '1',
+            height: !!height ? height : "",
+            age: !!age ? age : "",
+            weight: !!weight ? weight : "",
+            desiredWeight: !!desiredWeight ? desiredWeight : "",
+            bloodType: !!bloodType ? String(bloodType) : "1",
           }}
           validationSchema={formSchema}
-          onSubmit={values => {
+          onSubmit={(values) => {
             this.getCalculations(values);
           }}
         >
@@ -113,7 +120,7 @@ class DailyCaloriesForm extends Component {
                       type="number"
                       autoComplete="off"
                       className={`${styles.DailyCaloriesFormInput} ${
-                        errors.height && touched.height ? styles.errorInput : ''
+                        errors.height && touched.height ? styles.errorInput : ""
                       }`}
                     />
                   </div>
@@ -136,7 +143,7 @@ class DailyCaloriesForm extends Component {
                       type="number"
                       autoComplete="off"
                       className={`${styles.DailyCaloriesFormInput} ${
-                        errors.age && touched.age ? styles.errorInput : ''
+                        errors.age && touched.age ? styles.errorInput : ""
                       }`}
                     />
                   </div>
@@ -159,7 +166,7 @@ class DailyCaloriesForm extends Component {
                       type="number"
                       autoComplete="off"
                       className={`${styles.DailyCaloriesFormInput} ${
-                        errors.weight && touched.weight ? styles.errorInput : ''
+                        errors.weight && touched.weight ? styles.errorInput : ""
                       }`}
                     />
                   </div>
@@ -186,7 +193,7 @@ class DailyCaloriesForm extends Component {
                       className={`${styles.DailyCaloriesFormInput} ${
                         errors.desiredWeight && touched.desiredWeight
                           ? styles.errorInput
-                          : ''
+                          : ""
                       }`}
                     />
                   </div>
@@ -265,7 +272,7 @@ class DailyCaloriesForm extends Component {
                 Похудеть
               </Button>
               <div className={styles.SmallLoaderContainerHome}>
-                {this.props.isloading &&  <SmallLoader />}
+                {this.props.isloading && <SmallLoader />}
               </div>
             </Form>
           )}
@@ -283,7 +290,7 @@ class DailyCaloriesForm extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isLoading: globalSelectors.getLoading(state),
   userId: userSelectors.getUserId(state),
   userInfo: userSelectors.getUserInfo(state),
@@ -294,4 +301,7 @@ const mapDispatchToProps = {
   getDailyRateWithId,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withAuth(DailyCaloriesForm));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withAuth(DailyCaloriesForm));

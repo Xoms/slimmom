@@ -10,7 +10,6 @@ import debounce from 'lodash.debounce';
 import { connect } from 'react-redux';
 import { addProduct } from '../../redux/user/userOperations';
 import globalSelectors from '../../redux/global/globalSelectors';
-import { CSSTransition } from 'react-transition-group';
 
 const AddProdSchema = Yup.object().shape({
   product: Yup.string().required('Обязательное поле *'),
@@ -45,7 +44,11 @@ class DiaryAddProductForm extends Component {
           this.setState({ choosenProductId: data[0]._id });
         }
       })
-      .catch(err => this.setState({ products: [], error: err.message }));
+      .catch(err => {
+        err.response.data
+          ? this.setState({ products: [], error: err.response.data.message })
+          : this.setState({ products: [], error: err.message });
+      });
   }, 400);
 
   hanleChange = ({ target }) => {
@@ -64,23 +67,29 @@ class DiaryAddProductForm extends Component {
   };
 
   render() {
-    const { products} = this.state;
+    // console.log(css.errorMes);
+    // const adderrorInput = css.errorMes ? css.errorInput : '';
+
+    const { products } = this.state;
     const form = (
       <Formik
         initialValues={{
           weight: '100',
           product: '',
         }}
-        onSubmit={(values, initialValues) => {
+        onSubmit={(values, { resetForm }) => {
           this.handleSubmit(values);
-          values = initialValues;
+          resetForm();
         }}
         validationSchema={AddProdSchema}
       >
-        {({ setFieldValue, handleChange, handleBlur }) => (
+        {({ setFieldValue, handleChange, handleBlur, errors, touched }) => (
           <Form className={css.modalForm}>
             <label className={css.formLabel}>
               <Field
+                className={`${css.DailyCaloriesFormInput} ${
+                  errors.product && touched.product ? css.errorInput : ''
+                }`}
                 onBlur={e => {
                   handleBlur(e);
                   this.setState({ showUl: false });
@@ -93,24 +102,25 @@ class DiaryAddProductForm extends Component {
                   this.hanleChange(e);
                 }}
                 name="product"
-                placeholder="Введите название продукта"
+                placeholder="Введите название продукта*"
                 type="text"
                 autoComplete="off"
               />
 
-              <ErrorMessage
+              {/* <ErrorMessage
                 className={css.validField}
                 name="product"
                 component="span"
-              />
+              /> */}
             </label>
             <div className={css.productListWrapper}>
               {!!products.length ? (
                 // <CSSTransition in={this.state.showUl} unmountOnExit classNames="search-list" timeout={500}>
-                <ul className={css.autocomplete}>
+                <ul className={`${css.autocomplete}  ${css.scrollbar}`}>
                   {products.map(product => (
                     <li
                       key={product._id}
+                      className={css.autocompleteItem}
                       onClick={() => {
                         setFieldValue('product', product.title.ru);
                         this.setState({
@@ -132,16 +142,18 @@ class DiaryAddProductForm extends Component {
             </div>
             <label className={css.formLabel}>
               <Field
-                className={css.gramms}
+                className={` ${css.gramms} ${css.DailyCaloriesFormInput} ${
+                  errors.weight && touched.weight ? css.errorInput : ''
+                }`}
                 name="weight"
-                placeholder="Граммы"
+                placeholder="Граммы*"
                 type="number"
               />
-              <ErrorMessage
+              {/* <ErrorMessage
                 className={css.validField}
                 name="weight"
                 component="span"
-              />
+              /> */}
             </label>
             {window.innerWidth < 650 ? (
               <Button
@@ -198,11 +210,14 @@ class DiaryAddProductForm extends Component {
     }
   }
 }
-const mapStateToProps = (state)=>({
-  isLoading:  globalSelectors.getLoading(state),
-})
+const mapStateToProps = state => ({
+  isLoading: globalSelectors.getLoading(state),
+});
 const mapDispatchToProps = {
   addProduct,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DiaryAddProductForm);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(DiaryAddProductForm);
