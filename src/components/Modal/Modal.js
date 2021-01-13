@@ -1,33 +1,37 @@
-import React, { Component } from "react";
-import styles from "./Modal.module.scss";
-import PropTypes from "prop-types";
-import Button from "../shared/Button";
-import { NavLink } from "react-router-dom";
-import { connect } from "react-redux";
-import dailyRateSelector from "../../redux/user/userSelectors";
-import IconClose from "../shared/IconClose/IconClose";
-import IconBack from "../shared/IconBack/IconBack";
-import { CSSTransition } from "react-transition-group";
+import React, { Component } from 'react';
+import styles from './Modal.module.scss';
+import PropTypes from 'prop-types';
+import Button from '../shared/Button';
+import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import dailyRateSelector from '../../redux/user/userSelectors';
+import IconClose from '../shared/IconClose/IconClose';
+import IconBack from '../shared/IconBack/IconBack';
+import { CSSTransition } from 'react-transition-group';
 
 class Modal extends Component {
   static propTypes = {
     modal: PropTypes.func,
+    showModal: PropTypes.bool,
+    toggleModal: PropTypes.func,
+    calories: PropTypes.number,
+    products: PropTypes.array,
   };
 
-  modal = (e) => {
-    if (e.code === "Escape" || e.target.id === "overlay") {
+  modal = e => {
+    if (e.code === 'Escape' || e.target.id === 'overlay') {
       this.props.toggleModal();
     }
   };
 
   componentDidMount = () => {
-    window.addEventListener("keydown", this.modal);
-    window.addEventListener("click", this.modal);
+    window.addEventListener('keydown', this.modal);
+    window.addEventListener('click', this.modal);
   };
 
   componentWillUnmount = () => {
-    window.removeEventListener("keydown", this.modal);
-    window.removeEventListener("click", this.modal);
+    window.removeEventListener('keydown', this.modal);
+    window.removeEventListener('click', this.modal);
   };
 
   render() {
@@ -91,7 +95,7 @@ class Modal extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   calories: dailyRateSelector.getCalories(state),
   products: dailyRateSelector.getProducts(state),
 });

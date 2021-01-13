@@ -4,19 +4,9 @@ import { authOperations, authActions } from '../../redux/auth';
 import globalSelectors from '../../redux/global/globalSelectors';
 import Decoration from '../Decoration';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
 import Button from '../shared/Button';
 import css from './LoginForm.module.scss';
-
-const SignupSchema = Yup.object().shape({
-  email: Yup.string()
-    .min(2, 'Некорректная длинна поля')
-    .max(50, 'Превышен лимит символов')
-    .required('Обязательное поле *'),
-  password: Yup.string()
-    .required('Обязательное поле *')
-    .min(8, 'Некорректная длинна поля'),
-});
+import { SignupSchema } from '../../helpers/yupSchemas.js';
 
 const LoginForm = props => {
   const handleClick = () => {
@@ -47,7 +37,7 @@ const LoginForm = props => {
                     }`}
                     type="email"
                     name="email"
-                    placeholder="Логин *"
+                    placeholder="Электронная почта *"
                   />
                   <ErrorMessage
                     className={css.validField}

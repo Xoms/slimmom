@@ -8,7 +8,6 @@
   padding-top: 30px;
   width: 100%;
   font-family: 'Verdana';
-  // margin-bottom: 40px;
 }
 .DailyCaloriesFormGeneralWrapper {
   margin-bottom: 23px;
@@ -32,13 +31,10 @@
 }
 .DailyCaloriesForm {
   width: 240px;
-  // margin-bottom: 60px;
-  // height: 354px;
 }
 .DailyCaloriesFormBloodWrapper {
   display: flex;
   justify-content: space-between;
-  // margin-bottom: 42px;
 }
 .DailyCaloriesFormFieldsWrapper {
   position: relative;
@@ -67,7 +63,6 @@
   }
 }
 .DailyCaloriesFormFieldsLabelText {
-  // margin-top: 4px;
   font-family: 'VerdanaBold';
   color: rgba(155, 159, 170, 0.5);
   display: inline-block;
@@ -76,22 +71,6 @@
   line-height: 1.215;
   letter-spacing: 0.04em;
 }
-
-// .validField {
-//   font-family: 'Verdana';
-//   position: absolute;
-//   color: rgb(238, 20, 20);
-//   top: 25px;
-//   left: 0px;
-
-//   @media screen and (min-width: 650px) {
-//     top: 35px;
-//   }
-
-//   font-size: 12px;
-//   line-height: 1.415;
-//   letter-spacing: 0.04em;
-// }
 
 label.errorMessage ~ .DailyCaloriesFormFieldsLabelText {
   display: none;
@@ -220,7 +199,6 @@ label.errorMessage ~ .DailyCaloriesFormFieldsLabelText {
   }
   .DailyCaloriesForm {
     width: 510px;
-    // height: 290px;
   }
   .DailyCaloriesFormBloodTitle {
     margin-bottom: 19px;
