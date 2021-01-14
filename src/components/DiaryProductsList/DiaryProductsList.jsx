@@ -11,11 +11,11 @@ import userSelectors from '../../redux/user/userSelectors';
 const DiaryProductsList = ({ products, isLoading }) => {
   return (
     <>
-      {isLoading && (
+      {isLoading ? (
         <div className={styles.SmallLoaderContainer}>
           <SmallLoader />
-        </div>
-      )}
+        </div> ) :
+      
       <ul className={`${styles.productList} ${styles.scrollbar}`}>
         {!!products.length &&
           products.map(product => {
@@ -30,6 +30,7 @@ const DiaryProductsList = ({ products, isLoading }) => {
             );
           })}
       </ul>
+    }
     </>
   );
 };

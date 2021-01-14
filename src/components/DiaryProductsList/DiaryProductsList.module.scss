@@ -53,7 +53,7 @@
 
 .SmallLoaderContainer {
   position: absolute;
-
+  // min-height: 70vh;
   left: 120px;
   @include for-size(tablet) {
     bottom: 20%;
