@@ -1,5 +1,5 @@
 import React from 'react';
-//import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import styles from './AuthNavigations.module.scss';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -14,8 +14,11 @@ const AuthNavigations = ({dailyRate, userDataDailyRate}) => (
 const mapState = state => ({
   dailyRate: userSelectors.getCalories(state),
   userDataDailyRate: userSelectors.getUserDataDailyRate(state),
-})
+});
+
+AuthNavigations.propTypes = {
+  dailyRate: PropTypes.number,
+  userDataDailyRate: PropTypes.number
+};
 
 export default connect(mapState)(AuthNavigations);
-
-//{!dailyRate || !userDataDailyRate && }

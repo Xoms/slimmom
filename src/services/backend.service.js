@@ -47,21 +47,14 @@ class PhonebookService {
   }
 
   addProduct(product) {
-    //  product = {
-    //     "date": "2020-12-31",
-    //     "productId": "5d51694802b2373622ff552c",
-    //     "weight": 100
-    //   }
     return axios.post('/day', product);
   }
   getProducts(date) {
     return axios.post(`/day/info`, date); // дата из календаря для запроса
   }
   refresh(sid) {
-    console.log(sid);
     return axios.post(`/auth/refresh`, sid); //сид из store
   }
-  
 }
 
 export default new PhonebookService();
