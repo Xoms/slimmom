@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { CSSTransition } from "react-transition-group";
 import Calendar from "react-calendar";
+import dateNormalise from '../../helpers/dateNormalise';
 import "./SetDate.scss";
 
 import "react-calendar/dist/Calendar.css";
@@ -37,12 +39,12 @@ class SetDate extends Component {
     this.props.value(`${year}-${month}-${day}`);
   };
 
-  initCalendar() {
+  initCalendar(value) {
     const dateArr = this.props.currentDate.split("-");
     const outputValue = dateArr.reverse().join(".");
     this.setState((state) => {
       return {
-        outputValue: outputValue,
+        outputValue: value ? dateNormalise(value) : outputValue,
         currentValue: new Date(this.props.currentDate),
         currentDate: new Date(this.props.currentDate),
       };
@@ -50,8 +52,9 @@ class SetDate extends Component {
   }
 
   componentDidMount() {
-    this.initCalendar();
+    this.initCalendar(this.props.currentDay);
   }
+  
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.currentDate !== this.props.currentDate) {
       this.initCalendar();
@@ -80,8 +83,13 @@ class SetDate extends Component {
     );
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    currentDay: state.user.currentDay
+  }
+}
 
-export default SetDate;
+export default connect(mapStateToProps)(SetDate);
 
 SetDate.propTypes = {
   value: PropTypes.func,

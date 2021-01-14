@@ -3,6 +3,7 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 import {
   getDailyRate,
   getDailyRateWithId,
+  updateUserInput
 } from '../../redux/user/userOperations';
 import PropTypes from 'prop-types';
 import userSelectors from '../../redux/user/userSelectors';
@@ -52,6 +53,7 @@ class DailyCaloriesForm extends Component {
       this.toggleModal();
     } else {
       this.props.getDailyRateWithId(userCharacteristics, this.props.userId);
+      this.props.updateUserInput(userCharacteristics)
     }
   };
 
@@ -284,9 +286,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  getDailyRate,
-  getDailyRateWithId,
-};
+    getDailyRate,
+    getDailyRateWithId,
+    updateUserInput
+}
 
 export default connect(
   mapStateToProps,

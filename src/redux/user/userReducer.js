@@ -48,9 +48,17 @@ const user = createReducer(initialState, {
     ...state,
     ...payload,
     userData:{
+      ...state.userData,
       notAllowedProducts: [...payload.notAllowedProducts],
     }
     // notAllowedProducts: [...payload.notAllowedProducts],
+  }),
+  'user/updateUserInput': (state, {payload}) => ({
+    ...state,
+    userData:{
+      ...state.userData,
+      ...payload
+    }
   }),
   [userActions.setCurrentDay]: (state, { payload }) => ({
     ...state,
