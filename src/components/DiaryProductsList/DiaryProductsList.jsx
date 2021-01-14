@@ -5,17 +5,11 @@ import styles from './DiaryProductsList.module.scss';
 import DiaryProductsListItem from '../DiaryProductListItem';
 import { getProducts } from '../../redux/user/userOperations.js';
 import globalSelectors from '../../redux/global/globalSelectors';
-import SmallLoader from '../shared/SmallLoader';
 import userSelectors from '../../redux/user/userSelectors';
 
 const DiaryProductsList = ({ products, isLoading }) => {
   return (
     <>
-      {isLoading ? (
-        <div className={styles.SmallLoaderContainer}>
-          <SmallLoader />
-        </div> ) :
-      
       <ul className={`${styles.productList} ${styles.scrollbar}`}>
         {!!products.length &&
           products.map(product => {
@@ -30,7 +24,6 @@ const DiaryProductsList = ({ products, isLoading }) => {
             );
           })}
       </ul>
-    }
     </>
   );
 };
