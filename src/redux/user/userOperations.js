@@ -178,6 +178,11 @@ const deleteEatenProduct = (product, date) => dispatch => {
     .catch(err => dispatch(userActions.deleteEatenProductError(err)));
 };
 
+const updateUserInput = (obj) => dispatch => {
+  dispatch(userActions.updateUserInput(obj))
+}
+
+
 export {
   getCurrentUser,
   getDailyRate,
@@ -185,4 +190,5 @@ export {
   deleteEatenProduct,
   getProducts,
   getDailyRateWithId,
+  updateUserInput
 };

@@ -34,6 +34,15 @@ const addProductError = createAction('user/addProductError');
 
 const setCurrentDay = createAction('user/setCurrentDay');
 
+const updateUserInput = (obj) => {
+  return {
+    type: 'user/updateUserInput',
+    payload: {
+      ...obj
+    }
+  }
+}
+
 const actions = {
   getCurrentUserRequest,
   getCurrentUserSuccess,
@@ -54,6 +63,7 @@ const actions = {
   getDailyRateWithIdRequest,
   getDailyRateWithIdSuccess,
   getDailyRateWithIdError,
+  updateUserInput,
 };
 
 export default actions;
